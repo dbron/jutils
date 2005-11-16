@@ -1,0 +1,136 @@
+NB.*borderless forms demo
+NB.
+NB. INSTALL
+NB.    > copy borderless.ijs user\classes\
+NB. 
+NB. RUN
+NB.    load 'user\classes\borderless.ijs'
+NB.
+NB. RUN (alternative)
+NB.    open 'user\classes\borderless.ijs'
+NB.    [Ctrl+W]
+NB.
+NB. Copyright (C) April 2003 Oleg Kobchenko <olegykj@yahoo.com>
+
+require 'dll gl2 convert'
+
+coclass 'pborderless'
+
+PBORDERLESS=: 0 : 0
+pc borderless nomax nomenu nomin nosize; pn "J - Zoomin";
+xywh 0 0 100 100;cc g1 isigraph rightmove bottommove;
+pas 0 0;
+rem form end;
+)
+
+create=: 3 : 0
+coinsert'jgl2'
+CAPTURE=: ''
+XYWH=: 0 0 200 200
+STARTXY=: 0 0
+P1=: 3 3,164 3,164 16,3 16,3 3
+P2=: 60 30,150 30,150 66,134 66,134 140,110 176,40 176,12 150,12 102,60 102,60 30
+wd PBORDERLESS
+formhwnd=: ".wd'qhwndp'
+framehwnd=: Parent formhwnd
+(WS_DLGFRAME XOR WS_BORDER XOR WindowStyle framehwnd) WindowStyle framehwnd
+(WS_EX_CLIENTEDGE XOR WindowStyleEx formhwnd) WindowStyleEx formhwnd
+borderless_g1_size''
+(PolyPolygonRgn P1;P2) WindowRgn framehwnd
+wd 'pmovex 100 100 200 200'
+wd 'pshow;'
+)
+
+destroy=: 3 : 0
+wd'pclose'
+codestroy''
+)
+
+borderless_cancel=:borderless_close=:destroy
+
+borderless_g1_size=: 3 : 0
+XYWH=: ".wd'qchildxywhx g1'
+glsel'g1'
+glclear''
+glwantresize''
+glmap MM_TEXT
+glbrush ] glrgb 255 127 0
+glpolygon P1
+glpolygon P2
+glbkmode 1
+glfont 'System 9'
+gltextxy 8 1
+gltext 'borderless'
+glfont '"Bookman Old Style" 220 bold'
+gltextxy 20 _10
+gltext 'J'
+glshow''
+glpaintx''
+)
+
+borderless_g1_mbldown=: 3 : 0
+'x y w h'=. 4{.".sysdata
+y=. h-y
+STARTXY=: -x,y
+glcapture CAPTURE=: 7,XYWH
+)
+
+borderless_g1_mblup=: 3 : 0
+if. 0=#CAPTURE do. return. end.
+CAPTURE=: ''
+glcapture 0
+'x y w h'=. 4{.".sysdata
+y=. h-y
+MOVEXY=. x,y
+'x y w h'=. ".wd'qformx'
+wd 'pmovex ',":(MOVEXY+STARTXY+x,y),w,h
+wd 'setinvalid g1'
+)
+
+NB. ===================================================================[ W*n32 ]===
+
+NB.*Parent v   parenthwnd=. Parent hwnd
+Parent=: 3 : '>{.''user32 GetParent i i'' cd <y.'
+
+WS=. 'WS_POPUP WS_CHILD WS_MINIMIZE WS_VISIBLE WS_DISABLED WS_CLIPSIBLINGS '
+WS=. WS,'WS_CLIPCHILDREN WS_MAXIMIZE WS_BORDER WS_DLGFRAME WS_VSCROLL WS_HSCROLL '
+WS=. WS,'WS_SYSMENU WS_THICKFRAME WS_GROUP WS_TABSTOP'
+(WS)=: (_2 ic(0 0 0 128{a.)),|.2<.@^16+i.15
+
+NB.*WindowStyle v  oldstyle=. [newstyle] WindowStyle hwnd
+NB.  e.g. (WS_BORDER XOR WindowStyle hwnd) WindowStyle hwnd
+WindowStyle=: 3 : 0
+>{.'user32 GetWindowLongA i i i' cd y.;_16
+:
+>{.'user32 SetWindowLongA i i i i' cd y.;_16;x.
+)
+
+WS_EX_CLIENTEDGE=: 16b00000200
+
+NB.*WindowStyleEx v  oldstyle=. [newstyle] WindowStyleEx hwnd
+WindowStyleEx=: 3 : 0
+>{.'user32 GetWindowLongA i i i' cd y.;_20
+:
+>{.'user32 SetWindowLongA i i i i' cd y.;_20;x.
+)
+
+NB.*WindowRgn v  oldrgn=. [newrgn] WindowRgn hwnd
+NB.   e.g. (PolyPolygonRgn P1;P2) WindowRgn hwnd
+WindowRgn=: 3 : 0
+r=. >{.'user32 CreateRectRgn i i i i i' cd y.;0;0;0;0
+>{.'user32 GetWindowRgn i i i' cd y.;r
+:
+>{.'user32 SetWindowRgn i i i i' cd y.;x.;1
+)
+
+NB.*PolyPolygonRgn v   PolyPolygonRgn p1;p2;...;pN
+PolyPolygonRgn=: 3 : 0
+r=. <.-: #&> ,boxopen y.
+>{.'gdi32 CreatePolyPolygonRgn i *i *i i i' cd (;y.);r;(#r);1
+)
+
+
+cocurrent<'base'
+
+''conew'pborderless'
+

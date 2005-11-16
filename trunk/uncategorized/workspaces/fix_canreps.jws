@@ -1,0 +1,12 @@
+[Main]
+Position        	State           	IJXState        
+133 120 1178 861	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                                                                       	Position       	Selection   	State
+b:\projects\work\order_manager\main\dev\oms\default\util\appia_parser.ijs      	0 0 1567 544   	572 572     	2    
+c:\j406\temp\2.ijs                                                             	375 62 911 917 	801 801     	2    
+b:\projects\work\order_manager\main\dev\oms\default\workers\appiainterface.ijs 	265 66 1078 829	24648 24648 	2    
+b:\projects\work\order_manager\main\dev\oms\default\workers\orderstatus.ijs    	2 1 1565 760   	2570 2570   	2    
+b:\projects\work\order_manager\main\dev\oms\default\workers\traderinterface.ijs	45 52 1219 764 	28487 28487 	2    
+b:\projects\work\order_manager\main\dev\oms\default\fsm.ijs                    	132 132 906 533	5210 5210   	2    

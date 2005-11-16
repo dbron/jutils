@@ -1,0 +1,9 @@
+[Main]
+Position      	State           	IJXState        
+44 44 1178 861	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                                                    	Position      	Selection   	State
+b:\data\srccode\j\opera_upgrader.ijs                        	0 0 1566 556  	5054 5054   	0    
+b:\data\srccode\j\danutils.ijs                              	44 44 1214 760	14158 14158 	2    
+b:\projects\work\order_manager\main\dev\util\default\ini.ijs	66 66 1214 760	4178 4178   	0    

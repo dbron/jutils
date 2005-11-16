@@ -1,0 +1,38 @@
+Reinhard Karcher <rkarcher@frey.de> wrote in
+news:32lb73F3jcks9U1@individual.net: 
+
+> David Liebtag wrote:
+ 
+> Here's a problem for you:
+> 
+> I have the index of an element in the ravel of an arbitrary dimension
+> array. I need to generate the index for the same element if the array
+> were transposed and then ravelled.
+> 
+
+
+All you need for this is the shape of the matrix to be transposed.  Allow this shape to be called w, then, in APL:
+
+	w encode (reverse w) decode iota times/ w
+
+Or, in J:
+
+	(#. |. #: [: i. */)  w   NB.  I wish I could say |.&.:#: but I can't, because I need the #. to be applied dyadically.
+
+Perhaps there's an arithmetic identity which can be exploited to avoid the encode/decode, but I doubt the speed gain would justify the loss of clarity.  Besides, this form extends nicely to the general case.  To reindex a matrix given some transformation function on its shape (called 'aa'), just use:
+
+    reindexMasV is w encode (aa w) decode iota times/ w
+
+or, in J:
+
+    reindexMasV =: 1 : '#. u. #: [: i. */'  NB.  The axis transformation function is called 'u.' here, instead of 'aa'.
+     
+Then, if you knew (or divined) that transpose's axis transformation is simply reverse, you could just use:
+
+    reverse reindexMasV 
+    
+or
+    |. reindexMasV 
+    
+    
+-Dan

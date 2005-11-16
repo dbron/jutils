@@ -1,0 +1,8 @@
+[Main]
+Position        	State        	IJXState     
+235 122 1178 861	sw_shownormal	sw_shownormal
+
+[Windows]
+Filename                                                      	Position       	Selection	State
+b:\projects\work\order_manager\main\dev\oms\default\verify.ijs	125 22 1219 764	98 98    	0    
+c:\j406\temp\1.ijs                                            	15 41 1219 762 	484 484  	0    

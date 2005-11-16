@@ -1,0 +1,8 @@
+[Main]
+Position        	State           	IJXState        
+198 198 1179 861	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                                                               	Position      	Selection	State
+b:\projects\work\order_manager\main\dev\tv\default\trafficviewer.ijs   	0 544 1568 568	606 606  	0    
+b:\projects\work\order_manager\main\dev\tv\default\workers\tvworker.ijs	0 544 1568 568	359 359  	0    

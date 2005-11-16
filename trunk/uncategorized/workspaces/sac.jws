@@ -1,0 +1,17 @@
+[Main]
+Position        	State           	IJXState        
+199 119 1179 988	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                                                                                  	Position        	Selection 	State
+c:\danielb\projects\work\order_manager\main\dev\sac\default\sacollector.ijs               	-1 591 1569 522 	8005 8005 	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\datacollector.ijs     	44 44 1492 828  	2611 2611 	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\gscollector.ijs       	66 66 1220 764  	653 653   	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\omsinterface.ijs      	88 88 1220 764  	27 27     	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\slkcollector.ijs      	110 110 1220 764	431 431   	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\tradereconciler.ijs   	264 264 1216 760	1792 1792 	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\sac.ini                       	799 1 770 701   	709 709   	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\tradereporter.ijs     	347 125 1183 760	943 943   	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\positioncalculator.ijs	386 121 1136 826	996 996   	0    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\symbolmapper.ijs      	207 371 1242 616	370 392   	2    
+c:\danielb\projects\work\order_manager\main\dev\sac\default\workers\positionreconciler.ijs	235 143 1216 760	2402 2402 	0    

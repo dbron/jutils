@@ -1,0 +1,173 @@
+NOTES							=:  noun define
+From:  http://www.unc.edu/~rowlett/units/roman.html 
+As Of:  2003-November-20
+
+<<
+	The Romans usually wrote IIII for 4 and XXXX for 40. The number 949 was DCCCCXXXXVIIII. To shorten the
+	length of such numbers a "subtraction rule" appeared in later Roman times and was commonly used in
+	medieval times. The "subtraction rule" allows the use of six compound symbols in which a smaller unit
+	precedes the larger:
+	
+	IV = 4
+	IX = 9
+	XL = 40
+	XC = 90
+	CD = 400
+	CM = 900
+
+	Using these symbols, 949 is written more compactly as CMXLIX. (Other "subtracted" symbols are not allowed.
+	Thus 99 must written XCIX, not IC.) The use of subtracted symbols was never mandatory, so IIII and IV can
+	be used interchangeably for 4.
+>>
+ 
+It would be neat to generalize this.  What does it mean to generalize, though?
+Maybe to finding the shortest way to express the number?
+
+<<
+	Actually, the symbols D (500) and M (1000) were originally written using a vertical stroke with surrounding arcs; 
+	these arcs can only be approximated on this page by using parentheses. D appeared as I ) and M as ( I ). 
+	This system allowed powers of ten larger than 1000 to be written by increasing the number of arcs: 10 000 was 
+	written (( I )) and 100 000 was written ((( I ))).  The Romans had no word for 1 000 000 and rarely considered
+	numbers of that size or larger. In late Roman and medieval times, after D and M were adopted as the symbols for
+	500 and 1000, a custom arose of writing a bar over a number to multiply that number by 1000. Thus 10 000 became
+	X with a bar over it and 100 000 became C with a bar over it. These "overbarred" symbols are almost never seen
+	today.
+>>
+
+Should I replace strings of Ms with "arced" Ms?
+
+<<
+	In Roman times, only the capital letters were used for number symbols. Later, after lower case letters came into
+	use, Roman numbers were often written in lower case. Thus "vi" means 6 and "cxxii" means 122. Sometimes cases were
+	even mixed, as in "Mcxl" for 1140. Furthermore, the lower case letter "j" was sometimes used in place of "i". A
+	common custom was to write "j" for the last in a series of one's, as in "xiij" for 13.
+>>
+
+Allow a flag that indiciates the use of the 'j' rule.
+
+)
+
+'ROMAN_NUMERALS ROMAN_VALUES'	=: (;@:{. (; \:&.> <@]) 0&".@:(;:^:_1)@:{:) |: '=' makeTable noun define
+	M=1000
+	D=500
+	C=100
+	L=50
+	X=10
+	V=5
+	I=1
+)
+
+REPEATS_ALLOWED					=:   3  												NB.  >./ 2 <:@<.@%/\ ROMAN_VALUES   NB.  The maximum number of repeats that could possibly be required
+
+mapRomans						=:  [: {&ROMAN_VALUES ROMAN_NUMERALS&i.
+fromRoman						=:  +/@:((-~/);.2~ 1: ,~ 2&(>:/\))@:mapRomans           NB.  Doesn't complain about invalid Roman numerals like 'IC'
+toRoman							=:  [: #&ROMAN_NUMERALS (0 , 2 %/\ ROMAN_VALUES)&#:		NB.  Still don't handle collapsing. E.G. I should turn IIII into IV.
+roman							=:  fromRoman :. toRoman								NB.  To convert appropriately based on input, use smartRoman =: fromRoman`toRoman@.(2: ~: 3!:0) or roman ^: (_1: ^ 2: ~: 3!:0)
+inRoman							=:  &. roman  											NB.  Using smartRoman: smartRoman@: &:smartRoman
+
+
+NB.  Fun:  An interactive J command line that understands roman numerals.
+NB.  EG:  jInRoman''
+NB.  ROMAN>  II + III
+NB.  V
+NB.  ROMAN>  +/ }. i. VI
+NB.  XV
+
+interpretRoman					=:  ((((2: ~: 3!:0&>)@:[ 4 : 'x.}y.' ,:)~ (":@:fromRoman :: 0:)&.>)&.:;:)
+safeRoman						=:  ;:^:_1 @: (toRoman (<@ ::) ('?'"_)"0)  @: toInteger =.  <.@{.@+.
+calculateInRoman				=:  safeRoman @: ". @: interpretRoman
+jInRoman						=:  calculateInRoman smconsole 'ROMAN>  ' f.
+
+
+'TEST_NUMERALS TEST_VALUES'		=:  ({. ; 0&".@:(;:^:_1)@:{:) |: '=' makeTable noun define
+	MCDL=1450
+	MCDLI=1451
+	MCDLII=1452
+	MCDLIII=1453
+	MCDLIV=1454
+	MCDLV=1455
+	MCDLVI=1456
+	MCDLVII=1457
+	MCDLVIII=1458
+	MCDLIX=1459
+	MCDLX=1460
+	MCDLXI=1461
+	MCDLXII=1462
+	MCDLXIII=1463
+	MCDLXIV=1464
+	MCDLXV=1465
+	MCDLXVI=1466
+	MCDLXVII=1467
+	MCDLXVIII=1468
+	MCDLXIX=1469
+	MCDLXX=1470
+	MCDLXXI=1471
+	MCDLXXII=1472
+	MCDLXXIII=1473
+	MCDLXXIV=1474
+	MCDLXXV=1475
+	MCDLXXVI=1476
+	MCDLXXVII=1477
+	MCDLXXVIII=1478
+	MCDLXXIX=1479
+	MCDLXXX=1480
+	MCDLXXXI=1481
+	MCDLXXXII=1482
+	MCDLXXXIII=1483
+	MCDLXXXIV=1484
+	MCDLXXXV=1485
+	MCDLXXXVI=1486
+	MCDLXXXVII=1487
+	MCDLXXXVIII=1488
+	MCDLXXXIX=1489
+	MCDXC=1490
+	MCDXCI=1491
+	MCDXCII=1492
+	MCDXCIII=1493
+	MCDXCIV=1494
+	MCDXCV=1495
+	MCDXCVI=1496
+	MCDXCVII=1497
+	MCDXCVIII=1498
+	MCDXCIX=1499
+	MD=1500
+	MDI=1501
+	MDII=1502
+	MDIII=1503
+	MDIV=1504
+	MDV=1505
+	MDVI=1506
+	MDVII=1507
+	MDVIII=1508
+	MDIX=1509
+	MDX=1510
+	MDXI=1511
+	MDXII=1512
+	MDXIII=1513
+	MDXIV=1514
+	MDXV=1515
+	MDXVI=1516
+	MDXVII=1517
+	MDXVIII=1518
+	MDXIX=1519
+	MDXX=1520
+	MDXXI=1521
+	MDXXII=1522
+	MDXXIII=1523
+	MDXXIV=1524
+	MDXXV=1525
+	MDXXVI=1526
+	MDXXVII=1527
+	MDXXVIII=1528
+	MDXXIX=1529
+	MDXXX=1530
+	MDXXXI=1531
+	MDXXXII=1532
+	MDXXXIII=1533
+	MDXXXIV=1534
+	MDXXXV=1535
+	MDXXXVI=1536
+	MDXXXVII=1537
+	MDXXXVIII=1538
+	MDXXXIX=1539
+	MDXL=1540

@@ -1,0 +1,15 @@
+[Main]
+Position        	State        	IJXState     
+198 198 1178 861	sw_shownormal	sw_shownormal
+
+[Windows]
+Filename                                                                              	Position       	Selection	State        
+b:\projects\work\order_manager\main\dev\oms\default\macro.pathing.ijs                 	0 0 902 529    	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\omsfields.pathing.ijs             	22 22 902 529  	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\ordermanager.pathing.ijs          	44 44 902 529  	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\route_orders.pathing.ijs          	66 66 902 529  	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\workers\appiainterface.pathing.ijs	88 88 902 529  	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\workers\coordinator.pathing.ijs   	110 110 902 529	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\workers\eventlog.pathing.ijs      	132 132 902 529	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\workers\orderstatus.pathing.ijs   	154 154 902 529	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\workers\tlwinterface.pathing.ijs  	176 176 902 529	0 0      	sw_shownormal

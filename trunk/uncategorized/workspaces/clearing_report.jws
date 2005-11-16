@@ -1,0 +1,7 @@
+[Main]
+Position      	State        	IJXState     
+44 44 1178 861	sw_shownormal	sw_shownormal
+
+[Windows]
+Filename                                                                     	Position      	Selection	State        
+b:\projects\work\order_manager\main\dev\reports\clearing_report_generator.ijs	22 22 1215 760	0 0      	sw_shownormal

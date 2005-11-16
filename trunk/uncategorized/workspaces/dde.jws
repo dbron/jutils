@@ -1,0 +1,10 @@
+[Main]
+Position        	State           	IJXState        
+132 132 1179 861	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                               	Position      	Selection	State
+c:\j406\system\packages\dde\server1.ijs	22 22 1220 764	0 0      	0    
+c:\j406\system\packages\dde\server2.ijs	44 44 1220 764	0 0      	0    
+c:\j406\system\examples\dde\client1.ijs	66 66 1220 764	0 0      	0    
+c:\j406\system\examples\dde\client2.ijs	88 88 1220 764	0 0      	0    

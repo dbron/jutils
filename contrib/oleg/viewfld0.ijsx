@@ -1,0 +1,95 @@
+NB. viewfld - View Field
+NB.           extension to viewmat for complex values
+NB. INSTALL
+NB.    > copy viewfld.ijs user/
+NB.
+NB. RUN
+NB.   require '~user/viewfld.ijs'
+NB.   viewfld *: (jiota 20 20)%10
+NB.
+NB. SEE ALSO
+NB.    examples at the bottom of viewfld.ijs
+NB.
+NB. AUTHOR
+NB.    (C) Oleg Kobchenko <olegykj@yahoo.com>, 12/30/2003
+
+require 'viewmat trig plot'
+
+coclass 'jviewfld'
+
+COCLASSPATH=: ;: 'jviewfld jviewmat jgl2 z'
+R=: ((cos , sin) ,: -@sin , cos) 5r6p1
+YORT=: 1  NB. Y axis orientaion (1: down, _1: up)
+
+viewfld=: 3 : 0
+'' viewfld y.
+:
+a=. conew 'jviewfld'
+RMAT=: y.
+empty x. vmrun__a 1e6||y.
+)
+
+vm_show=: 3 : 0
+vm_show_jviewmat_ f. y.
+'w h'=. (_2{. 0".wd 'qchildxywhx g') % |.'r c'=. $RMAT
+if. 2 > m=. w <. h do. return. end.
+gllines 0 0
+(((h%2)+h*i.r)j./((w%2)+w*i.c)) uv (m%2.2)* (%~ |) RMAT
+glshow''
+)
+
+uv=: 4 : 0"0
+'y x u v'=. ,+. x.,y.
+'s t'=. R +/ . * u,v
+gllines <.(x-u),(y+YORT*v),(x+u),(y-YORT*v),(x+u+s),(y-YORT*v+t)
+)
+
+viewfld_z_=: viewfld_jviewfld_
+jjota_z_=: |:@:(j./&i./)@|.     NB. complex i.
+jiota_z_=: |:@:(j./&i:/)@|.     NB. complex i:
+
+
+NB. =======================================================================
+0 : 0 NB. test suite: press Ctrl+R on each line
+viewfld jiota 12 12
+viewfld %jiota 12 12
+viewfld sin (jiota 15 15)%15
+viewfld sin 1:^:(_&=@|)"0% (jiota 15 15)%5
+viewfld %sin (jiota 20 20)%20
+
+viewfld cos (jiota 15 15)%15
+viewfld cos 1:^:(_&=@|)"0% (jiota 15 15)%5
+viewfld %cos (jiota 20 20)%20
+
+'density'plot |cos (jiota 30 30)%30 NB. cf above: these are better hues
+
+viewfld *: (jiota 20 20)%10
+viewfld *: %(jiota 20 20)%10
+viewfld %: (jiota 20 20)%10
+viewfld (jiota 20 20)%10
+viewfld ^(jiota 20 20)%10
+viewfld ^.(jiota 20 20)%10
+
+jjota 3 4            NB. YORT=1, downward Y
+viewfld jjota 3 4
+jiota 2 2
+viewfld jiota 20 20
+
+YORT_jviewfld_=: _1  NB. YORT=_1, upward Y
+|.jjota 3 4          
+viewfld |.jjota 3 4
+|.jiota 2 2
+viewfld |.jiota 15 15
+YORT_jviewfld_=: 1  NB. restore YORT=1
+
+viewfld lvp_jviewfld_ 0j7+2 0.125 (j./@:* +.)"1 0 jjota 40 40
+)
+
+NB. Lotka-Volterra
+'lvR lvA lvB lvM'=: 0.1 0.01 0.001 0.05
+lvp=: 3 : 0"0
+'r f'=. +.y.
+dR_dt=. (lvR*r)-lvA*r*f
+dF_dt=. (lvB*r*f)-lvM*f
+dR_dt j. dF_dt
+)

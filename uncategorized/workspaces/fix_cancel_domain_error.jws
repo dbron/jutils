@@ -1,0 +1,9 @@
+[Main]
+Position        	State           	IJXState        
+242 242 1179 861	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                                                                       	Position      	Selection 	State
+b:\projects\work\order_manager\main\dev\rserver\default\rserver.ijs            	0 544 1568 568	890 890   	0    
+b:\projects\work\order_manager\main\dev\oms\default\workers\traderinterface.ijs	0 544 1568 568	789 789   	0    
+b:\projects\work\order_manager\main\dev\oms\default\verify.ijs                 	0 544 1568 568	1171 1171 	0    

@@ -1,0 +1,10 @@
+[Main]
+Position       	State           	IJXState        
+143 91 1272 834	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                                                                       	Position        	Selection 	State
+b:\projects\work\order_manager\main\dev\dbagent\default\dbagent.ijs            	1 0 1566 561    	0 0       	0    
+b:\projects\work\order_manager\main\dev\dbagent\default\workers\dbinterface.ijs	129 69 1213 973 	2053 2053 	0    
+b:\projects\work\order_manager\main\dev\dbagent\default\dbagent.ini            	110 110 1215 760	499 499   	2    
+b:\projects\work\order_manager\main\dev\dbagent\default\workers\errorlog.ijs   	132 132 1215 760	2409 2409 	2    

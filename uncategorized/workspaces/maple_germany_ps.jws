@@ -1,0 +1,14 @@
+[Main]
+Position        	State           	IJXState        
+140 187 1176 910	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                                                                       	Position        	Selection 	State
+b:\projects\work\order_manager\main\dev\mgps\default\mgps.ijs                  	0 528 1568 560  	899 899   	0    
+b:\projects\work\order_manager\main\dev\mgps\default\mgps.ini                  	44 44 1216 764  	561 561   	2    
+b:\projects\work\order_manager\main\dev\mgps\default\workers\mginterface.ijs   	0 0 1566 709    	1186 1186 	2    
+b:\projects\work\order_manager\main\dev\mgps\default\workers\dbinterface.ijs   	176 176 1212 760	0 0       	2    
+b:\projects\work\order_manager\main\dev\mgps\default\workers\errorlog.ijs      	198 198 1212 760	953 953   	2    
+b:\projects\work\order_manager\main\dev\mgps\default\mgpsfields.ijs            	132 132 1214 760	864 864   	2    
+b:\projects\work\order_manager\main\dev\mgps\default\workers\positionworker.ijs	176 176 1220 764	2026 2026 	2    
+b:\projects\work\order_manager\main\dev\table\default\table.ijs                	198 198 1216 760	2260 2260 	0    

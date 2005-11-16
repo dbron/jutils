@@ -1,0 +1,8 @@
+[Main]
+Position        	State           	IJXState        
+110 110 1180 861	sw_showmaximized	sw_showmaximized
+
+[Windows]
+Filename                                                                               	Position      	Selection 	State
+b:\projects\work\order_manager\main\dev\util\default\lunch_participation_calculator.ijs	784 0 784 1088	8084 8084 	0    
+b:\projects\work\order_manager\main\dev\util\default\lunch_participation_calculator.ini	-2 482 786 607	194 194   	0    

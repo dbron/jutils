@@ -1,0 +1,10 @@
+[Main]
+Position        	State        	IJXState     
+198 198 1178 861	sw_shownormal	sw_shownormal
+
+[Windows]
+Filename                                                                   	Position       	Selection	State        
+b:\projects\work\order_manager\main\dev\oms\default\macro.pathing.ijs      	583 384 583 384	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\omsfields.ijs          	583 0 583 384  	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\workers\coordinator.ijs	0 384 583 384  	0 0      	sw_shownormal
+b:\projects\work\order_manager\main\dev\oms\default\workers\orderstatus.ijs	0 0 583 384    	619 619  	sw_shownormal

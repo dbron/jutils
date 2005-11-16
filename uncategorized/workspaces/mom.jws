@@ -1,0 +1,8 @@
+[Main]
+Position      	State        	IJXState     
+44 44 1178 861	sw_shownormal	sw_shownormal
+
+[Windows]
+Filename                                                                    	Position      	Selection	State
+b:\projects\work\order_manager\main\dev\mom\default\mom.ijs                 	22 22 1219 764	0 0      	0    
+b:\projects\work\order_manager\main\dev\mom\default\workers\omsinterface.ijs	44 44 906 533 	0 0      	0    

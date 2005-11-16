@@ -1,0 +1,14 @@
+[Main]
+Position       	State        	IJXState     
+264 88 1178 861	sw_shownormal	sw_shownormal
+
+[Windows]
+Filename                                                             	Position        	Selection 	State
+b:\projects\work\usd_ps\specs\usdesk_to_boss_account_map.ijs         	0 0 783 272     	7845 7845 	2    
+b:\projects\work\usd_ps\dev\usdps\default\positionserver.ijs         	645 145 766 748 	720 720   	0    
+b:\projects\work\usd_ps\dev\usdps\default\workers\positionworker.ijs 	552 469 783 272 	89 89     	2    
+b:\projects\work\usd_ps\dev\usdps\default\positioncolumns.ijs        	783 272 783 272 	0 0       	2    
+b:\projects\work\usd_ps\dev\usdps\default\workers\sodworker.ijs      	783 0 783 272   	202 202   	2    
+b:\projects\work\usd_ps\dev\usdps\default\workers\jfeedclient.ijs    	0 816 783 272   	0 0       	2    
+b:\projects\work\usd_ps\dev\usdps\default\workers\omsinterface.ijs   	171 409 1170 542	617 617   	0    
+b:\projects\work\usd_ps\dev\usdps\default\workers\clientinterface.ijs	0 272 783 272   	10 10     	2    

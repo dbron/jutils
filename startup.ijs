@@ -29,6 +29,9 @@ NB.  ===========================================================================
 	WHITESPACE				=:  ' ', TAB, CR, LF
 	PRINTABLE				=:  WHITESPACE , a. {~ 33 ([ + i.@:>:@:-~) 126
 
+	NB.  I keep having to calculate this, so I'm just going to store it.
+	MAXINT					=:  ((<.@<:@(2&^))^:2) 5   NB.  Same as (<. <: 2 ^ <. <: 2 ^ 5) or (<. <: 2 ^ 31)
+
 	NB.  List of words, for research purposes.
 	loadWORDS				=:  [: -.&(s:a:)@:	/:~@:~.@:; s:@:(LF&,)@:toupper@:toJ@:fread each bind ('c:\danielb\data\documents\word.lst';'c:\danielb\data\documents\web2.txt')
 
@@ -663,6 +666,29 @@ NB.  so 'smoutput' won't work.  So I just create a verb to print the prompt
 NB.  and call it from a later script (newuser.ijs specificially)
 printPrompt_z_ =: verb define
 	smoutput 'New J (' , (({.~ i.&'/') 9!:14 '') ,  ') session started on ' , ((i.&' ') ({. , ' at '"_ , }.@:}.) ]) _4 }. datetimestamp_base_ 6!:0 ''
+
+	if.  you_want_regex_loaded_and_the_random_seed_changed =. 1 do.  NB.  Usually when you restart J ? wil give the same results in the same order as the last time.  This changes when you reset the randoms edd.
+	require 'regex'
+	
+	NB.  Set random seed to time, so we don't always get the same line from the same file
+	(?@:[ 9!:1)/ 2032 12 31 23 59 59 999x  (((<.<:2^31)&(] #:~ [ #~ 1: + <.@:^.)@:#.)&.|. <.@:(, *&1000@:(1&|)@:{:))  6!:0''
+
+    or               =. 2 : 'u. :: (n."_)'
+    orNada           =. or (i.0)
+	randFile         =.  toJ@:(1!:1 :: (''"_))@:({ orNada~ ?@:#)@:listFiles@:jpath 
+    isNB             =. (4&{ or ' ' e. '.:'"_)  < 'NB.'"_ -: 3&{.
+
+	NB.  Live code (livecode):  ('NB.[^.:]';'''')&( ((] +. +./\@:>)(+. ~:/\))/ @:(rxE&>))@:<   NB.  Mask where code is 'dead' (in quotes or after NB.)
+    containsCode     =. (0: ~: # - (isNB@:>@:{:))@:;:&>
+
+    randNonEmptyLine =. (>@:{ orNada~ (({ orNada~ ? @:#)@:I.@:containsCode))  @: (LF&cut)  NB.  Do NOT use  {:: in place of >@:{  because ''&{:: is NOT the same as ''&(>@:{) 
+    clean            =. ('NB.[^.:]';'''')&(>@:] #~ =&' '@:>@:]  (*./\.@:+. (j. 1 0&E.)@:= ]) ((] < +./\@:>)(+. ~:/\))/@:(rxE :: 0: &>))@:<^:(0: -.@:e. $)   NB.  Have to use S: instead of &> because 'boxed' -: datatype > 0 $ a: and rxE is sensitive to 'boxed' -: datatype
+
+	smoutput '   ' & , @: clean @: randNonEmptyLine  @: randFile  :: ((13!:11 ,&< 13!:12)@:empty "_) '~system\examples\phrases\*.ijs'
+	end.
+
+
+	smoutput ''
 )
 
 PROMPT =: noun define

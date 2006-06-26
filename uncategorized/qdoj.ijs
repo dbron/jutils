@@ -1,12 +1,12 @@
 require 'strings'
 require jpath '~system\extras\util\help.ijs'
 
-HTML_ENT =:  <@:(('&'&,@:,&';'@:{. ,&:< }.@:}.)~ i.&'=')@:trim;._2 noun define
+HTML_ENT =:  <@:(('&'&,@:,&';'@:{. ,&:< }.@:}.)~ i.&'=')@:('?' sr ' ' )@:trim;._2 noun define
 	lt=<
 	gt=>
 	amp=&
 	#149=*
-	nbsp=
+	nbsp=?
     harr=<==>
 	quot="
 )

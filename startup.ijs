@@ -4,12 +4,13 @@ NB.  ===========================================================================
 
 	NB.  No dependencies yet (except for those defined in stdlib, winlib, etc).
 buildpublic_j_ noun define
-yaml         user\util\general\parse\yaml
-jf_fmt       user\util\general\format\jf_fmt
-qdoj         b:\data\srccode\j\qdoj.ijs
-hui          user\util\contrib\hui\hui
-cmprj        user\util\environment\compare_j_verbs.ijs
-loadp        user\util\environment\loadp.ijs
+yaml         ~user\util\general\parse\yaml
+jf_fmt       ~user\util\general\format\jf_fmt
+qdoj         ~user\util\uncategorized\qdoj.ijs
+hui          ~user\util\contrib\hui\hui
+cmprj        ~user\util\environment\compare_j_verbs.ijs
+loadp        ~user\util\environment\loadp.ijs
+base64       ~system\packages\misc\base64.ijs
 )
 
 NB. require'yaml'
@@ -89,6 +90,7 @@ NB.  ===========================================================================
 
 	NB.  Identify the depth of nested parens at each point in a string
 	parenDepth				=:  +/\ @: (-/) @: ('()'&(=/))
+	pd						=:  ('()'&$:) : (({: + +/\ @: (-/)) @: (=/))
 
 	NB. Tests if all items in the RHA are equivalent.
 	allSame					=:  (1: = #@:~.)
@@ -255,7 +257,7 @@ NB.  ===========================================================================
 
 	NB.  Remove all occurances of the sequence on the LHS from the RHS
 	NB.  EG:  'ugly ' remove  'This ugly sentence should ugly be ugly nice'	NB.  Returns 'This sentence should be nice'
-	remove					=:  -.@:E select
+	NB. remove					=:  -.@:E select
 
 	NB.  With a list of boxes as a LHA, returns those which contain the sequence in the boxed RHA.
 	NB.  E.G. 'A' selectContaining 'ALPHA';'BETA';'GAMMA';'DELTA';'EPISLON';'THETA' NB. Returns  <;._1 ' ALPHA BETA GAMMA DELTA THETA'
@@ -295,9 +297,22 @@ NB.  ===========================================================================
 	NB.  EG:  getBooleanFunction (1 1 ,: 0 1)  ; (1 0 ,: 1 1) NB.  Same as above
    	getBooleanFunction		=: BDOT_EQUIVALENTS&({~ #.@:,"2@:>)
 
-	NB.  The inverse of bx
-	NB.  EG:  xb 5 7 12 NB.  Returns 0 0 0 0 0 1 0 1 0 0 0 0 1
-	xb						=: 1:`[`] } >:@:(>./) # 0:
+	NB.  The inverse of  I.  (which was once called  bx  )
+	NB.
+	NB.  The dyadic form allows the LHA to specific the length 
+	NB.  of the resultant vector.
+	NB.
+	NB.  EG:    xb 5 7 12    NB.  Returns 0 0 0 0 0 1 0 1 0 0 0 0 1
+	NB.  EG:    xb 5 5 7 12  NB.  Returns 0 0 0 0 0 2 0 1 0 0 0 0 1
+	NB.  EG:  5 xb 1 2 3     NB.  Returns 0 1 1 1 0
+	NB.  EG:  In a red-black tree, ensure all the children of black nodes are red:
+	NB.       assert (=&'r'@:#~ # {. ([: , 1 2 +/~ +:)&. bx @:=&'b')'brrbbbbrrr'
+	NB.  EG:  Strip trailing zeros:
+	NB.       assert 1 2 3 -: ]&.bx  1 2 3 , 15 # 0
+	NB. xb                  =: 1:`[`] } >:@:(>./) # 0:
+    iii                     =. ({:"1@:])`({."1@:])`(0 $~ [) } 
+    xb                      =: ((0 >. >:)@:(>./) iii f. ({. , #)/.~) : ({. $:) :. (bx =: I. :. xb)
+
 	
 	NB.  Just like ;:^:_1, but can join with any glue.
 	NB.  EG:  ', ' join ;: 'a b c d e f'
@@ -360,6 +375,14 @@ NB.  ===========================================================================
 	NB.getPath				=:  4!:55@:< ] (({. ; }.)~ >:@: i:&'\')@:>@:(4!:4@:< { 4!:3) [ ".@:(] , '=:'''&,@:(,&'''')@:])
 	NB.getPath				=:  ([: (({. ; }.)~ >:@:i:&'\') (4!:55 ] 4!:4 { 4!:3)&.<@:".@:(, '=:'''&,@:(,&'''')))
    	getPath					=: (splitPath@:scriptFile) f.
+
+	getNmdPath				=: verb define
+	me =. cocreate''	
+	('__me' , L: 0 ~ ;: 'dir basename ext' ) =. (; (split~ i:&'.'))&>/ getPath''
+	   fullname__me =: basename__me , ext__me
+   	path_me_ =: dir__me,fullname__me
+	me
+)
 
 
 	NB.  Arbitrary comparison functions.  Use like dyadic <:, >:, <, and > respectively

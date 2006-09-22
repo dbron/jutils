@@ -1,0 +1,204 @@
+<HTML><HEAD><TITLE>d:\math\j504\addons\xml\test\sax_test2.ijs</TITLE>
+<META name="GENERATOR" content="j504/2005-03-30/13:35 Publisher">
+<style>
+pre {background-color: #E2E2E2; padding: 4pt; margin-bottom: 0;padding-bottom: 0;}
+pre.out {background-color: white; }
+</style>
+</HEAD>
+<BODY bgcolor="White">
+
+<h3>sax_test2.ijs</h3>
+
+<PRE><CODE><FONT color="Green"><EM>NB. object oriented sax parser specialization</EM></FONT>
+<FONT color="Green"><EM>NB. extended to use attributes and levels</EM></FONT>
+
+require <FONT color="Blue">'~addons/xml/sax.ijs'</FONT>
+
+saxclass <FONT color="Blue">'psax2'</FONT>
+
+<STRONG>showattrs</STRONG><STRONG>=:</STRONG> (<FONT color="Blue">''</FONT>&quot;_)`(;:^:_1@:(([ , <FONT color="Blue">'='</FONT>&quot;_ , ])&amp;.&gt;/&quot;1))@.(*@#)
+
+<STRONG>startDocument</STRONG><STRONG>=:</STRONG> 3 : 0
+  <STRONG>L</STRONG><STRONG>=:</STRONG> 0
+)
+
+<STRONG>startElement</STRONG><STRONG>=:</STRONG> 4 : 0
+  smoutput (L#<FONT color="Blue">'  '</FONT>),<FONT color="Blue">'['</FONT>,y.,' ',(showattrs attributes x.),<FONT color="Blue">']'</FONT>
+  <STRONG>L</STRONG><STRONG>=:</STRONG> L+1
+)
+
+<STRONG>endElement</STRONG><STRONG>=:</STRONG> 3 : 0
+  <STRONG>L</STRONG><STRONG>=:</STRONG> L-1
+  smoutput (L#<FONT color="Blue">'  '</FONT>),<FONT color="Blue">'[/'</FONT>,y.,<FONT color="Blue">']'</FONT>
+)
+
+<FONT color="Green"><EM>NB. =========================================================</EM></FONT>
+cocurrent <FONT color="Blue">'base'</FONT>
+
+<STRONG>TEST1</STRONG><STRONG>=:</STRONG> 0 : 0
+&lt;root&gt;&lt;test a=&quot;11&quot;/&gt;&lt;test b=&quot;12&quot;/&gt;&lt;/root&gt;
+)
+
+0 : 0  <FONT color="Green"><EM>NB. Test</EM></FONT>
+process_psax2_ TEST1
+process_psax2_ fread jpath <FONT color="Blue">'~addons/xml/test/chess.xml'</FONT>
+)
+</CODE></PRE>
+
+<pre class=out>
+   process_psax2_ TEST1
+[root]
+  [test a=11]
+  [/test]
+  [test b=12]
+  [/test]
+[/root]
+</pre>
+
+<h3>table.ijs</h3>
+
+<PRE><CODE><FONT color="Green"><EM>NB. using element character content</EM></FONT>
+<FONT color="Green"><EM>NB. inter-tag and surrounding whitespace is ignored</EM></FONT>
+
+require <FONT color="Blue">'~addons/xml/sax.ijs format'</FONT>
+
+saxclass <FONT color="Blue">'ptable'</FONT>
+
+<STRONG>endElement</STRONG><STRONG>=:</STRONG> 3 : 0
+  <FONT color="#FF0000">if.</FONT> y.-:<FONT color="Blue">'tr'</FONT> <FONT color="#FF0000">do.</FONT> <STRONG>TD</STRONG><STRONG>=:</STRONG> <FONT color="Blue">''</FONT> [ <STRONG>TR</STRONG><STRONG>=:</STRONG> TR,TD <FONT color="#FF0000">end.</FONT>
+)
+
+<STRONG>characters</STRONG><STRONG>=:</STRONG> 3 : <FONT color="Blue">'TD=: TD,&lt;y.'</FONT>
+
+<STRONG>startDocument</STRONG><STRONG>=:</STRONG> 3 : <FONT color="Blue">'TR=: empty TD=: i.0 [ IGNOREWS=: 1'</FONT>
+<STRONG>endDocument</STRONG><STRONG>=:</STRONG> 3 : <FONT color="Blue">'TR'</FONT>
+
+<FONT color="Green"><EM>NB. =========================================================</EM></FONT>
+cocurrent <FONT color="Blue">'base'</FONT>
+
+<STRONG>TEST4</STRONG><STRONG>=:</STRONG> 0 : 0
+&lt;table&gt;&lt;tr&gt;  &lt;td&gt;0 0 &lt;/td&gt;  &lt;td&gt; 0 1&lt;/td&gt;  &lt;/tr&gt;
+      &lt;tr&gt;   &lt;td&gt;1 0 &lt;/td&gt;  &lt;td&gt; 1 1&lt;/td&gt;  &lt;/tr&gt;&lt;/table&gt;
+)
+
+0 : 0  <FONT color="Green"><EM>NB. Test</EM></FONT>
+process_ptable_ TEST4
+process_ptable_ fread jpath <FONT color="Blue">'~addons/xml/test/table.xml'</FONT>
+)
+</CODE></PRE>
+
+<pre class=out>
+   process_ptable_ TEST4
++---+---+
+|0 0|0 1|
++---+---+
+|1 0|1 1|
++---+---+
+</pre>
+
+
+<h3>rss.ijs</h3>
+
+<PRE><CODE><FONT color="Green"><EM>NB. using element character content</EM></FONT>
+<FONT color="Green"><EM>NB. selective processing based on element hierarchy position</EM></FONT>
+
+require <FONT color="Blue">'~addons/xml/sax.ijs format'</FONT>
+
+saxclass <FONT color="Blue">'prss'</FONT>
+
+<STRONG>startDocument</STRONG><STRONG>=:</STRONG> 3 : 0
+  <STRONG>S</STRONG><STRONG>=:</STRONG> <FONT color="Blue">''</FONT>
+)
+
+<STRONG>startElement</STRONG><STRONG>=:</STRONG> 4 : 0
+  <STRONG>S</STRONG><STRONG>=:</STRONG> S,&lt;y.
+  <FONT color="#FF0000">if.</FONT> y.-:<FONT color="Blue">'item'</FONT> <FONT color="#FF0000">do.</FONT> smoutput <FONT color="Blue">''</FONT> <FONT color="#FF0000">end.</FONT>
+)
+
+<STRONG>endElement</STRONG><STRONG>=:</STRONG> 3 : 0
+  <STRONG>S</STRONG><STRONG>=:</STRONG> }:S
+)
+
+<STRONG>characters</STRONG><STRONG>=:</STRONG> 3 : 0
+  s2=. _2{.S
+  <FONT color="#FF0000">if.</FONT> s2-:;:<FONT color="Blue">'channel title'</FONT>       <FONT color="#FF0000">do.</FONT> smoutput <FONT color="Blue">'Channel: '</FONT>,y. <FONT color="#FF0000">elseif.</FONT>
+      s2-:;:<FONT color="Blue">'channel description'</FONT> <FONT color="#FF0000">do.</FONT> smoutput fold y. <FONT color="#FF0000">elseif.</FONT>
+      s2-:;:<FONT color="Blue">'channel pubDate'</FONT>     <FONT color="#FF0000">do.</FONT> smoutput <FONT color="Blue">'Date: '</FONT>,y. <FONT color="#FF0000">elseif.</FONT>
+      s2-:;:<FONT color="Blue">'item title'</FONT>          <FONT color="#FF0000">do.</FONT> smoutput <FONT color="Blue">'Topic: '</FONT>,y. <FONT color="#FF0000">elseif.</FONT>
+      s2-:;:<FONT color="Blue">'item description'</FONT>    <FONT color="#FF0000">do.</FONT> smoutput fold y. <FONT color="#FF0000">elseif.</FONT>
+      s2-:;:<FONT color="Blue">'item link'</FONT>           <FONT color="#FF0000">do.</FONT> smoutput <FONT color="Blue">'URL: '</FONT>,y. <FONT color="#FF0000">end.</FONT>
+)
+
+<FONT color="Green"><EM>NB. =========================================================</EM></FONT>
+cocurrent <FONT color="Blue">'base'</FONT>
+
+<STRONG>TEST3</STRONG><STRONG>=:</STRONG> 0 : 0
+&lt;channel&gt;&lt;title&gt;qq&lt;/title&gt;&lt;pubDate&gt;1/1/2006&lt;/pubDate&gt;&lt;/channel&gt;
+)
+
+0 : 0  <FONT color="Green"><EM>NB. Test</EM></FONT>
+process_prss_ TEST3
+process_prss_ fread jpath <FONT color="Blue">'~addons/xml/test/cnn.rss'</FONT>
+)
+</CODE></PRE>
+
+<pre class=out>
+   process_prss_ TEST3
+Channel: qq
+Date: 1/1/2006
+</pre>
+
+<h3>chess.ijs</h3>
+
+<PRE><CODE><FONT color="Green"><EM>NB. chess -- a more complete example of custom parser</EM></FONT>
+<FONT color="Green"><EM>NB. transforms XML chess board into a J character matrix</EM></FONT>
+
+require <FONT color="Blue">'~addons/xml/sax.ijs viewmat'</FONT>
+
+saxclass <FONT color="Blue">'pchess'</FONT>
+
+<STRONG>COLORS</STRONG><STRONG>=:</STRONG> ;:<FONT color="Blue">'whitepieces blackpieces'</FONT>
+<STRONG>PIECES</STRONG><STRONG>=:</STRONG> ;:<FONT color="Blue">'pawn rook night bishop queen king'</FONT>
+<STRONG>SYMBOLS</STRONG><STRONG>=:</STRONG> <FONT color="Blue">'PRNBQKprnbqk'</FONT>
+
+<STRONG>startElement</STRONG><STRONG>=:</STRONG> 4 : 0
+  e=. &lt;y.
+  <FONT color="#FF0000">if.</FONT> 2&gt;C=. COLORS i.e <FONT color="#FF0000">do.</FONT> <STRONG>COLOR</STRONG><STRONG>=:</STRONG> C*6 <FONT color="#FF0000">return.</FONT> <FONT color="#FF0000">end.</FONT>
+  <FONT color="#FF0000">if.</FONT> 6&gt;P=. PIECES i.e <FONT color="#FF0000">do.</FONT> <STRONG>PIECE</STRONG><STRONG>=:</STRONG> SYMBOLS{~COLOR+P <FONT color="#FF0000">return.</FONT> <FONT color="#FF0000">end.</FONT>
+  <FONT color="#FF0000">if.</FONT> -.<FONT color="Blue">'position'</FONT>-:y. <FONT color="#FF0000">do.</FONT> <FONT color="#FF0000">return.</FONT> <FONT color="#FF0000">end.</FONT>
+
+  r=. &lt;:0&quot;.       x.getAttribute <FONT color="Blue">'row'</FONT>
+  c=. <FONT color="Blue">'abcdefgh'</FONT>i.x.getAttribute <FONT color="Blue">'column'</FONT>
+  empty <STRONG>BOARD</STRONG><STRONG>=:</STRONG> PIECE (&lt;r,c) } BOARD
+)
+
+<STRONG>startDocument</STRONG><STRONG>=:</STRONG> 3 : 0
+  <STRONG>BOARD</STRONG><STRONG>=:</STRONG> <FONT color="Blue">'. '</FONT>{~ ~:/~2|i.8
+)
+
+<STRONG>endDocument</STRONG><STRONG>=:</STRONG> 3 : 0
+  |.BOARD
+)
+
+<FONT color="Green"><EM>NB. =========================================================</EM></FONT>
+cocurrent <FONT color="Blue">'base'</FONT>
+
+0 : 0  <FONT color="Green"><EM>NB. Test</EM></FONT>
+process_pchess_ fread jpath <FONT color="Blue">'~addons/xml/test/chess.xml'</FONT>
+viewbmp jpath<FONT color="Blue">'~addons/xml/test/chess.bmp'</FONT>
+)
+</CODE></PRE>
+
+<pre class=out>
+   process_pchess_ fread jpath '~addons/xml/test/chess.xml'
+ . . . .
+q . . . 
+ k B . .
+p . . .P
+P. p . .
+.P. . . 
+ .P. PP.
+. . R K 
+</pre>
+
+</BODY></HTML>

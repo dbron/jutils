@@ -1,115 +1,20 @@
-! !. !:
-" ". ":
-# #. #:
-$ $. $:
-% %. %:
-& &. &: &.:
-* *. *:
-+ +. +:
-, ,. ,:
-- -. -:
-. .. .:
-/ /. /:
-_9: _8: _7: _6: _5: _4: _3: _2: _1: 0: 1: 2: 3: 4: 5: 6: 7: 8: 9: _:
-: :. ::
-; ;. ;:
-< <. <:
-= =. =:
-> >. >:
-? ?.
-@ @. @:
-  A.
-  C.
-  D. D:
-  E.
-  H.
-  L. L:
-  S:
-  T.
-[    [:
-\ \. \:
-]   
-^ ^. ^:
-`    `:
-  a. a:
-  b.
-  c.
-  d.
-  e.
-  f.
-  i. i:
-  j. 
-  m. n.    u. v.  x. y.  
-     x:
-     u:
-     o.
-   p. p:
-   q:
-   r.
-      s:
-   t. t:
-{ {. {: {::
-| |. |:
-} }. }: }::
-~ ~. ~:
+GRAPHICS     =: '!"#$%&''()*+,-./:;<=>?@[\]^_`{|}~'
+UCALPHA      =: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+LCALPHA      =: 'abcdefghijklmnopqrstuvwxyz'
+ALPHA        =: LCALPHA,UCALPHA
+INFLECTIONS  =: '.: '
 
-Math
-   Comparison
-       = ~: +. +: *. *: -.@:] < <: >: >:
-   Arithmetic
-       + - * % | ^ ^. ! *: %: #. #: >. <.
-   Trig
-     o. 
-   Rand
-     ? ?. 
-   Linear
-       %.
-   Numbers
-       Prime
-         p: q:
-       Rational
-         r.
-       Complex
-         j.
-   Polynomials & shit
-       d. D. D: H. p. T. t. t:
-   Permutations
-     A. C.
-Set theory
-    i. i: e. E. -. -: ~. ~:@:]
-Tree
-    < > {:: }:: L. L: S:
-Indexing 
-    , ,. ,:  $ # { } {. {: }: }.  \: /:   |. |:
-Partitioning (string processing)
-    ; ;. ;: ":
-Glue
-   . @ @:   & &:   &. &.:   ` `: @. 
-Explicit arguments
-    x. y., u., v., m. n.
-Fundamental
-    J internal
-      !: s: !. 
-    Irreplacible primtitives 
-       [ ] [: x: u: $: $. ". ~
-Looping
-    " / \ /. \. ^:
-Characteristics
-    b. .. .: :. :: : f.
+CLASS_NAMES  =: ;: 'ERROR INVALID UNUSED NOUN ADVERB CONJUNCTION VERB'
+CLASSES      =:        _3      _2     _1    0      1           2    3 
+(CLASS_NAMES)=:CLASSES
 
-Data
-   Nouns
-     a. a: 
-   Constant functions
-     _9: _8: _7: _6: _5: _4: _3: _2: _1: 0: 1: 2: 3: 4: 5: 6: 7: 8: 9: _:
+combinations =. { (< GRAPHICS,ALPHA), 2 # < INFLECTIONS  NB.  Graphs, digraphs, trigraphs
+PRIM_CANDS   =: (names =. ,&.> ALPHA) -.~ ~. {.@:;: ::<  &> , combinations
+PRIM_CLASSES =: ((CLASS_NAMES , ]) <@:}./.~ CLASSES , 3 : (' ". ''p =. '', y ';'nc{.;:''p'' ') :: (ERROR"_) &>) PRIM_CANDS
+PRIM_NAMES   =: 'PRIM_', L: 0'S',L:0~ CLASS_NAMES {~ <<<  badIdx =. CLASSES i. ERROR,INVALID,UNUSED
+(PRIM_NAMES) =:  PRIM_CLASSES =: PRIM_CLASSES     {~ <<<  badIdx
 
-
-Meta
-   Copulae
-     =. =:
-    Parens
-     ()
-    Direct data
-     1 2 3 4  'abcd'
-    Comments
-     NB. Bugs go here
+NB.   #PRIM_VERBS 
+NB.72
+NB.  (;:^:_1) 15 {. PRIM_VERBS 
+NB.! ". ": #. #: # $. $: $ %. %: % *. *: *

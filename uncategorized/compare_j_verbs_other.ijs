@@ -310,6 +310,7 @@ B:
 	10000001000100 01001000100010
 )
 
+
    NB.  Record differences in results of algorithms
    RPT         =:  ({.&> {."1 input) catRpts algos rpts smallInput 
    smoutput RPT

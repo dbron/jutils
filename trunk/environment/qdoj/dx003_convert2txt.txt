@@ -1,0 +1,4 @@
+lynx  -dump -width=500  -dont_wrap_pre http://www.jsoftware.com/books/help/dictionary/dx003.htm > poop.txt
+links -dump -width 500                 http://www.jsoftware.com/books/help/dictionary/dx003.htm > poop1.txt
+w3m   -dump -cols  500                 http://www.jsoftware.com/books/help/dictionary/dx003.htm > poop2.txt
+

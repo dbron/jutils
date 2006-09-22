@@ -1,5 +1,5 @@
 letters     =:  LF -.~ noun define
- abcdefghijklmnopqrstuvwxyzæøåABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ!"#$%&'*+,-./0123456789:;<=>?@[\]^_`
+ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&'*+,-./0123456789:;<=>?@[\]^_`
 )
 split=:($:~ <.@:-:@:#) :([@:{. ,&:< ]@:}.)
 LETTERS     =:  >"1 (2 split 2 2 2) multiCut '.M' i. TAB -.~ noun define

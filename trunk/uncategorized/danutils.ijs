@@ -1459,7 +1459,7 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 	screenSize				=:  {.@:wcsize bind '' <. 1: { 9!:36 bind ''
 
 	NB.  Get last error message
-	NB.  EG:  3 : ('try. 3 + y. catch. lastErr$0 end.') '3' NB.  Returns '³domain error' , LF , '³   3    +y.'
+	NB.  EG:  3 : ('try. 3 + y. catch. lastErr$0 end.') '3' NB.  Returns 'domain error' , LF , '   3    +y.'
 	lastErr			=:  (}: @: (13!:12) @: empty)
 
 	NB.  Debug - Show name

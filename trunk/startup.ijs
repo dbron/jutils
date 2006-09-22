@@ -11,6 +11,8 @@ hui          ~user\util\contrib\hui\hui
 cmprj        ~user\util\environment\compare_j_verbs.ijs
 loadp        ~user\util\environment\loadp.ijs
 base64       ~system\packages\misc\base64.ijs
+PRIM         ~user\util\environment\primitive_classes.ijs
+tara         ~addons\tara\tara.ijs
 )
 
 NB. require'yaml'
@@ -396,6 +398,12 @@ NB.  ===========================================================================
 	NB.  EG:  ' AQFR' interval UCALPHA    NB.  Returns 0 1 17 6 18
 	interval				=:  (i.&1@:(lt"_1))"_1 _
 
+	NB.  Extract strings of printable characters greater than
+	NB.  length x from y.  
+	NB.  EG:  ;{.strings fread jpath'~binary\j.exe'  NB.  Returns '!This program cannot be run in DOS mode.'
+	k						=. ' !"#$%&''()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~'   
+	strings					=:  7&$: : ([ (] #~ (< #&>)) ] <;._1~ k -.@:e.~ ]) 
+
 
 NB.  =====================================================================================================================================================
 NB.  Environment Utilities: Mostly covers for foreigns.
@@ -731,4 +739,4 @@ NB.  Make sure we don't reload the workspace if this script is reloaded
 (0 = nc<'WORKSPACE_z_') loadWorkspace@:]^:(+: 0&-:) getParam 'workspace'
 
 NB.  If 'j' option given on the command line, get the original command line and execute everything following /j, then exit.
-   
+NB.  base36 =: (encoding -&# lc_alpha) ([ #. | + (#dec_digits) * <:)  (encoding=.;'dec_digits uc_alpha lc_alpha'=.;:'0123456789 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz') i. ]

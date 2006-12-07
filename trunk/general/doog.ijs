@@ -75,7 +75,9 @@ NB.  Other uses
   pc =: shell 'wget http://www.jsoftware.com/svn/DanBron/trunk/environment/primitive_classes.ijs -q -O -'
   0!:0 (#~ [: -. (2# LF) E. ])^:_ (=&CR)`(,:&LF)} pc
 
-  
+  NB.  List of all J verbs, grouped by their rank.
   (~.<"1 n),:(,. PRIM_VERBS) </.~ n=. PRIM_VERBS 'b.' doog (`:0) 0
+
+  NB.  List of all J verbs and their inverses.
   (a~:a:)#PRIM_VERBS  ,. a =. (<'@' doog (PRIM_VERBS 'b.' doog '::' doog (''"_) )) (`:0) _1
 )

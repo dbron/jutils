@@ -71,7 +71,11 @@ testOnLoad      =. 0  NB.  0 disables, 1 enables.
 
 NB.  Other uses
 0 0$ noun define
-  load 'D:\store\from_MRU\scripts\svn\trunk\environment\primitive_classes.ijs'
+  require 'task'
+  pc =: shell 'wget http://www.jsoftware.com/svn/DanBron/trunk/environment/primitive_classes.ijs -q -O -'
+  0!:0 (#~ [: -. (2# LF) E. ])^:_ (=&CR)`(,:&LF)} pc
+
+  
   (~.<"1 n),:(,. PRIM_VERBS) </.~ n=. PRIM_VERBS 'b.' doog (`:0) 0
   (a~:a:)#PRIM_VERBS  ,. a =. (<'@' doog (PRIM_VERBS 'b.' doog '::' doog (''"_) )) (`:0) _1
 )

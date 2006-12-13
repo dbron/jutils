@@ -2,7 +2,7 @@
 	require'dates'
 
 	rank=:#@:$
-	merge =: 4 : 'x.}y.'
+	merge =: 4 : 'x}y'
 
 	NB.  Convert a list of boxes RHA into English, using commas and the word in the LHA (default is 'and')
 	NB.  EG:        listToEnglish ;: 'a'	    NB. Returns ,'a'
@@ -22,20 +22,20 @@
 	NB.  EG:  pluralize |:(;: 'corps') (<1 ; ,_1) } 2 {. ,: ;: 'apple princess company millenium radius corps'  NB.  Returns <;._1 ' apples princesses companies millenia radii corps'  NB.  The pluraly of corps is corps
 	NB.
 	NB.  Input expected: 
-	NB.  	x. is singular suffixes
-	NB.     y. is output of splitRootsFromEndings
+	NB.  	x is singular suffixes
+	NB.     y is output of splitRootsFromEndings
 	roots						=.  {.@:]  NB.  This is from the output of splitRootsFromEndings
 	calculateMergeSpec			=.  (>:@:(i:&1@:="1)&.|: >@:{:)
 	mergeSpecPlusRoots			=.  calculateMergeSpec ; roots
 	NB.  Input expected:
-	NB.  	x. is singular suffixes ,: corresponding plural suffixes 
-	NB.     y. is original words ,: custom plurals 
+	NB.  	x is singular suffixes ,: corresponding plural suffixes 
+	NB.     y is original words ,: custom plurals 
 	prefixes					=.  {.@:[
 	splitRootsFromEndings		=.  ({.@> ,&<  {:@>)@:((}. ; {.)&.>"0 1~ -@:#&>)~&:{.
 	mergeSpecAndRoots			=.  (prefixes mergeSpecPlusRoots splitRootsFromEndings) f.  NB.  Need to f. because I will reuse the name 'roots' and 'prefixes'
 	NB.  Input expected:
-	NB.  	x. is (original words ,: custom plurals) ,&< plural suffixes
-	NB.     y. is merge spec ,&< word roots
+	NB.  	x is (original words ,: custom plurals) ,&< plural suffixes
+	NB.     y is merge spec ,&< word roots
 	roots						=.  >@:{:@:]
 	suffixes					=.  >@:{:@:[
 	originalWords				=.  {.@:>@:{.@:[
@@ -49,12 +49,12 @@
 	calculatePlurals			=.  mergeSpecWithCustomization  merge allPossiblePlurals
 	NB.
 	NB.  Input expected:
-	NB.  	x. is singular suffixes  ,: corresponding plural suffixes 
-	NB.     y. is original words ,: custom plurals 
+	NB.  	x is singular suffixes  ,: corresponding plural suffixes 
+	NB.     y is original words ,: custom plurals 
 	plurals						=.  ((,&< {:)~ calculatePlurals mergeSpecAndRoots) f.
 	NB.
 	NB.  Input expected:
-	NB.  y. is original words OR (original words ,. custom plurals)
+	NB.  y is original words OR (original words ,. custom plurals)
 	NB.! Only handles lowercase text.
 	NB.! Perhaps put '/s' first, so that all plurals get defaulted to 's', instead of using ,&'s'&.>@:originalWords
 
@@ -94,9 +94,9 @@
 	createLeagueTable		=:  (<"0@:({.~ -@:#) ,. ]) {."1@:transformInputForPluralization f.
 	decomposeIntoLeagues 	=:  (#:~ ;@:({."1))~ formatUnitValueTableExcluding0s {:"1@:[	
 	NB.  Convenience conjunction;  inputs same as for createLeagueTable, outputs verb that will breakdown values appropriately.
-	breakdownLeagues		=:  2 : '(m. createLeagueTable  n.)&decomposeIntoLeagues'
+	breakdownLeagues		=:  2 : '(m createLeagueTable  n)&decomposeIntoLeagues'
 
-	NB.!  Make a conjunction that produces a conjunction like &.(m.&#.) or whatever
+	NB.!  Make a conjunction that produces a conjunction like &.(m&#.) or whatever
 	NB.!  so that we can do, for example, formatTimeSpan@:(-&.timeToScalar)
 	NB.!  Thus the inputs could be in 6!:0 format, and timeToScalar would turn these
 	NB.!  vector into a single, scalar number, - would subtract the LHA from the RHA

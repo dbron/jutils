@@ -11,7 +11,7 @@ UR=: 250
 
 sc_key=: 3 : 0
 ndx=. {. 0 ,~ 0 ". txt_select
-txt=. (ndx{.txt),(y.{a.),ndx}.txt
+txt=. (ndx{.txt),(y{a.),ndx}.txt
 wd 'set txt *',txt
 wd 'setselect txt ',":(1+ndx,ndx),0
 wd 'setfocus txt'

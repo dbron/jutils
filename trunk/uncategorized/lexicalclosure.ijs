@@ -33,9 +33,9 @@ NB.  ===========    UTILITY SECTION   ===========
 
         NB.  Another translate conjuction, only for scalars.  Repalce the scalar LHA to the conjunction with the scalar RHA to the conjunction.
         NB.  EG.  0 scalarReplace _1 ] 5 8 0 0 5 6 0 3 0 4  NB. Returns 5 8 _1 _1 5 6 _1 3 _1 4
-        NB.  scalarReplace      =: 2 : '(m.&=)`(,:&n.) } y.'
-        sr                         =:  2 : '(m.&=)`(,:&n.) } y.' NB.  (&=)`(,:&) }
-        s                          =:  2 : ('(m. sr n.) :. (n. sr m.)')
+        NB.  scalarReplace      =: 2 : '(m&=)`(,:&n) } y'
+        sr                         =:  2 : '(m&=)`(,:&n) } y' NB.  (&=)`(,:&) }
+        s                          =:  2 : ('(m sr n) :. (n sr m)')
 
         NB.  Tests if the end of the RHA matches the LHA.  It ravels the LHA argument if it's a scalar.
         isSuffix                   =:  ,^:(0: -: #@:$)@:[ -: ({.~ -@:#)~
@@ -53,7 +53,7 @@ NB.  ===========    UTILITY SECTION   ===========
         NB.  Just tacks the buffer onto the end of the argument list, then picks it out of the results
         NB.  and trims it.
         NB.  EG:  'GetTempFileNameA' winapiAsString ''
-        winapiAsString             =.  1 : '({.~ i.&(0 { a.))@:>@:{:@:(m. win32api)@:,&(<255 # '' '')@:boxopen'
+        winapiAsString             =.  1 : '({.~ i.&(0 { a.))@:>@:{:@:(m win32api)@:,&(<255 # '' '')@:boxopen'
   
         NB.  Creates a temporary file, with the prefix given as the argument.
         NB.! Note that this call actually creates the file.
@@ -85,7 +85,7 @@ NB.  ===========     LOGIC SECTION    ===========
         NB.  treated equivalently.  Doing this may result in name conflicts.  Note that the names defined, in the end,
         NB.  are in the same format as specified by the default parameter table.
         NB.! Make combineMaps an adverb with this verb as the parameter (or maybe a conjunction with a handle-missing-names-verb as the other parameter)
-        normalizeNames             =.  3 : 'tolower y.'@:-.&' _-'&.>@:({."1)
+        normalizeNames             =.  3 : 'tolower y'@:-.&' _-'&.>@:({."1)
         NB.
         NB.  If two parameters have the same name, use the first one, but only allow defineable names (names specified in
         NB.  the default table).  This allows the user's parameters to over-ride the defaults, without allowing him to
@@ -93,7 +93,7 @@ NB.  ===========     LOGIC SECTION    ===========
         NB.  access).
         combineMaps                =:  ([ ({."1@:[ ,. i.~&normalizeNames { }."1@:]) (appendDefaults normalizeInput)) f.
 
-        NB.  Give a dyad's x. lexical closure.
+        NB.  Give a dyad's x lexical closure.
         lexicalClosureOnRHA        =:  conjunction define
                 NB.  Get a temp file to map
                 tmp                =.  getTemporaryFile , 'j'
@@ -102,13 +102,13 @@ NB.  ===========     LOGIC SECTION    ===========
                 nm                 =.  (#~ e.&ALPHANUM) > {: splitPath tmp
 
                 NB.  Create the mapping (ensure we have some room for growth).
-                createjmf_jmf_ tmp ; 50 * # 3!:1 n.
+                createjmf_jmf_ tmp ; 50 * # 3!:1 n
 
                 NB.  Map the noun
                 map_jmf_ nm;tmp
 
                 NB.  Fill it with data
-                (nm)               =:  n.
+                (nm)               =:  n
 
                 NB.  Get a local reference
                 localname          =.  nm~
@@ -117,8 +117,8 @@ NB.  ===========     LOGIC SECTION    ===========
                 erase nm
   
                 NB.  We're given a dyad.  When this dyad is called monadically, our lexically-scoped data
-                NB.  will be passed in as x.
-                (localname & $:) : u.
+                NB.  will be passed in as x
+                (localname & $:) : u
 )
 
         defineAndDefaultParams     =:  conjunction define
@@ -137,13 +137,13 @@ NB.  ===========     LOGIC SECTION    ===========
         NB.  specified by the caller.
         NB.
         NB.  For the caller's convenience, instead of passing in a 2xN parameter table, it
-        NB.  may use a list of boxes.  These values will be assigned to the first (#y.) names
+        NB.  may use a list of boxes.  These values will be assigned to the first (#y) names
         NB.  in the default parameter table.  If the caller passes in an unboxed value, that
         NB.  value will be assigned to the first name in the default parameter table, unless
-        NB.  that value is null (0-:#,y.), in which case the default parameter table will be
+        NB.  that value is null (0-:#,y), in which case the default parameter table will be
         NB.  used in its entirety, with no caller-defined values.
 
-                if. # verbBody     =. {: |: (1) 5!:7 {.;: 'u.' do.
+                if. # verbBody     =. {: |: (1) 5!:7 {.;: 'u' do.
                 NB.  If this is an explicit monadic verb, then redefine it appropriately.
 
                         NB.  This version of defineAndDefaultParams provides 'closures'
@@ -162,34 +162,34 @@ NB.  ===========     LOGIC SECTION    ===========
                         createParameterTable =.  combineMaps f.
                         cptAsString          =.  parenclose 5!:5 {. ;: 'createParameterTable'
 
-                        NB.  We will add these lines to the top of u., thereby redefining it.
+                        NB.  We will add these lines to the top of u, thereby redefining it.
 
-                        NB.  Apply createParameterTable to y. (the input to u.)
-                        header               =.  'y. =. x.' , cptAsString , ' y.'      
+                        NB.  Apply createParameterTable to y (the input to u)
+                        header               =.  'y =. x' , cptAsString , ' y'      
 
                         NB.  Define some local names from the parameter table we just created.
                         NB. newHeading              =.  newHeading , CRLF , 'NB.  From the parameter name/value input table, define local names from column 0 to values from column 1'
-                        header               =.  header ; '(, (,. ,&''_is_default''&.>)', dropFlags , '&.> {."1 y.) =. , }."1 y.'
+                        header               =.  header ; '(, (,. ,&''_is_default''&.>)', dropFlags , '&.> {."1 y) =. , }."1 y'
 
-                        NB.  We will add these lines to the bottom of u., further redefining it.
+                        NB.  We will add these lines to the bottom of u, further redefining it.
 
                         NB.  Preserve the user's original output.
                         NB.!  This only works in the case that the last line of the function provides the
                         NB.!  output of the function.  There are MANY cases where this is not true.
-                        trailer              =.  'y. =. ' &,&.> {: verbBody
+                        trailer              =.  'y =. ' &,&.> {: verbBody
 
-                        NB.  Save state of flagged names.  We'll have closure over x., so the assignment to it preserves state across calls.
-                        trailer              =.  trailer , < 'x. =. }:"1 x. ' , cptAsString , ' (,. ".@:(' , dropFlags , ')&.>)~  (#~ ' , checkFlags , '&>) {."1 x.'
+                        NB.  Save state of flagged names.  We'll have closure over x, so the assignment to it preserves state across calls.
+                        trailer              =.  trailer , < 'x =. }:"1 x ' , cptAsString , ' (,. ".@:(' , dropFlags , ')&.>)~  (#~ ' , checkFlags , '&>) {."1 x'
 
                         NB.  Return user's expected output (but see NB.! above).
-                        trailer              =.  trailer , < 'y.' 
+                        trailer              =.  trailer , < 'y' 
 
                         NB.  Return re-defined function.
                         NB.!  Should really only use lexicalClosureOnRHA in the case that we have at least one flagged name.
-                        (4 : (header , (}: verbBody) , trailer)) lexicalClosureOnRHA n.
+                        (4 : (header , (}: verbBody) , trailer)) lexicalClosureOnRHA n
                 else.
-                NB.  If u. isn't an explicit monadic verb, don't do anything to it.
-                        u.
+                NB.  If u isn't an explicit monadic verb, don't do anything to it.
+                        u
                 end.
 )
 
@@ -236,6 +236,6 @@ NB.  ===========     EXAMPLE SECTION    ===========
         parameterizedVerb _2 ]\ ;: 'COLOR blue'
         
         NB.  Supply new default parameter table.
-        NB.  This will turn off the closure of x.
+        NB.  This will turn off the closure of x
         stringToTabl                     =.  (0&".`]@.(__&e.@:(__&".))&.>)@:(_2&(]\))@:(<;._1)
         ' filename f:\output.log max 999 color verdigris increment 0'  parameterizedVerb&:stringToTabl ' max 10000'

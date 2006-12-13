@@ -1,6 +1,6 @@
 magic =: 4 : 0"0 _
-y		=.  y.  NB.'x y' =. y.
-tvb =. x.`:6
+y		=.  y  NB.'x y' =. y
+tvb =. x`:6
 exv =. 5!:5 <'tvb'
 exs =. '(' , exv , ') y'
 exv ; (6!:2 exs) ; (7!:2 exs) ;< ". exs
@@ -27,7 +27,7 @@ compare		=:  dyad define
 	NB.  Maybe also output should be sorted by some function of
 	NB.  time and space metrics for the various inputs;
 	NB.  but it's better, perhaps, to preserve original input order.
-	(;: 'Definition Time Space Output') , output /: ; 1 {"1 output =. x. magic y.
+	(;: 'Definition Time Space Output') , output /: ; 1 {"1 output =. x magic y
 )
 
 NB.  Compare extended integer creating functions
@@ -75,7 +75,7 @@ NB.  Errors report as ERROR
 NB.  
 NB.  Function config example:
 NB.  A = +
-NB.  B = 4 : 'x. + y.'
+NB.  B = 4 : 'x + y'
 NB.  
 NB.  Case config example
 NB.  [Little]

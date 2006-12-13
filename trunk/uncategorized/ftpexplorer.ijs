@@ -89,7 +89,7 @@ TEXT			=:  255 254&, @: , @: ,.&0 &.: (a.&i.) TEXT
 NB.  Write out the registry file
 TEXT fwrite fn	=:  '\\statarbsvr0\d_drive\config\ftpx.reg' 
 
-ME              =:  3 : '(4!:3 $~0){::~ 4!:4 {.;: ''y.'''0
+ME              =:  3 : '(4!:3 $~0){::~ 4!:4 {.;: ''y'''0
 ME    fcopy ME  ;@:({.@:] , {:@:[)&:splitPath fn 
 
 NB.  Register it.  Need to figure out how to supress the Yes/No dialog.

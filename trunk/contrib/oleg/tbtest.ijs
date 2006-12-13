@@ -62,14 +62,14 @@ InvalidateRect=: 'user32 InvalidateRect i i i i'&cd
 
 ToolBarStyle=: 1 : 0
 :
-  t=. 0 pick SendMessage y.;TB_GETSTYLE;0;0
-  t=. x. u. t
-  SendMessage y.;TB_SETSTYLE;0;t
-  InvalidateRect y.;0;1
+  t=. 0 pick SendMessage y;TB_GETSTYLE;0;0
+  t=. x u t
+  SendMessage y;TB_SETSTYLE;0;t
+  InvalidateRect y;0;1
 )
 
 flattoolbar=: 3 : 0
-  h=. 0 pick GetWindow y.;GW_HWNDNEXT
+  h=. 0 pick GetWindow y;GW_HWNDNEXT
   if. h do. TBSTYLE_FLAT xor ToolBarStyle h end.
 )
 

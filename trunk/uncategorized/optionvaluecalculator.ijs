@@ -6,7 +6,7 @@ NB.  Calculates the value of an American put option on a non-dividend
 NB.  paying stock at time 0, rounded to the nearest penny.
 NB.
 NB.  Inputs:  
-NB.	  	y.: List of 6 numbers, in the following order:
+NB.	  	y : List of 6 numbers, in the following order:
 NB.  		S:  initial stock price
 NB.  		r:  risk-free interest rate (bank)
 NB.  		T:  total time (in years)
@@ -20,7 +20,7 @@ NB.
 NB.  Example:  
 NB.  	OVC 50 0.10 0.4167 0.40 50 5  NB. Returns 4.49
 
-	'S r T v X n' =. y.
+	'S r T v X n' =. y
 		
 	NB.  Calculate the neccesary constants
 	dt	=. T%n					
@@ -64,11 +64,11 @@ NB.!!  The following verbs do not give the same results as OVC; I believe OVC is
 NB.    verbs aren't producing the results fot the same kind of option.  EG They could be calculating
 NB.    values for call options).
 
-chop =: ( (10"_ ^ [) %~ <.@ ((10"_ ^ [) * ])  )				NB.  (floor(10^x. * y.))/(10^x.)
+chop =: ( (10"_ ^ [) %~ <.@ ((10"_ ^ [) * ])  )				NB.  (floor(10^x * y))/(10^x)
 
 option =: verb define
 
-	'S r T sigma X steps' =. > y.
+	'S r T sigma X steps' =. > y
 
 	prob =. q, p [ q =. 1 - p [ p =. (a-d)%(u-d) [ exp =. %a [ a =. ^(r*dt) [ d =. ^(-exponent) [ u =. ^exponent [ exponent =. sigma*(%:dt) [ dt  =. T%steps
 	
@@ -77,7 +77,7 @@ option =: verb define
 
 option2 =: verb define
 
-	'S r T sigma X steps' =. > y.				NB.  S = initial stock price, r = risk-free interest rate (bank)
+	'S r T sigma X steps' =. > y				NB.  S = initial stock price, r = risk-free interest rate (bank)
 														NB.  T = total time (in years), sigma = volatility, 
 														NB.  X = strike price, steps = # of iterations
 														NB.  Example option2 <"0 [ 50 0.10 0.4167 0.40 50 5
@@ -105,7 +105,7 @@ option2 =: verb define
 																			NB.  old option values (with overlap)
 
 	optionValue   =. multipleOptionDeriver ^: steps finalOptionValues		NB.  Repeat derivation N times (N = steps) 
-																								NB.  (e.g. sin(sin(sin(sin(...x...))))
+																								NB.  (e.g. sin(sin(sin(sin(...x ..))))
 	
 	2 chop optionValue							NB.  Cut off all but the last 2 digits.
 )
@@ -113,7 +113,7 @@ option2 =: verb define
 
 option3 =: verb define
 
-	'S r T sigma X steps' =: > y.				NB.  S = initial stock price, r = risk-free interest rate (bank)
+	'S r T sigma X steps' =: > y				NB.  S = initial stock price, r = risk-free interest rate (bank)
 														NB.  T = total time (in years), sigma = volatility, 
 														NB.  X = strike price, steps = # of iterations
 														NB.  Example option2 <"0 [ 50 0.10 0.4167 0.40 50 5
@@ -140,14 +140,14 @@ option3 =: verb define
 	multipleOptionDeriver =. (}:@]  singleOptionDeriver"0 }.@])  		NB.  Derive the new option values for each pair of 
 																							NB.  old option values (with overlap)
 	optionValue   =. multipleOptionDeriver ^: steps finalOptionValues	NB.  Repeat derivation N times (N = steps) 
-																							NB. (e.g. sin(sin(sin(sin(...x...))))
+																							NB. (e.g. sin(sin(sin(sin(...x ..))))
 	2 chop optionValue																NB.  Cut off all but the last 2 digits.
 )
 
 
 option4 =: verb define
 	
-	'S r T sigma X steps' =. > y.
+	'S r T sigma X steps' =. > y
 
 	prob =. q, p [ q =. 1 - p [ p =. (a-d)%(u-d) [ exp =. %a [ a =. ^(r*dt) [ d =. ^(-exponent) [ u =. ^exponent [ exponent =. sigma*(%:dt) [ dt  =. T%steps
 

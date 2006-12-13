@@ -34,7 +34,7 @@ NB. AUTHOR: Oleg Kobchenko
 
 require 'stdlib winlib dll files'
 'z' require'system\examples\winapi\winapi.ijs'
-win32apif=: 1 : '{.@>@{.@(x. win32api)'
+win32apif=: 1 : '{.@>@{.@(x win32api)'
 ntype=: 3!:0
 uc=: 223&AND"0&.(a.&i.)
 
@@ -68,18 +68,18 @@ NB.   clbDataFormat 1           NB. (0 if 1 is not on the clipboard)
 NB.
 NB.   clbRead 'html text'   NB. same for other functs with [fmt] arg
 clbFormat=: monad define
-if. ''-:y. do. 0 return. end.
-if. (ntype fmt=. {.;y.) e. JB01,JINT do.
+if. ''-:y do. 0 return. end.
+if. (ntype fmt=. {.;y) e. JB01,JINT do.
   if. CF_REGGEDFIRST > fmt do.
     if. -. fmt e. ".>clbFmt do. 0 return. end.
   else.
     if. '' -: clbFormatName fmt do. 0 return. end.
   end.
 else.
-  if. (#clbFmt) > ndx=. clbFmt i. uc &.>boxopen y. do.
+  if. (#clbFmt) > ndx=. clbFmt i. uc &.>boxopen y do.
     fmt=. ".>ndx { clbFmt
   else.
-    fmt=. RegisterClipboardFormat y.
+    fmt=. RegisterClipboardFormat y
   end.
 end.
 fmt
@@ -95,7 +95,7 @@ NB.   clbFormatName clbAvailable ''  NB. name for first available format
 NB.   clbDataFormat 'cf_text'   NB. equivalent forms (but not 1
 NB.   clbDataFormat 1           NB. if cf_text is not on the clipboard)
 clbAvailable=: monad define
-if. IsClipboardFormatAvailable fmt=. clbFormat y. do.
+if. IsClipboardFormatAvailable fmt=. clbFormat y do.
   fmt
 else.
   {.clbEnum''
@@ -105,7 +105,7 @@ end.
 NB.*clbFormatName v useful for user defined formats
 NB. form: name=. clbFormatName fmt
 clbFormatName=: verb define
-fmt=. {.y.
+fmt=. {.y
 if. (#clbFmt) > ndx=. (".>clbFmt) i. fmt do.
   > ndx { clbFmt
 else.
@@ -117,12 +117,12 @@ end.
 NB.*clbSize v get data size for given format
 NB. form: size=. [type=JCHAR] clbSize [fmt]
 clbSize=: verb define
-'' clbSize y.
+'' clbSize y
 :
-if. 0 >: hglb=. clbGetHandle y. do. _1 return. end.
+if. 0 >: hglb=. clbGetHandle y do. _1 return. end.
 res=. GlobalSize hglb
 
-type=. {.x.,JCHAR
+type=. {.x,JCHAR
 if. -. type e. JCHAR,JINT,JFL,JCMPX do. type=.JCHAR end.
 res=. >. res % ((JCHAR,JINT,JFL,JCMPX)i.type){1 4 8 16 1
 res
@@ -138,11 +138,11 @@ NB.*clbRead v read clipboard data
 NB. form: data=. [type=JCHAR] clbRead [fmt]
 NB. see: takestr, clbSet, GetClipboardData
 clbRead=: verb define
-'' clbRead y.
+'' clbRead y
 :
-type=. {.x.,JCHAR
+type=. {.x,JCHAR
 if. -. type e. JCHAR,JINT,JFL,JCMPX do. type=.JCHAR end.
-fmt=. clbAvailable y.
+fmt=. clbAvailable y
 if. (fmt e.(CF_TEXT, CF_OEMTEXT)) *. type = JCHAR do.
 	count=. _1 else. count=. type clbSize fmt end.
 if. 0 >: hglb=. clbGetHandle fmt do. _1 return. end.
@@ -167,17 +167,17 @@ NB.     int or name, for standard CF_XXX formats or
 NB.     strictly name, in which case Registration is done.
 NB. see: clbRead, SetClipboardData
 clbSet=: dyad define
-if. 0= fmt=. clbFormat y. do. 0 return. end.
-if. (0=$$ x.) *. (JINT=ntype x.) do.
-  handle =. x.
+if. 0= fmt=. clbFormat y do. 0 return. end.
+if. (0=$$ x) *. (JINT=ntype x) do.
+  handle =. x
 else.
-  if. JCHAR=ntype x. do.
-    handle=. 'GlobalAlloc'win32apif (OR/ >{.winconst 'GMEM_MOVEABLE GMEM_DDESHARE');len=. 1+{.$;x.
+  if. JCHAR=ntype x do.
+    handle=. 'GlobalAlloc'win32apif (OR/ >{.winconst 'GMEM_MOVEABLE GMEM_DDESHARE');len=. 1+{.$;x
 	addr=. GlobalLock handle
-    x. memw addr,0,len, JCHAR   NB. is implied
+    x memw addr,0,len, JCHAR   NB. is implied
     GlobalUnlock handle
   else.
-    binrep=. 3!:1 x.
+    binrep=. 3!:1 x
     len=. {.$binrep
     handle=. 'GlobalAlloc'win32apif (OR/ >{.winconst 'GMEM_MOVEABLE GMEM_DDESHARE');len
 	addr=. GlobalLock handle
@@ -207,7 +207,7 @@ NB. NOTE: if memory handle -- Size and Reading is appropriate
 NB.       for certain types this a resoure handle: CF_BITMAP, etc,
 NB.       and special functions for working with resources are required
 clbGetHandle=: monad define
-fmt=. clbAvailable y.
+fmt=. clbAvailable y
 if. 0 = IsClipboardFormatAvailable fmt do. _1 return. end.
 OpenClipboard ".wd'qhwndx'
 hglb=. GetClipboardData fmt

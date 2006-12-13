@@ -53,5 +53,5 @@ QUINE_2a =: trim CRLF -.~ noun define
 NB.  Modifications:    Daniel Bron <dbron@dbron.net>
 NB.  Date:             2004-Jan-14 (Wednesday)
 QUINE_2b =: trim CRLF -.~ noun define
-	2 (1!:2)~ 1!:1 (3 : '(4!:3''''){~4!:4<''y.''' '')
+	2 (1!:2)~ 1!:1 (3 : '(4!:3''''){~4!:4<''y''' '')
 )

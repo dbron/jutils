@@ -1169,5 +1169,5 @@ big                 =:  table2text f. @:bann
 
 NB.  Like big, but works on multiple lines.
 NB.  Try embiggen 'I said: ',LF,'  `Hello, World!'''
-md                  =.  2 : '(u.@:v.) : (u. v.)'
+md                  =.  2 : '(u@:v) : (u v)'
 embiggen            =:  ;@:((LF,LF)&join)@: (  big each md (LF&arbCut)  )

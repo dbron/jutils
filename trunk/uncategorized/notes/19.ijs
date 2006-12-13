@@ -1,6 +1,6 @@
 NB.  Progressive iota
 pi	=:  dyad define
-	|: x. ="_1 _ y.
+	|: x ="_1 _ y
 )
 
 smoutput 1 1 2 2 3 3 4 4 4 pi 1 2 3 4 1 2 3 4

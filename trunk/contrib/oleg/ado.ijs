@@ -48,8 +48,8 @@ try.
     wd 'cc r oleautomation:ADODB.Recordset'
   catch. smoutput 'ADO is required' throw. end.
   try.
-    wd 'oleset r base ActiveConnection *',x.
-    wd 'olemethod r base Open *',y.
+    wd 'oleset r base ActiveConnection *',x
+    wd 'olemethod r base Open *',y
     if. '1'=wd 'oleget r base State' do.
       r=. wd 'olemethod r base GetString'
       wd 'olemethod r base Close'

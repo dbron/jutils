@@ -29,7 +29,7 @@ in a verb train.  The insertion is NOT recursively applied to nested trains.
 It's not pretty, but it seems to work.
 
    conjs =: 2 : 0
-a =. a: 0}]`x.
+a =. a: 0}]`x
 lh =. >@{.
 rh =. >@{:
 list =. <@,"0 '32'
@@ -44,7 +44,7 @@ switch =. isTrain (+ +:) isDone
 step =. caseNotrain`caseTrain`] @. switch
 b =. >{.step^:_ a
 c =. ({.b) , <}.b
-at =. (<y.)"_
+at =. (<y)"_
 caseAtop =. (at , (<@lh <@, {.@rh)) ,&< }.@rh
 d =. {.(caseAtop`] @. isDone)^:_ c
 d 5!:0
@@ -123,7 +123,7 @@ For information about the J Forum see http://www.jsoftware.com/j_forum.htm
 )
 
 conjs =: 2 : 0
-	a =. a: 0}]`x.
+	a =. a: 0}]`x
 	lh =. >@{.
 	rh =. >@{:
 	list =. <@,"0 '32'
@@ -138,7 +138,7 @@ conjs =: 2 : 0
 	step =. caseNotrain`caseTrain`] @. switch
 	b =. >{.step^:_ a
 	c =. ({.b) , <}.b
-	at =. (<y.)"_
+	at =. (<y)"_
 	caseAtop =. (at , (<@lh <@, {.@rh)) ,&< }.@rh
 	d =. {.(caseAtop`] @. isDone)^:_ c
 	d 5!:0

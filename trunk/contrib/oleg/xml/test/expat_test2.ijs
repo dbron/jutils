@@ -7,18 +7,18 @@ coinsert 'pexpat'
 showattrs=: (''"_)`(;:^:_1@:(([ , '='"_ , ])&.>/"1))@.(*@#)
 
 startElement=: 4 : 0
-  smoutput (L#'  '),'(',y.,' ',(showattrs attributes x.),')'
+  smoutput (L#'  '),'(',y,' ',(showattrs attributes x),')'
   L=: L+1
 )
 
 endElement=: 3 : 0
   L=: L-1
-  smoutput (L#'  '),'(/',y.,')'
+  smoutput (L#'  '),'(/',y,')'
 )
 
 cdcallback=: 3 : 0
-  e=. memstr 1{y.
-  if. 3=#y. do. (2{y.) startElement e
+  e=. memstr 1{y
+  if. 3=#y do. (2{y) startElement e
   else. endElement e end.
   0
 )
@@ -31,7 +31,7 @@ test1=: 3 : 0
   p=. 0{::ParserCreate <<0
   SetElementHandler p;(cdcb 3);(cdcb 2)
   L=: 0
-  Parse p;y.;(#y.);1+0
+  Parse p;y;(#y);1+0
   empty ParserFree p
 )
 

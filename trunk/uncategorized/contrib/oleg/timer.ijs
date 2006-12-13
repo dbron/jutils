@@ -38,8 +38,8 @@ NB.*set v set timer
 NB. form: v[;vsync] set_pt_ INTERVAL[,TIMES=_1[,PRIORITY=_1]]
 
 set=: 4 : 0
-'I T P'=. 3{.y.,_1 _1
-'V VS'=. 2{.boxopen x.
+'I T P'=. 3{.y,_1 _1
+'V VS'=. 2{.boxopen x
 i=.VERBS i. VB=.<V
 if.(0=I) +. (i<:#VERBS) do.
   kill VB 
@@ -58,7 +58,7 @@ NB.*kill v kill timer
 NB. form: kill_pt_ v
 
 kill=: 3 : 0"0
-if. (n=.#VERBS)>i=.VERBS i. boxopen y.do.
+if. (n=.#VERBS)>i=.VERBS i. boxopen y do.
 p=. 0 i}n#1
    PRI=:p#PRI
  VERBS=:p#VERBS
@@ -92,14 +92,14 @@ wd'timer ',":d
 empty''
 )
 
-sync=: 3 : 'if. (#VERBS)>i=.VERBS i.y. do. i{STARTS else. now i.0 end.'
+sync=: 3 : 'if. (#VERBS)>i=.VERBS i.y do. i{STARTS else. now i.0 end.'
 
 NB.*resync v resync by other timer
 NB. form: vsync resync_pt_ v
 
 resync=: 4 : 0
-if. (i=.VERBS i. boxopen y.) >: #VERBS do. return. end.
-STARTS=: (sync boxopen x.) i } STARTS
+if. (i=.VERBS i. boxopen y) >: #VERBS do. return. end.
+STARTS=: (sync boxopen x) i } STARTS
 empty''
 )
 
@@ -107,8 +107,8 @@ NB.*repri v set new priority
 NB. form: v repri_pt_ PRIORITY
 
 repri=: 4 : 0
-if. (i=.VERBS i. boxopen x.) >: #VERBS do. return. end.
-PRI=: y. i } PRI
+if. (i=.VERBS i. boxopen x) >: #VERBS do. return. end.
+PRI=: y i } PRI
 O=. \:PRI
    PRI=: O{PRI
  VERBS=: O{VERBS
@@ -122,12 +122,12 @@ NB.*schedule v (re)schedule single event with a ts
 NB. form: v schedule_pt_ TIMESTAMP
 
 schedule=: 4 : 0
-x. set ((tsrep y.)-now''),1
+x set ((tsrep y)-now''),1
 )
 
 NB.*info v see info for single verb
 info=: 3 : 0
-if. (i=.VERBS i. boxopen y.) >: #VERBS do. empty'' return. end.
+if. (i=.VERBS i. boxopen y) >: #VERBS do. empty'' return. end.
 (i{VERBS),(<1 tsrep i{STARTS),(<i{INTS),(<i{TIMES),(<i{PRI)
 )
 
@@ -141,7 +141,7 @@ NB. ================================================================
 
 coclass'pttest'
 
-qname=: 3 : 'y.,''_'',(>coname i.0),''_'' '
+qname=: 3 : 'y,''_'',(>coname i.0),''_'' '
 
 create=: 3 : 0
 wd'pc p;pn ',qname'p'
@@ -192,15 +192,15 @@ wd'set es *',,LF,"1~":state_pt_''
 e1inc=: 3 : 0
 show_state''
 v=.0".'e1'wdget wd'qd'
-wd'set e1 ',":y.+v
+wd'set e1 ',":y+v
 )
 e2inc=: 3 : 0
 show_state''
-wd'set e2 ',":y.+0".'e2'wdget wd'qd'
+wd'set e2 ',":y+0".'e2'wdget wd'qd'
 )
 e3inc=: 3 : 0
 show_state''
-wd'set e3 ',":y.+0".'e3'wdget wd'qd'
+wd'set e3 ',":y+0".'e3'wdget wd'qd'
 )
 
 NB. ================================================================

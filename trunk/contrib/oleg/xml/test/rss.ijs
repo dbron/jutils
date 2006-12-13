@@ -10,8 +10,8 @@ startDocument=: 3 : 0
 )
 
 startElement=: 4 : 0
-  S=: S,<y.
-  if. y.-:'item' do. smoutput '' end.
+  S=: S,<y
+  if. y-:'item' do. smoutput '' end.
 )
 
 endElement=: 3 : 0
@@ -20,12 +20,12 @@ endElement=: 3 : 0
 
 characters=: 3 : 0
   s2=. _2{.S
-  if. s2-:;:'channel title'       do. smoutput 'Channel: ',y. elseif.
-      s2-:;:'channel description' do. smoutput fold y. elseif.
-      s2-:;:'channel pubDate'     do. smoutput 'Date: ',y. elseif.
-      s2-:;:'item title'          do. smoutput 'Topic: ',y. elseif.
-      s2-:;:'item description'    do. smoutput fold y. elseif.
-      s2-:;:'item link'           do. smoutput 'URL: ',y. end.
+  if. s2-:;:'channel title'       do. smoutput 'Channel: ',y elseif.
+      s2-:;:'channel description' do. smoutput fold y elseif.
+      s2-:;:'channel pubDate'     do. smoutput 'Date: ',y elseif.
+      s2-:;:'item title'          do. smoutput 'Topic: ',y elseif.
+      s2-:;:'item description'    do. smoutput fold y elseif.
+      s2-:;:'item link'           do. smoutput 'URL: ',y end.
 )
 
 NB. =========================================================

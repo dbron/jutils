@@ -72,8 +72,8 @@ newInput  =: jf_fmt ({:"1)@:>@:({:"1) input
 
 
 
-NB.!  Argument to email is a N by 2 array of boxes (rows correspond to input sets, column 0 is x. and column 1 is y.).
-NB.!  Each pair of x. and y. should have the same shape.  IE *./@:(-:/@:($&.>)"1)  
+NB.!  Argument to email is a N by 2 array of boxes (rows correspond to input sets, column 0 is x and column 1 is y).
+NB.!  Each pair of x and y should have the same shape.  IE *./@:(-:/@:($&.>)"1)  
 
 
 

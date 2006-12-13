@@ -10,13 +10,13 @@ PIECES=: ;:'pawn rook night bishop queen king'
 SYMBOLS=: 'PRNBQKprnbqk'
 
 startElement=: 4 : 0
-  e=. <y.
+  e=. <y
   if. 2>C=. COLORS i.e do. COLOR=: C*6 return. end.
   if. 6>P=. PIECES i.e do. PIECE=: SYMBOLS{~COLOR+P return. end.
-  if. -.'position'-:y. do. return. end.
+  if. -.'position'-:y do. return. end.
 
-  r=. <:0".       x.getAttribute 'row'
-  c=. 'abcdefgh'i.x.getAttribute 'column'
+  r=. <:0".       x getAttribute 'row'
+  c=. 'abcdefgh'i.x getAttribute 'column'
   empty BOARD=: PIECE (<r,c) } BOARD
 )
 

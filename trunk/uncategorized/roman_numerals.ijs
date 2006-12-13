@@ -73,7 +73,7 @@ NB.  V
 NB.  ROMAN>  +/ }. i. VI
 NB.  XV
 
-interpretRoman					=:  ((((2: ~: 3!:0&>)@:[ 4 : 'x.}y.' ,:)~ (":@:fromRoman :: 0:)&.>)&.:;:)
+interpretRoman					=:  ((((2: ~: 3!:0&>)@:[ 4 : 'x}y' ,:)~ (":@:fromRoman :: 0:)&.>)&.:;:)
 safeRoman						=:  ;:^:_1 @: (toRoman (<@ ::) ('?'"_)"0)  @: toInteger =.  <.@{.@+.
 calculateInRoman				=:  safeRoman @: ". @: interpretRoman
 jInRoman						=:  calculateInRoman smconsole 'ROMAN>  ' f.

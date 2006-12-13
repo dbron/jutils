@@ -21,7 +21,8 @@ NB.  verb(s) in the argument(s), and returns a gerund:
    NB. (a gerund) to a corresponding list of nouns (the gerund will be 
    NB. extended cyclically if required). See Test Block B.
    First        =:  Atop  {.
-   Across       =:  First (;.1)~ (`1:) (`:6)
+   Across       =:  First (;.2)~ (`1:) (`:6)
+   Ax           =:  1 : 'u Across : (u;._2)'
 
 
    NB.  Morever,  doog  extends this behavior (in two ways). Whereas 
@@ -31,6 +32,26 @@ NB.  verb(s) in the argument(s), and returns a gerund:
    NB.  will probably find many uses.  See Test Block C.
    Each         =:  '&.' doog >
    AcrossBoxed  =:  Each Across
+   Abx          =:  Each Ax
+  
+   parse =: dyad define
+   itm=.[: <"_1@:|: _3 ]\ ]
+   'nam typ len' =. itm , x
+
+   'vbs tps dfs'=.itm   num`(<'#')`(0 ". ])   `str`(<'"')`(6: s: s:)
+    ('`',;:^:_1 vbs)=.dfs
+
+    vrb =. < Atop vbs`] {~  tps i. typ
+    ctr =. ( '' ; (<: e.~ [: i. >./) +/\ 1 + ;len  )&$: :(vrb Ax)  NB. 1 + for the field delimiters
+    Q=.cocreate''
+    v__Q =. cocreate ''
+    ('`' , ;:^:_1 vbs , L: 0 '__v__Q') =. dfs
+    tbl__Q =. ,.&:>/ (nam , L: 0 '__Q') =. ctr (]\~ -@# % [: +/ LF&=) y NB. _ , 1 + {: $ y
+    Q
+)
+
+   X =: _3 ]\ 'acct';'#';2   ;'sub';'#';3 ;  'name';'"';6
+   Y =: , LF ,.~ (,. ' '&,.)&:>/(<@:> ;: 'Dan Henry Oleg Raul Roger Lam Bjorn Tuttle Eric Devon'),~ ":@:,.&.> (; -), 0 10 +/ i. 5
 
 
    NB.  The second extension  doog  provides is that it can distribute 

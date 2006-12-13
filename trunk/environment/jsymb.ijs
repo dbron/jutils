@@ -18,13 +18,13 @@ symbdata     =:  symbdata , 'gap'    ; 5   ; JINT  ; 0$0
 require 'jmf'
 DIR_jsymb_         =: 'D:\temp\jsymb\'
 mapdata_jsymb_     =: dyad define
-    'name MAXSIZE_IN_BYTES JTYPE TRAILING_SHAPE' =. 4 {. boxopen x.
+    'name MAXSIZE_IN_BYTES JTYPE TRAILING_SHAPE' =. 4 {. boxopen x
 	NAME     =.  toupper name
 	name     =.  tolower name
 	fn       =.  DIR,name,'.jmf'
 	createjmf_jmf_ fn;MAXSIZE_IN_BYTES
 	(JTYPE, TRAILING_SHAPE) map_jmf_ (localname =. NAME,'_',(; {. , coname''),'_');fn;NAME;0
-	(localname) =. y.
+	(localname) =. y
 )
 
 unmapall_jmf_''

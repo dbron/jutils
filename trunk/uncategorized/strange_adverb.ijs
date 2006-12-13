@@ -1,6 +1,6 @@
 COMMENT =: noun define
 	X =: adverb define
-		({&m.@:{.&.>@:>@:{. ;@:((,&.>) each) >@:{:)@:(<@:(0}~1:)@:(~: _1&|.) @:[  <;.1 each ,&<) NB. &:({.~ -@:>:@:#)
+		({&m@:{.&.>@:>@:{. ;@:((,&.>) each) >@:{:)@:(<@:(0}~1:)@:(~: _1&|.) @:[  <;.1 each ,&<) NB. &:({.~ -@:>:@:#)
 	)
 
 	 
@@ -58,7 +58,7 @@ fooooooo=. ((#&>~/@:] $:~^:(1: < #@:]) (<;.1~ 1: , >@:{:)) (; (~: >./)))
 fooooooo2=.;@:( ;^:(1: -: #) L: 1 ^:_ @: fooooooo)
 NNNNNNNNNNNN fooooooo2  P
 
-implant=: 1 : '((; ,&.>)&m.)@[ >@{.@:(]`[)@.(-:&}.) L: 1 (; L: 0 1 {::)~@]'
+implant=: 1 : '((; ,&.>)&m)@[ >@{.@:(]`[)@.(-:&}.) L: 1 (; L: 0 1 {::)~@]'
 opick=._99&{:: 
 foofunc =. (< S: 1 {:: FOO) {::~ (<_99) i.~ < S: 0 FOO=:(5!:1){.;:'opick'
 iii=. foofunc implant
@@ -67,15 +67,15 @@ RESARGS=: ARGS foo2 P
 
 
 
-NB.   plus =: 4 : 'parenclose (": x.) , '' + '' , (": y.)'
-NB.   comma =: 4 : 'parenclose (": x.) , '' , '' , (": y.)'
+NB.   plus =: 4 : 'parenclose (": x) , '' + '' , (": y)'
+NB.   comma =: 4 : 'parenclose (": x) , '' , '' , (": y)'
 NB.   (0&{:: plus (1&{:: plus ((2&{:: plus (3&{:: comma (4&{:: comma 5&{::))) plus 6&{::))) N
 NB. foofff =. (4&{:: comma 5&{::)
 NB. 5!:1 {. ;: 'foofff'
 
 
 xandy  =: dyad define
-   'x y'=. xandy&.>/^:(1&<@:L.)&.> x. ,&< y.
+   'x y'=. xandy&.>/^:(1&<@:L.)&.> x ,&< y
     3 
 	CLAMS_z_ =: 0   
 	if. (L. RES) = # dbstk'' do. assert CLAMS_z_ end.

@@ -16,16 +16,16 @@ makeInternal		=. internalfy^:(L. = 1:)
 NVtext_z_			=: ([: ,@:>@:(,.&(9{a.)&.>@:}: ,.&.>/@:, ,"1&(13 10{a.)&.>@:{:)@:(>@:{. rankTwo@:,&.> -.&(13 10 9{a.)@:":"_1&.>@:}.)@:{. makeInternal)@:defaultToAce f.
 
 NB.  Function to get the filename of a workspace, so that it can be loaded or saved
-NB.  Inputs:   x.:  Determines type of file prompt; either 'get' for an 'open/load' prompt, or 'set' for a 'save' prompt.
-NB.            y.:  Filename of workspace.   If '', the filename will be defaulted to the value in WORKSPACE_z_.  
+NB.  Inputs:   x :  Determines type of file prompt; either 'get' for an 'open/load' prompt, or 'set' for a 'save' prompt.
+NB.            y :  Filename of workspace.   If '', the filename will be defaulted to the value in WORKSPACE_z_.  
 NB.                 If the filename specifies a valid file, this file will be used.  If not, the user will be prompted
-NB.                 to choose a file (initial directory can be given as y. if desired).
+NB.                 to choose a file (initial directory can be given as y if desired).
 NB.                 If the user cancels the file prompt, an assert will be raised.
 NB.  Outputs:  Filename of workspace chosen.  Note also that WORKSPACE_z_ is set to the output.
 promptForWorkspace		=: dyad define
-	NB.  Default y. to WORKSPACE_z_
-	if. * # y. do.
-		filename	=. y.
+	NB.  Default y to WORKSPACE_z_
+	if. * # y do.
+		filename	=. y
 	else.
 		filename	=. ''"_`".@.(0&=@:nc@:<) 'WORKSPACE_z_'
 	end.
@@ -41,12 +41,12 @@ promptForWorkspace		=: dyad define
 
 	NB. If, after the preceeding, we still do not have a valid file, then prompt for one
 	if. -. goodFile do.
-		NB.  Pick an initial directory for the file prompt.  The precendece for choosing is y.,my workspace dir, J's working directory,
+		NB.  Pick an initial directory for the file prompt.  The precendece for choosing is y,my workspace dir, J's working directory,
 		NB.  if all else fails, choose the root '\'.
-	 	dir		=. (,&(<'\') {::~ [: i.&1 >@:{.@:('shlwapi.dll PathFileExistsA i *c'&(15!:0))"0) y. ; 'b:\data\srccode\j\workspaces\' ; 1!:40 ''
+	 	dir		=. (,&(<'\') {::~ [: i.&1 >@:{.@:('shlwapi.dll PathFileExistsA i *c'&(15!:0))"0) y ; 'b:\data\srccode\j\workspaces\' ; 1!:40 ''
 
-		NB.  Prompt for a filename: prompt type (open/save) is determined by x.
-		filename	=. wd (' "J Workspace" "',dir,'" "" "J Workspaces (*.jws)|*.jws|All files(*.*)|*.*" ') ,~ > 'get/mbopen set/mbsave /mbopen' lookupWithDefault x.
+		NB.  Prompt for a filename: prompt type (open/save) is determined by x
+		filename	=. wd (' "J Workspace" "',dir,'" "" "J Workspaces (*.jws)|*.jws|All files(*.*)|*.*" ') ,~ > 'get/mbopen set/mbsave /mbopen' lookupWithDefault x
 
 		NB.  Can't do anything unless the user chooses a filename
 		'Workspace filename must be chosen' assert -. '' -: filename
@@ -78,8 +78,8 @@ getWindowParams			=:  ('=' makeTable noun define)&({."1@:[ , ([ ,. }."1@:(((<@:,
 )
 
 NB.  Function to save a J workspace
-NB.  Inputs:   y.:  Filename where workspace is to be saved.  Same rules as y. to promptForWorkspace
-NB.  Outputs:  Saves workspace config in file named in y.
+NB.  Inputs:   y :  Filename where workspace is to be saved.  Same rules as y to promptForWorkspace
+NB.  Outputs:  Saves workspace config in file named in y
 saveWorkspace			=: verb define
 	NB.  Get the parameters of the main window
 	mainParams		=.  getMainParams	''	
@@ -89,7 +89,7 @@ saveWorkspace			=: verb define
 	windowParams	=.  getWindowParams (#~ -.@:endsWith&'.ijx'&>)@:(<;._2) wd 'qsmall'
 
 	config 			=. _2 }. ; ('['&,@:,&']'@:(0&{::) ,&:(,&CRLF) NVtext@:(1&{::)) each ('Main';<mainParams),&<'Windows';<windowParams
-	config fwrite 'set' promptForWorkspace y.
+	config fwrite 'set' promptForWorkspace y
 )
 NB.=======================================================
 
@@ -121,17 +121,17 @@ setWindowParams			=: ('=' makeTable noun define)& ([: wd :: empty each ;@:(|.@:(
 
 
 NB.  Function to load a J workspace
-NB.  Inputs:   x.:  Type of restart:  All scripts windows are to restart either maximised, restored (old positions), cascaded, or minimized 
-NB.                 this is because there's no way to query the state of a child window in J.  In the monad form, x. is defaulted to minimized.
+NB.  Inputs:   x :  Type of restart:  All scripts windows are to restart either maximised, restored (old positions), cascaded, or minimized 
+NB.                 this is because there's no way to query the state of a child window in J.  In the monad form, x is defaulted to minimized.
 NB.                 Enumeration is ;: 'maximized restored cascaded minimized'
-NB.            y.:  Filename of workspace to be loaded.  Same rules as y. to promptForWorkspace
-NB.  Outputs:  Restores a the J workspace in y.
+NB.            y :  Filename of workspace to be loaded.  Same rules as y to promptForWorkspace
+NB.  Outputs:  Restores a the J workspace in y
 loadWorkspace			=: verb define
 	fileCut			=.  -.&a:@:trim@:(({.~ i.&'#') each)@:(LF&arbCut)@:toJ
 	cutIniBlocks		=. }.@:((trim@:}.@:}:@:>@:{. ; <@:}.);.1~ '[]'&-:@:(0 _1&{)&>)@:((<'[]')&,)
 	iniFileCut		=. cutIniBlocks@:fileCut 
 
-	iniData			=. ({."1 ,. trim each @:(TAB&arbCut&>)&.>@:}."1) iniFileCut fread 'get' promptForWorkspace y.
+	iniData			=. ({."1 ,. trim each @:(TAB&arbCut&>)&.>@:}."1) iniFileCut fread 'get' promptForWorkspace y
 
 	NB.  Open and position script windows, etc.
 	setWindowParams winData =.  'Windows' map~ iniData

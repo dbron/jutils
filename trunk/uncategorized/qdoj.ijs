@@ -16,7 +16,7 @@ html     =:  HTML_ENT&(stringreplace seq)@:('<>'&rb)
 
 qdoj     =:  dyad define  NB.  Quote dictionary of J
 	try.
-		x. (html;.0~ ,:/)"_ 1~  > {. fread @: jpath each ('~system\extras\help\dictionary\';'.htm')  <@:;@:(1&A.)@:,"1 0  y. (,&(<y.)@:{:@:] {~ {.@:] i. ;:@:[) |: ;:@:-.&'?';._2 toJ DICTNDX_jhelp_
+		x (html;.0~ ,:/)"_ 1~  > {. fread @: jpath each ('~system\extras\help\dictionary\';'.htm')  <@:;@:(1&A.)@:,"1 0  y (,&(<y)@:{:@:] {~ {.@:] i. ;:@:[) |: ;:@:-.&'?';._2 toJ DICTNDX_jhelp_
 	catch.
 		'topic not found'  assert 0
 	end.
@@ -25,7 +25,7 @@ qdoj     =:  dyad define  NB.  Quote dictionary of J
 qdojH    =:  dyad define  NB.  Quote dictionary of J
 	htmll =. 5!:5{.;:'html'
 	html  =: ]
-	z=.x. qdoj y.
+	z=.x qdoj y
 	". 'html =: ',htmll
 	z
 )

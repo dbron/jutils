@@ -29,7 +29,7 @@ GetHashParam=: hexhash@:('advapi32 CryptGetHashParam i i i *c *i i'&cd)
 md5=: 3 : 0
 CC=. AcquireContext (,_1);0;0;PROV_RSA_FULL;0
 H=. CreateHash CC;CALG_MD5;0;0;(,_1)
-HashData H;y.;(0 or #y.);0
+HashData H;y;(0 or #y);0
 P=. GetHashParam H;HP_HASHVAL;(20#'z');(,20);0
 DestroyHash H
 ReleaseContext CC;0

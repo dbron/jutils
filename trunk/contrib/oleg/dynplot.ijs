@@ -16,7 +16,7 @@ wd'timer 0'
 reset''
 
 create=: 3 : 0
-'FN INTERVAL'=: 2{.boxopen y.
+'FN INTERVAL'=: 2{.boxopen y
 if. a:=INTERVAL do. INTERVAL=: BASE_INTERVAL end.
 LIST_ptimer_=: LIST (-. , ]) coname''
 sys_timer_z_=: timer_ptimer_

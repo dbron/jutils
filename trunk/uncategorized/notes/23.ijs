@@ -23,14 +23,14 @@ DATA  =: }.@:}:&.|: }: (#~ $&0 1@:#) (LF,'|') multiCut toJ noun define
 )
 NB.  numerify		=:  ($ $ 0&".@:((#~ -.) ' " '&E.)@:(;:^:_1)@:,) 
 NB.  appendAverage	=:  (,: # $ +/ ,:@:% #)
-NB.  N				=: (=&(<'"-- "') 4 :'x.}y.' appendAverage@:numerify) DATA
+NB.  N				=: (=&(<'"-- "') 4 :'x}y' appendAverage@:numerify) DATA
 
 	   NB.  Noun:  Placeholder for a "missing value"
 	   MISSING_VALUE	=:  __
 
 	   NB.  Conjunction:  Perform operation over input less the "missing values"
 	   NB.  LHA is monadic verb, RHA is placeholder for "missing value"
-	   withoutMissing	=:  2 : 'u.@:(-.&n.)' NB.  In J4 I could have said [.@:(-.&)
+	   withoutMissing	=:  2 : 'u@:(-.&n)' NB.  In J4 I could have said [.@:(-.&)
 
 	   NB.  Adverb:  Performs operation on data, ignoring MISSING_VALUEs
 	   NB.  EG:  (+/ % #) ignoreMissing 1 __ 2 __ 3 __ 4 __ 5 NB.  Returns 3
@@ -50,6 +50,6 @@ NB.  N				=: (=&(<'"-- "') 4 :'x.}y.' appendAverage@:numerify) DATA
 	   NB.  Monadic verb:  Given an input array in DATA form, output a numeric
 	   NB.  array of the same shape, with the "missing values" replaced with
 	   NB.  the average of their corresponding columns.
-	   replaceMissingWithAverage	=:  (=&MISSING_VALUE 4 :'x.}y.' appendAverage)@:numerify
+	   replaceMissingWithAverage	=:  (=&MISSING_VALUE 4 :'x}y' appendAverage)@:numerify
 
 	   replaceMissingWithAverage DATA

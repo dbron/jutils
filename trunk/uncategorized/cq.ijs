@@ -12,10 +12,10 @@ scol               =:  dyad define
 	NB.  recsiz:        The width of a record, in bytes,
 	NB.  fieldoffset:   Number of bytes from into the record at which the key field starts
 	NB.  fieldsiz:      Width of the key field, in bytes
-	'recsiz fieldoffset fieldsiz'=.x.
+	'recsiz fieldoffset fieldsiz'=.x
 
 	NB.  Name of the file containing the records.
-	fname          =.  y.
+	fname          =.  y
 
 
 

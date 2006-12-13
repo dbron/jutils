@@ -22,7 +22,7 @@ destroy=: 3 : 0
 )
 
 parse=: 3 : 0
-  if. 0=0{::Parse PARSER;y.;(PARLEN=:#y.);0+1 do.
+  if. 0=0{::Parse PARSER;y;(PARLEN=:#y);0+1 do.
     destroy geterr PARSER
     (assert~ error) 0 end.
 )
@@ -36,25 +36,25 @@ endElement=: ]
 characters=: ]
 
 cdcallback=: 3 : 0
-  if. 3=#y. do.
-    if. PARLEN(> *. 0&<@])2{y. do.
-      characters^:(*@#) trim^:IGNOREWS memchr/}.y. return.end.
-    (2{y.) startElement memstr 1{y.
+  if. 3=#y do.
+    if. PARLEN(> *. 0&<@])2{y do.
+      characters^:(*@#) trim^:IGNOREWS memchr/}.y return.end.
+    (2{y) startElement memstr 1{y
   else.
-    endElement memstr 1{y.
+    endElement memstr 1{y
   end.
 )
 
 process=: 3 : 0
   p=. '' conew >coname''
   startDocument__p''
-  parse__p y.
+  parse__p y
   ([ destroy__p) endDocument__p''
 )
 
 saxclass_z_=: cocurrent@(3 : 0) f.
-  coclass y.
+  coclass y
   coextend 'psax'
   process=: process_psax_ f.
-  y.
+  y
 )

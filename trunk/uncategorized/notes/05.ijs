@@ -1,4 +1,4 @@
-'MY_PATH MY_FILE'			=: (({. ,&< }.)~ (# <. >:@:i:&'\')) 3 : '(4!:4 {:: 4!:3) <''y.''' $0
+'MY_PATH MY_FILE'			=: (({. ,&< }.)~ (# <. >:@:i:&'\')) 3 : '(4!:4 {:: 4!:3) <''y''' $0
 require MY_PATHo,'..\util\default\general.ijs'
 require MY_PATH,'..\util\default\email_sender.ijs'
 

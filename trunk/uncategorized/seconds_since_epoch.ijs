@@ -44,14 +44,14 @@ NB. Local date-time to UTC date-time
 convertDateTimeStampInLocalTimeToUTC	=:  verb define
 
 	NB.  The hour has to be in UTC; (so just add the timezone-bias / 60).
-	y. + 0 0 0 , (60 d~ > {: timezone '') , 0 0
+	y + 0 0 0 , (60 d~ > {: timezone '') , 0 0
 )
 
 
 NB.  Julian day number from Gregorian date.
 julianDayFromGregorianDate =: verb define 
 	
-	'year month day' =. y.
+	'year month day' =. y
 
 	a  =. (14 - month) d 12
 	y  =. year + 4800 - a
@@ -67,10 +67,10 @@ getSecondsSinceEpochSinceGregorianDate =: verb define
 	NB.  This disagrees with http://www.onlineconversion.com/unix_time.htm after leap day, 2000.
 	NB.  That page uses built-in javascript date calculation functions.  The page's answers agree in all browsers 
 	NB.  (and, hence, in distinct javascript implementations), therefore the page's answers are probably correct.
-    ssgd =. (*/  24 60 60) * y. -&:julianDayFromGregorianDate 1970 01 01
+    ssgd =. (*/  24 60 60) * y -&:julianDayFromGregorianDate 1970 01 01
 
 	NB.  For now, fix with a cheap hack:
-	ssgd +  (*/ 2 24 60 60) * 1999 < {. y.
+	ssgd +  (*/ 2 24 60 60) * 1999 < {. y
 )
 
 
@@ -78,19 +78,19 @@ NB.  Seconds since date-time in UTC.
 getSecondsSinceEpochFromGregorianDateTimeInUTC =: verb define
     
 	NB.  Seconds until midnight UTC today
-	secondsTillToday =. getSecondsSinceEpochSinceGregorianDate 3 {. y.
+	secondsTillToday =. getSecondsSinceEpochSinceGregorianDate 3 {. y
 
 	NB.  Seconds passed since midnight UTC "today".
-	secondDuringToday =. <. 24 60 60 #. _3 {. y.
+	secondDuringToday =. <. 24 60 60 #. _3 {. y
 
-	NB.  Seconds since y. is seconds up to the date-part of y. + seconds passed since midnight UTC in the time-part of y.
+	NB.  Seconds since y is seconds up to the date-part of y + seconds passed since midnight UTC in the time-part of y
 	secondsTillToday + secondDuringToday 
 )
 
 NB.  Seconds since date-time in local time.
 getSecondsSinceEpochFromGregorianDateTimeInLocalTime =: verb define
 
-	getSecondsSinceEpochFromGregorianDateTimeInUTC convertDateTimeStampInLocalTimeToUTC y.
+	getSecondsSinceEpochFromGregorianDateTimeInUTC convertDateTimeStampInLocalTimeToUTC y
 )
 
 NB.  Seconds since epoch.

@@ -2,7 +2,7 @@
    require 'numeric'  NB.  For 'round'
 
    NB.  Utils
-   sr         =:  2 : '(m.&=)`(,:&n.) } y.'
+   sr         =:  2 : '(m&=)`(,:&n) } y'
    arbCut     =:  <@:#@:[ }.&.> [ (E. <;.1 ]) ,
    multiCut   =:  arbCut&>/@:(<"_1^:(L. = 0:)@:|.@:[ , <@:])
    strip_loc  =:  (}.~ ({: * # -~ i:&1@:(1 0&E.))@:=&'_')&.>@:(;:^:(0: -: L.))
@@ -12,7 +12,7 @@
 
 NB.  Describe agreement	
    describe   =: verb define
-     'type rank shape numtrue true added missing'=.y.
+     'type rank shape numtrue true added missing'=.y
      if. -.type-:'failure' do.
         z   =.(':',&.>~'Type';'Rank';'Shape';'Number of true';'True bits') ,. ]&.".each ;: 'type rank shape numtrue true'
         z,'WRT majority:  ' (~:&0@:#@:] # ,:@:(,&< sqr@:(a:&,)) ) ((~:&a:@:] # (,.~ ,&':'&.>)~) ]&.".each) ;: 'added missing'
@@ -26,8 +26,8 @@ NB.     z =. z , 'Detail' ,&< 10 {. (deb;.0~ ({. ,: -~/)@:(2 0&+)@:(2&{.)@:I.@:=
 )
 
    agree      =:  dyad define
-     algos      =.  x.
-     smallInput =.  y.
+     algos      =.  x
+     smallInput =.  y
      data       =.  algos (0: ,&< 128!:2) :: ((13!:11 ,&< 13!:12) bind '') &> <smallInput
      msk        =.  ;{."1 data
      idx        =.  (({."1 data) ,. (,.~ 3!:0&.>) {:"1 data) </. i. # algos  NB.!  DO NOT DO THIS in this manner!  (See ** later)
@@ -99,8 +99,8 @@ NOTES          =: noun define
 	This was 'catRpts' before I reimplemented it:
 	NB.!  This is REALLY ugly, REALLY redundant and needs to be cleaned up.
 	NB.    metaAgree  =: dyad define 
-	NB.      'algos inputName' =.x.
-	NB.      'idx agreement'   =. y.
+	NB.      'algos inputName' =.x
+	NB.      'idx agreement'   =. y
 	NB.
 	NB.      NB. Make deb handle TABs.
 	NB.      notSpace   =. ' '&~:
@@ -108,9 +108,9 @@ NOTES          =: noun define
 	NB.      ".'debt    =.','deb' ({:@:] ;@:}.@:,@:,. (arbCut~ >@:{.))&:(  (5!:5)@:{.@:;: L: 0  ) ;: 'notSpace spaceNorTab'
 	NB.
 	NB.      algoNs     =. {.@:;:&>algos 
-	NB.      Q          =. ((1: 0} ~:) 4 : 'x.}y.' (,:~ {:@:(,&' ')&.>)) "1 &.|: >@:(,&.>/)@:((({.~ #) ,. TAB&,.@:])&.>/"1) @: (,:^:(2: - #@:$) each) @:(({."1 each ~ >./@:({:@:$&>)) "1 &.|: ) each agreement
+	NB.      Q          =. ((1: 0} ~:) 4 : 'x}y' (,:~ {:@:(,&' ')&.>)) "1 &.|: >@:(,&.>/)@:((({.~ #) ,. TAB&,.@:])&.>/"1) @: (,:^:(2: - #@:$) each) @:(({."1 each ~ >./@:({:@:$&>)) "1 &.|: ) each agreement
 	NB.      Q          =. ((<''),>each ((<'[Majority]')&,&.>@:{. , }.) idx {&.><algoNs)  ,. inputName , Q
 	NB.      Q          =.  (LF,'|   ',LF)&join@:((LF&join@:('|   '&,&.>)@:(#~ ([: +./\. a:&~:))@:(({.~ #) <@:debt"1@:,. TAB&,.@:])&.>)/"1)@: ((({. each ~ <@:+&2@:(>./)@:($&>)) "1 &.|: ))@:(,:^:(2: - #@:$) each)@:}.   Q
-	NB.      <nvtext (>inputName) (({.&.>~5: >. >./@:(#&>))@:(((,&< >.@:-:)   4 : ' ({.x.) ({:x.)}y.' #&(<' ')@:]) #) ,. ])LF cut  Q
+	NB.      <nvtext (>inputName) (({.&.>~5: >. >./@:(#&>))@:(((,&< >.@:-:)   4 : ' ({.x) ({:x)}y' #&(<' ')@:]) #) ,. ])LF cut  Q
 	NB. )
 )

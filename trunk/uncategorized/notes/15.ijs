@@ -3,7 +3,7 @@ NB.  	'strings'  is for 'rjust' and 'deb'
 NB.     'danutils' is for anyone not on my machine
 
 NB.  My location
-'MY_PATH MY_FILE'			=: (({. ,&< }.)~ (# <. >:@:i:&'\')) 3 : '(4!:4 {:: 4!:3) <''y.''' $0
+'MY_PATH MY_FILE'			=: (({. ,&< }.)~ (# <. >:@:i:&'\')) 3 : '(4!:4 {:: 4!:3) <''y''' $0
 
 load 'strings' 
 load MY_PATH,'danutils.ijs'

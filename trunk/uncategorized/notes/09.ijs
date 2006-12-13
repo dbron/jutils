@@ -160,8 +160,8 @@ getOrders								=: verb define
 )
 
 calculateParticipations					=: verb define
-	'names orders'	=. <"1 |: > {. y.
-	'quote tip'		=. }. y.
+	'names orders'	=. <"1 |: > {. y
+	'quote tip'		=. }. y
 	total			=.  quote + tip
 	results			=.  <@:,&LF@:trim"1 names (,.&TAB@:>@:[ ,. [: rjust ('$'&,)@:(0j2&":)"0@:]) payments =. 0.25 round total * ((%~ +/)~&>  +/@:;) orders
 	; results [`,@.(0 < | difference) <' on this deal (because payments are rounded to the nearest quarter).' ,~ 'The lunch coordinator ' , ((;: 'made lost') {::~ difference > 0) , ' $', ":, | difference =. total - +/ payments

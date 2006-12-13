@@ -10,18 +10,18 @@ NB.  To encode data that contains all of a.
 require jpath '~system\packages\misc\base64.ijs'
 
 NB.  Scalar replace
-sr				=:  2 : '(m.&=)`(,:&n.) } y.'
+sr				=:  2 : '(m&=)`(,:&n) } y'
 
 encode			=:  verb define
-	if. y. e.~ null =. 0 { a. do.
+	if. y e.~ null =. 0 { a. do.
 	NB.  The function compressblock_jsfl_ doesn't like nulls
 
-		if. 0 < # freeLetters =. a. -. y. do.
+		if. 0 < # freeLetters =. a. -. y do.
 		NB.  If there's a free letter from the alphabet,
 		NB.  encode nulls as that character.
 
 			nullChar=.  {. freeLetters
-			ed		=.  nullChar , null sr nullChar y.
+			ed		=.  nullChar , null sr nullChar y
 			type	=.  'X'
 		else.
 		NB.  If the data contains all of a., base64 encode it.
@@ -30,18 +30,18 @@ encode			=:  verb define
 		NB.  mechanism. Base64 encoding might actually expand the data so
 		NB.  much that the benefits of compression are lost.
 
-			ed		=. tobase64 y.
+			ed		=. tobase64 y
 			type	=.  '6' 
 		end.
 	else.
-		NB.  No 0s in y. .. so leave it as-is
-		ed			=.  y.
+		NB.  No 0s in y .. so leave it as-is
+		ed			=.  y
 		type		=. 'N'
 	end.
 
 	type , ed
 )
-decode			=: (3 : '({. y.) sr (0 { a.) }. y.'`frombase64`])@:}.@.('X6N'&i.@:{.) 
+decode			=: (3 : '({. y) sr (0 { a.) }. y'`frombase64`])@:}.@.('X6N'&i.@:{.) 
 enc				=:   encode :. decode
 NB.  ----------------------------------
 

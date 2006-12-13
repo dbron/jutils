@@ -12,7 +12,7 @@ CXN						=:  ddcon 'dsn=' , DATABASE
 
 NB.  Utils
 sql						=:  verb define
-	ddfch _1 ,~ y. ddsel CXN
+	ddfch _1 ,~ y ddsel CXN
 )
 
 

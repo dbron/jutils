@@ -19,13 +19,13 @@ NB.     *  Find out when and how to close a connection gracefully.
 	openSocket =: verb define
 	NB.  This just returns a new socket
 
-		socket =. 0 pick sdcheck sdsocket y.
+		socket =. 0 pick sdcheck sdsocket y
 )
 
 	closeSocket =: verb define
 	NB.  Close and free up a socket.  Simply an alias for sdclose.
 		
-		socket =. y.
+		socket =. y
 
 		sdcheck sdclose socket
 )
@@ -33,8 +33,8 @@ NB.     *  Find out when and how to close a connection gracefully.
 	bindSocket =: 4 : 0
 	NB.  Bind a socket to a port
 
-		socket =. x. 
-		port =. y.
+		socket =. x 
+		port =. y
 
 		sdcheck sdbind socket ; AF_INET_jsocket_ ; '' ; port
 )
@@ -42,7 +42,7 @@ NB.     *  Find out when and how to close a connection gracefully.
 	listenOnSocket =: verb define
 	NB.  Start listening for connections on the socket/port
 
-		socket =. y.
+		socket =. y
 		maxConnections =. 1						NB.  This should be generalized.
 		sdcheck sdlisten  socket , maxConnections
 )
@@ -50,7 +50,7 @@ NB.     *  Find out when and how to close a connection gracefully.
 	a_syncSocket =: verb define
 	NB. Do NOT block while waiting for connections or data
 		
-		server =. y.
+		server =. y
 	
 		sdcheck sdasync server	
 )
@@ -59,7 +59,7 @@ NB.     *  Find out when and how to close a connection gracefully.
 	acceptConnection =: verb define
 	NB.  Start accepting connections on the socket/port
 		
-		socket =. y.
+		socket =. y
 
 		0 pick sdcheck sdaccept socket
 )
@@ -67,13 +67,13 @@ NB.     *  Find out when and how to close a connection gracefully.
 	syncConnection =: verb define
 	NB.  Make sure server and client are sync'd	
 
-		server =. y.
+		server =. y
 		assert server e. 1 pick sdcheck sdselect ''
 )
 
 	closeConnection =: verb define
 	NB.  Just another alias for sdclose
-		connection =: y.
+		connection =: y
 
 		sdcheck sdclose connection
 )
@@ -82,7 +82,7 @@ NB.     *  Find out when and how to close a connection gracefully.
 	startServer =: verb define
 	NB.  Open a socket, bind it to a port, listen for and accept connections asynchronesly
 		
-		port =. y.
+		port =. y
 
 		acceptedSockets =: ''
 
@@ -104,7 +104,7 @@ NB.		thisSocket =: socket
 	NB.  There are really only 2 cases to deal with: 
 	NB.  	1)  When a connection FIRST comes in, it needs to be accepted.
 	NB.		2)  When the client wants to send data
-		smoutput y.
+		smoutput y
 
 		while. (# > 1 pick sdselect '') do.
 			
@@ -134,7 +134,7 @@ NB.					syncConnection thisSocket											NB.  Sync with client
 )
 
 	processSocket =: verb define
-		socket =: y.
+		socket =: y
 
 		data =. socket read 1000 				NB.  Read stream
 		socket write data						NB.  Echo to client
@@ -144,15 +144,15 @@ NB.					syncConnection thisSocket											NB.  Sync with client
 	getClient =: verb define
 	NB.  Return the socket that a particular client is on.
 
-		clientNumber =. (y. - 1)
+		clientNumber =. (y - 1)
 		clientNumber  { acceptedSockets
 )
 
 	write =: 4 : 0
-	NB.  Convert data in y. to streamable form and write out to server (socket) x.  
+	NB.  Convert data in y to streamable form and write out to server (socket) x  
 		
-		client =. x.
-		data =. y.
+		client =. x
+		data =. y
 		flags =. 0								NB.  This should be generalized
 
 		data =. toStream data
@@ -161,10 +161,10 @@ NB.					syncConnection thisSocket											NB.  Sync with client
 )
 
 	read =: 4 : 0
-	NB.  Read in y. bytes of data from server (socket) x. and convert data to normal format
+	NB.  Read in y bytes of data from server (socket) x and convert data to normal format
 		
-		server =. x.
-		maxToRead =. y.
+		server =. x
+		maxToRead =. y
 		flags =. 0								NB.  This should be generalized
 		
 		fromStream ; sdcheck sdrecv server, maxToRead, flags
@@ -174,13 +174,13 @@ NB.					syncConnection thisSocket											NB.  Sync with client
 	toStream =: verb define
 	NB.  Convert normal data to streamable form
 
-		data =. y.
+		data =. y
 NB.		3!:1 data
 )
 
 	fromStream =: verb define
 	NB.  Convert streamed data to normal form
 
-		data =. y.
+		data =. y
 NB.			3!:2 data
 )

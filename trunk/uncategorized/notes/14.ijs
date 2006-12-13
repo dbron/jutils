@@ -36,22 +36,22 @@ x xx y
 )
 
 NB.  Input expected: 
-NB.  	x. is prefixes 
-NB.     y. is output of splitRootsFromEndings
+NB.  	x is prefixes 
+NB.     y is output of splitRootsFromEndings
 roots						=.  {.@:]  NB.  This is from the output of splitRootsFromEndings
 calculateMergeSpec			=.  (>:@:(i:&1@:="1)&.|: >@:{:)
 mergeSpecPlusRoots			=.  calculateMergeSpec ; roots
 
 NB.  Input expected:
-NB.  	x. is prefixes ,: suffixes
-NB.     y. is original words ,: custom plurals 
+NB.  	x is prefixes ,: suffixes
+NB.     y is original words ,: custom plurals 
 prefixes					=.  {.@:[
 splitRootsFromEndings		=.  ({.@> ,&<  {:@>)@:((}. ; {.)&.>"0 1~ -@:#&>)~&:{.
 mergeSpecAndRoots			=.  (prefixes mergeSpecPlusRoots splitRootsFromEndings) f.  NB.  Need to f. because I will reuse the name 'roots' and 'prefixes'
 
 NB.  Input expected:
-NB.  	x. is (original words ,: custom plurals) ,&< suffixes
-NB.     y. is merge spec ,&< word roots
+NB.  	x is (original words ,: custom plurals) ,&< suffixes
+NB.     y is merge spec ,&< word roots
 roots						=.  >@:{:@:]
 suffixes					=.  >@:{:@:[
 originalWords				=.  {.@:>@:{.@:[
@@ -65,12 +65,12 @@ mergeSpecWithCustomization	=.  a:&=@:customPlurals * mergeSpec
 calculatePlurals			=.  mergeSpecWithCustomization  merge allPossiblePlurals
 
 NB.  Input expected:
-NB.  	x. is prefixes ,: suffixes
-NB.     y. is original words ,: custom plurals 
+NB.  	x is prefixes ,: suffixes
+NB.     y is original words ,: custom plurals 
 plurals						=.  ((,&< {:)~ calculatePlurals mergeSpecAndRoots) f.
 
 NB.  Input expected:
-NB.  y. is original words OR original words ,. custom plurals
+NB.  y is original words OR original words ,. custom plurals
 transformInputForPluralization	=.  ,.&a:^:(1: = rank)@:(;:^:(2: = 3!:0))
 pluralize					=:  (' /' multiCut 's/ses y/ies ay/ays ey/eys oy/oys uy/uys ium/ia ius/ii')&(plurals&|: transformInputForPluralization)
 

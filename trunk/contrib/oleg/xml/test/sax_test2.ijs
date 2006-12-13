@@ -12,13 +12,13 @@ startDocument=: 3 : 0
 )
 
 startElement=: 4 : 0
-  smoutput (L#'  '),'[',y.,' ',(showattrs attributes x.),']'
+  smoutput (L#'  '),'[',y,' ',(showattrs attributes x),']'
   L=: L+1
 )
 
 endElement=: 3 : 0
   L=: L-1
-  smoutput (L#'  '),'[/',y.,']'
+  smoutput (L#'  '),'[/',y,']'
 )
 
 NB. =========================================================

@@ -10,21 +10,21 @@ load 'b:\projects\work\order_manager\main\dev\oms\default\omsfields.ijs'
 fetchSQL					=:  verb define
 NB.  Verb performs a SQL command.  
 NB.  Inputs:
-NB.         	x. :  Boolen specifying what dd command to use.  Possible values are:
+NB.         	x :  Boolen specifying what dd command to use.  Possible values are:
 NB.         	      	0: ddfch
 NB.         	     	1: ddfet
 NB.         	      Default (i.e. monadic case) is 0.
-NB.         	y. :  SQL string to execute
+NB.         	y :  SQL string to execute
 NB.
 NB.  Outputs:   Output of SQL command.
 NB.  EG:  "fetchSQL 'select * from TEST'" and "0 fetchSQL 'select * from TEST'" are equivalent to:
 NB.       "ddfch _1 ,~ 'select * from TEST' ddsel SQLCONNECTION"
 
 	NB.  Default to the faster 'ddfch'
-	0 fetchSQL y.
+	0 fetchSQL y
 :
 	
-	ddfch`ddfet@.x. _1 ,~ y. ddsel ddcon 'dsn=' , DATABASE
+	ddfch`ddfet@.x _1 ,~ y ddsel ddcon 'dsn=' , DATABASE
 )
 
 getTableColumnNames		=: verb define
@@ -34,10 +34,10 @@ NB.  ----------------------
 NB.  * getTableColumnNames: get column names given (table or worksheet) NaMe for
 NB.  Open Connection.
 NB.  EG:  colnms=. 'SOMETABLE' getTableColumnNames cha=. ddcon 'dsn=DATSOURCE'
-	y. getTableColumnNames SQLCONNECTION
+	y getTableColumnNames SQLCONNECTION
 :
-	    nm	=.  x.							NB.  Table name
-		oc	=.  y.							NB.  Data source handle.
+	    nm	=.  x							NB.  Table name
+		oc	=.  y							NB.  Data source handle.
     	nm	=.  nm-.';'						NB.  Remove terminal ";" from name.
     	dbi	=.  nm ddcol oc					NB.  Get DB info mat
     	colnms	=.  }.((0{dbi) i. <'COLUMN_NAME'){"1 dbi
@@ -94,14 +94,14 @@ T					=: Table (1;'') ,"1~ (<'"') ,. (>@:{. ,. {:@:$&.>@:}.) TABLES
 Insert__T ,: TABLES
 
 NB.  Across - apply gerund left to array on right (from system\packages\publish\web.ijs).
-NB.  across	=. adverb def '(# # 1:) (}.@$ $ ,)@:u.;.1 ]'  NB.  Old, explicit version
+NB.  across	=. adverb def '(# # 1:) (}.@$ $ ,)@:u;.1 ]'  NB.  Old, explicit version
 across				=: ((}.@$ $ ,)@:)(;.1)~ (# # 1:)
 NB.  Verb form of across.  Can have calculated gerund
-acrossV				=: 4 : 'x. across y.'
+acrossV				=: 4 : 'x across y'
 
 NB.  Modify an element and put it back (make sure initial and terminal shapes match)
 NB.  EG:  3: mod 2 ] 5 # 0 NB.  Returns 0 0 3 0 0
-mod					=: 2 : 'u.@:(n.&{) NB. n.} ]'
+mod					=: 2 : 'u@:(n&{) NB. n} ]'
 
 
 NB.  Turn loops into ranks
@@ -111,13 +111,13 @@ NB.  so that anything that wants to do a Broker/Desk breakdown can.
 NB.  For now, we only care about the order tables.
 NB.  Group tables by desk.
 accumulateDeskData	=:   verb define 
-	y.				=.  dtb&.> 	y.
+	y				=.  dtb&.> 	y
 
 	NB.  Since Lalit has defined some of the OMS' numeric fields as textual in the DB
 	NB.  (because J's negative number character is '_' instead of '-'), we can't trust the
 	NB.  database's definition of the fields.  We'll have to use the (current) OMS'.
-	omsFields		=. USEFUL_FIELDS (] #~ (e.~ 1&{"1)) ('fields' ,~ > {. 1 { 'TYPE' From y.)~
-NB.	fields_z_		=.  }. 'TYPE_NAME COLUMN_NAME COLUMN_SIZE REMARKS' From (> {. 1 { 'TABLENAME' From y.) ddcol ddcon 'dsn=',DATABASE
+	omsFields		=. USEFUL_FIELDS (] #~ (e.~ 1&{"1)) ('fields' ,~ > {. 1 { 'TYPE' From y)~
+NB.	fields_z_		=.  }. 'TYPE_NAME COLUMN_NAME COLUMN_SIZE REMARKS' From (> {. 1 { 'TABLENAME' From y) ddcol ddcon 'dsn=',DATABASE
 NB.	fields_z_		=.  ('varchar/" numeric/# /?'&lookupWithDefault`]`]`]`] across @: ,&(<1) )&.|: fields
 NB.	fields_z_		=.  (0 2 }~ {.&.>@:(0&{) ,: '#'&=@:;@:{.`(,:&(<8)@:(2&{)) })&.:|: fields
 NB.	fields_z_		=.  0 1 2 4 3 {"1 fields
@@ -126,7 +126,7 @@ NB. wrongTypedFields=. fields #~ fields ~:&>/@:(,&<&:(0&{"1) {&.>~ i.@:#@:[ ; (i
 	t				=.  Table omsFields
 
 	colTypeMap		=.  1 0 {"1 Fields__t 12
-	for_tn. , }. 'TABLENAME' From y. do.
+	for_tn. , }. 'TABLENAME' From y do.
 		NB.  Be compatible with J5+ where reassining the loop variable inside the loop is unsupported
 		tableName	=.  > tn
 		data		=.  fetchSQL 'select ', (}: ; ,&','&.> USEFUL_FIELDS) , ' from ' , DATABASE , '..' , tableName , ' where DATE between ' , MONTH_BOTTOM , ' and ' , MONTH_TOP
@@ -136,7 +136,7 @@ NB. wrongTypedFields=. fields #~ fields ~:&>/@:(,&<&:(0&{"1) {&.>~ i.@:#@:[ ; (i
 )
 
 createDataCube		=:  verb define
-	deskTableMap	=.  y.
+	deskTableMap	=.  y
 	resultMatrix	=.  a: $~ #&> BROKER_FILTERS;deskTableMap;<USEFUL_FIELDS
 
 	for_brokerFilter. BROKER_FILTERS do.

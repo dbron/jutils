@@ -20,10 +20,10 @@ NB.  ===========================================================================
 	NB.  Example of use:
 	NB.    10 +`-`*`% compareVerbs 100
 
-		mx=:  x.
-		my=:  y.
+		mx=:  x
+		my=:  y
 		z=.i.0 4
-		for_f. m. do.
+		for_f. m do.
 			'`mt mg'=:[`f
 			z=.z,(5!:5 <'mg');(6!:2;7!:2;".) 'mx mg my'
 		end.
@@ -31,37 +31,37 @@ NB.  ===========================================================================
 )
 
 	NB.c	over =:  2 : 0
-	NB.c		verb =.  u.
-	NB.c		data =.  n.
+	NB.c		verb =.  u
+	NB.c		data =.  n
 	NB.c
 	NB.c		verb /^:(#@$@])  data
 	NB.c)
 
 	NB.  From phrases: Apply a set of verbs across the columns of a table
 	NB.  eg:  Verb1`Verb2`Verb3 across table
-	across				=:  adverb def '(# # 1:) (}.@$ $ ,)@:u.;.1 ]'
+	across				=:  adverb def '(# # 1:) (}.@$ $ ,)@:u;.1 ]'
 
 	NB.  Jose Quintana's adverb for sequential application of dyadic verbs
-	NB.  x. f seq y. is essentially equivalent to ... (2 {:: x.) f (1 {:: x.) f (0 {:: x.) f y.
+	NB.  x f seq y is essentially equivalent to ... (2 {:: x) f (1 {:: x) f (0 {:: x) f y
 	seq					=:  ((&.>) /) (@:((|.@:[) , (<@:]))) (>@:)
 
 	NB.  Kirk B. Iverson's de-raveller adverb (ravels argument, applies verb, unravels argument).
-	rav					=:  1 : 'u.@, $~ $'
+	rav					=:  1 : 'u@, $~ $'
 
 	NB.  An adverb that gives the indicies in the RHA (which can be of any rank) where the
 	NB.  verb on the LHS returns true.  The following example finds the indices of the LHA in the RHA
 	NB.  E.G. 0&= index 4 4$8 3 9 2 0 5 0 1 10 9 8 5 0 7 6 0	NB.  Return 4 2$1 0 1 2 3 0 3 3
 	NB.  E.G. 'z0ert' e.~ index 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' {~ i. 3 4 5  NB.  Returns 5 3$0 0 4 0 3 2 0 3 4 1 1 0 2 2 2
-	index				=:  1 : '(# i.@#)@:(u.&:,) #:~ $@:]'
+	index				=:  1 : '(# i.@#)@:(u&:,) #:~ $@:]'
 
 	NB.  A 'translate' conjunction.  Has 2 noun arguments, producing a verb.
 	NB.  Example:  rot13 =.  'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM' tr 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 	NB.  rot13 'Guvf vf fbzr ebgngrq grkg'
-	xlat				=:  2 : '({&(n. , a.)) @: ((m. , a.)&i.)'
+	xlat				=:  2 : '({&(n , a.)) @: ((m , a.)&i.)'
 
 	NB.  Another translate conjuction, only for scalars.  Repalce the scalar LHA to the conjunction with the scalar RHA to the conjunction.
 	NB.  EG.  0 scalarReplace _1 ] 5 8 0 0 5 6 0 3 0 4  NB. Returns 5 8 _1 _1 5 6 _1 3 _1 4
-	scalarReplace	=: 2 : '(m.&=)`(,:&n.) } y.'
+	scalarReplace	=: 2 : '(m&=)`(,:&n) } y'
 
 	NB.  A better version of scalarReplace; actually more of a hybrid of scalarReplace and xlat.  It shares the advantages of scalarReplace
 	NB.  in that it does not need to know the universe of possible values in advance (meaning it's not restricted to literals and doesn't 
@@ -72,7 +72,7 @@ NB.  ===========================================================================
 	NB.  be exact.
 	NB.  EG:  abc_to_def 'aZbYcX'       [. abc_to_def	=: 'abc' multiScalarReplace	'def' NB.  Returns 'dZeYfX'
 	NB.  EG:  zero_to_one 5 5 5 5 $ 0   [. zero_to_one	=:     0 multiScalarReplace 1     NB.  Returns 5 5 5 5$1
-	multiScalarReplace	=: 2 : '((i.~"0 _&m.)` (n.&(] ,~ ($~"0 1&, $)))) }'
+	multiScalarReplace	=: 2 : '((i.~"0 _&m)` (n&(] ,~ ($~"0 1&, $)))) }'
 
 	NB.  The adverb evoke can be used to access global nouns (which can change) from tacit definitions.
 	NB.  E.G. lookUpID	=: ((i.~ {."1) { {:"1@:]) 'ID_TABLE' evoke
@@ -82,31 +82,31 @@ NB.  ===========================================================================
 	NB.  Pads a string to a greater length.  If the length given is less
 	NB.  than the length of the string, the string is truncated.
 	NB.
-	NB.  Parameters:  y. is the string to be padded.
+	NB.  Parameters:  y is the string to be padded.
 	NB.
-	NB.               x. is a list of 3 boxes:
+	NB.               x is a list of 3 boxes:
 	NB.
-	NB.               0 {:: x. is a numeric length to pad the string
+	NB.               0 {:: x is a numeric length to pad the string
 	NB.
-	NB.               1 {:: x. is the string character with which to pad
+	NB.               1 {:: x is the string character with which to pad
 	NB.                        the string
 	NB.
-	NB.               2 {:: x. is a boolean which indicates the side on
+	NB.               2 {:: x is a boolean which indicates the side on
 	NB.                        which the string will be padded: 0
 	NB.                        indicates pad on the right, 1 indicates
 	NB.                        pad on the left.
 
-		'size filler side'	=.  x.
+		'size filler side'	=.  x
 
-		> side { (size{.y.,size#filler);(|. size {. |. (size#filler),y.)
+		> side { (size{.y,size#filler);(|. size {. |. (size#filler),y)
 )
 
 	to						=:  verb define
 
-	'first last by includeLower includeUpper' =:  5 {. y., 1 1 1
+	'first last by includeLower includeUpper' =:  5 {. y, 1 1 1
 	(}.^:(-.includeLower)) first + ((_1^(first > last)) * by) * i. (>:^:includeUpper) | (first - last)%by
 :
-	y. (] + (* * i.@:>:@:|)@:-) x.
+	y (] + (* * i.@:>:@:|)@:-) x
 )
 
 
@@ -133,7 +133,7 @@ NB.  ===========================================================================
 	NB.  Numerify a literal if possible, if not, return original literal
 	cn					=:  ((__&e.@:] >@{ ;~) __&".)
 
-	NB.  Scramble the items of y.
+	NB.  Scramble the items of y
 	scramble			=:  {~ ?~@:#
 
 	NB.  Sort a 2-d array by columns
@@ -151,7 +151,7 @@ NB.  ===========================================================================
 	NB.  Old form:  ([: *./ 2&(-:/\))
 	allMatch			=:  (1: = #@:~.)
 
-NB.	NB.  Insert 1 pick x. into y. starting at the index specified in 0 pick x.
+NB.	NB.  Insert 1 pick x into y starting at the index specified in 0 pick x
 NB. Removed because it's useless and conflicts with a name in the trader side of the OMS.
 NB.	insert				=:  ((0&pick@:[ {. ]) , 1&pick@:[ , (0&pick@:[ }. ]))
 
@@ -182,7 +182,7 @@ NB.	insert				=:  ((0&pick@:[ {. ]) , 1&pick@:[ , (0&pick@:[ }. ]))
 	trap				=: ([ 0&|:@:, ,~)^:(#@$@:])
 
 	NB.  r is my analog to j. (sort of like an r.) which takes its two arguments and returns a rational
-	NB.  with x. as the numerator and y. as the denominator. Useful if precision is more important
+	NB.  with x as the numerator and y as the denominator. Useful if precision is more important
 	NB.  than space/time considerations (that is, store all your calculations with full precision and only
 	NB.  evaluate them to a floating point at the end).
 	NB.  E.G. 3 r 4 produces 3r4 and _2 r/\ 2 3 4 5 6 7 produces 2r3 4r5 6r7
@@ -248,11 +248,11 @@ NB.	insert				=:  ((0&pick@:[ {. ]) , 1&pick@:[ , (0&pick@:[ }. ]))
 
 	NB.  This is a slightly modified version of comb dyad that appears in 
 	NB.  the documentaion for "for." in the J dictionary.  It produces all
-	NB.  the size x. combinations of the elements of y.  For example,
+	NB.  the size x combinations of the elements of y  For example,
 	NB.  3 comb 'abcde' NB.  Returns 10 3$'abcabdabeacdaceadebcdbcebdecde'
 	comb=: ((] {~ ((4 : 0) #)) ~.)
-	 	z=.1 0$k=.i.#c=.1,~(y.-x.)$0
-	 	for. i. x. do. 
+	 	z=.1 0$k=.i.#c=.1,~(y-x)$0
+	 	for. i. x do. 
 			z=.; k ,.&.> (-c=.+/\.c) {.&.> <1+z 
 		end.
 )
@@ -267,7 +267,7 @@ NB.	insert				=:  ((0&pick@:[ {. ]) , 1&pick@:[ , (0&pick@:[ }. ]))
 
 	NB.  Monadic form plots the frequency of each unique item in a set using the asterisk character
 	NB.  Dyadic form allows you to specify your own character.
-	graphfreq			=:  '*'&$: : (4 : '((] (;"0 1 x.&(#~)@:]"0) +/@:(=/)) ~.) y.')
+	graphfreq			=:  '*'&$: : (4 : '((] (;"0 1 x&(#~)@:]"0) +/@:(=/)) ~.) y')
 
 	NB.  Pick the prime elements from a list
 	primepicker			=:  {~ ((> # ]) p:@:i.)@:#
@@ -318,13 +318,13 @@ NB.	insert				=:  ((0&pick@:[ {. ]) , 1&pick@:[ , (0&pick@:[ }. ]))
 	NB.  Another example:  treeIt dictionary <;._2 'arriving cares coerciveness commenting denigrates dextro greenflies pinfish pocketknives resettled '
 	treeIt				=: 5!:4 bind (<'some_name') [ ([: ".@:('some_name=:'&,) ('()';'NULL')&replace@:boxToParen)
 
-	NB.  Return (1 { x.) elements from y. starting at 0 { x.
+	NB.  Return (1 { x) elements from y starting at 0 { x
 	NB.  EG:  a. from~ 10 ,~ a. i. '0'  NB. Returns '0123456789'
 	from				=:  (];.0~ ,:/)~
 
 	NB.  Apply function on nub, then expand array to original length
 	NB.  Just make verbs faster on arguments with small nubs.
-	applyOnNub			=:  1 : '((u.@:[) {~ i.~) ~.'
+	applyOnNub			=:  1 : '((u@:[) {~ i.~) ~.'
 
 	NB.  Like E., this creates a boolean list where the elements of the right match the elements of the left
 	NB.  except that E. has ones only where the match begins, whereas this function has ones for the entire
@@ -335,7 +335,7 @@ NB.	insert				=:  ((0&pick@:[ {. ]) , 1&pick@:[ , (0&pick@:[ }. ]))
 
 	NB.  Select;  adverb which takes a verb that produces a boolean; the result of the verb will be selected
 	NB.  from the RHA.
-	select				=: 'u. # ]'
+	select				=: 'u # ]'
 
 	NB.  Remove all occurances of the sequence on the LHS from the RHS
 	NB.  EG:  'ugly ' remove  'This ugly sentence should ugly be ugly nice'	NB.  Returns 'This sentence should be nice'
@@ -365,7 +365,7 @@ NB.  ===========================================================================
 	NB.  This converts the number of seconds since Epoch into
 	NB.  UTC/GMT time.  Relies upon the standard function library add-on
 
-		timer			=.  y.
+		timer			=.  y
 		date			=.  ": > {. timer_to_date_jsfl_ timer
 		time			=.  ": > {. timer_to_time_jsfl_ timer
 		time			=.  (8;'0';1) pad time
@@ -389,7 +389,7 @@ NB.  ===========================================================================
 	datetimestamp		=: [: ;@:|:@:,:&(;/'-- ::')  4 2 2 2 2 6j3&(<@(' ' scalarReplace '0')@":"0)
 
 	NB.  Just a cool way of producing YYYY-MM-DD
-	datestamp			=: 3 : '; 1 0 1 0 1 expandby (<''-'') 4 2 2 (-@:[ <@:({.!.''0'') ":@:])"0 ]3 {. 6!:0 y.'
+	datestamp			=: 3 : '; 1 0 1 0 1 expandby (<''-'') 4 2 2 (-@:[ <@:({.!.''0'') ":@:])"0 ]3 {. 6!:0 y'
 
 
 
@@ -399,7 +399,7 @@ NB.  File Utilities:  Utils to manipulate files and the file system.
 NB.  =====================================================================================================================================================
 	treeWalker			=:  verb define
 	NB.  Verb to recursively walk a directory structure, listing the directories and files within it.
-		'dirs files'	=.  ((, ^: (*@:#@:])) L: 0 ({."1 each @: dirsAndFiles)) @: appendSlash y.
+		'dirs files'	=.  ((, ^: (*@:#@:])) L: 0 ({."1 each @: dirsAndFiles)) @: appendSlash y
 
 		ans				=.  $0
 
@@ -495,16 +495,16 @@ NB.  ===========================================================================
 	NB.  may use a list of boxes. These values will be assigned to the first N names in
 	NB.  the default parameter table.  If the caller passes in an unboxed value, that
 	NB.  value will be assigned to the first name in the default parameter table, unless
-	NB.  that value is null (0=#y.), in which case the default parameter table will be
+	NB.  that value is null (0=#y), in which case the default parameter table will be
 	NB.  used in its entirety, with no caller-defined values.
 
-		if. '3 :' beginsWith~ verbBody =. 5!:5<'v.' do.
+		if. '3 :' beginsWith~ verbBody =. 5!:5<'v' do.
 		NB.  If this is an explicit monadic verb, then redefine it appropriately.
 
 			NB.  Drop off the '3 : 0' (or '3 : ''')
 	 		verbBody		=.  5 }. verbBody
 
-			NB.  We need to build up a verb that will massage the input to v.
+			NB.  We need to build up a verb that will massage the input to v
 			
 			NB.  Box the input iff it's not boxed and it's not null.  This way it's convenient to pass in one parameter, or
 			NB.  none, just allowing all the defaults to take effect.
@@ -532,20 +532,20 @@ NB.  ===========================================================================
 			NB.  the default table).  This allows the user's parameters to over-ride the defaults, without allowing him to 
 			NB.  define names the function isn't expecting (which could possibly over-ride global names the function needs to
 			NB.  access).
-			createParameterTable	=.  m.&([ (] {~ i.~&:({."1))&:notmalizeNames (appendDefaults normalizeInput)) f.
+			createParameterTable	=.  m&([ (] {~ i.~&:({."1))&:notmalizeNames (appendDefaults normalizeInput)) f.
 
-			NB.  We will add these lines to the top of v., thereby redefining it.
+			NB.  We will add these lines to the top of v, thereby redefining it.
 
-			NB.  Apply createParameterTable to y. (the input to v.)
-	        newHeading 		=.  'NB.  Create parameter name/value table from input and default table.', CRLF, 'params =. ', (5!:5<'createParameterTable') , ' y.'
+			NB.  Apply createParameterTable to y (the input to v)
+	        newHeading 		=.  'NB.  Create parameter name/value table from input and default table.', CRLF, 'params =. ', (5!:5<'createParameterTable') , ' y'
 			NB.  Define some local names from the parameter table we just created.
 			newHeading 		=.  newHeading , CRLF, 'NB.  From the parameter name/value input table, define local names from column 0 to values from column 1' , CRLF , '({."1 params) =. {:"1 params'
 			
-			NB.  Drop off the trailing ')' (or '''') from v., add our new heading, and output the redefined verb.
+			NB.  Drop off the trailing ')' (or '''') from v, add our new heading, and output the redefined verb.
 			3 : (<;._2 toJ newHeading, CRLF, CRLF, ,&CRLF^:(LF&~:@:{:) _1 }. verbBody)
 		else.
-		NB.  If v. isn't an explicit monadic verb, don't do anything to it.
-	 		v.
+		NB.  If v isn't an explicit monadic verb, don't do anything to it.
+	 		v
 		end.
 )
 
@@ -569,39 +569,39 @@ NB.  ===========================================================================
 	NB.  Monadic case of findNames:  Same as dyadic with an empty LHA.
 	NB.  Example (monadic):  findNames '^r' 
 	NB.  Example (dyadic) :  (0 3;'base z') findNames '^r'
-		'' findNames y.
+		'' findNames y
 :
 	NB.  Utility to find named entities:  
 	NB.  findNames allows searching for names of any type (noun, verb, etc.), or all types, in any or all locales.
 	NB.  Name searches are case-insensitive, and some basic search patterns are allowed.  Specifically, the first
 	NB.  character of the search string specifies the type of matching to do.
 	NB.
-	NB.  Input:  		x. can be either empty, numeric or boxed, and it specifies the types and locales of named
+	NB.  Input:  		x can be either empty, numeric or boxed, and it specifies the types and locales of named
 	NB.                 entities to find. 
 	NB.					
-	NB.					If 0 -: # x. then all names in all locales will be searched.
+	NB.					If 0 -: # x then all names in all locales will be searched.
 	NB.
-	NB.                 If x. is numeric, all locales are searched, and only those names whose type is
-	NB.                 an element of x. will be searched (as for names_z_ or nl_z_).  
+	NB.                 If x is numeric, all locales are searched, and only those names whose type is
+	NB.                 an element of x will be searched (as for names_z_ or nl_z_).  
 	NB.
-	NB.					If x. is boxed, then only the first two boxes matter.
-	NB.						0 { 2 {. x. is a numeric type list as described above.
-	NB.						    If 0 -: # 0 {:: 2 {. x. then all types will be searched.
-	NB.						1 { 2 {. x. is literal or boxed, and specifies what locales to search.
-	NB.						    If 0 -: # 1 {:: 2 {. x. then all locales will be searched.
+	NB.					If x is boxed, then only the first two boxes matter.
+	NB.						0 { 2 {. x is a numeric type list as described above.
+	NB.						    If 0 -: # 0 {:: 2 {. x then all types will be searched.
+	NB.						1 { 2 {. x is literal or boxed, and specifies what locales to search.
+	NB.						    If 0 -: # 1 {:: 2 {. x then all locales will be searched.
 	NB.
-	NB.					y. is literal, and provides the search pattern.
-	NB.						}. y. is the search string
-	NB.						{. y. is the type of search to perform.  The possible values of {. y. are as follows 
-	NB.						(if {. y. is not one of the following, a default of '|' is assumed, and all of y. 
+	NB.					y is literal, and provides the search pattern.
+	NB.						}. y is the search string
+	NB.						{. y is the type of search to perform.  The possible values of {. y are as follows 
+	NB.						(if {. y is not one of the following, a default of '|' is assumed, and all of y 
 	NB.						is used as the search string):
 	NB.							'=' means 'exactly match the name'. 
 	NB.							'|' means 'match anywhere in the name'. 
 	NB.							'^' means 'match at the beginning of the name'.  
 	NB.							'$' means 'match at the end of the name'.
 	NB.							'~' means 'match regular expression'.
-	NB.					Note that if '!' -: {. y., then the  search is negated (i.e. the names that do NOT match the
- 	NB.					pattern are returned), and }. y. is considered the search pattern.
+	NB.					Note that if '!' -: {. y, then the  search is negated (i.e. the names that do NOT match the
+ 	NB.					pattern are returned), and }. y is considered the search pattern.
 	NB.
 	NB.  Output: A 2 by N matrix of boxes, with N = to the number of locales searched (which will always be >: 1).  Each box contains a list of 2 boxes, 
 	NB.  The first box in each row contains the literal name of a locale searched, and the second box of each contains a list of boxes (possibly with # = 0)
@@ -610,30 +610,30 @@ NB.  ===========================================================================
 		NB.  Require regexes for the '~' operator (do I want to require this selectively?  So that I only load it in if I'm actually going to run a regex?)
 		require 'regex'
 
-		NB.  This complicated line is just to make sure that we default correctly.  That is, x. must always be a list of 2 boxes,
+		NB.  This complicated line is just to make sure that we default correctly.  That is, x must always be a list of 2 boxes,
 		NB.  the second containing conl$0 if no locale names were provided.
-		locales			=. 1 {:: x. =. ({. , ((conl$0)"_^:(0: -: #))@:(;:^:(-.@:*@:L.))&.>@:{:)@:(2&{.)@:boxopen x.
+		locales			=. 1 {:: x =. ({. , ((conl$0)"_^:(0: -: #))@:(;:^:(-.@:*@:L.))&.>@:{:)@:(2&{.)@:boxopen x
 
 		NB.  This creates a verb which will negate our search function if and only if the first character of 
 		NB.  the search string is '!'.  It also updates the search string by removing the '!' if it's present.
-		negate			=. -.^: ( 1 {:: 'y. z' =. ((}.~ ; ]) '!'&-:@:(0&{)@:(1&{.)) y. )
+		negate			=. -.^: ( 1 {:: 'y z' =. ((}.~ ; ]) '!'&-:@:(0&{)@:(1&{.)) y )
 
 		NB.  If no proper search type is specified, the default, '|' or 'match anywhere in the name',
 		NB.  is used.
-		y.				=. (,~ {.&'|'@:-.@:(e.&'=|^$~')@:{.~&1) y.
+		y				=. (,~ {.&'|'@:-.@:(e.&'=|^$~')@:{.~&1) y
 
 		NB.  These are our search verbs - they correspond to the search type in the following line.
 		verbs			=. -:`(+./@:E.)`(beginsWith~)`(endsWith~)`rxin
 
 		NB.  This will select the correct search verb from the list.  5!:0 turns the result of the
 		NB.  pick from the gerund into a verb.
-		searchVerb		=.  (([: {&verbs [: '=|^$'&i.@:{. 1&{.) y.) 5!:0
+		searchVerb		=.  (([: {&verbs [: '=|^$'&i.@:{. 1&{.) y) 5!:0
 
 		NB.  Default the name list to an empty list of boxes.
 		nameList		=. 0 2 {. a:
 
 		for_locale. locales do. 
-	 		nameList	=. nameList , locale , < y. (] #~ (negate@:searchVerb&lc~ }.)~ &>&boxopen) nl__locale 0 {:: x.
+	 		nameList	=. nameList , locale , < y (] #~ (negate@:searchVerb&lc~ }.)~ &>&boxopen) nl__locale 0 {:: x
 		end.
 )
 	NB.  ls is just like list only it wraps to the maximum line length instead of the window size, avoiding the ...ed list problem.	
@@ -643,7 +643,7 @@ NB.  ===========================================================================
 	listNames			=: ([: ls@:, (1&{:: , each '_'&envelope&.>@:{.)"1) @: findNames
 
 	NB.  Return a list of all names in all locales.
-	allNames			=: 3 : ' y.&(4 : ''y , < nl__y x. [ y =. boxopen y.'')&> conl $0'
+	allNames			=: 3 : ' y&(4 : ''y , < nl__y x [ y =. boxopen y'')&> conl $0'
 
 	NB.  Mesaure time of execution of a sentence (format num_times time 'sentence')
 	time 				=:  6!:2
@@ -693,10 +693,10 @@ NB.  ===========================================================================
 	deff				=:  5!:5 @ boxopen
 
 	NB.  Linear representation of data; not a name.
-	nounToText			=: 3 : '5!:5<''y.'''
+	nounToText			=: 3 : '5!:5<''y'''
 
 	NB.  Linear representation of a verb; not a name.
-	verbToText			=: 1 : '5!:5<''u.'''
+	verbToText			=: 1 : '5!:5<''u'''
 
 	NB.  Parse strings passed on command line (including filenames and filenames in spaces).  Gets rid of any empty parameters. (E.G. "" or " ")
 	NB.  Obsoleted by commandLineParser.ijs

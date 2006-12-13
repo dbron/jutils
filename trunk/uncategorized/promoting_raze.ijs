@@ -31,7 +31,7 @@ literal_order       =: trim each ',' cut > {. LF cut  noun define  NB.  I arbitr
 unicode, literal
 )
 
-CLASSES             =:  (;: each (;@:({."1)@:] 4 : 'x.}y.' (,: {:"1)) ((noun"_ -: 4!:0)@:< ; <@:". )@:(,&'_order')&>  ) class_order  
+CLASSES             =:  (;: each (;@:({."1)@:] 4 : 'x}y' (,: {:"1)) ((noun"_ -: 4!:0)@:< ; <@:". )@:(,&'_order')&>  ) class_order  
 
 noun define
 

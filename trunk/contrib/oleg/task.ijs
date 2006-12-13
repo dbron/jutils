@@ -52,10 +52,10 @@ NB.   cmdline: 'shortcmd arg1 arg2 ...'
 NB.   cmdline: '"command with space" arg1 ...'
 NB. e.g. fork 'notepad.exe'
 fork=: 3 : 0
-  0 fork y.
+  0 fork y
 :
-  ph=. CreateProcess y.
-  if. x. do. Wait ph;x. end.
+  ph=. CreateProcess y
+  if. x do. Wait ph;x end.
   CloseHandle ph
   empty''
 )
@@ -72,13 +72,13 @@ NB. stdout=. [stdin=''] spawn cmdline
 NB.   stdin: input to stream as stdin, '' no input
 NB. e.g. nocr 'i.3 4'spawn'jconsole'
 spawn=: 3 : 0
-  '' spawn y.
+  '' spawn y
 :
   'or ow'=. CreatePipe 1
-  'ir iw'=. CreatePipe 2,#x.
-  ph=. (ow,ir) CreateProcess y.
+  'ir iw'=. CreatePipe 2,#x
+  ph=. (ow,ir) CreateProcess y
   CloseHandle ow,ir
-  if. #x. do. x. WriteAll iw end.
+  if. #x do. x WriteAll iw end.
   CloseHandle iw
   r=. ReadAll or
   CloseHandle or,ph
@@ -105,10 +105,10 @@ sint=: 2&ic
 
 NB. METHOD OF NAMED FIELDS
 NB. struct=. 'valu' 'memb' sset structdef struct
-sset=: 2 : ',@(((_4]\n.)i.m.)}) _4&(]\)'
+sset=: 2 : ',@(((_4]\n)i.m)}) _4&(]\)'
 
 NB. value=. 'memb' sget structdef struct
-sget=: 2 : '[: ((_4]\n.)i.m.)&{ _4&(]\)'
+sget=: 2 : '[: ((_4]\n)i.m)&{ _4&(]\)'
 
 szero=: # # (0{a.)"_
 
@@ -136,8 +136,8 @@ CreateProcessF=: 'kernel32 CreateProcessA i i *c i i i  i i i *c *c'&cd
 
 DuplicateHandle=: 3 : 0
   p=. 0 pick GetCurrentProcess ''
-  'r i1 i2 i3 h i4 i5 i6'=. DuplicateHandleF p;y.;p;(sint 0);0;0;DUPLICATE_SAME_ACCESS
-  CloseHandle y.
+  'r i1 i2 i3 h i4 i5 i6'=. DuplicateHandleF p;y;p;(sint 0);0;0;DUPLICATE_SAME_ACCESS
+  CloseHandle y
   int h
 )
 
@@ -147,7 +147,7 @@ NB. CloseHandle hRead,hWrite
 NB.
 NB. Inheritable: 0 none, 1 for read, 2 for write
 CreatePipe=: 3 : 0
-  'inh size'=. 2{.y.,0
+  'inh size'=. 2{.y,0
   sa=. szero SECURITYATTR
   sa=. (sint #SECURITYATTR) 'Cbyt' sset SECURITYATTR sa
   sa=. (sint *inh) 'Inhe' sset SECURITYATTR sa
@@ -163,9 +163,9 @@ NB. hProcess=. [hWriteOut[,hReadIn]] CreateProcess 'program agr1 agr2 ...'
 NB.    ... 
 NB. CloseHandle hProcess
 CreateProcess=: 3 : 0
-'' CreateProcess y.
+'' CreateProcess y
 :
-  'ow ir'=. 2{.x.,0
+  'ow ir'=. 2{.x,0
   si=. szero STARTUPINFO
   si=. (sint #STARTUPINFO) 'Cbyt' sset STARTUPINFO si
   f=. inh=. 0
@@ -180,7 +180,7 @@ CreateProcess=: 3 : 0
     if. ir do. si=. (sint ir) 'Inph' sset STARTUPINFO si end.
   end.
   pi=. szero PROCESSINFO
-  'r i1 c i2 i3 i4 f i5 i6 si pi'=. CreateProcessF 0;y.;0;0;inh; f;0;0;si;pi
+  'r i1 c i2 i3 i4 f i5 i6 si pi'=. CreateProcessF 0;y;0;0;inh; f;0;0;si;pi
   if. 0=r do. 0 return. end.
   ph=. int 'Proh' sget PROCESSINFO pi
   th=. int 'Thrh' sget PROCESSINFO pi
@@ -193,8 +193,8 @@ NB.    ...
 NB. Wait ph;5000
 NB. CloseHandle ph
 Wait=: 3 : 0
-  r=. 0 pick WaitForSingleObject y.
-  if. WAIT_TIMEOUT=r do. TerminateProcess (0 pick y.);_1 end.
+  r=. 0 pick WaitForSingleObject y
+  if. WAIT_TIMEOUT=r do. TerminateProcess (0 pick y);_1 end.
 )
 
 NB. ph=. h CreateProcess 'program agr1 agr2 ...'
@@ -204,7 +204,7 @@ NB. CloseHandle h,ph
 ReadAll=: 3 : 0
   ret=. ''
   while. 1 do.
-    'r i1 str i2 len i3'=. ReadFile y.;(4096#'z');4096;(sint 0);0
+    'r i1 str i2 len i3'=. ReadFile y;(4096#'z');4096;(sint 0);0
     len=. int len
     if. (0=r)+.0=len do. 
       'ec es'=: cderx''
@@ -223,15 +223,15 @@ NB. r=. ReadAll hr
 NB. CloseHandle hr,ph
 WriteAll=: 3 : 0
 :
-  while. #x. do.
-    'r i1 str i2 len i3'=. WriteFile y.;x.;(#x.);(sint 0);0
+  while. #x do.
+    'r i1 str i2 len i3'=. WriteFile y;x;(#x);(sint 0);0
     len=. int len
     if. (0=r)+.0=len do. 
       'ec es'=: cderx''
       if. -.ec e.0 109 do. ret=. _1  end.
       break.
     end.
-    x.=. len}.x.
+    x=. len}.x
   end.
   1
 )

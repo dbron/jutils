@@ -34,14 +34,14 @@ NB.  EG:  abc_to_def 'aZbYcX'       [. abc_to_def	=: 'abc' multiScalarReplace	'd
 NB.  EG:  zero_to_one 5 5 5 5 $ 0   [. zero_to_one	=:     0 multiScalarReplace 1     NB.  Returns 5 5 5 5$1
 find					=:  ((i.~)"0 _)&
 overlay					=:  &(] ,~ ($~"0 1&, $))
-msr						=:  multiScalarReplace	=: 2 : '(m. find ` (n. overlay)) }'
+msr						=:  multiScalarReplace	=: 2 : '(m find ` (n overlay)) }'
 
 ". ( ; {. nm ) , ' =: ',(;: '>:') msr ( ;:  ']')&.;: 5!:5 nm =. {. ;: 'splitPath'	
 ". 'splitHost' , ' =: ',(;: 'i:') msr ( ;: 'i.')&.;: 5!:5 nm
 ". 'splitNV' , ' =: ',(;: '''\''i:') msr ( ;: '''=''i.')&.;: 5!:5 nm
 ". 'splitExt' , ' =: ',(;: '''\'']') msr ( ;: '''.''>:')&.;: 5!:5 nm
 
-NB. subUV =: (;: 'm.v.') msr (;: 'n u')
+NB. subUV =: (;: 'm v') msr (;: 'n u')
 NB. subUVInStrings =: ([ ;@:, (subUV &. ;: &.(}: :. (,&QUOTE))@:]^:[~ -:&('a']QUOTE))~&.>)/@:split
 NB. dfn =: (4!:0 nnn) : ( (subUVInStrings each@: subUV) &.;: each {:"1 (2) 5!:7 nnn=.{.;:'defineAndDefaultParams' )
 
@@ -67,7 +67,7 @@ NB.  This is so that, for example, 'someParameter', 'Some Parameter', 'some-para
 NB.  treated equivalently.  Doing this may result in name conflicts.  Note that the names defined, in the end,
 NB.  are in the same format as specified by the default parameter table.
 NB.! Make combineMaps an adverb with this verb as the parameter (or maybe a conjunction with a handle-missing-names-verb as the other parameter)
-normalizeNames             =.  3 : 'tolower y.'@:-.&' _-'&.>@:({."1)
+normalizeNames             =.  3 : 'tolower y'@:-.&' _-'&.>@:({."1)
 NB.
 NB.  If two parameters have the same name, use the first one, but only allow defineable names (names specified in
 NB.  the default table).  This allows the user's parameters to over-ride the defaults, without allowing him to
@@ -91,13 +91,13 @@ NB.  whether the corresponding parameter came from the default table or was
 NB.  specified by the caller.
 NB.
 NB.  For the caller's convenience, instead of passing in a 2xN parameter table, it
-NB.  may use a list of boxes.  These values will be assigned to the first (#y.) names
+NB.  may use a list of boxes.  These values will be assigned to the first (#y) names
 NB.  in the default parameter table.  If the caller passes in an unboxed value, that
 NB.  value will be assigned to the first name in the default parameter table, unless
-NB.  that value is null (0-:#,y.), in which case the default parameter table will be
+NB.  that value is null (0-:#,y), in which case the default parameter table will be
 NB.  used in its entirety, with no caller-defined values.
 
-        if. # verbBody     =. {: |: (1) 5!:7 {.;: 'u.' do.
+        if. # verbBody     =. {: |: (1) 5!:7 {.;: 'u' do.
         NB.  If this is an explicit monadic verb, then redefine it appropriately.
 
                 NB.  This version of defineAndDefaultParams provides 'closures'
@@ -116,47 +116,47 @@ NB.  used in its entirety, with no caller-defined values.
                 createParameterTable =.  combineMaps f.
                 cptAsString          =.  parenclose 5!:5 {. ;: 'createParameterTable'
 
-                NB.  We will add these lines to the top of u., thereby redefining it.
+                NB.  We will add these lines to the top of u, thereby redefining it.
 
-                NB.  Apply createParameterTable to y. (the input to u.)
-                header               =.  'y. =. x.' , cptAsString , ' y.'      
+                NB.  Apply createParameterTable to y (the input to u)
+                header               =.  'y =. x' , cptAsString , ' y'      
 
                 NB.  Define some local names from the parameter table we just created.
                 NB. newHeading              =.  newHeading , CRLF , 'NB.  From the parameter name/value input table, define local names from column 0 to values from column 1'
-                header               =.  header ; '(, (,. ,&''_is_default''&.>)', dropFlags , '&.> {."1 y.) =. , }."1 y.'
+                header               =.  header ; '(, (,. ,&''_is_default''&.>)', dropFlags , '&.> {."1 y) =. , }."1 y'
 
-                NB.  We will add these lines to the bottom of u., further redefining it.
+                NB.  We will add these lines to the bottom of u, further redefining it.
 
                 NB.  Preserve the user's original output.
                 NB.!  This only works in the case that the last line of the function provides the
                 NB.!  output of the function.  There are MANY cases where this is not true.
-                trailer              =.  'y. =. ' &,&.> {: verbBody
+                trailer              =.  'y =. ' &,&.> {: verbBody
 
-                NB.  Save state of flagged names.  We'll have closure over x., so the assignment to it preserves state across calls.
-                trailer              =.  trailer , < 'x. =. }:"1 x. ' , cptAsString , ' (,. ".@:(' , dropFlags , ')&.>)~  (#~ ' , checkFlags , '&>) {."1 x.'
+                NB.  Save state of flagged names.  We'll have closure over x, so the assignment to it preserves state across calls.
+                trailer              =.  trailer , < 'x =. }:"1 x ' , cptAsString , ' (,. ".@:(' , dropFlags , ')&.>)~  (#~ ' , checkFlags , '&>) {."1 x'
 
                 NB.  Return user's expected output (but see NB.! above).
-                trailer              =.  trailer , < 'y.' 
+                trailer              =.  trailer , < 'y' 
 
                 NB.  Return re-defined function.
                 NB.!  Should really only use lexicalClosureOnRHA in the case that we have at least one flagged name.
-                n.&(4 : (header , (}: verbBody) , trailer))
+                n&(4 : (header , (}: verbBody) , trailer))
         else.
-        NB.  If u. isn't an explicit monadic verb, don't do anything to it.
-                u.
+        NB.  If u isn't an explicit monadic verb, don't do anything to it.
+                u
         end.
 )
 
 
 normalizeSqlNames =: verb define
-	(0 2 $ a:) normalizeSqlNames y.
+	(0 2 $ a:) normalizeSqlNames y
 :
-	y. =. ( (] # ((toupper@:{~`]`[} I.) _1&(|.!.0)@:-.)) e.&ALPHA) each y.  NB.  Non-alphanumerics seperate words.  So just capitalize the letter after the symbol and remove the symbol
-	y. =. x.&stringreplace each y.  NB.  User specific string transformations
-	y. =. _2 (, ([^:(-:&'ID'@:[)~ toupper))&>~/@:split_z_ each  y.  NB.  If the last 2 letters are 'ID', make sure they're capitalized, so they get to be a seperate word.
-	y. =.  (<UCALPHA;LCALPHA) (] <@:toupper;.1~ 2&(>/\)@:((<./i.0)&,)@:(i.&1"1@:|:@:(e. S: 0)~) ) &.>  y. NB. seperate names into words by detecting capital/lowercase boundaries (some of which I imposed `manually`
-	y. =. '_' (join -.&a:) each y.  NB.  Join words with underscores
-	y.
+	y =. ( (] # ((toupper@:{~`]`[} I.) _1&(|.!.0)@:-.)) e.&ALPHA) each y  NB.  Non-alphanumerics seperate words.  So just capitalize the letter after the symbol and remove the symbol
+	y =. x&stringreplace each y  NB.  User specific string transformations
+	y =. _2 (, ([^:(-:&'ID'@:[)~ toupper))&>~/@:split_z_ each  y  NB.  If the last 2 letters are 'ID', make sure they're capitalized, so they get to be a seperate word.
+	y =.  (<UCALPHA;LCALPHA) (] <@:toupper;.1~ 2&(>/\)@:((<./i.0)&,)@:(i.&1"1@:|:@:(e. S: 0)~) ) &.>  y NB. seperate names into words by detecting capital/lowercase boundaries (some of which I imposed `manually`
+	y =. '_' (join -.&a:) each y  NB.  Join words with underscores
+	y
 )
 
 
@@ -286,7 +286,7 @@ NB. 0!:010 <'c:\app\j\current\user\util\uncategorized\danutils.ijs'  NB. for psq
 NB. Q=:(- >:i.3) psql fread n
 
 getTable =: verb define
-	'nms data' =. split y.
+	'nms data' =. split y
 	tbl =. cocreate''
 	(nms , L:0  '__tbl') =.  <@:>@:|:"1<&2@:#@:$>@:{.@:, data
 
@@ -298,7 +298,7 @@ getTable =: verb define
 
 NB.sqlhn =: ('CoB';'Cob';'wid';'wID') normalizeSqlNames  {. Q
 NB. 4 : '  q=.cocreate ''
-NB.sqlhn 4 : ('  q=.cocreate $~0 ' ;' (x. , L:0  ''__q'') =. y.' ; 'q') (] {.~ #@:] , [: >./ i:&1@:(+./\.)"1@:~:) &.> {:Q
+NB.sqlhn 4 : ('  q=.cocreate $~0 ' ;' (x , L:0  ''__q'') =. y' ; 'q') (] {.~ #@:] , [: >./ i:&1@:(+./\.)"1@:~:) &.> {:Q
 
-NB.QQ=:sqlhn 4 : ('  q=.cocreate $~0 ' ;' (x. , L:0  ''__q'') =. y.' ; 'q') ' ' (] {.~ #@:] (,>:) [: >./ i:&1@:(+./\.)"1@:~:) &.> {:Q
+NB.QQ=:sqlhn 4 : ('  q=.cocreate $~0 ' ;' (x , L:0  ''__q'') =. y' ; 'q') ' ' (] {.~ #@:] (,>:) [: >./ i:&1@:(+./\.)"1@:~:) &.> {:Q
 NB.ROW_ID__QQ

@@ -1,5 +1,5 @@
 	   NB.  Some of my standard utilities (documentation not included).
-	   sr                   =:  (&=)`(,:&) }  NB.  For J5, use 2 : '(m.&=)`(,:&n.) } y.'
+	   sr                   =:  (&=)`(,:&) }  NB.  For J5, use 2 : '(m&=)`(,:&n) } y'
 	   trim                 =:  #~ (+./\. *. +./\)@:(-.@:(e.&(9 32 { a.)))
 	   beginsWith           =:  ,^:(0: -: #@:$)@:] -: ({.~ #)
 	   arbCut               =:  <@:#@:[ }.&.> [ (E. <;.1 ]) ,

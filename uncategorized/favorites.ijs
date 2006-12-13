@@ -87,7 +87,7 @@ config				=:  open bind ('system\extras\config\config.ijs' ,~ 1!:40'')
 
 cons				=:  rcons=:console=:rconsole=: verb define
 	load 'b:\projects\work\order_manager\main\dev\rserver\default\rconsole.ijs'
-	wd 'smprompt "rconsole ''" ', ''' 1' ,~ (*@:# {:: 'oms.local.test'&;) y.
+	wd 'smprompt "rconsole ''" ', ''' 1' ,~ (*@:# {:: 'oms.local.test'&;) y
 )
 
 
@@ -138,7 +138,7 @@ require 'dir'
 NB.  Start an OMS.  Config is "NULL" by default
 oms					=: verb define
 	load_base_ 'b:\projects\work\order_manager\main\dev\OMS\default\ordermanager.ijs'
-	OMS_base_ 'Null' (*@:#@:] {:: ;) y.
+	OMS_base_ 'Null' (*@:#@:] {:: ;) y
 )
 
 pbng				=: verb define

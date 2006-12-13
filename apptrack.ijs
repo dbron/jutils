@@ -27,14 +27,14 @@ $&>O
 {.A
 
 normalizeSqlNames =: verb define
-	(0 2 $ a:) normalizeSqlNames y.
+	(0 2 $ a:) normalizeSqlNames y
 :
-	y. =. ( (] # ((toupper@:{~`]`[} I.) _1&(|.!.0)@:-.)) e.&ALPHA) each y.  NB.  Non-alphanumerics seperate words.  So just capitalize the letter after the symbol and remove the symbol
-	y. =. x.&stringreplace each y.  NB.  User specific string transformations
-	y. =. _2 (, ([^:(-:&'ID'@:[)~ toupper))&>~/@:split_z_ each  y.  NB.  If the last 2 letters are 'ID', make sure they're capitalized, so they get to be a seperate word.
-	y. =.  (<UCALPHA;LCALPHA) (] <@:toupper;.1~ 2&(>/\)@:((<./i.0)&,)@:(i.&1"1@:|:@:(e. S: 0)~) ) &.>  y. NB. seperate names into words by detecting capital/lowercase boundaries (some of which I imposed `manually`
-	y. =. '_' (join -.&a:) each y.  NB.  Join words with underscores
-	y.
+	y =. ( (] # ((toupper@:{~`]`[} I.) _1&(|.!.0)@:-.)) e.&ALPHA) each y  NB.  Non-alphanumerics seperate words.  So just capitalize the letter after the symbol and remove the symbol
+	y =. x&stringreplace each y  NB.  User specific string transformations
+	y =. _2 (, ([^:(-:&'ID'@:[)~ toupper))&>~/@:split_z_ each  y  NB.  If the last 2 letters are 'ID', make sure they're capitalized, so they get to be a seperate word.
+	y =.  (<UCALPHA;LCALPHA) (] <@:toupper;.1~ 2&(>/\)@:((<./i.0)&,)@:(i.&1"1@:|:@:(e. S: 0)~) ) &.>  y NB. seperate names into words by detecting capital/lowercase boundaries (some of which I imposed `manually`
+	y =. '_' (join -.&a:) each y  NB.  Join words with underscores
+	y
 )
 
 N=:(_2 ]\ 'Adc';'AdC';'CoB';'Cob') normalizeSqlNames  {.A

@@ -8,7 +8,7 @@ load 'd:\trade\neurallayer.ijs'
 NB. Create the test function (the values are saved below)
 NB. test function is the rational function:
 NB. (x^2 + y^2 - 3xy + 4x - y) / (1.5x^2 - y^2 - 2xy +y + 1)
-poly2 =: 4 : '+/ , x. * *// y. ^"0 1 (0 1 2)'"2 1
+poly2 =: 4 : '+/ , x * *// y ^"0 1 (0 1 2)'"2 1
 p2 =: 3 3 $ 0.7 _2 4 _2  _1 0 3.5 0 0
 p1 =: 3 3 $ 6 _10 10  _10 _4 0  12 0 0
 testfun =: (p1&poly2) % (p2&poly2)

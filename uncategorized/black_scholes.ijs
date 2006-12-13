@@ -5,7 +5,7 @@ NB. CDF of N(0,1)
 cnd     =:  N =: [: -: 1: + [: erf %&(%:2)
 NB.  Black scholes
 BS      =:  monad define
-	'S X T r v' =. y.
+	'S X T r v' =. y
 	-/(S,X*^-r*T)*N((^.S%X)+T*r(+,-)-:*:v)%v*%:T
 )
 y       =:  60 65 0.25 0.08

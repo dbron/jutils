@@ -39,7 +39,7 @@ _9: _8: _7: _6: _5: _4: _3: _2: _1: 0: 1: 2: 3: 4: 5: 6: 7: 8: 9: _:
   f.
   i. i:
   j. 
-  m. n.    u. v.  x. y.  
+  m n    u v  x y  
      x:
      u:
      o.
@@ -86,7 +86,7 @@ Partitioning (string processing)
 Glue
    . @ @:   & &:   &. &.:   ` `: @. 
 Explicit arguments
-    x. y., u., v., m. n.
+    x y, u, v, m n
 Fundamental
     J internal
       !: s: !. 

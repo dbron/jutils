@@ -8,17 +8,17 @@ TEST1=: 0 : 0
 )
 
 startElement=: 4 : 0
-  smoutput '(',y.,')'
+  smoutput '(',y,')'
 )
 
 endElement=: 3 : 0
-  smoutput '(/',y.,')'
+  smoutput '(/',y,')'
 )
 
 cdcallback=: 3 : 0
-  elm=. memr (1{y.),0,_1,JCHAR
-  if. 3=#y. do.
-    (2{y.) startElement elm
+  elm=. memr (1{y),0,_1,JCHAR
+  if. 3=#y do.
+    (2{y) startElement elm
   else.
     endElement elm
   end.

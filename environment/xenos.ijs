@@ -77,7 +77,7 @@ NB.  Table of RHA ; LHA ; Script (relative to 1!:43) ; Line number in script ; A
 TABLE    =:  (xaIdot { xArgs ) (,. /: 0&".&>@:[) ('~', each (#prefix) }. each  script { S) ,. (<"> lineInScript) ,. (mentions)
 
 NB.  Format this table for display. 
-group    =: 1 : '({."1 (~.@:[ ,.@:-.&a:@:(<@:dtb"1)^:(2: = #@:$)@:(,/^:(2: < #@:$)^:_)@:(tree"_1) <@:u./.) }."1)'
+group    =: 1 : '({."1 (~.@:[ ,.@:-.&a:@:(<@:dtb"1)^:(2: = #@:$)@:(,/^:(2: < #@:$)^:_)@:(tree"_1) <@:u/.) }."1)'
 tree     =:  >@:(,.&.>/)@:(] ,~ ,:@:,&':   '@:>@:[ <@:{.~ _: ,~ {.@:(#&>)@:]) [: ({.~ # -@:+ 1: < #)&.> >@:(<@:(,"1&':   ')@:>"1@:|:&.>)
 gTABLE   =: ,/ >  ] group group group > ,.&.>/ ,1 <"1 each @:(rjust each `(rjust each)`]`(rjust each )`]);.1 <@:>"1 |: ": each TABLE
 colons   =: ': '(*./@:(+./) +/\^:_1@:I.@:*. 0: < +/@:{.)@:(=/) gTABLE

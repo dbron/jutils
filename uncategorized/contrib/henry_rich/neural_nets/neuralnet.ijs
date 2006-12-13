@@ -19,35 +19,35 @@ load 'd:\trade\utils.ijs'
 NB. obsolete load 'd:\trade\tradingdays.ijs'
 
 NB. Create network
-NB. y. is (list of layer descriptions: (# neurons, #inputs);(activation function name);(optional weights)); (other stuff TBD)
+NB. y is (list of layer descriptions: (# neurons, #inputs);(activation function name);(optional weights)); (other stuff TBD)
 NB. If the weights are given, the # neurons/inputs are not used
 create =: 3 : 0
-layers =: (0 {:: y.) conew"1 _ 'neurallayer'
+layers =: (0 {:: y) conew"1 _ 'neurallayer'
 ''
 )
 
 destroy =: 3 : 0
 for_l. layers do. destroy__l NIL end.
-codestroy y.
+codestroy y
 )
 
-NB. Evaluate the network on the input vector y.; x. is layer parms
+NB. Evaluate the network on the input vector y; x is layer parms
 NB. Result is the last layer's output vector.
 eval =: 3 : 0
-for_l. layers do. y. =. eval__l y. end.
+for_l. layers do. y =. eval__l y end.
 )
 
 NB. Perform one cycle of backprop.
-NB. y. is vector of inputs;target output
-NB. x. is (noise level to add to the inputs)
+NB. y is vector of inputs;target output
+NB. x is (noise level to add to the inputs)
 NB. Result is error resulting from evaluating the inputs after the move of 'mu'
 NB. We use the conjugate gradient for the search.
 NB. On input, 'mu' holds the distance to move; we move there (provided the move
 NB. reduces the error, else we take a small move), and then calculate the next move
 NB. using the method of Yu et al., IEEE Trans Neural Nets, v6 #3 May 1995 pp. 669ff
 backpropcycle =: 4 : 0
-noise =. x.
-'inputs target' =. y.
+noise =. x
+'inputs target' =. y
 
 NB. We enter here with a move 'mu' to make, using the direction saved in the layers.
 NB. We make a trial evaluation of the move; if it is OK, we keep it, otherwise
@@ -121,7 +121,7 @@ NB. of -grad(E) (saved in the layer) and the previous direction (also saved in t
 NB. The amount of the previous direction to use is given by ((grad - prevgrad) dot grad) % grad dot grad.
 NB. We will save this direction in the layer, for use during search and for use
 NB. during the next backpropcycle.
-NB. If you don't want to use conjugate gradient search, use a y. of 0 in this call.
+NB. If you don't want to use conjugate gradient search, use a y of 0 in this call.
 NB. While we're at it, accumulate the length-squared of the search direction
 for_l. layers do. setsearchdirection__l ] cglambda end.
 
@@ -185,30 +185,30 @@ preverror % */ $ finalerror  NB. return average error
 )
 
 NB. Train the net
-NB. y. is (list of inputs;list of outputs) for training ; (list of inputs;list of outputs) for crossvalidation
-NB. x. is parameters to control the operation
+NB. y is (list of inputs;list of outputs) for training ; (list of inputs;list of outputs) for crossvalidation
+NB. x is parameters to control the operation
 NB.  0{x is a gerund, inverse of pdf to use for sampling the inputs (currently not used)
 NB.  1{::x is the noise-addition schedule for the inputs:
 NB.   0{ is vector of noise amplitudes, one for each input
 NB.   1{ is (start-of-taper time,end time) in # of cycles.  Taper is linear
-NB.  2{::x. is unused
-NB.  3{::x. is unused
-NB.  4{::x. is the minimum number of training cycles allowed
-NB.  5{::x. termination criterion: when we don't improve this much, stop
-NB.  6{x. is a gerund, the routine to use for calculating the cv error.  Returns a vector, which
+NB.  2{::x is unused
+NB.  3{::x is unused
+NB.  4{::x is the minimum number of training cycles allowed
+NB.  5{::x termination criterion: when we don't improve this much, stop
+NB.  6{x is a gerund, the routine to use for calculating the cv error.  Returns a vector, which
 NB.			we type.  The first element must be the error
 train =: 4 : 0
-'tr cv' =. y.
+'tr cv' =. y
 'tin tout' =. tr
 'cvin cvout' =. cv
-invpdf =. (0{x.) `:6
+invpdf =. (0{x) `:6
 rmserr =. (+/ % #)&.(*:"_)@:,@:-
-calccverr =. (6{::x.) `: 6
-'noisesched  mincycles termcrit' =. 1 4 5 { x.
+calccverr =. (6{::x) `: 6
+'noisesched  mincycles termcrit' =. 1 4 5 { x
 'cverr cycct lasttime lastlogtime trerr' =. ($0) ; 0 ; __ ; __ ; 100000
-NB. y. is ts, result is time in seconds from epoch
+NB. y is ts, result is time in seconds from epoch
 julianday =: {:  NB. Use better version if you go over month boundary
-ymdhmstojsec =. 13 : '0 24 60 60 #. (julianday 3 {. y.) , 3 }. y.'
+ymdhmstojsec =. 13 : '0 24 60 60 #. (julianday 3 {. y) , 3 }. y'
 NB. Loop through in batches of the test set, but in random order.  To make a
 NB. turnaround on crossvalidation easier to detect, we use the same
 NB. random sequence each time: 8 copies of the test vectors, shuffled

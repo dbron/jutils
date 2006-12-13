@@ -1,6 +1,6 @@
 noun define
 	   NB.  Some utils first -- see my past JForum messages for documentation
-	   sr               =:  2 : '(m.&=)`(,:&n.) } y.'
+	   sr               =:  2 : '(m&=)`(,:&n) } y'
 	   arbCut           =:  <@:#@:[ }.&.> [ (E. <;.1 ]) ,
 	   join             =:  -@:#@:[ }. ;@:(,&.> boxopen)~
 
@@ -8,19 +8,19 @@ noun define
 	   NB.  Conj. to extract the fields from the input,
 	   NB.  Apply a user-defined function, and then
 	   NB.  expand back.
-	   mutateFields     =:  2 : 'u.&.(n.&arbCut :. (n.&join))'
+	   mutateFields     =:  2 : 'u&.(n&arbCut :. (n&join))'
 
 	   NB.  Replace empty fields (comma-delimited) with the word 'NULL'
 	   bron             =:  emptiesToNulls =:  a: sr (<'NULL') mutateFields  ','
 
 	   day              =:  nrpl =: 3 : 0
-		     }.;(<',NULL')(I.@((<,',')&=)@])}<;.1',',y.
+		     }.;(<',NULL')(I.@((<,',')&=)@])}<;.1',',y
 	   )
 
 	   burke            =:  rplc&(',,';',NULL,')@:(rplc&(',,,';',NULL,NULL,'))
 
 	   chene            =:  verb define
-	   	     w =: y. , ','
+	   	     w =: y , ','
 	   	     y=. (w=',') < ;.2 w
 	   	     }: ; {."1 (y = < , ',') |."0 1 y ,. < 'NULL,'
 	   )
@@ -56,18 +56,18 @@ noun define
 	   bron1         =:      >@:(3&{.)@:(<\.)&.:(|."1)
 	   bron2         =:  3&( |."1@:>@:({. <\.@:|.)              )
 	   bron3         =:  3&( (] {."0 1~ #@:] -~ i.@:[)&.:(|."1) )
-       bron4         =:  3&(4 : '({. y.) (<0 #~ >: # $ y.) } 0 (((; i.)&.> i.&.<: x.) ) } (- i. x.) |."_1 x. $ ,: y.')
-       bron5         =:  3&(4 : ('z =. 0 (((; i.)&.> i.&.<: x.) ) } z =. (- i. x.) |."_1 x. $ ,: y.';'z =. ({. y.) (<0 #~ # $ z) } z'))
-       bron6         =:  3&(4 : ('z =. (- i. x.) |."_1 x. $ ,: y.';'z =. 0 (((; i.)&.> i.&.<: x.) ) } z';'z =. ({. y.) (<0 #~ # $ z) } z'))
-       bron7         =:  3&(4 : ('z =. x. $ ,: y.';'z =. (- i. x.) |."_1 z';'z =. 0 (((; i.)&.> i.&.<: x.) ) } z';'z =. ({. y.) (<0 #~ # $ z) } z'))
+       bron4         =:  3&(4 : '({. y) (<0 #~ >: # $ y) } 0 (((; i.)&.> i.&.<: x) ) } (- i. x) |."_1 x $ ,: y')
+       bron5         =:  3&(4 : ('z =. 0 (((; i.)&.> i.&.<: x) ) } z =. (- i. x) |."_1 x $ ,: y';'z =. ({. y) (<0 #~ # $ z) } z'))
+       bron6         =:  3&(4 : ('z =. (- i. x) |."_1 x $ ,: y';'z =. 0 (((; i.)&.> i.&.<: x) ) } z';'z =. ({. y) (<0 #~ # $ z) } z'))
+       bron7         =:  3&(4 : ('z =. x $ ,: y';'z =. (- i. x) |."_1 z';'z =. 0 (((; i.)&.> i.&.<: x) ) } z';'z =. ({. y) (<0 #~ # $ z) } z'))
 	   bron8         =:  3&(-@:#@:] {.&> -@:[ |.@:{. <\@:])
 	   bron9         =:  3&(-@:#@:] >@:({.&.>) -@:[ |.@:{. <\@:])
 
-	   hui           =:  3&( 4 : '(#y.) {."1 (x.,_1+x.+#y.) $ y.,x.$0')
+	   hui           =:  3&( 4 : '(#y) {."1 (x,_1+x+#y) $ y,x$0')
 	   huiTacit      =:  3&(#@:] {."1 ([ , <:@ (+ #)) $ ] , [ $ 0: )
 
 	   NB. algos     =:  0 {:: 4!:5&.> i. _2
-	   NB.  ger      =:  1 : '(< S: 0) 5!:2{.;:''u.'''
+	   NB.  ger      =:  1 : '(< S: 0) 5!:2{.;:''u'''
 	   NB.  algos    =:  (lanzavecchia holmes lam bron0 bron1 bron2 bron3 bron4 bron5 bron6 bron7 bron8 bron9 hui) ger
 
 	   algos         =:  lanzavecchia`holmes`lam`bron0`bron1`bron2`bron3`bron4`bron5`bron6`bron7`bron8`bron9`hui`huiTacit
@@ -139,7 +139,7 @@ noun define
 	   rdm        =: ~: _1&(|.!.0)
 NB.	   djb_fix0   =:  1: 0} djb f.
 NB.	   djb_fix1   =:  1: 0} ::] djb f.
-NB.	   djb_fix2   =: 3 : ('y. =. djb y.';'y. =. 1 (0}) y.')
+NB.	   djb_fix2   =: 3 : ('y =. djb y';'y =. 1 (0}) y')
    	   bb         =: 1:,2&(~:/\)
    	   partition  =: 1: , [: -. }. -:"_1 }:
    	   reb        =: 1: , }. ~: }:
@@ -181,7 +181,7 @@ noun define
 
    	   4!:5  [ 1  NB.  Collect algorithms
 
-   	   fE         =:  verb : '- y.'
+   	   fE         =:  verb : '- y'
    	   FT         =:  -
    
    	   algos      =:  strip_loc 0 {:: 4!:5&.> i. _2
@@ -218,7 +218,7 @@ noun define
 
    	   4!:5  [ 1  NB.  Collect algorithms
 
-   	   bron       =:  p&(4 : 'x. (<"1 x. ,.~ i. # x.) } y.')
+   	   bron       =:  p&(4 : 'x (<"1 x ,.~ i. # x) } y')
    	   miller     =:  p&([`(i.@#@[ <@,"0 [)`]})
 	   rich       =:  p&([`[`]}"0 1)
    
@@ -277,13 +277,13 @@ NB.   I           =.  Idot f.
    rich0       =:  1: ` ((#  |.!.0@(>./\)@(* i.@#))~) ` (#@[ $ 0:) } "1
    rich1       =:  1: ` ((<:@(Idot  <:) { [)&Idot ) ` (#@[ $ 0:) } "1
 
-   day0        =: 13 : '}:((I.x.),#x.)([ {~ h (k@:< # [) #@[) (I.y.),#y.' f.
+   day0        =: 13 : '}:((I.x),#x)([ {~ h (k@:< # [) #@[) (I.y),#y' f.
 
    hell0       =:  4 : 0
-     g=. +/\ y.
-     i=. x. # g
+     g=. +/\ y
+     i=. x # g
      j=.(# i )$( 2 (~:/)\ i ),1
-     x. #^:_1 j
+     x #^:_1 j
 )
   
 

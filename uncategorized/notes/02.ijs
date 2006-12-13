@@ -30,7 +30,7 @@ BUILTUPNAMES_z_	=: 4!:5]1
 4!:5 ] 0
 
 testWrap	=: dyad define
-	*./ x. <: #&> CRLF arbCut x. wordWrap y.
+	*./ x <: #&> CRLF arbCut x wordWrap y
 )
 
 smoutput (;:'SUCCESS FAILURE') ;"1@:(a:&~:@:] # [ ,. ((<' @ ')&,.)@:]) (0 0 , wrapLengths) <@:listToEnglish@:(<@":"0)@:}./.~ 0 1 , -. ; inputText {:@testWrap~"_ 0 wrapLengths=:5 * >: i. 6
@@ -69,7 +69,7 @@ BUILTUPNAMES_z_	=: 4!:5]1
 4!:5 ] 0
 
 testWrap	=: dyad define
-	*./ x. <: #&> CRLF arbCut x. wordWrap y.
+	*./ x <: #&> CRLF arbCut x wordWrap y
 	)
 
 smoutput (;:'SUCCESS FAILURE') ;"1@:(a:&~:@:] # [ ,. ((<' @ ')&,.)@:]) (0 0 , wrapLengths) <@:listToEnglish@:(<@":"0)@:}./.~ 0 1 , -. ; inputText {:@testWrap~"_ 0 wrapLengths=:5 * >: i. 6

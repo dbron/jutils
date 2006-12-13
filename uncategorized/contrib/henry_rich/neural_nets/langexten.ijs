@@ -1,15 +1,15 @@
 coclass 'z'
 NB. language extensions
 
-NB. Type y. on the terminal
+NB. Type y on the terminal
 display =: (i.0 0)"_ ((1!:2) 2:)
 
-NB. Conjunction: u. unless y. is empty; then v.
+NB. Conjunction: u unless y is empty; then v
 butifnull =: ((]."_)`[.) @. (*@#@])
 NB. Alternative form without gerund.  This turns out to be slower
 NB. butifnull =: [. ^: ((] *@#) ` ((]."_) ^: ((] 0&=@#)`])))
 
-NB. Conjunction: u. unless x. is empty; then v.
+NB. Conjunction: u unless x is empty; then v
 butifxnull =: ((]."_)`[.) @. (*@#@[)
 
 NB. Empties: select one according to context
@@ -19,19 +19,19 @@ NILRETQUIET =: i. 0 0  NB. return to J, without printing
 NB. verb to return empty list, to discard the actual returned value
 null =: ''"_
 
-NB. Adverb.  Do u., but skip it if y. is null
+NB. Adverb.  Do u, but skip it if y is null
 ifany =: ^: (*@#@])
-NB. Same if x. is nonnull
+NB. Same if x is nonnull
 ifanyx =: ^: (*@#@[)
 
-NB. bivalent =: [. ^: (1:`(].@]))  NB. u. v. y. if monad, x. u. (v. y.) if dyad
-NB. u. v. y. if monad, x. u. (v. y.) if dyad
+NB. bivalent =: [. ^: (1:`(].@]))  NB. u v y if monad, x u (v y) if dyad
+NB. u v y if monad, x u (v y) if dyad
 bivalent =: [. ^: (1:`((]`].)`:6))
 
-NB. x. is string, result is that verb but forced to be monadic
+NB. x is string, result is that verb but forced to be monadic
 impmonad =: (13 : ]:) : [:
 
-NB. x. is string, result is that verb but forced to be dyadic
+NB. x is string, result is that verb but forced to be dyadic
 impdyad =: [: : (13 : ]:)
 
 NB. Like e. dyadic, but using tolerant comparison.  Faster on lists with identical first elements
@@ -40,7 +40,7 @@ in0 =: e.!.0
 NB. Like i. dyadic, but using tolerant comparison.  Faster on lists with identical first elements
 index0 =: i.!.0
 
-NB. Adverb.  Apply u. and join the results end to end
+NB. Adverb.  Apply u and join the results end to end
 endtoend =: ;@:(<@]:)
 
 NB. Conjunctions to use for readability
@@ -51,40 +51,40 @@ ux_vy =: uy_vx~  NB. (u x) v y
 vy_ux =: ]. uy_vx [.  NB. (v y) u x
 vx_uy =: ]. ux_vy [.  NB. (v x) u y
 
-NB. y. is anything; result is a ist of 0 y.s
+NB. y is anything; result is a ist of 0 y s
 noneof =: ($0)&(]"0 _)
 
-NB. Adverb.  Monad, converts y. to rank u. by adding axes
+NB. Adverb.  Monad, converts y to rank u by adding axes
 enrank =: ,: ^: ((0&>.)@(]:&-)@#@$)
 
-NB. x. is column number; we open column x. of y.
+NB. x is column number; we open column x of y
 ocol =: >@:({"1)
 
-NB. like {., but limited to the length of y.
+NB. like {., but limited to the length of y
 leading =: ((<. #) {. ])"0 _
-NB. like - ux_vy {., but limited to the length of y.
+NB. like - ux_vy {., but limited to the length of y
 trailing =: (-@(<. #) {. ])"0 _
 
-NB. Adverb.  Install x. in the path given by m.
+NB. Adverb.  Install x in the path given by m
 store =: 1 : 0
 :
-if. #m. do. (< x. (}.m.)store ({.m.){::y.) ({.m.)} y. else. x. end.
+if. #m do. (< x (}.m)store ({.m){::y) ({.m)} y else. x end.
 )
 
 NB. Atomic-representation utilities
-NB. y. is string name of verb, result is AR of verb
+NB. y is string name of verb, result is AR of verb
 arverb =: <@,
-NB. y. is noun, result is AR of noun
+NB. y is noun, result is AR of noun
 arnoun =: <@((,'0')&(,&<))
-NB. (adverb) m. is conjunction, x. is AR, y. is AR
-NB. Result is AR of x. m. y.
+NB. (adverb) m is conjunction, x is AR, y is AR
+NB. Result is AR of x m y
 arconj =: <@((,&<~ ,)&]:)@,"0
-NB. y. is a list of 3 ARs, result is AR of their fork
+NB. y is a list of 3 ARs, result is AR of their fork
 arfork =: <@((,'3')&(,&:<))
-NB. x. is AR, y. is AR, result is AR for (x. y.)
+NB. x is AR, y is AR, result is AR for (x y)
 arhook =: <@((,'2')&(,&:<))@,"0
 
-NB. Adverb.  m. describes an item to be fetched, as
+NB. Adverb.  m describes an item to be fetched, as
 NB. spec[!spec]...[!]
 NB.  where spec is
 NB.  [prefix?]expr
@@ -104,22 +104,22 @@ NB.  the result of the selection is unboxed (and subsequent selections are
 NB.  applied to each atom after it is unboxed)
 NB. Ex: 'IUNIT?^:ORDER!^:HANDLE!^:STATE!^STS' fstr
 
-NB. x. is one unboxed spec string, y. is incoming path (a list of boxed strings), result is path to use here
+NB. x is one unboxed spec string, y is incoming path (a list of boxed strings), result is path to use here
 inputpath =. ( ({.~ i.&'?') ux_vy ((<@[) ` (0&". ux_vy trailing) @. (*./@(e.&'0123456789')@[)) ) ^:('?'&e.@[)
-NB. x. is one unboxed spec string, y. is path to use here, result is path to use at next level
+NB. x is one unboxed spec string, y is path to use here, result is path to use at next level
 outputpath =. ( ;: ux_vy ( -.@((<'^:')&e.) ux_vy #  ,  ({~ >:@(i.&1)@(e.&((,'^');'^:')))@[ ) ) ^: ('^'&e.@[)
-NB. x. is one boxed spec string, y. is (accumulated path[;garbage])
+NB. x is one boxed spec string, y is (accumulated path[;garbage])
 NB. Result is (path for next level;path to use at this level)
 accumpath =. ([ (outputpath ,&< ]) inputpath)&>  {.
-NB. y. is spec string (boxed in pieces), result is prefix string to use at each level
+NB. y is spec string (boxed in pieces), result is prefix string to use at each level
 buildpaths =. ;@:(,&'_'&.>)&.>@:({:"1)@:((accumpath/\.)&.(,&(<0$a:)))&.|.
-NB. x. is boxed pieces of the spec string, y. is list of boxed paths
-NB. result is x. with substitutions made for ^ and ^:
+NB. x is boxed pieces of the spec string, y is list of boxed paths
+NB. result is x with substitutions made for ^ and ^:
 substpath =. (<;._2@(,&'^')@(#~ -.@(|.!.0)@('^:'&E.))@((}.~ >:@(i.&'?'))^:('?'&e.))@> ux_vy (<@;@}:@,@,.))"0
-NB. y. is the spec string, result is selection info, with substitutions
+NB. y is the spec string, result is selection info, with substitutions
 NB. performed (and '!' indicating unboxing)
 brktospecs =. (substpath buildpaths) @ (<;.1~ (+. |.!.1)@('!'&=))
-NB. y. is the spec string.  Result is
+NB. y is the spec string.  Result is
 NB. a list of ARs, one for each spec and one for each !
 arofspecs =. ('&' arconj&(arverb '{')@arnoun@(".&.>))`((arverb '>')"_) @. ((<,'!')&-:) "0 @: brktospecs
 NB. Convert each component to an AR, and then roll up the ARs.  We go from
@@ -129,26 +129,26 @@ NB. result
 fstrar =. ('@' arconj)~/ @: arofspecs
 fstr =: ('' ([. (fstrar f.@]) ].)) `: 6
 
-NB. Conjunction.  Apply u. at the cell indicated by n.
+NB. Conjunction.  Apply u at the cell indicated by n
 applyintree =: 2 : 0
-if. #n. do. ((u. applyintree (}.n.)) L:_1 ({.n.){y.) ({.n.)} y. else. u. y. end.
+if. #n do. ((u applyintree (}.n)) L:_1 ({.n){y) ({.n)} y else. u y end.
 :
-NB. The rank is s,0 where s is the surplus of x.-rank over y.-rank.  This causes
-NB. the cells of y. to be matched up with the largest appropriate blocks x.  This
+NB. The rank is s,0 where s is the surplus of x-rank over y-rank.  This causes
+NB. the cells of y to be matched up with the largest appropriate blocks x  This
 NB. is necessary because it is impossible to change the shape of the values being modified
-if. #n. do. (x. u. applyintree (}.n.) L:_ _1"(0 (,~ >.) x. -&(#@$) a) (a =. ({.n.){y.)) ({.n.)} y. else. x. u. y. end.
+if. #n do. (x u applyintree (}.n) L:_ _1"(0 (,~ >.) x -&(#@$) a) (a =. ({.n){y)) ({.n)} y else. x u y end.
 )
 
-NB. y. is character string list of entry-point names
-NB. x. is the level number at which we should publish the entry points (default _1, 'z')
+NB. y is character string list of entry-point names
+NB. x is the level number at which we should publish the entry points (default _1, 'z')
 NB. we publish these names in the z locale
 publishentrypoints =: 3 : 0
-_1 publishentrypoints y.
+_1 publishentrypoints y
 :
 NB. The rhs of the assigment below interprets the names as gerunds
-path =. '_' (,,[) x. {:: (<,'z') ,~^:(-.@*@#@]) 18!:2 current =. 18!:5 ''
-l =. ,&path^:('_'&~:@{:)&.> ;: y.
-r =. ,&('_' (,,[) > current)@(({.~ i:&'_')@}:^:('_'&=@{:))&.> ;: y.
+path =. '_' (,,[) x {:: (<,'z') ,~^:(-.@*@#@]) 18!:2 current =. 18!:5 ''
+l =. ,&path^:('_'&~:@{:)&.> ;: y
+r =. ,&('_' (,,[) > current)@(({.~ i:&'_')@}:^:('_'&=@{:))&.> ;: y
 NB. The gerund assignment requires more than one name, so duplicate the last:
 ('`' , ;:^:_1 (, {:) l) =: (, {:) r
 )
@@ -157,56 +157,56 @@ NB. 18!:4 without side effects
 setlocale =: 18!:4
 
 NB. Cuts
-onpiecesbetweenm =: 12 : '(x. ;._1)@:(y.&,)'
+onpiecesbetweenm =: 12 : '(x ;._1)@:(y&,)'
 onpiecesbetweend =: (([.`> `: 6 "_1)`((< ;. _1)@(]. & ,)) `: 6)
 onpiecesbetween =: onpiecesbetweenm : onpiecesbetweend
-onpiecesusingtail =: 11 : 'x. ;._2'
+onpiecesusingtail =: 11 : 'x ;._2'
 
-NB. Conjunction.  u. is verb, n. (or [x.] v. y.) is arg to { to select s = desired portion of y.
-NB. The result of x. u. s (if dyad) or u. s (if monad) replaces s
+NB. Conjunction.  u is verb, n (or [x] v y) is arg to { to select s = desired portion of y
+NB. The result of x u s (if dyad) or u s (if monad) replaces s
 onitem =: ([. bivalent (].&{)) (]: ]: ]) (].})
 onitemm =: ([. @ (].&{)) (]: ]: ]) (].})
 onitemd =: ([. xuvy (].&{)) (]: ]: ]) (].})
 
 NB. Debugging support
-NB. conjunction: execute u. after displaying n.
+NB. conjunction: execute u after displaying n
 afterdisplaying =: [. [ (display @ (]."_))
 
 NB. Memory management
-NB. adverb: purge memory, then do u.
+NB. adverb: purge memory, then do u
 afterpurging =: ]: [ (7!:4 @ (($0)"_))
 NB. debug afterpurging =: ]: [ (7!:4 @ display @ ('purging free list'"_))
 
 NB. Conditionally purge memory.
-NB. y. is (machine memory available),(amount we think we need);
-NB.   defaults are MACH_MEMSIZETOUSE and 0.75*0{y.
-NB. If x. message to type when we purge (default=1)
+NB. y is (machine memory available),(amount we think we need);
+NB.   defaults are MACH_MEMSIZETOUSE and 0.75*0{y
+NB. If x message to type when we purge (default=1)
 condpurge =: 3 : 0
-'purging memory free list' condpurge y.
+'purging memory free list' condpurge y
 :
-if. 0=#y. do. y. =. MACH_MEMSIZETOUSE end.
-if. 1=#y. do. y. =. 1 0.75 * y. end.
-if. (-/ 2 {. y.) < +/ */"1 (1024) ((< 0&{"1) # ]) 7!:3 NIL do.
+if. 0=#y do. y =. MACH_MEMSIZETOUSE end.
+if. 1=#y do. y =. 1 0.75 * y end.
+if. (-/ 2 {. y) < +/ */"1 (1024) ((< 0&{"1) # ]) 7!:3 NIL do.
   7!:4 NIL
-  display ifany x.
+  display ifany x
 end.
 NILRET
 )
 
-NB. conjunction: execute u. after conditionally purging, with parameters n.
+NB. conjunction: execute u after conditionally purging, with parameters n
 aftercondpurge =: [. [ (condpurge @ (]."_))
 
-NB. conjunction: execute u., counting time.  n. is a descriptive string
+NB. conjunction: execute u, counting time.  n is a descriptive string
 showtime =: 2 : 0
-display 'Starting ' , n.
+display 'Starting ' , n
 starttime =. 6!:0 NIL
-u. y.
-if. 0: display 'Exiting ' , n. , ' time=' , ": 0 12 30 24 60 60 #. (6!:0 NIL) - starttime do. end.
+u y
+if. 0: display 'Exiting ' , n , ' time=' , ": 0 12 30 24 60 60 #. (6!:0 NIL) - starttime do. end.
 :
-display 'Starting ' , n.
+display 'Starting ' , n
 starttime =. 6!:0 NIL
-x. u. y.
-if. 0: display 'Exiting  ' , n. , ' time=' , ": 0 12 30 24 60 60 #. (6!:0 NIL) - starttime do. end.
+x u y
+if. 0: display 'Exiting  ' , n , ' time=' , ": 0 12 30 24 60 60 #. (6!:0 NIL) - starttime do. end.
 )
 
 NB. Conjunction: we use this for things that may need to be 'rank' if J
@@ -216,30 +216,30 @@ rnk =: " ifany
 
 NB. Conjunction: like ", but guarantees no reevaluation of cells
 rank =: 2 : 0
-ru =. 0 { v.
-if. ru < 0 do. ru =. 0 >. (# $ y.) + ru end.
-r =. ru <. # $ y.
-f =. (-r) }. $ y.
+ru =. 0 { v
+if. ru < 0 do. ru =. 0 >. (# $ y) + ru end.
+r =. ru <. # $ y
+f =. (-r) }. $ y
 fi =. 0
 if. fl =. */ f do.
   r =. 0 $ a:
   while. fi < fl do.
     x =. ,/ <"0 f #: fi   NB. index to frame
-    r =. r , < u. ( (< x) { y.)
+    r =. r , < u ( (< x) { y)
     fi =. >: fi
   end.
   > f $ r
 else.
-  f $ ,: u. ((-r) {. $y.) $ 1 {. , y.
+  f $ ,: u ((-r) {. $y) $ 1 {. , y
 end.
 :
-'lru rru' =. 1 2 { 3 $&.|. v.
-if. lru < 0 do. lru =. 0 >. (# $ x.) + lru end.
-if. rru < 0 do. rru =. 0 >. (# $ y.) + rru end.
-lr =. lru <. # $ x.  NB. ranks to use
-rr =. rru <. # $ y.
-lfs =. (-lr) }. $ x. NB. frames
-rfs =. (-rr) }. $ y.
+'lru rru' =. 1 2 { 3 $&.|. v
+if. lru < 0 do. lru =. 0 >. (# $ x) + lru end.
+if. rru < 0 do. rru =. 0 >. (# $ y) + rru end.
+lr =. lru <. # $ x  NB. ranks to use
+rr =. rru <. # $ y
+lfs =. (-lr) }. $ x NB. frames
+rfs =. (-rr) }. $ y
 fr =. lfs <.&# rfs  NB. rank of common part of frame
 if. -. lfs -:&(fr&{.) rfs do. 13!:8 (8) end.
 f =. (fr {. lfs) , lfs ,&(fr&}.) rfs  NB. the longer of the frames
@@ -248,37 +248,37 @@ if. fl =. */ f do.
   r =. 0 $ a:
   while. fi < fl do.
     x =. ,/ <"0 f #: fi   NB. index to frame
-    r =. r , < ( (< ($lfs) {. x) { x.) u. ( (< ($rfs) {. x) { y.)
+    r =. r , < ( (< ($lfs) {. x) { x) u ( (< ($rfs) {. x) { y)
     fi =. >: fi
   end.
   > f $ r
 else.
-  if. -. */ lfs do. x. =. ((-lr) {. $x.) $ 1 {. , x. end.
-  if. -. */ rfs do. y. =. ((-rr) {. $y.) $ 1 {. , y. end.
-  f $ ,: x. u. y.
+  if. -. */ lfs do. x =. ((-lr) {. $x) $ 1 {. , x end.
+  if. -. */ rfs do. y =. ((-rr) {. $y) $ 1 {. , y end.
+  f $ ,: x u y
 end.
 )
 
-NB. Conjunction: x. if y. is nonzero, otherwise nullverb
+NB. Conjunction: x if y is nonzero, otherwise nullverb
 butonlyif =: 2 : 0
-if. y. do. x. else. ($0)"_ end.
+if. y do. x else. ($0)"_ end.
 :
-if. y. do. x. else. ($0)"_ end.
+if. y do. x else. ($0)"_ end.
 )
 
 FormalLevel =: 2 : 0
- m=. 0{ 3&$&.|. n.
- ly=. L. y.  if. 0>m do. m=.0>.m+ly end.
- if. m>:ly do. u. y. else. u. FormalLevel m&.> y. end.
+ m=. 0{ 3&$&.|. n
+ ly=. L. y  if. 0>m do. m=.0>.m+ly end.
+ if. m>:ly do. u y else. u FormalLevel m&.> y end.
    :
- 'l r'=. 1 2{ 3&$&.|. n.
- lx=. L. x.  if. 0>l do. l=.0>.l+lx end.
- ly=. L. y.  if. 0>r do. r=.0>.r+ly end.
+ 'l r'=. 1 2{ 3&$&.|. n
+ lx=. L. x  if. 0>l do. l=.0>.l+lx end.
+ ly=. L. y  if. 0>r do. r=.0>.r+ly end.
  b=. (l,r)>:lx,ly
- if.     b-: 0 0 do. x.    u. FormalLevel(l,r)&.> y.
- elseif. b-: 0 1 do. x.    u. FormalLevel(l,r)&.><y.
- elseif. b-: 1 0 do. (<x.) u. FormalLevel(l,r)&.> y.
- elseif. 1       do. x. u. y.
+ if.     b-: 0 0 do. x    u FormalLevel(l,r)&.> y
+ elseif. b-: 0 1 do. x    u FormalLevel(l,r)&.><y
+ elseif. b-: 1 0 do. (<x) u FormalLevel(l,r)&.> y
+ elseif. 1       do. x u y
  end.
 )
 

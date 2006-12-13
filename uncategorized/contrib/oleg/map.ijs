@@ -204,13 +204,13 @@ NB.*setmap a [monad] remove map entry
 NB. MAP=: 'key' setmap MAP
 
 setmap=: 1 : 0
-  if. (#y.) <: i=. u. ndxmap y. do.
-    y. return. end.
-  (0 i } (#y.)#1) # y.
+  if. (#y) <: i=. u ndxmap y do.
+    y return. end.
+  (0 i } (#y)#1) # y
 :
-  if. (#y.) <: i=. u. ndxmap y. do.
-    y.,(boxopen u.),<x. return. end.
-  (< x.) (<i,1) } y.
+  if. (#y) <: i=. u ndxmap y do.
+    y,(boxopen u),<x return. end.
+  (< x) (<i,1) } y
 )
 
 NB.*DELIM v nested keys delimiter
@@ -227,13 +227,13 @@ NB. KEYS=: geymapx MAP
 
 getmapx=: 3 : 0
   r=. ''
-  if. ismap y. do.
-    for_i. getmap y. do.
-      r=. r, i [`(  (, DELIM&,)&.>  )@.(*@#@]) getmapx i getmap y.
+  if. ismap y do.
+    for_i. getmap y do.
+      r=. r, i [`(  (, DELIM&,)&.>  )@.(*@#@]) getmapx i getmap y
   end. end.
 :
-  for_i. <;._2 (>x.),DELIM do.
-    y.=. i getmap y.
+  for_i. <;._2 (>x),DELIM do.
+    y=. i getmap y
   end.
 )
 
@@ -244,23 +244,23 @@ NB.*setmapx a [monad] remove a nested entry
 NB. MAPX=: 'k1.k2.k3' setmapx MAPX
 
 setmapx=: 1 : 0
-  (empty'') u. setmapx y.
+  (empty'') u setmapx y
 :
-  E=. x. -: empty''
-  r=. ,< y=. y.
-  for_i. }:KEYS=. <;._2 (>u.),DELIM do.
+  E=. x -: empty''
+  r=. ,< y=. y
+  for_i. }:KEYS=. <;._2 (>u),DELIM do.
     y=. i getmap y
     if. (#*.-.@ismap) y do. 
-      if. E do. y. return. end.
+      if. E do. y return. end.
       y=. ,:'';y 
     end.
     r=. r, <y
   end.
   if. E do.
-    if. (<empty'') e. r do. y. return. end.
+    if. (<empty'') e. r do. y return. end.
     q=. ({:KEYS) setmap >{:r
   else.
-    q=. x.
+    q=. x
   end.
   for_i. |.i.(#KEYS)-E do.
     q=. q (i{KEYS) setmap >i{r
@@ -277,13 +277,13 @@ NB. MAPX=: flatmapx MAP
 
 flatmapx=: 3 : 0
   r=. empty''
-  for_i. y. do.
+  for_i. y do.
     'k v'=. i
     r=. v k setmapx r
   end.
 )
 
-linear=: 3 : '5!:5<''y.'''
+linear=: 3 : '5!:5<''y'''
 box2str=: ;@:(,&LF&.>)@(<"1@:>@{. <@(, ' '&,)&>"0 (linear&.>)@{: )@|:
 str2box=: (i.&' ' ({. ; ".@}.) ]);._2
 

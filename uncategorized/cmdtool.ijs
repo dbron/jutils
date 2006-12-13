@@ -18,7 +18,7 @@ Usage:
 	Examples:
 	a =: '' conew 'cmdtool'
 	runcommand__a 'dir'			NB.  Returns 2 boxes:  return-code;output
-	0 runcommand__a 'wait 12'	NB.  Even though the wait command won't return for 12 seconds, the J call returns immediately, because x. = 0
+	0 runcommand__a 'wait 12'	NB.  Even though the wait command won't return for 12 seconds, the J call returns immediately, because x = 0
 )
 
 
@@ -46,8 +46,8 @@ gettmpfile =: 3 : 0
 
 NB.  RunCommand:  Run a windows command; optionally wait for it to complete and return its output.
 NB.  Inputs:
-NB.  	x. : A boolean indicating whether to wait for the command to complete before returning.
-NB.  	y. : A string specifying the command to be executed.
+NB.  	x : A boolean indicating whether to wait for the command to complete before returning.
+NB.  	y : A string specifying the command to be executed.
 NB.
 NB.  Outputs:   
 NB.  	If wait is enabled, J will block until the the command is finished executing and return 2 boxes.  
@@ -58,11 +58,11 @@ NB.     If wait is not enabled, the command will return (i. 0 0) immediately.
 
 runcommand =: 3 : 0
 	NB. Default is to wait for the command.	
-	1 runcommand y.
+	1 runcommand y
 :
 	EAV =. 255{a.
-	runcmd =. 'cmd /c ', y.
-	if. 1 = x. do.
+	runcmd =. 'cmd /c ', y
+	if. 1 = x do.
 		sTempName =. gettmpfile ''
 		runcmd =. runcmd, ' > ', sTempName
 	end.
@@ -70,9 +70,9 @@ runcommand =: 3 : 0
 	NB. see http://msdn.microsoft.com/library/default.asp?url=/library/en-us/script56/html/wsMthRun.asp
 	NB. for documentatio of Wscript Run method.
 	wd 'psel ShellObj'
-	e =. wd 'olemethod WshShell base run  ', EAV, runcmd, EAV, '0 ', ": x.
+	e =. wd 'olemethod WshShell base run  ', EAV, runcmd, EAV, '0 ', ": x
 
-	if. 1 = x. do.	NB. if waiting for the app to complete
+	if. 1 = x do.	NB. if waiting for the app to complete
 		res =. 1!:1 < sTempName
 		1!:55 < sTempName
 		(_1 ". e); res

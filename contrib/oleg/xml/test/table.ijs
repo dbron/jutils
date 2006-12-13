@@ -6,10 +6,10 @@ require '~addons/xml/sax.ijs format'
 saxclass 'ptable'
 
 endElement=: 3 : 0
-  if. y.-:'tr' do. TD=: '' [ TR=: TR,TD end.
+  if. y-:'tr' do. TD=: '' [ TR=: TR,TD end.
 )
 
-characters=: 3 : 'TD=: TD,<y.'
+characters=: 3 : 'TD=: TD,<y'
 
 startDocument=: 3 : 'TR=: empty TD=: i.0 [ IGNOREWS=: 1'
 endDocument=: 3 : 'TR'

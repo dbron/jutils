@@ -15,33 +15,33 @@ NB.  mapped files, for efficiency reasons.
 bfp						=:  bigfileparser =:  verb define
 
 	NB.  If called monadically, then the LHA is unspecified.
-	y. bfp~  UNSPECIFIED
+	y bfp~  UNSPECIFIED
 :
 
 	NB.  Get a handle to our file, and reference instead of
 	NB.  constantly referencing the name
-	y.					=.  'C:\danielb\temp\temp2\exfile.001'	
-	fhand				=.  (1!:21 <y.)
+	y					=.  'C:\danielb\temp\temp2\exfile.001'	
+	fhand				=.  (1!:21 <y)
 
 	NB. Size of the file, needed for matrix shape calculation.
 	fsiz				=.  1!:4 <fhand 
 	
-	if. -. UNSPECIFIED -: x. do.
+	if. -. UNSPECIFIED -: x do.
 		NB.  The nominal case:  we were told where the columns break (i.e. the location of the field delimiters)
 
 		NB.  Account for record-delimiter (1 -: # LF)
-		x. 				=.  x. , 1
+		x 				=.  x , 1
 
 		dbstopme''
 
-		select. deb tolower datatype x.
+		select. deb tolower datatype x
 
 			NB.  Boolean cut-mask
 			case. 'boolean' do.
-				mask	=. x. , 1
+				mask	=. x , 1
 			NB.  List of field lengths
 			case. 'integer' do.
-				mask	=. xb +/\ x.
+				mask	=. xb +/\ x
 			case. do.
 				'Unsupported type of LHA' assert 0
 		end.

@@ -19,7 +19,7 @@ NB. 	   there already exists a connection).
 	getHost =: verb define
 	NB.  Convert a user-friendly computer name to an IP address
 
-		hostname =. y.
+		hostname =. y
 		sdcheck sdgethostbyname hostname
 )
 
@@ -29,11 +29,11 @@ NB. 	   there already exists a connection).
 
 	createClient =: verb define
 	NB.  Like in the server script, this opens a socket.  
-    NB.  The useless y. calculation is just to satisfy J's 
+    NB.  The useless y calculation is just to satisfy J's 
     NB. requirement that verbs use their parameters.
 	
 		client =. 0 pick sdcheck sdsocket''	
-		y. =. y. + 3
+		y =. y + 3
 		client
 	
 )
@@ -41,7 +41,7 @@ NB. 	   there already exists a connection).
 	a_syncSocket =: verb define
 	NB. Do NOT block while waiting for connections or data
 
-		client =. y.
+		client =. y
 	
 		sdcheck sdasync client
 )
@@ -49,7 +49,7 @@ NB. 	   there already exists a connection).
 	syncClient =: verb define
 	NB.  Make sure server and client are sync'd	
 
-		client =. y.
+		client =. y
 		
 		assert client e. 0 pick sdcheck sdselect ''
 )
@@ -59,7 +59,7 @@ NB. 	   there already exists a connection).
 
 		numConnections =: 0
 		
-		port =. y.
+		port =. y
 
 		client =. createClient 0					NB.  Open a socket
 
@@ -93,16 +93,16 @@ NB.		syncClient client							NB.  Sync with server
 	closeClient =: verb define
 	NB.  Close an open socket.  Just an alias for sdclose
 		
-		client =: y.
+		client =: y
 		
 		sdcheck sdclose client
 )
 
 	write =: 4 : 0
-	NB.  Convert data in y. to streamable form and write out to server (socket) x.  
+	NB.  Convert data in y to streamable form and write out to server (socket) x  
 		
-		client =. x.
-		data =. y.
+		client =. x
+		data =. y
 		flags =. 0								NB.  This should be generalized
 
 		data =. toStream data
@@ -111,10 +111,10 @@ NB.		syncClient client							NB.  Sync with server
 )
 
 	read =: 4 : 0
-	NB.  Read in y. bytes of data from client (socket) x. and convert data to normal format	
+	NB.  Read in y bytes of data from client (socket) x and convert data to normal format	
 
-		client =. x.
-		maxToRead =. y.
+		client =. x
+		maxToRead =. y
 		flags =. 0								NB.  This should be generalized
 		
 		fromStream ; sdcheck sdrecv client, maxToRead,flags
@@ -123,13 +123,13 @@ NB.		syncClient client							NB.  Sync with server
 	toStream =: verb define
 	NB.  Convert normal data to streamable form
 	
-		data =. y.
+		data =. y
 		3!:1 data
 )
 
 	fromStream =: verb define
 	NB.  Convert streamed data to normal form
 
-		data =. y.
+		data =. y
 		3!:2 data
 )

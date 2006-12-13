@@ -1,15 +1,15 @@
 pff_z_=:verb define
-	'get' pff y.
+	'get' pff y
 :
 	NB.  LHA should be 'get' or 'set', i.e. are we reading or writing the file?
-	gs =. lc trim x.
+	gs =. lc trim x
 
-	NB.  RHA is optional; it's a filename (or dir;filename).  If y. specifies only a path, then it will be used as the initial directory to the prompt
-	NB.  if y. specifies a filename (without a path), then the file will be expected to be found in one of the default directory.
+	NB.  RHA is optional; it's a filename (or dir;filename).  If y specifies only a path, then it will be used as the initial directory to the prompt
+	NB.  if y specifies a filename (without a path), then the file will be expected to be found in one of the default directory.
 	NB.  Note the use of 'sp', NOT 'splitPath' here.  So to pass in a filename without an extension, use the form 'dir';'filename'
 	NB.  (the extension will be defaulted to 'jws').
-	NB.  'd f'=.sp^:(0: = L.) y.
-	'd f'=.|.^:(PATHSEP_j_"_ -.@:e. >@:{. *. a:"_ = {:)@:splitPath^:(0: = L.) y.
+	NB.  'd f'=.sp^:(0: = L.) y
+	'd f'=.|.^:(PATHSEP_j_"_ -.@:e. >@:{. *. a:"_ = {:)@:splitPath^:(0: = L.) y
 
 	NB.  Calculate the dir we should look for the file; this is the first valid dir of, in order,
 	NB.  the dir given, my custom workspace dir, J's working directory.  If none of these are valid, choose the root ('\').

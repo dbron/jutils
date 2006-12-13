@@ -31,7 +31,7 @@ NB.  Explicit Definition
 fiboExplicit =: 3 : 0
 
 	i =. 0
-	n =. y.
+	n =. y
 
 	fibonacci =: 1 1
 

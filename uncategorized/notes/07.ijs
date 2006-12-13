@@ -16,8 +16,8 @@ C		=:  (!@:[ % !@:] * !@:-)&x:
    
 
 roll	=: dyad define
-	N =. x.
-	r =. y.
+	N =. x
+	r =. y
 	
 	Q=.0 2 $ 0
 	

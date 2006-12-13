@@ -27,13 +27,13 @@ coclass 'pxsl'
 NB.*parseError v comprehensive error report
 NB. OUT=: XSL xsl XML
 parseError=: 3 : 0
-  wd 'oleget ',y.,' base parseError; oleid ',y.,' parseError'
-  if. 0~:0".c=. wd 'oleget ',y.,' parseError errorCode;' do.
-    line=. wd 'oleget ',y.,' parseError line;'
-    pos=. wd 'oleget ',y.,' parseError linePos;'
-    src=. wd 'oleget ',y.,' parseError srcText;'
+  wd 'oleget ',y,' base parseError; oleid ',y,' parseError'
+  if. 0~:0".c=. wd 'oleget ',y,' parseError errorCode;' do.
+    line=. wd 'oleget ',y,' parseError line;'
+    pos=. wd 'oleget ',y,' parseError linePos;'
+    src=. wd 'oleget ',y,' parseError srcText;'
     t=. 'Error ',c,' at ',line,',',pos
-    t=. t,LF,wd 'oleget ',y.,' parseError reason;'
+    t=. t,LF,wd 'oleget ',y,' parseError reason;'
     if. #src do.
       t=. t,LF,src
       t=. t,LF,(}.(0".pos)#' '),'^'
@@ -52,13 +52,13 @@ try.
     wd 'cc y oleautomation:MSXML2.DOMDocument.4.0'
   catch. smoutput 'MSXML v4 is required' throw. end.
   wd 'oleset x base async 0'
-  wd 'olemethod x base loadXML *',x.
+  wd 'olemethod x base loadXML *',x
   if. parseError 'x' do. throw. end.
   wd 'oleset y base async 0'
-  wd 'olemethod y base loadXML *',y.
+  wd 'olemethod y base loadXML *',y
   if. parseError 'y' do. throw. end.
   try.
-    r=. wd 'olemethod y base transformNode !object:.x.base'
+    r=. wd 'olemethod y base transformNode !object:.x base'
   catch. smoutput wd'qer' throw. end.
 catcht. r=. '' end.
   wd 'pclose'

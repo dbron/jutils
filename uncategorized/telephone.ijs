@@ -24,9 +24,9 @@ all_types      =.  <;._1 all_types
 categories     =. '(chr: literal, unicode) (sym: symbol) (box: boxed, sparse boxed) (num: *)'
 categories     =. {:"1 category_table =. trim L: 0 ((({. ; <@:(','&slice)@:}.@:}.)~ i.&':')@:}.@:}:@:trim;.1~ [: 1&(0}) ')'&= +: *@parenDepth) categories 
 
-amenable_types =:  REMOVE_ME { ((;:'box') (3 : 'REMOVE_ME=:<<<y.'@:i.~ ] ]) {."1 category_table) ,. (<all_types) (2: ^ i.)&.> -.~&.>/\&.:(a:&,) (<;:'*')  sr (<all_types -. a:) categories  
-is_type        =: 1 : '3!:0 e. (> amenable_types map m.)"_'
-sense_type     =: 2 : 'u. ^: (_1: ^ -.@:(n. is_type))'
+amenable_types =:  REMOVE_ME { ((;:'box') (3 : 'REMOVE_ME=:<<<y'@:i.~ ] ]) {."1 category_table) ,. (<all_types) (2: ^ i.)&.> -.~&.>/\&.:(a:&,) (<;:'*')  sr (<all_types -. a:) categories  
+is_type        =: 1 : '3!:0 e. (> amenable_types map m)"_'
+sense_type     =: 2 : 'u ^: (_1: ^ -.@:(n is_type))'
 
 phon           =: phone sense_type 'chr' :. phon
 

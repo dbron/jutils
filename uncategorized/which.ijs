@@ -32,16 +32,16 @@ require '~user\util\uncategorized\contrib\paul_chapman\ats.ijs'
 
 whichwhichywhich=: verb define
 
-   NB.  If no extension is given in y. (a: -: {: '.' split y.), then use 
+   NB.  If no extension is given in y (a: -: {: '.' split y), then use 
    NB.  the executable extensions from the PATHEXT env variable.
    doota =: >,'PATHEXT' {@:(,&:< '\'&appendIfNotPresent&.>)&:(';'&slice)&:(2!:5) 'PATH'  
-   hoota =: <@:;"1 ] 3 A.&.|: doota ,. <y.
+   hoota =: <@:;"1 ] 3 A.&.|: doota ,. <y
    poota =: fexist&> hoota
    poota # hoota
 
 	NB.  Also want to look in 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\'
 	NB.  which is the registry equivalent of the 'PATH' environment variable.
-	NB.  If extension is given in y., use it, else just prefixPath y. with the subkey enumeration.
+	NB.  If extension is given in y, use it, else just prefixPath y with the subkey enumeration.
 	if. 0 -: > {. 'ok handle' =. regcreatekey HKEY_LOCAL_MACHINE;'SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths';1 do.
 
 			MAX_KEY_LENGTH_which_ =: 255
@@ -115,7 +115,7 @@ CJmap				=.  '=' makeTable noun define
 cTojDef				=.  ;:^:_1@:(,&'A'&.>@:(1&{) , (CJmap&map)@:({. , {."1@:>@:(2&{)))@:parseCDef
 PORKENDOOFY=: + 1 : (parenclose cTojDef	f. vtt)
 
-callC				=.  2 : ('(m. (, '' ''&,@:' , (parenclose cTojDef f. vtt) , ' ) n.)&cd')
+callC				=.  2 : ('(m (, '' ''&,@:' , (parenclose cTojDef f. vtt) , ' ) n)&cd')
 
 NB. 'Advapi32' callC (noun define)
 NB.	LONG RegQueryInfoKey

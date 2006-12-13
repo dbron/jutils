@@ -1,6 +1,6 @@
 NB.  	File system locations
 cocurrent 'z'            [ originalLocale_z_ =. coname''
-'REPORT_DIR REPORT_FILE'=: (({. ,&< }.)~ (# <. >:@:i:&'\')) 3 : '(4!:4 {:: 4!:3) <''y.''' $0
+'REPORT_DIR REPORT_FILE'=: (({. ,&< }.)~ (# <. >:@:i:&'\')) 3 : '(4!:4 {:: 4!:3) <''y''' $0
 load OMS_DIR,'..\..\util\default\resolvelink.ijs'
 CODE_ROOT			=:  resolvelink REPORT_DIR, '..\'
 UTIL_DIR			=:  resolvelink CODE_ROOT,'util\default\'
@@ -35,7 +35,7 @@ bootConnection		=: verb define
 		load OMSROOT,'rserver\default\rclient'
 		
 		NB.  Utility functions to access the OMS server
-		doRemotely		=:  conjunction def 'n.&rget@:(u. callToText)'
+		doRemotely		=:  conjunction def 'n&rget@:(u callToText)'
 		doOnOMSServer	=:  OMSHP&rget
 	
 		NB.  Example:  i. ohs 5  NB.  Calculates results on OMS server and returns answer

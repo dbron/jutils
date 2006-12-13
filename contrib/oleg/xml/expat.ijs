@@ -14,7 +14,7 @@ IFMACOSX=: fexist '/.DS_Store'
 LIB=: jpath ADDONDIR,'/lib/libexpat.',((#.IFWIN32,IFMACOSX){::'so';'dylib';'dll';''),' '
 
 cdecl=: ({. , ' +'"_ , }.)~ i.&' '
-xcdm=: 1 : '(LIB,cdecl^:(-.IFWIN32) x.)&(15!:0)'
+xcdm=: 1 : '(LIB,cdecl^:(-.IFWIN32) x)&(15!:0)'
 
 ParserCreate=:             'XML_ParserCreate            i    *c    ' xcdm
 ParserFree=:               'XML_ParserFree              i i        ' xcdm
@@ -39,17 +39,17 @@ memstr=: memr@(,&(0,_1,JCHAR))
 
 attributes=: 3 : 0
   z=. empty''
-  while. p=. memint y. do.
-    z=. z, (memstr p);memstr memint y.+SZINT
-    y.=. y.+2*SZINT
+  while. p=. memint y do.
+    z=. z, (memstr p);memstr memint y+SZINT
+    y=. y+2*SZINT
   end.
   z
 )
 
 getAttribute=: 4 : 0
-  while. p=. memint x. do.
-    if. y.-: memstr p do. memstr memint x.+SZINT return.end.
-    x.=. x.+2*SZINT
+  while. p=. memint x do.
+    if. y-: memstr p do. memstr memint x+SZINT return.end.
+    x=. x+2*SZINT
   end.
   _1
 )
@@ -57,16 +57,16 @@ getAttribute=: 4 : 0
 NB. =========================================================
 
 seterr=: 3 : 0
-  if. 3~:#y. do. y.=. 0;0 0;'' end.
-  ('ERRCODE_pexpat_ ERRPOS_pexpat_ ERRMSG_pexpat_')=: y.
+  if. 3~:#y do. y=. 0;0 0;'' end.
+  ('ERRCODE_pexpat_ ERRPOS_pexpat_ ERRMSG_pexpat_')=: y
   empty''
 )
 seterr''
 
 geterr=: 3 : 0
-  code=. 0{::GetErrorCode y.
-  line=. 0{::GetCurrentLineNumber y.
-  col=. 0{::GetCurrentColumnNumber y.
+  code=. 0{::GetErrorCode y
+  line=. 0{::GetCurrentLineNumber y
+  col=. 0{::GetCurrentColumnNumber y
   msg=. memstr 0{::ErrorString code
   seterr code;(line,col);msg
 )

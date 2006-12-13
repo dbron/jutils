@@ -1,11 +1,11 @@
 NB.  Roger's dyadic I. implentation
 bs          =: 1 : 0
 :
-     i      =.  0,_1+#x.
+     i      =.  0,_1+#x
 
      while. <:/i do.
           k =.  <.-:+/i
-          b =.  0 1 -: u. y.,:k{x. 
+          b =.  0 1 -: u y,:k{x 
           i =.  (k+_1^b) b}i 
      end.
 
@@ -15,13 +15,13 @@ bs          =: 1 : 0
 atype       =:  e.&>&(1 4 8 16 64 128 4096 8192 16384 ; 2 2048 131072 ; 32 32768 ;65536)@(3!:0)
 
 Idot        =:  verb define
-     I. y.  NB. Added this to make I ambivalent, like I.
+     I. y  NB. Added this to make I ambivalent, like I.
 :
-     r      =.  0>._1+#$x.
-     assert. (}.$x.) -: (-r){.$y.                      NB. rank error
-     assert. (0 e.$x.) +. (0 e.$y.) +. x. -:&atype y.  NB. domain error
-     ord    =. /:`\: @. (1 0 -: /: 0 _1{ :: 0: x.)
-     x. ord f. bs"(_,r) y.
+     r      =.  0>._1+#$x
+     assert. (}.$x) -: (-r){.$y                      NB. rank error
+     assert. (0 e.$x) +. (0 e.$y) +. x -:&atype y  NB. domain error
+     ord    =. /:`\: @. (1 0 -: /: 0 _1{ :: 0: x)
+     x ord f. bs"(_,r) y
 )
 
 
@@ -51,22 +51,22 @@ EMAILS =: noun define
 	
 	bs=: 1 : 0
 	:
-	 i=. 0,_1+#x.
+	 i=. 0,_1+#x
 	 while. <:/i do. 
 	  k=. <.-:+/i 
-	  b=. u. y. ,: k{x.
+	  b=. u y ,: k{x
 	  i=. (i*-.b) + b*k+1 _1
 	 end.
 	 1+{:i
 	)
 	
 	I=: 4 : 0
-	 r=. 0>._1+#$x.
-	 assert. r<:#$y.               NB. rank error
-	 assert. (}.$x.) -: (-r){.$y.  NB. length error
-	 assert. 1 [ x.,y.             NB. domain error
-	 ord=. /:`\: @. ({. /: 0 _1{ :: 0: x.)
-	 x. ord f. bs"(_,r) y.
+	 r=. 0>._1+#$x
+	 assert. r<:#$y               NB. rank error
+	 assert. (}.$x) -: (-r){.$y  NB. length error
+	 assert. 1 [ x,y             NB. domain error
+	 ord=. /:`\: @. ({. /: 0 _1{ :: 0: x)
+	 x ord f. bs"(_,r) y
 	)
 	
 	test=: 3 : 0

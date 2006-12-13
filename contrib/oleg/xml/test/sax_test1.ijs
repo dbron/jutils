@@ -5,11 +5,11 @@ require '~addons/xml/sax.ijs'
 saxclass 'psax1'
 
 startElement=: 4 : 0
-  smoutput '[',y.,']'
+  smoutput '[',y,']'
 )
 
 endElement=: 3 : 0
-  smoutput '[/',y.,']'
+  smoutput '[/',y,']'
 )
 
 NB. =========================================================

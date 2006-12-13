@@ -30,18 +30,18 @@ YORT=: 1
 NB.*viewfld v view field given by complex matrix
 NB.   viewfld *: (jiota 20 20)%10
 viewfld=: 3 : 0
-'' viewfld y.
+'' viewfld y
 :
 a=. conew 'jviewfld'
-RMAT=: 0.455 * * y.                           NB. rotation matrix
+RMAT=: 0.455 * * y                           NB. rotation matrix
 ARROWS=: +^:(YORT~:1) RMAT */ _1,1,1+r.5r6p1  NB. arrows rotated at origin
-COLROW=: |.$y.
+COLROW=: |.$y
 GRID=: jjota |.COLROW                         NB. complex grid R,C
-empty x. vmrun__a 1e6||y.
+empty x vmrun__a 1e6||y
 )
 
 vm_show=: 3 : 0
-vm_show_jviewmat_ f. y.
+vm_show_jviewmat_ f. y
 if. 2>sc=.<./wh=.(_2{.0".wd 'qchildxywhx g')%COLROW do.return.end.
 gllines <. ,@:+."1 ,/ (sc * ARROWS) + (j./wh) (-:@[ + *&.+.) GRID
 glshow''
@@ -95,7 +95,7 @@ viewfld lvp_jviewfld_ 0j7 + 2j0.125 *&.+. jjota 40 40
 NB. Lotka-Volterra
 'lvR lvA lvB lvM'=: 0.1 0.01 0.001 0.05
 lvp=: 3 : 0"0
-'r f'=. +.y.
+'r f'=. +.y
 dR_dt=. (lvR*r)-lvA*r*f
 dF_dt=. (lvB*r*f)-lvM*f
 dR_dt j. dF_dt

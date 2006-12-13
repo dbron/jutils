@@ -5,16 +5,16 @@ NB.  Utility functions.
 	NB.  EG:  '"'  enclose 'A Quote'               NB.  Returns '"A Quote"'
 	enclose					=:  <"_1@:(2&$)@:[ ;@:}:@:,@:,. <@:]	
 
-	NB.  Conjuction that produces a verb that permutes y. in the same way m. is permuted from n.
+	NB.  Conjuction that produces a verb that permutes y in the same way m is permuted from n
 	NB.  EG:  cdab =: 'ABCD' permute 'CDAB' 
 	NB.       3 4 1 2 -: cdab 1 2 3 4  NB.  Returns 1
-	permute                       =:  2 : '(A. m. i. n.)&A. '
+	permute                       =:  2 : '(A. m i. n)&A. '
 
 	NB.  Across - apply gerund left to array on right (from system\packages\publish\web.ijs).
-	across                        =:  (]&.":  4 -~ 0 ". {. 0 {:: '/' slice 'j' -.~ 9!:14'') 1 : 'if.  m. do. 1 : ''1: (}.@$ $ ,)@:u.;.1 ]'' else. ((}.@$ $ ,)@:)(;.1)~ (# # 1:) end.'
+	across                        =:  (]&.":  4 -~ 0 ". {. 0 {:: '/' slice 'j' -.~ 9!:14'') 1 : 'if.  m do. 1 : ''1: (}.@$ $ ,)@:u;.1 ]'' else. ((}.@$ $ ,)@:)(;.1)~ (# # 1:) end.'
 
 	NB. Turn 5!:5 rep into 5!:1 rep.
-	atomicFromLinear              =:  3 : ('". n=.''y.=.'',y.';'5!:1{.;:n')
+	atomicFromLinear              =:  3 : ('". n=.''y=.'',y';'5!:1{.;:n')
 
 	NB.  Another fixed-width parsenator.
 	NB.  Good for chopping up structs/objects serialized by other languages.
@@ -84,13 +84,13 @@ NB.  Functions to convert C types to J types.
 
 	NB.  We prefer to use the more specific over the more general types 
 	NB.  (unsigned_int is prefered over int), so make sure these appear first in the typearray.
-	'qualifiers type'             =.  _1 (}. ; {.) > y.
+	'qualifiers type'             =.  _1 (}. ; {.) > y
 	typearray                     =.  <@:('_'&join)\. qualifiers,<type
 
 	NB.  Prefer the array processing functions (suffixed with _N, eg char_N) iff we're dealing with array data.
 	NB.  Thus, for 'unsigned int foo[4]' prefer: unsigned_int_N, int_N, unsigned_int, int
 	NB.  If we're only dealing with scalar data (eg 'unsigned int foo'), elide the array processing names.
-	'repetitions width'           =.  x.
+	'repetitions width'           =.  x
 	typearray_N                   =.  typearray ((# ,&'_N'&.>)~ , [) repeated =. repetitions ~: 1
 
 	NB.  We now have the array of all the possible names we'd like to use.  We must figure out which of these names
@@ -210,7 +210,7 @@ NB.  Implementation:  Take a specific C struct and generate code to convert it t
 	
 	NB.  Parse the C structure's textual definition.
 	NB.  Strip comments, split into statements (delimited by ;), split into names and types.
-	'names types'                 =.  <"1  |: ' ' _1&split@:arbCut &> ';' slice ; {."1 '//' makeTable C_STRUCT =. y.
+	'names types'                 =.  <"1  |: ' ' _1&split@:arbCut &> ';' slice ; {."1 '//' makeTable C_STRUCT =. y
 	names                         =.  ; names
 
 	NB.  Split names into barenames and array specifications.
@@ -238,17 +238,17 @@ NB.  Implementation:  Take a specific C struct and generate code to convert it t
     structArrayToTable            =:  dyad define
 
 	NB.  Get the functions to transform the fields of the structs.
-	'sizes functions'             =.  getFunctionsForStruct x.
+	'sizes functions'             =.  getFunctionsForStruct x
 
 	NB.  Split file into columns (each column is a homogenous C type)
-	Qp                            =.  sizes parsenate (1e4 * +/ sizes) {. y.
+	Qp                            =.  sizes parsenate (1e4 * +/ sizes) {. y
 
 	NB.  Apply our C-to-J conversion functions to the C data.
 	Q                             =.  functions across Qp
 )
 
 	NB.  Read the file & turn it into a table
-    structFileToTable             =:  4 : 'x. structArrayToTable fread y.'
+    structFileToTable             =:  4 : 'x structArrayToTable fread y'
 
 	NB.  Parse a quotes file
 	quotesFileToTable             =:  C_STRUCT&structFileToTable

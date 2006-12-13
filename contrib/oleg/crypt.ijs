@@ -13,7 +13,7 @@ add=: (+&(_16&sh) (16&sh@(+ _16&sh) or and&65535@]) +&(and&65535))"0
 hexlist=: tolower@:,@:hfd@:,@:(|."1)@(256 256 256 256&#:)
 
 cmn=: 4 : 0
-'x s t'=: x. [ 'q a b'=: y.
+'x s t'=: x [ 'q a b'=: y
 b add s rot (a add q) add (x add t)
 )
 
@@ -51,17 +51,17 @@ _1502002290  1735328473   530742520   718787259
 )
 
 norm=: 3 : 0
-n=. 16 * 1 + _6 sh 8 + #y.
-b=. n#0  [  y=. a.i.y.
-for_i. i. #y. do.
+n=. 16 * 1 + _6 sh 8 + #y
+b=. n#0  [  y=. a.i.y
+for_i. i. #y do.
   b=. ((j { b) or (8*4|i) sh i{y) (j=. _2 sh i) } b
 end.
-b=. ((j { b) or (8*4|i) sh 128) (j=._2 sh i=.#y.) } b
-_16]\ (8 * #y.) (n-2) } b
+b=. ((j { b) or (8*4|i) sh 128) (j=._2 sh i=.#y) } b
+_16]\ (8 * #y) (n-2) } b
 )
 
 md5=: 3 : 0
-X=. norm y.
+X=. norm y
 q=. r=. 1732584193 _271733879 _1732584194 271733878
 for_x. X do.
   for_j. i.4 do.

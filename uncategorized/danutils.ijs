@@ -30,7 +30,7 @@ NB.  ===========================================================================
 	ALPHANUM				=:  ALPHA,DIGITS
 	WHITESPACE				=:  ' ', TAB, CR, LF
 	PRINTABLE				=:  WHITESPACE , a. {~ 33 ([ + i.@:>:@:-~) 126  NB.  a. ];.0~ 33 ,: 94
-	PRIMITIVES				=:  ;: '! !. !: " ". ": # #. #: $ $. $: % %. %: & &. &.: &: * *. *: + +. +: , ,. ,: - -. -: . .. .: / /. /: 0: 1: 2: 3: 4: 5: 6: 7: 8: 9: : :. :: ; ;. ;: < <. <: = =. =: > >. >: ? ?. @ @. @: A. C. D. D: E. H. L. L: S: T. [ [. [: \ \. \: ] ]. ]: ^ ^. ^: _1: _2: _3: _4: _5: _6: _7: _8: _9: _: ` `: a. a: b. c. d. e. f. i. i: j. m. n. o. p. p: q: r. s: t. t: u. u: v. x. x: y. { {. {: {:: | |. |: } }. }: }:: ~ ~. ~: NB.'
+	PRIMITIVES				=:  ;: '! !. !: " ". ": # #. #: $ $. $: % %. %: & &. &.: &: * *. *: + +. +: , ,. ,: - -. -: . .. .: / /. /: 0: 1: 2: 3: 4: 5: 6: 7: 8: 9: : :. :: ; ;. ;: < <. <: = =. =: > >. >: ? ?. @ @. @: A. C. D. D: E. H. L. L: S: T. [ [. [: \ \. \: ] ]. ]: ^ ^. ^: _1: _2: _3: _4: _5: _6: _7: _8: _9: _: ` `: a. a: b. c. d. e. f. i. i: j. m n o. p. p: q: r. s: t. t: u u: v x x: y { {. {: {:: | |. |: } }. }: }:: ~ ~. ~: NB.'
 
 	NB.  I keep having to calculate this, so I'm just going to store it.
 	MAXINT					=:  ((<.@<:@(2&^))^:2) 5   NB.  Same as (<. <: 2 ^ <. <: 2 ^ 5) or (<. <: 2 ^ 31)
@@ -40,43 +40,43 @@ NB.  ===========================================================================
 	NB.	primitive_frequency		=:  NVtext PRIMITIVES ([ ((,. 0j2&":&.>@:(0.01&round)@:(% +/ % #)) \: ]) (<:@:(#/.~))@:,) (#~ e.&PRIMITIVES) ; ; ;: ::(a:"_) L: 0 LF&arbCut@:toJ@:fread&.> {."1 dirtree '\\rutherford\dfs\j\dev\current\*.ijs' [ load 'dir'
 
 	NB.  Jose Quintana's adverb for sequential application of dyadic verbs
-	NB.  x. f seq y. is essentially equivalent to ... (2 {:: x.) f (1 {:: x.) f (0 {:: x.) f y.
+	NB.  x f seq y is essentially equivalent to ... (2 {:: x) f (1 {:: x) f (0 {:: x) f y
 	seq						=:  ((&.>) /) (@:((|.@:[) , (<@:]))) (>@:)
 
 
 	NB.  Left-middle-right.  Takes 3 verbs (l m r) as arguments.  Makes a fork:  (l@:[ m r@:])
 	NB.  EG:  (1: 2: lmr 3:)  NB.  Returns (1:@:[ 2: 3@:])
-	lmr						=:  1 : '2 : (''u.@:[('', (5!:5 fw ''u.'') , '')v.@:]          	'') ' NB. 1 : ' ([.@:[)  u.  (].@:])'
+	lmr						=:  1 : '2 : (''u@:[('', (5!:5 fw ''u'') , '')v@:]          	'') ' NB. 1 : ' ([.@:[)  u  (].@:])'
 
 	NB.  Conjunction that takes a noun LHA and a dyadic verb RHA.
 	NB.  Derived verb is ambivalent; if no LHA specified, the conjunction's LHA
 	NB.  is used.
-	dl						=:  defaultLHA	=:  2 : 'm.&$: : v.' NB. [.&$: : ].
+	dl						=:  defaultLHA	=:  2 : 'm&$: : v' NB. [.&$: : ].
 
 	NB.  An adverb which coerces its RHA to the rank of the LHA
 	NB.  It's an adverb because ,:@:]^:([ - rank@:]) doesn't work 
 	NB.  on arguments where (< rank) because ,:@:] isn't invertible.
-	NB.  EG:  3 :'rank 2 rankN ,:^:y. 0'&.> i. 4  NB. Returns 2;2;2;2
+	NB.  EG:  3 :'rank 2 rankN ,:^:y 0'&.> i. 4  NB. Returns 2;2;2;2
 	rankN					=:  ((&-)(@:rank))(,:^:)
 
 	NB.  An adverb that gives the indicies in the RHA (which can be of any rank) where the
 	NB.  verb on the LHS returns true.  The following example finds the indices of the LHA in the RHA
 	NB.  E.G. 0&= index 4 4$8 3 9 2 0 5 0 1 10 9 8 5 0 7 6 0	NB.  Return 4 2$1 0 1 2 3 0 3 3
 	NB.  E.G. 'z0ert' e.~ index 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' {~ i. 3 4 5  NB.  Returns 5 3$0 0 4 0 3 2 0 3 4 1 1 0 2 2 2
-	index					=:  1 : '(# i.@#)@:(u.&:,) #~ $@:]'NB. (# i.@#)@:(&:,) #:~ $@:]
+	index					=:  1 : '(# i.@#)@:(u&:,) #~ $@:]'NB. (# i.@#)@:(&:,) #:~ $@:]
 
 	NB.  A conjunction like ::, but which produces verbs with the same rank as the LHA.
 	NB.  EG:  q: adverse 0: i. 3 NB.  Returns ,. 0 0 2
 	adverse					=:  :: " [.
 
-	NB.  Adverb that applies u. to the sequences of equal elements in the input.
+	NB.  Adverb that applies u to the sequences of equal elements in the input.
 	NB.  EG:  >./ # plateaus 0 1 1 3 5 5 5 6 _1 _1 2 _1 0 _1  NB.  Returns 3
 	plateaus 				=:  ((;.1)~) 1: , 2&(~:/\)
 	
 	NB.  A 'translate' conjunction.  Has 2 noun arguments, producing a verb.
 	NB.  Example:  rot13 =.  'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM' tr 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 	NB.  rot13 'Guvf vf fbzr ebgngrq grkg'
-	xlat					=:  ({&(2 :'m.,a.')) @: ((2 :'n.,a.')&i.)  NB.  Old form:  2 : '({&(n. , a.)) @: ((m. , a.)&i.)'
+	xlat					=:  ({&(2 :'m,a.')) @: ((2 :'n,a.')&i.)  NB.  Old form:  2 : '({&(n , a.)) @: ((m , a.)&i.)'
 
     NB.  The conjunction 'xl' is like 'xlat', but works on any type of argument, not just literals, because
 	NB.  it doesn't need to know the set of all possible inputs in advance.  It's slower than xlat and is not
@@ -89,20 +89,20 @@ NB.  ===========================================================================
 	NB.
 	NB.  Easier to read and understand, but the derived verb won't
     NB.  be evaluated until it's actually passed an argument.
-    xl0  =:  2 : '(idxs ~: # m.) } y. ,: (idxs =. m. i. y.) { (, fillElement) n.'
+    xl0  =:  2 : '(idxs ~: # m) } y ,: (idxs =. m i. y) { (, fillElement) n'
 	
     NB.  This is harder to understand, but will immediately output a tacit
     NB.  verb when both arguments to the conjunction are specified.
-	xl1  =:  2 : '(((#m.)&~:@:>@:{.@:] ({"0 1 (0&|:)) (,: >@:{:)) (,&< {&((, fillElement) n.))@:(m.&i.)) f.'
+	xl1  =:  2 : '(((#m)&~:@:>@:{.@:] ({"0 1 (0&|:)) (,: >@:{:)) (,&< {&((, fillElement) n))@:(m&i.)) f.'
 	  
 	NB.  Like xl1, but is invertible.
-	xl2  =:  2 : 'm. xl1 n. :. (n. xl1 m.)'
+	xl2  =:  2 : 'm xl1 n :. (n xl1 m)'
 
 	NB.  Another translate conjuction, only for scalars.  Repalce the scalar LHA to the conjunction with the scalar RHA to the conjunction.
 	NB.  EG.  0 scalarReplace _1 ] 5 8 0 0 5 6 0 3 0 4  NB. Returns 5 8 _1 _1 5 6 _1 3 _1 4
-	NB.  scalarReplace	=: 2 : '(m.&=)`(,:&n.) } y.'
+	NB.  scalarReplace	=: 2 : '(m&=)`(,:&n) } y'
 	sr						=:  scalarReplace			=: (&=)`(,:&) }
-	s						=:  2 : ('(m. sr n.) :. (n. sr m.)')
+	s						=:  2 : ('(m sr n) :. (n sr m)')
 
 	NB.  A better version of scalarReplace; actually more of a hybrid of scalarReplace and xlat.  It shares the advantages of scalarReplace
 	NB.  in that it does not need to know the universe of possible values in advance (meaning it's not restricted to literals and doesn't
@@ -116,7 +116,7 @@ NB.  ===========================================================================
 	find					=:  i.~"0 _&
 	overlay					=:  &(] ,~ ($~"0 1&, $))
 	msr						=:  multiScalarReplace	=: (find ` overlay) }
-	m						=:  2 : ('(m. msr n.) :. (n. msr m.)')
+	m						=:  2 : ('(m msr n) :. (n msr m)')
 
 	NB.  First attempt at creating a generalized translation function.
 	NB.  It should handle as many cases as I can come up with, in the 
@@ -128,16 +128,16 @@ NB.  ===========================================================================
 
 		NB.  If we're just replacing a scalar by a scalar,
 		NB.  use scalar replace.
-		if. *./ 0 = #@:$&> m. ,&:< n. do.
-			m. s n.	
+		if. *./ 0 = #@:$&> m ,&:< n do.
+			m s n	
 		NB.  If we're replacing a list of items by the same
 		NB.  element (N-to-1 mapping), use e. instead of i.
 		NB.  This is not invertible.
-		elseif. (-: 1&|.) n. do.
-			(e.&m.) ` (,:&({. n.)) }
+		elseif. (-: 1&|.) n do.
+			(e.&m) ` (,:&({. n)) }
 		NB.  Else do the general case.
 		elseif. 1 do.
-			m. m n.
+			m m n
 		end.
 )
 
@@ -145,8 +145,8 @@ NB.  ===========================================================================
 	NB.  E.G. lookUpID	=: ((i.~ {."1) { {:"1@:]) 'ID_TABLE' evoke
 	evoke					=:  ". bind
 
-	NB.  Adverb to produce dyadic verb which applies u. to y. x. times.
-	NB.  Equivalent to u.^:x. y.
+	NB.  Adverb to produce dyadic verb which applies u to y x times.
+	NB.  Equivalent to u^:x y
 	NB.  EG:  5 (, 2: + 3: * {:) apply 0  NB.  Returns 0 2 8 26 80 242 (see JForum message from Zhe Fu on 2003-Jan-04).
 	apply					=:  (@:[) (&'')
 
@@ -158,13 +158,13 @@ NB.  ===========================================================================
 	tail					=:  {:@:(_1&{.)
 
 	NB.  Returns the rank of the input.  
-	NB.  EG:  3 :'rank ,:^:y. 0'&.> i. 4  NB. Returns ;/i.4
+	NB.  EG:  3 :'rank ,:^:y 0'&.> i. 4  NB. Returns ;/i.4
 	rank					=:  #@:$	
 
 	NB.  Merge the RHA by the specification of the LHA
 	NB.! Find some way to say this tacitly.
 	NB.  EG:  0 1 2 3 mergelists 'abcd','ABCD','efgh',:'EFGH'  NB.  Returns 'aBgH'
-	merge					=:  4 : 'x.}y.'
+	merge					=:  4 : 'x}y'
 
 	NB.  Merge a set of lists based on a merging specification
 	NB.  EG:  0 1 2 1 0 2 mergelists 'ABCDEFG';'0123';'zyxwvutsr'  NB.  Returns A1x3Eu
@@ -179,7 +179,7 @@ NB.  ===========================================================================
 	NB.  Round RHA to the nearest LHA.
 	round					=:  ([ * [: <. 0.5"_ + %~)
 
-	NB.  Scramble the items of y.
+	NB.  Scramble the items of y
 	scramble				=:  {~ ?~@:#
 
 	NB.  Identify the depth of nested parens at each point in a string
@@ -335,11 +335,11 @@ NB.  ===========================================================================
 
 	NB.  This is a slightly modified version of comb dyad that appears in
 	NB.  the documentaion for "for." in the J dictionary.  It produces all
-	NB.  the size x. combinations of the elements of y.  For example,
+	NB.  the size x combinations of the elements of y  For example,
 	NB.  3 comb 'abcde' NB.  Returns 10 3$'abcabdabeacdaceadebcdbcebdecde'
 	comb=: ((] {~ ((4 : 0) #)) ~.)
-	 	z=.1 0$k=.i.#c=.1,~(y.-x.)$0
-	 	for. i. x. do.
+	 	z=.1 0$k=.i.#c=.1,~(y-x)$0
+	 	for. i. x do.
 			z=.; k ,.&.> (-c=.+/\.c) {.&.> <1+z
 		end.
 )
@@ -382,20 +382,20 @@ NB.  ===========================================================================
 	NB.  EG:  pluralize |:(;: 'corps') (<1 ; ,_1) } 2 {. ,: ;: 'apple princess company millenium radius corps'  NB.  Returns <;._1 ' apples princesses companies millenia radii corps'  NB.  The pluraly of corps is corps
 	NB.
 	NB.  Input expected: 
-	NB.  	x. is singular suffixes
-	NB.     y. is output of splitRootsFromEndings
+	NB.  	x is singular suffixes
+	NB.     y is output of splitRootsFromEndings
 	roots						=.  {.@:]  NB.  This is from the output of splitRootsFromEndings
 	calculateMergeSpec			=.  (>:@:(i:&1@:="1)&.|: >@:{:)
 	mergeSpecPlusRoots			=.  calculateMergeSpec ; roots
 	NB.  Input expected:
-	NB.  	x. is singular suffixes ,: corresponding plural suffixes 
-	NB.     y. is original words ,: custom plurals 
+	NB.  	x is singular suffixes ,: corresponding plural suffixes 
+	NB.     y is original words ,: custom plurals 
 	prefixes					=.  {.@:[
 	splitRootsFromEndings		=.  ({.@> ,&<  {:@>)@:((}. ; {.)&.>"0 1~ -@:#&>)~&:{.
 	mergeSpecAndRoots			=.  (prefixes mergeSpecPlusRoots splitRootsFromEndings) f.  NB.  Need to f. because I will reuse the name 'roots' and 'prefixes'
 	NB.  Input expected:
-	NB.  	x. is (original words ,: custom plurals) ,&< plural suffixes
-	NB.     y. is merge spec ,&< word roots
+	NB.  	x is (original words ,: custom plurals) ,&< plural suffixes
+	NB.     y is merge spec ,&< word roots
 	roots						=.  >@:{:@:]
 	suffixes					=.  >@:{:@:[
 	originalWords				=.  {.@:>@:{.@:[
@@ -409,12 +409,12 @@ NB.  ===========================================================================
 	calculatePlurals			=.  mergeSpecWithCustomization  merge allPossiblePlurals
 	NB.
 	NB.  Input expected:
-	NB.  	x. is singular suffixes  ,: corresponding plural suffixes 
-	NB.     y. is original words ,: custom plurals 
+	NB.  	x is singular suffixes  ,: corresponding plural suffixes 
+	NB.     y is original words ,: custom plurals 
 	plurals						=.  ((,&< {:)~ calculatePlurals mergeSpecAndRoots) f.
 	NB.
 	NB.  Input expected:
-	NB.  y. is original words OR (original words ,. custom plurals)
+	NB.  y is original words OR (original words ,. custom plurals)
 	NB.! Only handles lowercase text.
 	NB.! Perhaps put '/s' first, so that all plurals get defaulted to 's', instead of using ,&'s'&.>@:originalWords
 
@@ -444,7 +444,7 @@ NB.  ===========================================================================
 	NB.  Should combine fmt, listToEnglish, breakDownLeagues, and something like roman (to create the prefixes (mill bill trill ...) by counting in Greek.
 	NB.  (<;._1 '//thousand/million/billion/trillion/quadrillion/quintiliion/sextillion/septillion/octillion/nontillion') (|.@:] trim@:listToEnglish@:,@:(<@:(' '&join)"1)@:|.@:,. ({.~ #)) ',' arbCut fmt (#UCALPHA,DIGITS) ^&:x: 8+3
 
-	NB.  Return (1 { x.) elements from y. starting at 0 { x.
+	NB.  Return (1 { x) elements from y starting at 0 { x
 	NB.  EG:  a. from~ 10 ,~ a. i. '0'  NB. Returns '0123456789'
 	from					=:  (];.0~ ,:/)~
 
@@ -524,7 +524,7 @@ NB.	ohma
 	NB.! Make this tacit (which is easy, but I didn't want to do it at the time I wrote it)
 	NB.  EG:  which 'ping.exe'  NB.  Returns ,<'C:\WINNT\system32\'
 	NB.  EG:  which 'word.*'	NB.  Returns ,<'c:\danielb\shortcuts\ms\'
-	which					=:  3 : '(<y.) (] #~ *@:#@:(1!:0)@:,~&>) ''\'' appendIfNotPresent&.> a: -.~ '';'' slice 2!:5''PATH'''
+	which					=:  3 : '(<y) (] #~ *@:#@:(1!:0)@:,~&>) ''\'' appendIfNotPresent&.> a: -.~ '';'' slice 2!:5''PATH'''
 
 NB.	files =. splitPath &> ; listFiles @: ,&'*' each /:~ '\'&appendIfNotPresent@:lc each a: -.~ ';' slice 2!:5 'PATH'
 NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup ])&>@:{:)@:|: files
@@ -570,7 +570,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 	parseFormat			=.  '$'&arbCut
 	NB.
 	placeHolders		=.  #~ $&0 1@:#
-	splitOn				=.  1 : '(({. ,&< (}.~ >:)~)~ i.&m.)'
+	splitOn				=.  1 : '(({. ,&< (}.~ >:)~)~ i.&m)'
 	phAndFormats		=.  ':' splitOn &> @: placeHolders
 	mapValues			=.  map {."1
 	valuesAndPHF		=.  (mapValues ,&< ]) phAndFormats
@@ -589,7 +589,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 	results				=.  parsedAndMask mergeFStrings fStrings f.
 	NB.	
 	values				=.  >@:{.@:] 
-	fmtResults			=.  values  4 : 'x. sprintf~ y.' ;@:results   NB.  4  : '...' to hide sprintf from f.
+	fmtResults			=.  values  4 : 'x sprintf~ y' ;@:results   NB.  4  : '...' to hide sprintf from f.
 	NB.
 	hideSlashes			=.   '\' s '|'  
 	formatStringx		=.  (] fmtResults valuesAndPHF) parseFormat
@@ -607,7 +607,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 	NB.!  The use of combineMaps precludes the user of these operators from changing the formatting of any of the values -
 	NB.!  that is, if the default table specifies a NUMBER field, the user can't over-ride and use NUMBER:X.  If
 	NB.!  I made combineMaps an adverb (or conjunction) that took normalizeNames as an argument, I could solve this problem.
-	formatStringA		=:  1 : '(0 2 $ a:)&$: : ((formatString~  m.&combineMaps_base_)~)'
+	formatStringA		=:  1 : '(0 2 $ a:)&$: : ((formatString~  m&combineMaps_base_)~)'
 	formatStringC		=:  ([. formatStringA) & ]. 
 	
 	NB.  Boolean function utilities
@@ -624,7 +624,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 	NB.  EG:  getBooleanFunction (1 1 ,: 0 1)  ; (1 0 ,: 1 1) NB.  Same as above
    	getBooleanFunction		=: BDOT_EQUIVALENTS&({~ #.@:,"2@:>)
 
-	NB.  First word. Essentially {. ;: y.
+	NB.  First word. Essentially {. ;: y
 	fw				=:  head@:;:
 
 	NB.  Verbs to create binary arrays locating the the elements before after, or between
@@ -639,7 +639,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 
 	NB.  Adverb that produces a conjunction.   Essetially a 3-argument operator that
 	NB.  produced a verb train.  Given verbs (f g h) produces (f@:[ g h@:]).
-	k						=:  fork  =:  1 : '2 : (''u.@:[ '' , (parenclose 5!:5<''u.''), '' v.@:]'')'
+	k						=:  fork  =:  1 : '2 : (''u@:[ '' , (parenclose 5!:5<''u''), '' v@:]'')'
 
 	NB.  Pair the items of the arguments, boxing if the types are not compatible.
 	NB.  I should really maintain a list of 'compatible' types and only box if
@@ -647,7 +647,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 	stitch					=:  ,.&:>/@:(-.@:-:&:(3!:0) (<"_1 apply &.>) ,&:<)
 
 	NB.  Adverb like /., but also gives the nub of the LHA.
-	nubAndKey				=:  1 : '~.@:[ stitch u./.'
+	nubAndKey				=:  1 : '~.@:[ stitch u/.'
 
 
 	NB.  Like E., this creates a boolean list where the elements of the right match the elements of the left
@@ -694,7 +694,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 	NB.  	Q       =: '"' = 'Some things "in quotes" are "to be removed"'                                     NB.  The input
 	NB.  	A       =:  0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1  NB.  The desired output
 	NB.  
-	NB.  	   CLOOG   =: (          <'';<@":">2 _2    ),(<     (3 : '<y. 5!:0 vtt')"0 BDOT_EQUIVALENTS     ),(<      '/' (<@:;@:,"_ 0&:;:) '\\.'      )  NB.  All useful boolean scans.
+	NB.  	   CLOOG   =: (          <'';<@":">2 _2    ),(<     (3 : '<y 5!:0 vtt')"0 BDOT_EQUIVALENTS     ),(<      '/' (<@:;@:,"_ 0&:;:) '\\.'      )  NB.  All useful boolean scans.
 	NB.  	   FOOG    =: { CLOOG
 	NB.  	   NOOG    =: FOOG , each <{.;:'Q'
 	NB.  	   ROOG    =: ;:^:_1 each NOOG
@@ -747,7 +747,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 	NB.  EG:  xb 5 7 12 NB.  Returns 0 0 0 0 0 1 0 1 0 0 0 0 1
 	NB.  xb					=: 1:`[`] } >:@:(>./) # 0:
 	NB.  xb					=: 1: modifyIndicies >:@:(>./) # 0:
-	NB.  xb					=:  $.^:_1@:(4 : '1 x.}y.' (1: $. >:@:(>./) ; 0: ; 0:))  NB.  Could use 1: modifyIndicies here
+	NB.  xb					=:  $.^:_1@:(4 : '1 x}y' (1: $. >:@:(>./) ; 0: ; 0:))  NB.  Could use 1: modifyIndicies here
 	xb						=: e.~ i.@:>:@:(>./)
 
 	NB.  Word wrap text at column given in LHA (which defaults to 80)
@@ -804,7 +804,7 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 
 	NB.  Lists the parts of speech used in a definition, from least common to most common.
 	NB.  EG:  partsOfSpeech partsOfSpeech vtt2 NB.  Returns 'adverb noun conjunction punctuation verb'
-	partsOfSpeech			=:  (({: /:~ {&(;:'? punctuation noun adverb conjunction verb locale')@:{.)@:((~.@:] ,: #/.~)) 2&+@:(3 : 'nc <''ff'' [ ". :: ] ''ff=.'',y.'&>))&.;:
+	partsOfSpeech			=:  (({: /:~ {&(;:'? punctuation noun adverb conjunction verb locale')@:{.)@:((~.@:] ,: #/.~)) 2&+@:(3 : 'nc <''ff'' [ ". :: ] ''ff=.'',y'&>))&.;:
 
 	NB.  Takes a rank-one numeric list as input, and outputs a rank-one literal list.  The output is the 'shorthand' for the input.  
 	NB.  That is, all sequences of equal elements longer than MAXIMUM_REPETITIONS are replaced by (count # element).  The output is 
@@ -835,28 +835,28 @@ NB.	;"1 F #~ 'vim' =&:(s:@:(lc&.>)@:boxopen) 1 {"1 F =: ({. ,. '.'&(i.~ splitup 
 	NB.! Note that fst is broken because replace is broken.  Try ('\\';'<DSLASH>') replace '\\'
 	fst						=:  formatStackTrace	=:  (_2 (<@:;~ '\'&,)~/\ '\\','t',TAB,'r',CR,'n',LF)&multireplace@:paste bind ''
 
-	NB.  Dyadic verb:  Takes a numerator & denominator, produces a rational of x.%y.
+	NB.  Dyadic verb:  Takes a numerator & denominator, produces a rational of x%y
 	NB.  EG:  22 r 7 NB.  Returns 22r7
 	r						=:  (, 'r'&,)&.":
 
 	psql					=:  parseSQLOutput  =:  verb define
-		(i.0) psql y.
+		(i.0) psql y
 :
 
 		NB.  Note I assume here that te SQL output has a single trailing space on each line.
-		TABs =. ' ' = sqlOutput {~ (>:@:[ + i.@:<:@:-~)/ 2 {. bx LFs =. LF = sqlOutput =. y. -. CR
+		TABs =. ' ' = sqlOutput {~ (>:@:[ + i.@:<:@:-~)/ 2 {. bx LFs =. LF = sqlOutput =. y -. CR
 
 		NB.  Put any indicies for exclusion (like _2 or whatever for 'rows effected:  N') 
 		NB.  in the first noun on the following line.  I have excluded the 2nd row because
 		NB.  that consists entirely of '-'s.
-		|: (dtb@:{. ; }.)&> (<^:4 x.,1) {&.> ('';TABs) <;._2 sqlOutput ];._2~ ] 1 (_1}) LFs
+		|: (dtb@:{. ; }.)&> (<^:4 x,1) {&.> ('';TABs) <;._2 sqlOutput ];._2~ ] 1 (_1}) LFs
 )
 
 	NB.  Adverb to apply a list of functions (as a gerund) to the columns of the input.
 NB.	across		=:	(((}.@$ $ ,)@:) (;.1) ~) (# # 1:)
 	NB.  Adverb, like across, which takes a gerund as a LHA.  The derived verb takes indicies into the 
 	NB.  gerund as a LHA and the data as a RHA.
-NB.	acrost		=:  1 : ' m.&(4 : ''(x. {~ > {. y.) across > {: y.'')@:(,&<)'
+NB.	acrost		=:  1 : ' m&(4 : ''(x {~ > {. y) across > {: y'')@:(,&<)'
 
 	NB.  Given a nested box input, returns an N by 2 table of leaf ,. path-to-leaf.
 	NB.  EG:  describeTree  5!:2<'describeTree'  NB.  Returns 19 2$(<,'>'),(<(,0);(,0);(,0);,0),(<,'@'),(<(,0);(,0);(,0);,1),(<'{.'),(<(,0);(,0);(,0);,2),(<,'"'),(<(,0);(,0);,1),(<1),(<(,0);(,0);,2),(<',.'),(<(,0);,1),(<'{:'),(<(,0);(,2);,0),(<,'"'),(<(,0);(,2);,1),(<1),(<(,0);(,2);,2),(<'@:'),(<,<,1),(<,'<'),(<(,2);(,0);,0),(<'L:'),(<(,2);(,0);,1),(<0),(<(,2);(,0);,2),(<',.'),(<(,2);(,1);,0),(<'&:'),(<(,2);(,1);,1),(<,'<'),(<(,2);(,1);(,2);,0),(<'S:'),(<(,2);(,1);(,2);,1),(<1),(<(,2);(,1);(,2);,2),(<'{::'),<(,2);,2
@@ -986,21 +986,21 @@ NB.  ===========================================================================
 	NB.
 	NB.  EG:   cv <"1(]#~#?~##~[:?.10"_);/'ABCDE'  NB.  Returns 6 19$(0$0);(0$0);(0$0);(0$0);'B';'B';(0$0);'C';'C';'C';'C';'D';(0$0);(0$0);(0$0);'E';'E';'E';(0$0);'A';(0$0);(0$0);(0$0);'B';'B';(0$0);(0$0);(0$0);(0$0);(0$0);'D';'D';'D';(0$0);'E';'E';'E';'E';'A';'A';(0$0);(0$0);'B';'B';'B';(0$0);(0$0);(0$0);(0$0);'D';'D';'D';'D';'E';(0$0);(0$0);(0$0);'A';(0$0);(0$0);(0$0);'B';'B';(0$0);'C';'C';'C';'C';'D';'D';'D';(0$0);(0$0);(0$0);(0$0);(0$0);'A';'A';'A';'A';(0$0);(0$0);(0$0);'C';(0$0);(0$0);(0$0);'D';'D';'D';(0$0);'E';'E';(0$0);(0$0);'A';'A';(0$0);(0$0);'B';(0$0);(0$0);'C';'C';'C';(0$0);(0$0);(0$0);(0$0);(0$0);'E';'E';'E';'E'
 	cv						=:  verb define
-		NB. displays items of y. to compare them visually
-		snr=./:~ ~. ; y.
+		NB. displays items of y to compare them visually
+		snr=./:~ ~. ; y
 
-		NB. sorted nub of razed y.
-		snc=.(<snr)([:+/"1=/)&>y.
+		NB. sorted nub of razed y
+		snc=.(<snr)([:+/"1=/)&>y
 
-		NB. sorted nub count in items of y.
+		NB. sorted nub count in items of y
 		snr #~ snc j.(-"1~>./)snc
 )
 
 
-	NB.  Conjuction that produces a verb that permutes y. in the same way m. is permuated from n.
+	NB.  Conjuction that produces a verb that permutes y in the same way m is permuated from n
 	NB.  EG:  cdab =: 'ABCD' permute 'CDAB' 
 	NB.       3 4 1 2 -: cdab 1 2 3 4  NB.  Returns t
-	permute					=:  2 : '(A. m. i. n.)&A. '
+	permute					=:  2 : '(A. m i. n)&A. '
 NB.  =====================================================================================================================================================
 NB.  File Utilities:  Utils to manipulate files and the file system.
 NB.  =====================================================================================================================================================
@@ -1085,7 +1085,7 @@ NB.  ===========================================================================
 
 	saveNamespace				=: 3 : 0
 	NB.  Utility to save all names to a J key file, which can later be loaded into another J session
-	NB.  The RHA (y.) is the name of the file to which the namespace will be saved.
+	NB.  The RHA (y) is the name of the file to which the namespace will be saved.
 	NB.! At this time no file checks are done (i.e. file is writable, doesn't exist, etc)
 		localeList			=. findNames''
 		nameList			=. 0 $ a:
@@ -1096,24 +1096,24 @@ NB.  ===========================================================================
 		end.
 		cocurrent currentLocale
 		require'keyfiles'
-		keycreate y.
-		(nameList) keywrite y.;<{."1 localeList
+		keycreate y
+		(nameList) keywrite y;<{."1 localeList
 		i. 0 0
 )
 	
 	loadNamespace				=: 3 : 0
 	NB.  Utility to load all names which were previously saved to a J key file by a call to saveNameSpace
-	NB.  The RHA (y.) is the name of the file in which the namespace is saved.
+	NB.  The RHA (y) is the name of the file in which the namespace is saved.
 	NB.! At this time no file checks are done (i.e. file exists, is non-empty, is in the right format, etc)
 	NB.! It appears copaths are not restored on loadNamespace.  Perhaps I should save and restore these explicitly with 18!:2.
 		require'keyfiles'
-	    localeList			=. keydir y.
-	    nameList			=. keyread y.;<localeList
+	    localeList			=. keydir y
+	    nameList			=. keyread y;<localeList
 		failedAssignments	=. 0 2 $ a:
 		currentLocale		=.  coname''
 		for_locale. localeList ,. nameList do.
 			cocurrent {. locale
-			failedAssignments  =. failedAssignments  , ({. locale) , < a: -.~ ({. 4 : ('(x.) =: y. 5!:0';'a:') :: [ "0 {:) > {: locale
+			failedAssignments  =. failedAssignments  , ({. locale) , < a: -.~ ({. 4 : ('(x) =: y 5!:0';'a:') :: [ "0 {:) > {: locale
 		end.
 		cocurrent currentLocale
 		(#~ [: a:&~: {:"1) failedAssignments
@@ -1165,10 +1165,10 @@ NB.  ===========================================================================
 	NB.  may use a list of boxes. These values will be assigned to the first N names in
 	NB.  the default parameter table.  If the caller passes in an unboxed value, that
 	NB.  value will be assigned to the first name in the default parameter table, unless
-	NB.  that value is null (0=#y.), in which case the default parameter table will be
+	NB.  that value is null (0=#y), in which case the default parameter table will be
 	NB.  used in its entirety, with no caller-defined values.
 
-		if. '3 :' beginsWith~ verbBody =. 5!:5<'v.' do.
+		if. '3 :' beginsWith~ verbBody =. 5!:5<'v' do.
 		NB.  If this is an explicit monadic verb, then redefine it appropriately.
 
 			NB.  Drop off the '3 : 0' (or '3 : ''')
@@ -1178,22 +1178,22 @@ NB.  ===========================================================================
 			NB.  the default table).  This allows the user's parameters to over-ride the defaults, without allowing him to
 			NB.  define names the function isn't expecting (which could possibly over-ride global names the function needs to
 			NB.  access).
-			createParameterTable	=.  m.&combineMaps f.
+			createParameterTable	=.  m&combineMaps f.
 
-			NB.  We will add these lines to the top of v., thereby redefining it.
+			NB.  We will add these lines to the top of v, thereby redefining it.
 
-			NB.  Apply createParameterTable to y. (the input to v.)
-	        newHeading		=.  'NB.  Create parameter name/value table from input and default table.', CRLF, 'params =. ', (5!:5<'createParameterTable') , ' y.'
+			NB.  Apply createParameterTable to y (the input to v)
+	        newHeading		=.  'NB.  Create parameter name/value table from input and default table.', CRLF, 'params =. ', (5!:5<'createParameterTable') , ' y'
 			NB.  Define some local names from the parameter table we just created.
 			newHeading 		=.  newHeading , CRLF, 'NB.  From the parameter name/value input table, define local names from column 0 to values from column 1' , CRLF , '({."1 params) =. {:"1 params'
 			NB.  Erase the noun 'params', so we don't interfere with globals of that name.
 			newHeading 		=.  newHeading , CRLF, 'NB.  Erase the noun ''params'', so we don''t interfere with globals of that name.' , CRLF , '4!:55 ,<''params'''
 
-			NB.  Drop off the trailing ')' (or '''') from v., add our new heading, and output the redefined verb.
+			NB.  Drop off the trailing ')' (or '''') from v, add our new heading, and output the redefined verb.
 			3 : (<;._2 toJ newHeading, CRLF, CRLF, ,&CRLF^:(LF&~:@:{:) _1 }. verbBody)
 		else.
-		NB.  If v. isn't an explicit monadic verb, don't do anything to it.
-	 		v.
+		NB.  If v isn't an explicit monadic verb, don't do anything to it.
+	 		v
 		end.
 )
 	NB.  Make readable parameterizations.
@@ -1210,8 +1210,8 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 	iedit					=:  adverb define
 	NB.  Adverb that will append the full definition of a multiline explicit verb to the IJX window.
 	NB.  EG:  function iedit NB. Appends full definition of verb 'function'.
-		name	=. 5!:5<'u.'
-		val		=. u. f. vtt_base_
+		name	=. 5!:5<'u'
+		val		=. u f. vtt_base_
 		wd 'smselout'
 		wd @:('smappend *'&,)@:,&LF each PORK_z_ =: LF arbCut_base_ toJ name , '=: ', val
 		i. 0 0
@@ -1221,64 +1221,64 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 	NB.  Monadic case of findNames:  Same as dyadic with an empty LHA.
 	NB.  Example (monadic):  findNames '^r'
 	NB.  Example (dyadic) :  (0 3;'base z') findNames '^r'
-		'' findNames y.
+		'' findNames y
 :
 	NB.  Utility to find named entities:
 	NB.  findNames allows searching for names of any type (noun, verb, etc.), or all types, in any or all locales.
 	NB.  Name searches are case-insensitive, and some basic search patterns are allowed.  Specifically, the first
 	NB.  character of the search string specifies the type of matching to do.
 	NB.
-	NB.  Input:  		x. can be either empty, numeric or boxed, and it specifies the types and locales of named
+	NB.  Input:  		x can be either empty, numeric or boxed, and it specifies the types and locales of named
 	NB.                 entities to find.
 	NB.
-	NB.					If 0 -: # x. then all names in all locales will be searched.
+	NB.					If 0 -: # x then all names in all locales will be searched.
 	NB.
-	NB.                 If x. is numeric, all locales are searched, and only those names whose type is
-	NB.                 an element of x. will be searched (as for names_z_ or nl_z_).
+	NB.                 If x is numeric, all locales are searched, and only those names whose type is
+	NB.                 an element of x will be searched (as for names_z_ or nl_z_).
 	NB.
-	NB.					If x. is boxed, then only the first two boxes matter.
-	NB.						0 { 2 {. x. is a numeric type list as described above.
-	NB.						    If 0 -: # 0 {:: 2 {. x. then all types will be searched.
-	NB.						1 { 2 {. x. is literal or boxed, and specifies what locales to search.
-	NB.						    If 0 -: # 1 {:: 2 {. x. then all locales will be searched.
+	NB.					If x is boxed, then only the first two boxes matter.
+	NB.						0 { 2 {. x is a numeric type list as described above.
+	NB.						    If 0 -: # 0 {:: 2 {. x then all types will be searched.
+	NB.						1 { 2 {. x is literal or boxed, and specifies what locales to search.
+	NB.						    If 0 -: # 1 {:: 2 {. x then all locales will be searched.
 	NB.
-	NB.					y. is literal, and provides the search pattern.
-	NB.						}. y. is the search string
-	NB.						{. y. is the type of search to perform.  The possible values of {. y. are as follows
-	NB.						(if {. y. is not one of the following, a default of '|' is assumed, and all of y.
+	NB.					y is literal, and provides the search pattern.
+	NB.						}. y is the search string
+	NB.						{. y is the type of search to perform.  The possible values of {. y are as follows
+	NB.						(if {. y is not one of the following, a default of '|' is assumed, and all of y
 	NB.						is used as the search string):
 	NB.							'=' means 'exactly match the name'.
 	NB.							'|' means 'match anywhere in the name'.
 	NB.							'^' means 'match at the beginning of the name'.
 	NB.							'$' means 'match at the end of the name'.
 	NB.							'~' means 'match regular expression'.
-	NB.					Note that if '!' -: {. y., then the  search is negated (i.e. the names that do NOT match the
- 	NB.					pattern are returned), and }. y. is considered the search pattern.
+	NB.					Note that if '!' -: {. y, then the  search is negated (i.e. the names that do NOT match the
+ 	NB.					pattern are returned), and }. y is considered the search pattern.
 	NB.
 	NB.  Output: A 2 by N matrix of boxes, with N = to the number of locales searched (which will always be >: 1).
 	NB.  The first box in each row contains the literal name of a locale searched, and the second box of each
 	NB.  contains a list of boxes (possibly with # = 0) each containing a name in that locale matching the search
 	NB.  pattern.
 
-		NB.  This complicated line is just to make sure that we default correctly.  That is, x. must always be a list of 2 boxes,
+		NB.  This complicated line is just to make sure that we default correctly.  That is, x must always be a list of 2 boxes,
 		NB.  the second containing conl$0 if no locale names were provided.
-		locales				=.  1 {:: x. =. ({. , ((conl$0)"_^:(0: -: #))@:(;:^:(-.@:*@:L.))&.>@:{:)@:(2&{.)@:boxopen x.
+		locales				=.  1 {:: x =. ({. , ((conl$0)"_^:(0: -: #))@:(;:^:(-.@:*@:L.))&.>@:{:)@:(2&{.)@:boxopen x
 
 		NB.  This creates a verb which will negate our search function if and only if the first character of
 		NB.  the search string is '!'.  It also updates the search string by removing the '!' if it's present.
-		negate				=.  -.^: ( 1 {:: 'y. z' =. ((}.~ ; ]) '!'&-:@:(0&{)@:(1&{.)) y. )
+		negate				=.  -.^: ( 1 {:: 'y z' =. ((}.~ ; ]) '!'&-:@:(0&{)@:(1&{.)) y )
 
 		NB.  If no proper search type is specified, the default, '|' or 'match anywhere in the name',
 		NB.  is used.
-		y.					=.  (,~ {.&'|'@:-.@:(e.&'=|^$~')@:{.~&1) trim y.
+		y					=.  (,~ {.&'|'@:-.@:(e.&'=|^$~')@:{.~&1) trim y
 
 		NB.  These are our search verbs - they correspond to the search type in the following line.
 		verbs				=.  -:`(+./@:E.)`(beginsWith~)`(endsWith~)`rxin
 
 		NB.  This will select the correct search verb from the list.  5!:0 turns the result of the
 		NB.  pick from the gerund into a verb.
-		NB.! Maybe I could use @. here.  EG verbs@.] '=|^$' i. searchType =. 0 { 1 {. y.
-		searchVerb			=.  (verbs {~ '=|^$' i. searchType =. 0 { 1 {. y.) 5!:0
+		NB.! Maybe I could use @. here.  EG verbs@.] '=|^$' i. searchType =. 0 { 1 {. y
+		searchVerb			=.  (verbs {~ '=|^$' i. searchType =. 0 { 1 {. y) 5!:0
 
 		NB.  Require regexes for the '~' operator, i.e., only load 'regex' if I'm actually going to use it.
 		require^:(searchType -: '~') 'regex'
@@ -1287,7 +1287,7 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 		nameList			=. 0 2 {. a:
 
 		for_locale. locales do.
-	 		nameList		=. nameList , locale , < y. (] #~ (negate@:searchVerb&lc~ }.)~ &>&boxopen) nl__locale 0 {:: x.
+	 		nameList		=. nameList , locale , < y (] #~ (negate@:searchVerb&lc~ }.)~ &>&boxopen) nl__locale 0 {:: x
 		end.
 )
 
@@ -1310,15 +1310,15 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 	NB.             EG:  If user types just ')' then session ends, but if he types ')i.2' then '0 1' gets passed
 	NB.             to the function.
 	NB.  EG:  ;: smconsole '>  ' '' NB.  Will show the J tokenization of each line of input (prompt is '>  ')
-	smconsole				=:  2 : '($:@:[ smoutput@:(u. :: lastErr))`empty@.(-:&'')''@:head@:trim)@:sminput bind n.'
+	smconsole				=:  2 : '($:@:[ smoutput@:(u :: lastErr))`empty@.(-:&'')''@:head@:trim)@:sminput bind n'
 	smc						=:  smconsole '      '
 
 	NB.  Assign the (character vector) argument to a name, then pass that name as an argument to the function.
 	NB.  Good for dereferencing data, encapsulation, higher-order operators, etc.
-	passArgAsName			=:  1 : ' ''name''&(u.@:[ [ ".@:(, '' =. ''&,)) '
+	passArgAsName			=:  1 : ' ''name''&(u@:[ [ ".@:(, '' =. ''&,)) '
 
 	NB.  Just like smconsole but allows the LHA to detect the end of input (i.e. the ')') and handle it.
-	smconsoleDetectEOI		=:  2 : '($:@:[ smoutput@:(u. :: lastErr))@:sminput bind n.`empty@.(-:&'')''@:head@:trim)'
+	smconsoleDetectEOI		=:  2 : '($:@:[ smoutput@:(u :: lastErr))@:sminput bind n`empty@.(-:&'')''@:head@:trim)'
 
 	NB.  A simple dos shell.  Depends on Oleg's 'shell' verb (in .\oleg\task.ijs).
 	NB.  Keep in mind:
@@ -1359,7 +1359,7 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 
 	NB.  SMConsole session, output is time,space of input sentence.  LHA is LHA to 6!:2, RHA is prompt.
 	NB.  Default LHA is 1, default RHA is 6 # ' '.
-	tm						=:  timeinate	=:  1&$: : (4 : '(1:^:(e.&1 4@:(3!:0) *: *@:#) x.)&ts smconsole ((*@:# {:: (6#'' '')&;) y.)$~0')
+	tm						=:  timeinate	=:  1&$: : (4 : '(1:^:(e.&1 4@:(3!:0) *: *@:#) x)&ts smconsole ((*@:# {:: (6#'' '')&;) y)$~0')
 
 	NB.  Close J.  No 'Are you sure?' dialog.
 	exit					=:  2!:55 bind ''
@@ -1404,17 +1404,17 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 	ft						=:  fulltype	=:  ]`((, ': '&,@:nountype@:".@:;)~)@.(-:&'noun'@:]) nametype
 
 	NB.  Turn a noun into text.  EG: nounToText <'NUMBERS';1 2 3 NB.  Returns '(<''NUMBERS'';1 2 3)'
-	ntt						=:  nounToText	=:  verb   def '5!:5 < ''y.'' '
+	ntt						=:  nounToText	=:  verb   def '5!:5 < ''y'' '
 
 	NB.  Turn a verb into text.  EG: (+/ % #) verbToText NB.  Returns '(+/ % #)'
-	vtt						=:  verbToText	=:  adverb def '5!:5 < ''u.'' '
+	vtt						=:  verbToText	=:  adverb def '5!:5 < ''u'' '
 	NB.  Like verbToText, but applies f. first.
 	vtt2					=:  verbToText2	=:  f. vtt 
 
 	NB.  Turn a call into text.  EG:  1 2 3 4 ({.~ +/)~ callToText 'HELLO'  NB. Returns '(1 2 3 4)(({.~ +/)~)(''HELLO'')'
-	ctt						=:  callToText	=:  adverb def '(, ,~&(parenclose u. verbToText))&>/@:{.~&_2@:,~&a:@:,&:(<@:parenclose@:nounToText)'
+	ctt						=:  callToText	=:  adverb def '(, ,~&(parenclose u verbToText))&>/@:{.~&_2@:,~&a:@:,&:(<@:parenclose@:nounToText)'
 	NB.  Like callToText, but without the enclosing parens.  Prettier at the expense of fidelity.
-	ctt2					=:  callToText2	=:  adverb def '(, ,~&(           u. verbToText))&>/@:{.~&_2@:,~&a:@:,&:(<@:            nounToText)'
+	ctt2					=:  callToText2	=:  adverb def '(, ,~&(           u verbToText))&>/@:{.~&_2@:,~&a:@:,&:(<@:            nounToText)'
 
 
 	NB.  Unfold is like another 5!: representation.  It splits definitions out onto lines by their depths.
@@ -1459,11 +1459,11 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 	screenSize				=:  {.@:wcsize bind '' <. 1: { 9!:36 bind ''
 
 	NB.  Get last error message
-	NB.  EG:  3 : ('try. 3 + y. catch. lastErr$0 end.') '3' NB.  Returns 'domain error' , LF , '   3    +y.'
+	NB.  EG:  3 : ('try. 3 + y catch. lastErr$0 end.') '3' NB.  Returns 'domain error' , LF , '   3    +y'
 	lastErr			=:  (}: @: (13!:12) @: empty)
 
 	NB.  Debug - Show name
-	NB.  EG: dbsn 'Insert y.'
+	NB.  EG: dbsn 'Insert y'
 	dbsn			=:  0 7&{"1@:dbstk bind '' multiMap_base_ ;:^:(0: -: L.)
 
 	NB.  Head-tail splitter.  Adverb that produces a conjunction.
@@ -1473,7 +1473,7 @@ NB.	makeParamTable          =:  ((deb@:{. ,&:< ".@:}.@}.)~ i.&'=')&>@:(LF&arbCut
 	NB.  The verb split defaults the processing functions to lev and dex.
 	NB.  Note that the derived verbs are dyadic, whose monadic case are defaulted to splitting
 	NB.  the data in half (if (1: -: 2: | #) then head gets the smaller list).
-    ht						=:  1 : '2 : (''($:~ <.@:-:@:#) : (u.@:{. ('' , u. vtt2_base_  , '') v.@:}.)'')'
+    ht						=:  1 : '2 : (''($:~ <.@:-:@:#) : (u@:{. ('' , u vtt2_base_  , '') v@:}.)'')'
     partition				=:  ,&:< ht f.
 	split					=:  [ partition ] f.
 
@@ -1563,8 +1563,8 @@ NB.	progIDX						=:  ($@:[ $ [: /:@:/: [ i. ,) i. ($@:] $ [: /:@:/: [ i. ,~)
 	NB.      foo 3 NB.  Returns 6
 	NB.      foo 0 NB.  Returns 6
 	NB.      foo 5 NB.  Returns 11
-	NB.  acc	=:  1 :('n=.":<:#N_z_=:(3 :''N_z_''::((i.0)"_)''''),m.';'3 :(n,''{N_z_=:'',''(y.+'',n,''{N_z_)'',n,''}N_z_'')')
-	NB.  acc	=:  1 :('((n)=:m.[n=.''xxx'',''_z_'',~":N_z_=:>:3 :''{N_z_''::_1:'''')';'3 :(n,''=:'',n,''+y.'')')
+	NB.  acc	=:  1 :('n=.":<:#N_z_=:(3 :''N_z_''::((i.0)"_)''''),m';'3 :(n,''{N_z_=:'',''(y+'',n,''{N_z_)'',n,''}N_z_'')')
+	NB.  acc	=:  1 :('((n)=:m[n=.''xxx'',''_z_'',~":N_z_=:>:3 :''{N_z_''::_1:'''')';'3 :(n,''=:'',n,''+y'')')
 
 	NB.  A re-implementation of expand (#:^:_1)
 	NB.  Note that, unlike #^:_1, +/@:[ can be less than #@:]
@@ -1584,7 +1584,7 @@ NB.	progIDX						=:  ($@:[ $ [: /:@:/: [ i. ,) i. ($@:] $ [: /:@:/: [ i. ,~)
 	NB.  EG:   2 3   '' insurt  'hello'  NB.  Returns 'hel l o'
    
 	NB.  Named insurt because insert is too common.
-	insurt                      =:  1 : ' if. -. * # m. do. ex =. #  else. ex =. #!.m. end.  (] ex f.~ 1: j. i.@:#@:] e. (| - <&0)@:[ )'
+	insurt                      =:  1 : ' if. -. * # m do. ex =. #  else. ex =. #!.m end.  (] ex f.~ 1: j. i.@:#@:] e. (| - <&0)@:[ )'
 NB.  =====================================================================================================================================================
 NB.  Execution section: Run at startup
 NB.  =====================================================================================================================================================
@@ -1609,7 +1609,7 @@ NB.  ===========================================================================
 	NB.  and fix his definitions to work with J4.
 	load listFiles MY_PATH,'contrib\paul_chapman\*.ijs'
 	load MY_PATH,'contrib\paul_chapman\ats.ijs'
-   	replaceWords				=.  2 : '(y.,~;:n.) {~ y. i.~ (y.,~;:m.)'
+   	replaceWords				=.  2 : '(y,~;:n) {~ y i.~ (y,~;:m)'
    	(toFix)						=:  2 : (('H=.{.@:(1&{.) :{.';'T=.{:@:(_1&{.) :{:') , <@:(('{. {:' replaceWords 'H T')&.;:)"1 ('';;/3#1) {:: 5!:1 toFix=.<'conjs')
 
 

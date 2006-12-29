@@ -7,7 +7,7 @@ NB.  So, +./"1@:nameScope indicates which names are defined (same as   _1 < nc )
 NB.  and </ "1@:nameScope indicates which names will come from a global name table.
 NB.  and >/ "1@:nameScope indicates which names are strictly local.
 NB.  and =/ "1@:nameScope indicates which names are locals shadowing globals
-nameScope  =: (( (~: ,. *.&:(~:&_1))  ({~ i.&1@:~:&_1 <. _1 + #)"1 )&:(([ #!._1^:_1: 15!:6@:# )"1~ _1 < nc) [: ;&.> @:{ 1j1 1j1 #!.(<<'_')   ;:^:(0 = L.) ,&< 3 : '(, |.@:copath) coname$~0' )
+nameScope  =: (( (~: ,. *.&:(~:&_1))  ({~ i.&1@:~:&_1 <. _1 + #)"1 )&:(([ #!._1^:_1: 15!:6@:# )"1~ _1 < nc) [: ;&.> @:{ 1j1 1j1 #!.(<<'_')   ] ,&< (, |.@:copath)@:coname@:(''"_) )@:(;:^:(0 = L.))
 NB.
 NB.  The four possibilities above are encapsulted in this verb:
 ns         =:  #.@:nameScope

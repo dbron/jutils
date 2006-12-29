@@ -40,18 +40,19 @@ ns_type                             =: ;:^:(0 = L.) ,. ns_ENUM {~ ns_RC i. ns
 
 NB.  An adverb, like  f.  , that only fixes local names.
 NB.  In a in a script or an explicit definition, try:
+NB.  EG:   0!:011 (0 : 0)
+NB.  EG:	   local    =. 4
+NB.  EG:	   localv   =. +
+NB.  EG:	   global   =: 45612
+NB.  EG:	   globalv  =: +:
+NB.  EG:	   r        =. local localv global globalv ]
 NB.  EG:  
-NB.  EG:  local    =. 4
-NB.  EG:  localv   =. +
-NB.  EG:  global   =: 45612
-NB.  EG:  globalv  =: +:
-NB.  EG:  r        =. local localv global globalv ]
-NB.  EG:  
-NB.  EG:  A        =:  r fl
-NB.  EG:  B        =:  (local localv global globalv r) fl
-NB.  EG:  
-NB.  EG:  A is now 4 + 45612 globalv ]
-NB.  EG:  B is now 4 + 45612 globalv 4 + 45612 globalv ]
+NB.  EG:	   A        =:  r fl
+NB.  EG:	   B        =:  (local localv global globalv r) fl
+NB.  EG:   )  
+NB.  EG:
+NB.  EG:   A  is now  4 + 45612 globalv ]
+NB.  EG:   B  is now  4 + 45612 globalv 4 + 45612 globalv ]
 NB.
 NB.  The verb 'peel' takes one name-layer off its argument,
 NB.  which is a string giving a name (local or global).
@@ -65,10 +66,10 @@ NB.  (+/ # foo) Peel.
 NB.
 NB.  We can use an explicit def here, because 'u' is special 
 NB.  in exp. defs (it doesn't hide behind its name).
-Peel     =:  1 : ' > {. u`[ 'NB. ~
+Peel     =:  1 : 'peel ''u'' ' NB. ' > {. u`[ 'NB. ~
 NB.
 NB.  Keep peeling layers until no local names are left
-resolve  =:  peel^:({.@:ns_isLOCAL :: 0:) L: 0^:_
+resolve  =:  >@:peel^:({.@:ns_isLOCAL :: 0:) L: 0^:_
 NB.
 NB.  Fix local names.  The "{.;:'Peel'" trick is because
 NB.  conjunction-adverb is a syntax error.  I could have also

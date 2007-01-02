@@ -111,8 +111,8 @@ NB.  The set is:
 NB.
 NB.       ns_hasLOCAL`ns_hasGLOBAL 
 NB.
-NB.  EG:     3 : '(ns_hasLOCAL  > ns_isLOCAL ) both=.''local'' ' both =: 'global'
-NB.  EG:     3 : '(ns_hasGLOBAL > ns_isGLOBAL) both=.''local'' ' both =: 'global'
+NB.  EG:     3 : '(ns_hasLOCAL  > ns_isLOCAL ) both=.''both'' ' both =: 'global'
+NB.  EG:     3 : '(ns_hasGLOBAL > ns_isGLOBAL) both=.''both'' ' both =: 'global'
 parenclose =.  '(' , ')' ,~ ]
 join       =.  -@:#@:[ }. ;@:(,&.> boxopen)~
 ('`', ;:^:_1 'ns_is' ,L:0 ns_ENUM)  =: ". '`' join nss parenclose@:, L: 0 ' = ns'

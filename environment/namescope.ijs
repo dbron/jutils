@@ -103,7 +103,7 @@ NB.
 NB.  EG:     3 : 'ns_isUNASSIGNED '   'nada''   '                     NB.  equivalent to ns_UNASSIGNED = ns
 NB.  EG:     3 : 'ns_isLOCAL          ''y''     '                     NB.  equivalent to ns_LOCAL      = ns
 NB.  EG:     3 : 'ns_isGLOBAL         ''each''  '                     NB.  equivalent to ns_GLOBAL     = ns
-NB.  EG:     3 : 'ns_isSHADOWED both=.''local'' ' both =: 'global'    NB.  equivalent to ns_SHADOWED   = ns
+NB.  EG:     3 : 'ns_isSHADOWED both=.''both''  ' both =: 'global'    NB.  equivalent to ns_SHADOWED   = ns
 NB.
 NB.  The second set of verbs indicate if a name HAS the 
 NB.  attribute (e.g., if a name is shadowed, it HAS local).

@@ -31,10 +31,10 @@ NB.  EG:  [: #&.> cut
 
 
 NB.  An adverb, like  f.  , that only fixes local names.
-NB.  The "{.;:'Peel'" trick is because the train 
-NB.  (conjunction adverb) is a syntax error.  I could have
-NB.  also said (`5!:1{.;:'Peel').
-fl       =:  fixLocal =:`({.;:'Peel') (resolve`) (`:6) (5!:0)
+NB. 
+NB. fl   =:  fixLocal =:`({.;:'Peel') (resolve`) (`:6) (5!:0)     NB.   The "{.;:'Peel'" trick is because the train  (conjunction adverb) is a syntax error.
+NB. fl   =:  fixLocal =: Peel (`(;:'`')) (`]) ({.`)  (`:6) (5!:0)  NB.  The (`(;:'`'))   trick is because C0 C1 is a syntax error.  
+fl       =:  fixLocal =: Peel ("_) (`(;:'a:')) (resolve`) (`:6) (5!:0) 
 NB.
 NB.  Keep peeling layers until no local names are left.
 resolve  =:  >@:peel^:({.@:ns_isLOCAL :: 0:) L: 0^:_
@@ -44,9 +44,8 @@ NB.  peel'foo'  we can say  foo Peel  (so we don't have to
 NB.  quote names) or even pass anonymous verb arguments like
 NB.  (+/ # foo) Peel.
 NB.
-NB.  We can use an explicit def here, because 'u' is special 
-NB.  in exp. defs (it doesn't hide behind its name).
-Peel     =:  1 : 'peel ''u'' ' NB. ' > {. u`[ 'NB. ~
+NB. Peel     =:  1 : 'peel ''u'' ' NB. ' > {. u`[ 'NB. ~  NB. We can use an explicit def here, because 'u' is special  in exp. defs (it doesn't hide behind its name).
+Peel     =:  1 : '{. u + 1 : ((''`'' ; ''&;'') {::~ noun -: nc {.;:''m'') a:'
 NB.
 NB.  The verb 'peel' takes one name-layer off its argument,
 NB.  which is a string giving a name (local or global). Have

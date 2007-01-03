@@ -1,12 +1,16 @@
 NB.  Fix local names.
-NB.  EG:     0!:0(0 :0)
+NB.  EG:     NB.  Put these lines in a script (seperate file):
+NB.  EG:     
 NB.  EG:	   local   =. +
 NB.  EG:	   global  =: -
 NB.  EG:	   r       =. global local %
 NB.  EG:
 NB.  EG:	   f       =: r fl
 NB.  EG:	   g       =: (global local r global -) fl
-NB.  EG:  )  
+NB.  EG:     
+NB.  EG:     NB.  End of script
+NB.  EG:    
+NB.  EG:     load'name_of_your_script.ijs' 
 NB.  EG:
 NB.  EG:     f
 NB.  EG:  global + %

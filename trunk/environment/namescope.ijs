@@ -42,7 +42,7 @@ NB.
 NB. Peel     =:  1 : 'peel ''u'' ' NB. ' > {. u`[ 'NB. ~  NB. We can use an explicit def here, because 'u' is special  in exp. defs (it doesn't hide behind its name).
 Peel     =:  1 : '{. u + 1 : ((''`'' ; ''&;'') {::~ noun -: nc {.;:''m'') a:'
 NB.  Keep peeling layers until no local names are left.
-resolve  =:  >@:peel^:({.@:ns_isLOCAL :: 0:) L: 0^:_
+resolve  =:  >@:peel^:({.@:ns_hasLOCAL :: 0:) L: 0^:_
 NB.
 NB.  An adverb, like  f.  , that only fixes local names.
 NB. 

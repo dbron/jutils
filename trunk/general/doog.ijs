@@ -24,6 +24,13 @@ NB.  verb(s) in the argument(s), and returns a gerund:
    Across       =:  First (;.2)~ (`1:) (`:6)
    Ax           =:  1 : 'u Across : (u;._2)'
 
+   Encap        =: adverb define
+		4 : (1 |. 'm[(''__m'',L:0~{.x)=. ({:x) BxAx y';'m =. ',5!:5{.;:'m' )
+)
+
+   encap        =: dyad define
+   x (cocreate '') Encap&|: y
+)
 
    NB.  Morever,  doog  extends this behavior (in two ways). Whereas 
    NB.  the J implementation restricted compositions with gerunds to the 
@@ -32,6 +39,7 @@ NB.  verb(s) in the argument(s), and returns a gerund:
    NB.  will probably find many uses.  See Test Block C.
    Each         =:  '&.' doog >
    AcrossBoxed  =:  Each Across
+   BxAx         =:  (< Atop) Across
    Abx          =:  Each Ax
   
    parse =: dyad define

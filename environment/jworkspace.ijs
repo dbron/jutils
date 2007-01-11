@@ -63,7 +63,7 @@ promptForWorkspace =: dyad define
 
 NB.=======================================================
 NB.  Save workspace
-getMainParams		=: ({. ,: wd each @:{:)@:|: bind ('=' makeTable noun define)
+getMainParams		=: (,: wd each)/@:|: bind ('=' makeTable noun define)
 	Position = qsmmfmove
 	State    = qsmmfshow
 	IJXState = qsmmfshow

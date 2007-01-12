@@ -4,6 +4,9 @@ NB.  Tokenize XML
 tt =: tokenizeTags =: verb define
 
 	NB.  This will also drop everything before the 1st tag
+	NB.c          =. y e. TAB,CR,LF
+    NB.y          =. c } ' ' ,: y
+
 	(--.{:{:h) }. y <;.1~ +./ 0 _1 |."_1 h=.'<>' =/ y 
 
 )
@@ -45,7 +48,7 @@ pa =: parseAttributes =: verb define
 	nv         =. {.~ ;&:trimSyn (}.~ >:)
 	cutNV      =. nv i.&'='
 
-	attrCutMsk =. [: ((> ~:/\) > 2 | +/\@:]) / ' "' =/ ] 
+	attrCutMsk =. [: ((> ~:/\) > 2 | +/\@:]) / ((,'"');' ',CR,LF,TAB) e.&>~ < 
 	cutAttr    =. ] cutNV;.1~ 1: 0} attrCutMsk 
 	tagAsAttr  =. (2 {. 'tag' ; {.) , }. 
     attrs      =. [: tagAsAttr cutAttr 
@@ -54,7 +57,7 @@ pa =: parseAttributes =: verb define
 	freeTxt    =. ('tag';'FREE_TEXT') ,: ('CONTENT'&;) NB. ('/FREE_TEXT';'') ,&:<~ 'FREE_TEXT'&;
 	parse      =. freeTxt`attrs@.isTag&.>
 
-    parse y
+    parse  y
 )
 
 

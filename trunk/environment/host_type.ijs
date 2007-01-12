@@ -1,11 +1,11 @@
-require 'task'
+require 'task doog'
 
 NB.  Get the URL from qdoj
 NB.  Actually, modify qdoj so that  qodj '3!:' gets this url,
 NB.  and qdoj '3!:1' gets the table row for 3!:1, etc.
 NB.  and if I ask for a vocab page, I should be able to ask for "monadic", "dyadic", "ranks", "examples", "example code", etc.
 NB.  qdoj should return the text as nested tables, like I do here.
-PORK                   =.  shell 'c:\app\cygwin\bin\w3m -dump -cols  500                 http://www.jsoftware.com/books/help/dictionary/dx003.htm'      
+PORK                   =.  shell 'c:\cygwin\bin\w3m -dump -cols  500                 file://localhost/C:/Documents%20and%20Settings/dbron/My%20Documents/app/j/current/system/extras/help/dictionary/dx003.htm'      
 BAM                    =.  > 3 : ' PRKf <;._1~ (;&:(1 , 2 </\ *./)~ |:) '' '' = PRKf=.'' '' , '' '' ,. y'^:(1 < #) L: 0^:2 <3 }. _3 }. ];._1 LF ,PORK
 tbl                    =.  3 {. , (<5;1) {:: BAM
 
@@ -15,11 +15,11 @@ normalize_byte_order   =.  [: (6 s: s:) normalize each@:(]&.s:)
 col_processors         =. (0&".)`(0 ". {.&.;:)`normalize_byte_order  ,. ;: 'x word_size byte_order' 
 col_process            =. ({."1 col_processors) {~ ({:"1 col_processors)&i. 
 
-'nms vals'             =.  1 <@:(normalize each`])@{.;.1 deb"1&.> |: split&> (TAB sr ' ')&.> tbl 
+'nms vals'             =.  normalize&.>`] BxAx deb"1&.> |: split&> (TAB sr ' ')&.> tbl 
 
 verbs                  =. col_process  nms
 
-xwb                    =. |: > (nms) =. 1 < @: verbs @:>@:{.;.1 vals
+xwb                    =. |: > (nms) =. verbs Abx vals
 
 assert 'integer' -: datatype int =. 2
 
@@ -34,11 +34,14 @@ WORD_SIZE_ENUM         =: ~. word_size
 WORD_SIZE_nms          =. 'WORD_SIZE_',L: 0 ":&.> WORD_SIZE_ENUM
 (WORD_SIZE_nms)        =: <"_1 WORD_SIZE_ENUM
 
-HOST_CONVERT           =: 1 : ' (  lookup111 f. ^:_1 ) : (  (3!:m~ $:)~ )  :.  lookup111  =. (}."1 xwb) {~ ({."1 xwb)&i. '
+lookupWB                =: (}."1 xwb) {~ ({."1 xwb)&i. 
+
+NB.HOST_CONVERT           =: 1 : '(  lookup111 f. ^:_1 ) : (  (3!:m~ $:)~ )  :.  lookup111  =. (}."1 xwb) {~ ({."1 xwb)&i. '
+HOST_CONVERT           =: 1 : '(  lookupWB f. ^:_1 ) : (  (3!:m~ $:)~ )  :.  lookupWB f. '
 
 NB.  If we define the byte order enum such that
 NB.     1  means standard  and  2  means reverse, then
-NB.  lookup111 turns out to be equivalent to 
+NB.  lookupWB turns out to be equivalent to 
 NB.               (2 2 #. 5 0 -~ 2 ^. ])   
 NB.  The  2 2  is important:  you cannot use   2 #.  
 NB.  or  mondic  #.  because the latter doesn't invert correctly
@@ -55,18 +58,18 @@ IF64_z_                =: HOST_word_size = 64
 
 aabbaa=.3 : ' PRKf <;._1~ (;&:(1 , 2 </\ *./)~ |:) '' '' = PRKf=.'' '' , '' '' ,. y'^:(1 < #) L: 0^:2
 bbaabb=.3 : ' PRKf <;._1~ (;&:(1 , 2 </\ *./)~ |:) (~. ''+'' (] {~ [: i.&1 e."1) BOXES_jijs_) e.~ PRKf=.''+'' , ''+'' ,. y'^:(1 < #) L: 0^:2
-BAM2  =:((1 <@:( 0 0 1 { ({:@:>@:{.@:,@:(0&{))`([: , 1&{))@:>@:{.;.1 ])@:{. , }.)> each >,.&.>/}:@:aabbaa each }:}.{.bbaabb > 0 { 0 { > 0 { 1 { 8 { BAM
-tbl2  =: 0 1 3 { > {: {. BAM2  
+BAM2  =.(( 0 0 1 { ({:@:>@:{.@:,@:(0&{))`([: , 1&{)) Abx@:{. , }.) > each >,.&.>/}:@:aabbaa each }:}.{.bbaabb > 0 { 0 { > 0 { 1 { 8 { BAM
+tbl2  =. 0 1 3 { > {: {. BAM2  
 
 require 'convert'
 flag_processor =. dfh@:toupper  :. (tolower@:hfd)
-bbo =: |: > 'flag bits order' =: 1 <@:( flag_processor ` (}. verbs))@:>@:{.;.1  tbl2
+bbo =. |: > 'flag bits order' =: ( flag_processor ` (}. verbs)) Abx  tbl2
 assert ({."1 bbo) -: a. i. int {.@HOST_CONVERT_bytes"_1 _~   }."1 bbo
 
 
 NB. HOST_CONVERT           =: 1 : ' (  lookup111 f. ^:_1 ) : (  (3!:m~ $:)~ )  :.  lookup111  =. (}."1 bbo) {~ ({."1 bbo)&i. '
-bbo_lookup =. (}."1 bbo) {~ ({."1 bbo)&i.
-assert (HOST_word_size,HOST_byte_order) -: bbo_lookup HOST_flag =: a. i. {.3!:1 int   
+bbo_lookup =: (}."1 bbo) {~ ({."1 bbo)&i.
+assert (HOST_word_size,HOST_byte_order) -: bbo_lookup HOST_flag =: a. i. {. 3!:1 int
 
 FLAG_ENUM              =: ~. flag
 FLAG_nms               =. 'FLAG_',L: 0 <"_1 flag_processor^:_1 FLAG_ENUM

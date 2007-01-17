@@ -56,16 +56,16 @@ testOnLoad      =. 0  NB.  0 disables, 1 enables.
   1:`2: At (3:`4:)  -:      1:@3:`(2:@4:)
 
   NB.  Block B:  Apply successive verbs to succesive items.
-  (  +:`-:`*:`>: Across       i. 4*3 )                  -:   ,(+:0+a    ),.(-:1+a     ),.(*:2+a     ),.(>:3+a=.4*i.3 )
+  (  +:`-:`*:`>: Across       i. 4*3 )                  -:   ,( +:0+a ),.( -: 1+a ),.( *: 2+a ),.( >: 3+a=.4*i.3 )
 
   NB.  Block C:  Distribute arbitrary conjunctions.
-  (  +:`-:`*:`%: AcrossBoxed  (1+i.4)  *&.>   <i.3 3 )  -:    (+:1*a    ); (-:2*a     ); (*:3*a     ); (%:4*a=.i.3 3 )
+  (  +:`-:`*:`%: AcrossBoxed  (1+i.4)  *&.>   <i.3 3 )  -:    ( +:1*a ); ( -: 2*a ); ( *: 3*a ); ( %: 4*a=.i.3 3 )
 
   NB.  Block D:  Distribute adverbs, too.
-  (      +`*     Over Across  i. 4 10x               )  -:    (+/0+i.10x), (*/10+i.10x), (+/20+i.10x), (*/30+i.10x   )
+  (      +`*     Over Across  i. 4 10x               )  -:    ( +/0+a ), ( */10+a ), ( +/20+a ), ( */30+a=.i.10x )
 
   NB.  Block E:  Put it all together for a nice effect.
-  ( 1 10 *`^     AcrossDyad   5 3                    )  -:    (1*5      ), (10^3      )
+  ( 1 10 *`^     AcrossDyad   5 3                    )  -:    ( 1*5   ), ( 10^3   )
 )
 
 NB.  Other uses

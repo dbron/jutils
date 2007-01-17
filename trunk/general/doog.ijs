@@ -24,14 +24,6 @@ NB.  verb(s) in the argument(s), and returns a gerund:
    Across       =:  First (;.2)~ (`1:) (`:6)
    Ax           =:  1 : 'u Across : (u;._2)'
 
-   Encap        =: adverb define
-		4 : (1 |. 'm[(''__m'',L:0~{.x)=. ({:x) BxAx y';'m =. ',5!:5{.;:'m' )
-)
-
-   encap        =: dyad define
-   x (cocreate '') Encap&|: y
-)
-
    NB.  Morever,  doog  extends this behavior (in two ways). Whereas 
    NB.  the J implementation restricted compositions with gerunds to the 
    NB.  forms (m@v u@n m@n), (m@:v u@:n m@:n), (m&:v u&:n m&:n), and  m&n ,
@@ -42,26 +34,6 @@ NB.  verb(s) in the argument(s), and returns a gerund:
    BxAx         =:  (< Atop) Across
    Abx          =:  Each Ax
   
-   parse =: dyad define
-   itm=.[: <"_1@:|: _3 ]\ ]
-   'nam typ len' =. itm , x
-
-   'vbs tps dfs'=.itm   num`(<'#')`(0 ". ])   `str`(<'"')`(6: s: s:)
-    ('`',;:^:_1 vbs)=.dfs
-
-    vrb =. < Atop vbs`] {~  tps i. typ
-    ctr =. ( '' ; (<: e.~ [: i. >./) +/\ 1 + ;len  )&$: :(vrb Ax)  NB. 1 + for the field delimiters
-    Q=.cocreate''
-    v__Q =. cocreate ''
-    ('`' , ;:^:_1 vbs , L: 0 '__v__Q') =. dfs
-    tbl__Q =. ,.&:>/ (nam , L: 0 '__Q') =. ctr (]\~ -@# % [: +/ LF&=) y NB. _ , 1 + {: $ y
-    Q
-)
-
-   X =: _3 ]\ 'acct';'#';2   ;'sub';'#';3 ;  'name';'"';6
-   Y =: , LF ,.~ (,. ' '&,.)&:>/(<@:> ;: 'Dan Henry Oleg Raul Roger Lam Bjorn Tuttle Eric Devon'),~ ":@:,.&.> (; -), 0 10 +/ i. 5
-
-
    NB.  The second extension  doog  provides is that it can distribute 
    NB.  adverbs as well as conjunctions.  See Test Block D.
    Over         =:  '/' doog 
@@ -72,7 +44,6 @@ NB.  verb(s) in the argument(s), and returns a gerund:
    NB.  successive item pairs ).  See Test Block E.
    Every        =:  '&:' doog >
    AcrossDyad   =:  Over Every Across ( @:(,&:<"_1) )
-
 
 NB.  Test cases
 testOnLoad      =. 0  NB.  0 disables, 1 enables.
@@ -97,7 +68,6 @@ testOnLoad      =. 0  NB.  0 disables, 1 enables.
   ( 1 10 *`^     AcrossDyad   5 3                    )  -:    (1*5      ), (10^3      )
 )
 
-
 NB.  Other uses
 0 0$ noun define
   require 'task'
@@ -105,8 +75,87 @@ NB.  Other uses
   0!:0 (#~ [: -. (2# LF) E. ])^:_ (=&CR)`(,:&LF)} pc
 
   NB.  List of all J verbs, grouped by their rank.
-  (~.<"1 n),:(,. PRIM_VERBS) </.~ n=. PRIM_VERBS 'b.' doog (`:0) 0
+  BY_RANK      =: (~.<"1 n),:(,. PRIM_VERBS) </.~ n=. PRIM_VERBS 'b.' doog (`:0) 0
 
   NB.  List of all J verbs and their inverses.
-  (a~:a:)#PRIM_VERBS  ,. a =. (<'@' doog (PRIM_VERBS 'b.' doog '::' doog (''"_) )) (`:0) _1
+  WITH_INVERSE  =: (a~:a:)#PRIM_VERBS  ,. a =. (<'@' doog (PRIM_VERBS 'b.' doog '::' doog (''"_) )) (`:0) _1
+
+  
+   NB. Given a description of the columns,  x,  and fixed-width line-delimited data,  yu,  
+   NB. the verb  parse  will return a J object (numbered locale) with one name per
+   NB. column.  
+   NB.
+   NB. The relevance is that we can use the definitions in this script
+   NB. to apply to each column a verb that knows how to process that column
+   NB. (e.g. numeric columns are turned into numbers,  string columns are turned into
+   NB. integers using  s: , etc).
+   NB.
+   NB. This is an efficient method for parsing fixed-width files.  I may make a 
+   NB. seperate script for it.
+   parse =: dyad define
+   	itm              =.  [: <"_1@:|: _3 ]\ ]
+   	'nam typ len'    =.  itm , x
+
+   	'vbs tps dfs'    =.  itm   num`(<'#')`(0 ". ])   `str`(<'"')`(6: s: s:)
+   	('`',;:^:_1 vbs) =.  dfs
+
+   	vrb              =.  < Atop vbs`] {~  tps i. typ
+   	ctr              =.  ( '' ; (<: e.~ [: i. >./) +/\ 1 + ;len  )&$: :(vrb Ax)  NB. 1 + for the field delimiters
+
+   	Q                =.  cocreate ''
+   	v__Q             =.  cocreate ''
+
+   	('`' , ;:^:_1 vbs , L: 0 '__v__Q')  =. dfs
+   	tbl__Q           =.  ,.&:>/ (nam , L: 0 '__Q') =. ctr (]\~ -@# % [: +/ LF&=) y NB. _ , 1 + {: $ y
+
+    Q
+NB. Closing Paren --> )
+
+   NB.  Column spec format is  name;type;width
+   columns =.  _3 ]\ 'acct';'#';2   ;'sub';'#';3 ;  'name';'"';6  NB. # means numeric, "  means string. 
+   fw_data =.  noun define NB.  Fixed width data, columns correspond to above description.
+	 0   0 Dan   
+	 1  _1 Henry 
+	 2  _2 Oleg  
+	 3  _3 Raul  
+	 4  _4 Roger 
+	10 _10 Lam   
+	11 _11 Bjorn 
+	12 _12 Tuttle
+	13 _13 Eric  
+	14 _14 Devon 
+NB. Closing Paren -->)
+   NB. fw_data =.  , LF ,.~ (,. ' '&,.)&:>/(<@:> ;: 'Dan Henry Oleg Raul Roger Lam Bjorn Tuttle Eric Devon'),~ ":@:,.&.> (; -), 0 10 +/ i. 5
+
+   T  =: columns parse fw_data
+   tbl__T
+ 0   0  1
+ 1  _1  2
+ 2  _2  3
+ 3  _3  4
+ 4  _4  5
+10 _10  6
+11 _11  7
+12 _12  8
+13 _13  9
+14 _14 10
+   acct__T
+0 1 2 3 4 10 11 12 13 14
+   name__T
+1 2 3 4 5 6 7 8 9 10
+   str__v__T^:_1  name__T
++---+-----+----+----+-----+---+-----+------+----+-----+
+|Dan|Henry|Oleg|Raul|Roger|Lam|Bjorn|Tuttle|Eric|Devon|
++---+-----+----+----+-----+---+-----+------+----+-----+
+
+)
+
+   NB.  If you're not Dan Bron, ignore these two definitions for now.
+   NB.  If you're curious, it's related to the verb parse in the 
+   NB.  "other uses" section above.
+   Encap        =: adverb define
+		4 : (1 |. 'm[(''__m'',L:0~{.x)=. ({:x) BxAx y';'m =. ',5!:5{.;:'m' )
+)
+   encap        =: dyad define
+   x (cocreate '') Encap&|: y
 )

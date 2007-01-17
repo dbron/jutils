@@ -48,7 +48,7 @@ pa =: parseAttributes =: verb define
 	nv         =. {.~ ;&:trimSyn (}.~ >:)
 	cutNV      =. nv i.&'='
 
-	attrCutMsk =. [: ((> ~:/\) > 2 | +/\@:]) / ((,'"');' ',CR,LF,TAB) e.&>~ < 
+	attrCutMsk =. [: ((> ~:/\) > 2 | +/\@:]) / ('"' ;&:, ' ',CR,LF,TAB) e.&>~ < 
 	cutAttr    =. ] cutNV;.1~ 1: 0} attrCutMsk 
 	tagAsAttr  =. (2 {. 'tag' ; {.) , }. 
     attrs      =. [: tagAsAttr cutAttr 

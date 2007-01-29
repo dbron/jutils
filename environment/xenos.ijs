@@ -1,4 +1,4 @@
-require'qdoj dir strings'
+require'qdoj doog dir strings'
 
 NB.  List of all J scripts in and under the J directory.
 scripts  =: {."1 s=: dirtree '*.ijs',~prefix =: '\',~1!:43''
@@ -69,17 +69,17 @@ unDocd   =: -. x 1&e.@:E.&> < ; dx
 NB.  Figure out what scripts and lines use these undocumented foriegns.
 word     =:  xenos  {~ xaIdot =: I. xArgs e. xaNub #~ unDocd     
 line     =:  word i.&0@:>"_1 _ WC  NB.    SHould be able to say / instead of "_1 _ but I can't
-script   =:  line i.&0@:>"_1 _ LC
-lineInScript =: line - LC {~ <: script
+scriptt  =:  line i.&0@:>"_1 _ LC
+lineInScript =: line - LC {~ <: scriptt
 mentions =:  L {~ line  NB.(<lines) {::&.>~ <@;/"1 ~. script ,. lineInScript
 
 NB.  Table of RHA ; LHA ; Script (relative to 1!:43) ; Line number in script ; Actual Line from script
-TABLE    =:  (xaIdot { xArgs ) (,. /: 0&".&>@:[) ('~', each (#prefix) }. each  script { S) ,. (<"> lineInScript) ,. (mentions)
+TABLE    =:  (xaIdot { xArgs ) (,. /: 0&".&>@:[) ('~', each (#prefix) }. each  scriptt { S) ,. (<"> lineInScript) ,. (mentions)
 
 NB.  Format this table for display. 
 group    =: 1 : '({."1 (~.@:[ ,.@:-.&a:@:(<@:dtb"1)^:(2: = #@:$)@:(,/^:(2: < #@:$)^:_)@:(tree"_1) <@:u/.) }."1)'
 tree     =:  >@:(,.&.>/)@:(] ,~ ,:@:,&':   '@:>@:[ <@:{.~ _: ,~ {.@:(#&>)@:]) [: ({.~ # -@:+ 1: < #)&.> >@:(<@:(,"1&':   ')@:>"1@:|:&.>)
-gTABLE   =: ,/ >  ] group group group > ,.&.>/ ,1 <"1 each @:(rjust each `(rjust each)`]`(rjust each )`]);.1 <@:>"1 |: ": each TABLE
+gTABLE   =: ,/ >  ] group group group > ,.&.>/ ,1 <"1 each Atop (rjust each `(rjust each)`]`(rjust each )`]);.1 <@:>"1 |: ": each TABLE
 colons   =: ': '(*./@:(+./) +/\^:_1@:I.@:*. 0: < +/@:{.)@:(=/) gTABLE
-headers  =: }:;, 1 <@(1&(|.!.':'))@(rjust`rjust`]`]`])@>;.1 colons (({.~ #) {.&.> ]) 'x';'y';'  Script';'  Line#';'  Line'
+headers  =: }:;, 1 < At (1&(|.!.':')) At (rjust`rjust`]`]`]) At >;.1 colons (({.~ #) {.&.> ]) 'x';'y';'  Script';'  Line#';'  Line'
 gTABLE   =: _2 }. ' ' ,;(<@:,&CRLF@:dtb@:{.~ i:&0@:=&':')"1 headers , gTABLE 

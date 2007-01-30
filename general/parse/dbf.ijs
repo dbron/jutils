@@ -19,7 +19,7 @@ readdbf =: (verb define) :: _1:
 	field_offset     =.  +/\ field_length
 	field_names      =.  (i.10) {"1 field_meta_data 
 
-    table			 =.  data  ((0 1 1 0 { <`([: < _9876543x&([ [^:(0: = #@:]) ". )"1)) {~ 'CDN' i. field_data_type);.2~ '';	field_offset     e.~ i. length_of_record
+	table			 =.  data  ((0 1 1 0 { <`([: < _9876543x&([ [^:(0: = #@:]) ". )"1)) {~ 'CDN' i. field_data_type);.2~ '';	field_offset     e.~ i. length_of_record
 
 	table ,&:<~ field_data_type ; field_length  ; field_decimals  ; field_offset ; field_names
 )

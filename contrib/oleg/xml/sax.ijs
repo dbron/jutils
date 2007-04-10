@@ -4,7 +4,7 @@ NB.
 NB. 01/19/06 Oleg Kobchenko
 
 NB. require '~addons/xml/expat.ijs'
-require '~user/util/contrib/oleg/xml/expat.ijs'
+require '~user/contrib/oleg/xml/expat.ijs'
 
 coclass 'psax'
 coextend 'pexpat'

@@ -48,7 +48,7 @@ HENK =: SHPENK shell 'tidy 2>NUL'
 
 assert 0
 
-require'~user\util\general\parse\xml.ijs ~user\util\contrib\oleg\map.ijs'
+require'~user\general\parse\xml.ijs ~user\contrib\oleg\map.ijs'
 coinsert 'map xml'
 R=:proc HENK
 'A B'=:4!:5&.>i._2

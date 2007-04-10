@@ -113,7 +113,16 @@ create               =:  verb define
 	NB.  Have the columns now, no longer require T.
 	NB. unmap_jmf_ fqn'T'
 	NB.  Non-useful locales
-	coerase hdr  NB.  Could save  preamble__hdr ..
+	preamble__meta  =: preamble__hdr
+	coerase hdr 
+
+	NB.  Assert that the file's preamble is what we expect
+	assert. 1 4 -: $ tdMMDDYYY =. '(?i)^Trade Date (\d{2})/(\d{2})/(\d{4})' (rxmatches rxfrom ]) preamble__meta
+
+	NB.  Then pull the trade date out of it.
+	tdDates         =. '__meta' , L: 0~ ;:'MM DD YYYY' 
+	(tdDates)       =:  }. , tdMMDDYYY
+	TRADE_DATE__meta=:  __ ". ;:^:_1: 4 A. ".&.> tdDates
 
 	i. 0 0
 )
@@ -140,7 +149,7 @@ tablify             =:  verb define
 	assert. (# colname1__hdr) -: file_width =. >./lens__lin
 
 	NB.  Report sometimes ends with a bunch of blank lines; trim these.
-	data_end        =.  idx__lin {~ last__lin =. 1 + 2 (~: i: 1:) lens__lin
+	data_end        =.  idx__lin {~ last__lin =. (<:#lens__lin) <. 1 + 2 (~: i: 1:) lens__lin
 	bytes__tlr      =.  +/lens__lin {.~ -ln_ct__tlr =. last__lin  -~ # idx__lin
 
 	NB.  Since we reduced the file, we have to correspdoningly reduce line byte counts.
@@ -193,11 +202,10 @@ clean               =: dyad define
 	NB. ff              =. 60 (({:@:] * ln_ct__x -~ [) + (*{:) (*i.@:>.) (%~{.) ) $T 
     NB. ff              =. width * +/\ ln_ct__x ((-~ {.) , }.@:]) 60 (>.@:%~ # [) {. 'len width'  =.  $T
 	NB. ff              =.         +/\ ln_ct__x ((-~ {.) , }.@:]) 60 (>.@:%~ # [) {. 'len width'  =.  $T
-	ff              =.  ln_ct__x -~ 60 ([ * 1 + i.@:>.@:%~)#T
+	ff              =.  (#T) }:@:]^:(< {:) ln_ct__x -~ 60 ([ * 1 + i.@:>.@:%~)#T
     assert. (12{a.) = T {~ <ff;0 
     fixed           =.  1 |.!.LF"1 ff { T
 	y               =.  fixed ff} y
-	 
 
 	NB.  Some lines have a leading space, which pushes each field over 
     NB.  by one character.  Note that the formfeeds already pushed
@@ -324,4 +332,4 @@ NB.  Best fit over the column names is:
 NB. ('';1 _1:} 212 xb +/\ 9 11 11 11 10 9 10 12 8 13 9 5 5 13 8 9 8 7 15 16 7 5 1)    <;.2>1 2{<;.2 LF,~fread fn;0 1000
 
 
-   
+   	

@@ -164,7 +164,7 @@
 	fullFormatDate			=.  ((smartFormatDate~ f.  #&>/@:[)~ ` (bx@:>@:{.@:[) ` (>@:{:@:[) } ~  (;~ e.&(~. BASEFORMAT)))~ 
 
 	NB.  Like fullFormatDate but default RHA is 6!:0''
-	dateToString			=:  ($: 6!:0 bind '') : fullFormatDate f.
+	dateToString			=:  ($: 6!:0 bind '') : (fullFormatDate f. 6 {."1 ]) 
 
 	NB.  Takes a number of milliseconds as input, produces a human-readable timespan as output.
 	NB.  One quirk is that a month is considered to be exactly 4 weeks, and a year to be exactly 13 months.

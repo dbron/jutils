@@ -282,7 +282,7 @@ TBLh   =:  '__TBL' ,L:0~ COLUMN_NAME__tbl normalizeSqlNames~ 'CoB';'Cob';'wid';'
 
 NB.  Ok, assume from the above we were able to extract the data and save it to..
 NB. n=.'C:\Documents and Settings\dbron\My Documents\credit.rpt'
-NB. 0!:010 <'c:\app\j\current\user\util\uncategorized\danutils.ijs'  NB. for psql
+NB. 0!:010 <'c:\app\j\current\user\uncategorized\danutils.ijs'  NB. for psql
 NB. Q=:(- >:i.3) psql fread n
 
 getTable =: verb define

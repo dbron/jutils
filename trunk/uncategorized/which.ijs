@@ -1,7 +1,7 @@
 NB.  which 
 
 require 'registry winapi dll'
-require '~user\util\uncategorized\contrib\paul_chapman\ats.ijs'
+require '~user\uncategorized\contrib\paul_chapman\ats.ijs'
 
 3 : 0 ''
 

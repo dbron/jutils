@@ -1,4 +1,0 @@
-directory:  user\config
-
-This is an empty directory created when J is installed,
-and is intended for user configuration files.

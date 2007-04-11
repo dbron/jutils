@@ -1,0 +1,39 @@
+directory:  user\classes\ole
+
+Contains cover classes for use with
+particular ActiveX/OLE Automation controls.
+
+The purposes of this collection are
+  - to make up for J's "peculiar" ole interface
+  - short-cut common control spercific tasks
+
+The mechanism provides integration with J's UI
+scheme and event driven model
+
+prefix 'c' indicates a class file
+prefix 'd' indicates a demo file
+sufix denotes the covered ActiveX control
+
+coleobject.ijs      Parent class with utility methods
+cimagelist.ijs      ImageList control for ListView and TreeView
+clistview.ijs       ListView control
+ctreeview.ijs       TreeView control
+cmsflexgrid.ijs     MSFlexGrid control
+cweb.ijs            Web Borwser control
+
+dlistview.ijs       ListView demo
+dlistview2.ijs      ListView demo demonstrating independence of
+                    several controls
+dtreeview.ijs       TreeView control
+dmsflexgrid.ijs     MSFlexGrid control
+dbrowse.ijs         J file browser
+dlocbrowse.ijs      J file locale browser with objects
+dweb.ijs            Web Browser control
+
+07-Dec-2002 preview 0.10 version, adapted for J v50x
+23-Mar-2004 0.11 version: jpath, no cancel/close, alt comctl32
+10-Jul-2006 0.12 version: updated
+10-Jul-2006 0.13 version: j601
+
+Author: Oleg Kobchenko <olegyk@spin.vl.net.ua>
+

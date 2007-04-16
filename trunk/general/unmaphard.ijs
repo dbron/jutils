@@ -34,7 +34,6 @@ NB.  Given an argument  u  (either noun or verb), returns
 NB.  the atomic rep of  u"_ .
 norv =: 1 : '(<(<,''"''),<(5!:1{.;:''u''),<(<,''0''),<_)'
 
-NB.cocurrent'jmf'
 NB.  Given a noun y, get its pointer (pointer of header to data).
 NB.
 NB.  Right now, you can only  use it to get pointers to nouns, not 
@@ -42,7 +41,7 @@ NB.  verbs, adverbs or conjs. In the future, I may create an adverb
 NB.  (with the same interface as 'fixlocals') to get pointers to those
 NB.  other parts of speech.
 NB.
-NB.  A further restriction is that I know the verb works unmapped nouns 
+NB.  A further restriction is that I know the verb works for unmapped nouns 
 NB.  and for directly mapped nouns  (where the JMF file contains both the 
 NB.  header and the data) but I'm not positive that it works for indirectly
 NB.  mapped nouns (where the symbol table points to a header in main memory
@@ -56,7 +55,7 @@ NB.  Conjunction to work on nouns embedded in atomic reps.
 NB.  u  is  verb to act on embedded nouns, v is verb to handle
 NB.  leaves which are not nouns (primitives).  Derived verb
 NB.  is monadic and y is the atomic rep of an entity (5!:1 style)
-NB.  LHA to u will always be  (,'0')
+NB.  x will always be  (,'0')
 NB.
 NB.  In a future version you may be able to work on any embedded type
 NB.  (verbs, operators, trains, bidents, bonded conjs, trains of adverbs...
@@ -118,13 +117,15 @@ NB.    will not be touched (i.e. not replaced with a copy).
 NB.
 NB.  In a future version, I may do something like:
 NB.  (boxed_noun_name) =: (3 : 'a:{y' path {:: boxed_noun_name~) }:: boxed_noun_name~
+
+NB.  *******************************************************
+NB.  Public names start here.  Will be exported to locale z
 4!:5&.> i.2
+
+NB.  Enumeration of LHAs to unmaphard and unmapallhard
 (       uhs=.'uh_'   ,L:0 uh_ENUM)  =: uh_RC =: i.#uh_ENUM =: ;:'LEAVE COPY CHANGE ERASE'
 uh_type                             =: ;:^:(0 = L.) ,. uh_ENUM {~ uh_RC i. ]
 uh_DEFAULT                          =: uh_ERASE
-
-NB.  *******************************************************
-NB.  Public names start here.  Will be exported to locale z.
 
 
 NB.  Like unmap, but tries to identify and remove aliases
@@ -133,14 +134,14 @@ unmaphard =: uh_DEFAULT&$: : (dyad define"0 1)
    y  =. fullname_jmf_ > {. cn y
 
    NB.! Report this bug (?)
-   NB.  For some reason (#~ [: y~ mapRefr 5!:1) doesn't give the same results 
-   NB.  as an #~ y~ mapRefr 5!:1 an=. ...  
-   NB.  (and (#~ y~ mapRefr) 5!:1 an =.  gives a domain error when it shouldn't)
+   NB.  For some reason (#~ [: y~ mapRefr 5!:1) an=. ...  gives different 
+   NB.  results from   an #~ y~ mapRefr 5!:1 an=. ...  
+   NB.  and  (#~ y~ mapRefr)  5!:1 an =.   gives a domain error when it shouldn't.
    NB.
    NB.  DO NOT assign  5!:1 an  to anything -- that'll create a new reference
    NB.  to  y  .   Maybe that's not a problem if you erase the name assigned
    NB.  before you do unmap_jmf_  (but it's not worth finding out.)
-   an =. y -.~ an #~ (y~ mapRefr) 5!:1 an=.allnames ''   
+   an =. ({.;:y) -.~ an #~ (y~ mapRefr) 5!:1 an=.allnames ''   
 
    select. x [ 'x r' =. 2 {. boxopen x
        case. uh_LEAVE do.
@@ -155,13 +156,13 @@ unmaphard =: uh_DEFAULT&$: : (dyad define"0 1)
    end.
 
 
-   (unmap_jmf_ y) ,&< an
+   (unmap_jmf_^:(-.x-:uh_LEAVE) y) ,&< an
 )
 
 NB.  The  unmaphard  analog of unmapall_jmf_  
 unmapallhard =: uh_DEFAULT&$: : (4 : '> x unmaphard each 0{"1 mappings')
 
-'exportable blah'=:4!:5&.> i._2
+'exportable blah'=.4!:5&.> i._2
 ('`',;:^:_1 '_z_' ,L:0 ~ ({.~ 2 i:~ +/\.@:=&'_')&.>exportable)=:exportable
 
 

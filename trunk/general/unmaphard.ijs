@@ -141,6 +141,11 @@ unmaphard =: uh_DEFAULT&$: : (dyad define"0 1)
    NB.  DO NOT assign  5!:1 an  to anything -- that'll create a new reference
    NB.  to  y  .   Maybe that's not a problem if you erase the name assigned
    NB.  before you do unmap_jmf_  (but it's not worth finding out.)
+   NB.  
+   NB.  This cavaet applies equally well to any names local to definitions
+   NB.  downstack:  if you have a local refernce to a mapped array
+   NB.  this function will fail to delete it (I know of no way to interrogate
+   NB.  local namespaces).
    an =. ({.;:y) -.~ an #~ (y~ mapRefr) 5!:1 an=.allnames ''   
 
    select. x [ 'x r' =. 2 {. boxopen x

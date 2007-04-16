@@ -30,6 +30,10 @@ NB.  of classes y in locales specified by x.
 allnames  =:  ($:~ ''"_) : ( ;@:((] slap namesl~) locales)~ )
 
 
+NB.  Given an argument  u  (either noun or verb), returns
+NB.  the atomic rep of  u"_ .
+norv =: 1 : '(<(<,''"''),<(5!:1{.;:''u''),<(<,''0''),<_)'
+
 NB.cocurrent'jmf'
 NB.  Given a noun y, get its pointer (pointer of header to data).
 NB.
@@ -81,17 +85,20 @@ mapRefr =: 1 : '+./@:          (m isRefTo   nouner 0:)& >'
    
 NB.  Adverb like mapRefr, but takes a user-defined action 
 NB.  on the embedded reference to  m  within a (list of) atomic reps.
-NB.  The noun argument  m  is either  uh_COPY  or   uh_CHANGE;u  .  If it's 1,
-NB.  the references are copied-by-value, leaving the atomic rep
-NB.  unchanged except that it no longer refers to the noun  n .
-NB.  If m is  0;u  then if  u  is the atomic rep of a verb, the references 
+NB.  The noun argument  m  is either  uh_COPY  or   uh_CHANGE;u  .  
+NB.  If it's simple  uh_COPY, then the references are copied-by-value, 
+NB.  leaving the atomic rep unchanged except that it no longer refers 
+NB.  to the noun  n .
+NB.
+NB.  If m is  uh_CHANGE;u  then if  u  is the atomic rep of a verb, the references 
 NB.  to n are replaced the result of that verb on that reference 
 NB.  (which, in certain cases, may leave the reference unchanged.  
-NB.  The verb  ]  is such a special case).  If u is any other noun, it is 
-NB.  treated as the verb u"_ so references to n are replaced by that noun.
+NB.  The verb  ]  is such a special case).  
+NB.  If u is any other noun, it is  treated as the verb u"_ so references 
+NB.  to n are replaced by that noun (not yet implemented).
 mapChng =: conjunction define
  'N R'=. 2{.boxopen n
-  v =. R"_`copyByVal@.(N-:uh_COPY)  NB.  Very important to name this v
+  v =. (<R)`copyByVal@.(N-:uh_COPY)  NB.  Very important to name this v
 
   (,&< v^:(m isRefTo)) nouner ]  &.>
 )
@@ -135,14 +142,14 @@ unmaphard =: uh_DEFAULT&$: : (dyad define"0 1)
    NB.  before you do unmap_jmf_  (but it's not worth finding out.)
    an =. y -.~ an #~ (y~ mapRefr) 5!:1 an=.allnames ''   
 
-   select. x [ 'x u' =. 2 {. boxopen x
+   select. x [ 'x r' =. 2 {. boxopen x
        case. uh_LEAVE do.
        case. uh_ERASE do.
           erase an
        case. uh_COPY  do.
-          (an) =: y~ mapChng uh_COPY 5!:1 an  NB. 
+          (an) =: y~ mapChng uh_COPY 5!:1 an
        case. uh_CHANGE do.
-          (an) =:  y~ mapChng (x;<u) 5!:1 an
+          (an) =: y~ mapChng (x;<r norv) 5!:1 an
        case. do.
             assert. 0 [ x e. uh_ENUM
    end.

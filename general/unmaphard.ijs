@@ -60,6 +60,9 @@ NB.
 NB.  In a future version you may be able to work on any embedded type
 NB.  (verbs, operators, trains, bidents, bonded conjs, trains of adverbs...
 NB.  )
+NB.
+NB.  Could use a  S: (L. m) strategy like in isRefTo, but then we'd lose
+NB.  the ability to modify the noun reference in-place.
 nouner =: 2 : 'v`($:`(u&>/)@.((<,''0'') -: {.))@.(0 < L.)' 
 
 NB.  Verb to copy a noun BY VALUE.  That is, ]y may have special code such that

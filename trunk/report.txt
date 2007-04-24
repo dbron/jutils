@@ -16,9 +16,6 @@
 
   *  Bother reporting `0 -: 0%_1` but `-. 0 -:&% 0%_1` ?  Probably not.
 
-  *  The DoJ says: 
-      ''The result of 5!:7 is a 0 3 empty matrix if the named object is not an explicit definition, or is undefined for the specified valence.''
-     but 5!:7 requirs x=.1  for both adverbs and conjs; conjs should require a 2 (fixed valence of 2 re: DoJ)
 
 == dictionary ==
 
@@ -26,6 +23,46 @@
 
   *  The definitions of "attention interrupt", "break", and "input interrupt" at  given in http://www.jsoftware.com/help/user/interrupt.htm  should be documented  http://www.jsoftware.com/help/dictionary/errors.htm or it should at least say "implemented by the frontend" etc.
 
+  *  this isn't a bug, but it's interesting
+   At =: 2 : 'u'
+   (1 2) 5!:7"1 0 ;:'At'
+
++-+---------+-+   NB.  Just mentioning u doesn't force the result of 2 : to be a verb,
+| |         | |   NB.  and a conj has a fixed valence of 2, so this is right.
++-+---------+-+
+
++-+---------+-+
+|0|1 65535 0|u|
++-+---------+-+
+ 
+
+   At =: 2 : 'x u'
+   (1 2) 5!:7"1 0 ;:'At'
++-+---------+---+
+|0|1 65535 0|x u|   NB.  Mentionin a derived verb argument means the rsult must be a verb
++-+---------+---+   NB.  And the default output of an operator is a MONADIC verb
+
++-+---------+---+
+| |         |   |
++-+---------+---+
+   At =: 2 : (':';'x u')
+   (1 2) 5!:7"1 0 ;:'At'
++-+---------+---+
+| |         |   |   NB.  To get a DYADIC verb, you have to include a single 
++-+---------+---+   NB.  line with only a  :  on it.
+
++-+---------+---+
+|0|1 65535 0|x u|
++-+---------+---+
+   At =: 2 : ('u y';':';'x u y')
+   (1 2) 5!:7"1 0 ;:'At'
++-+---------+-----+
+|0|1 65535 0|u y  |
++-+---------+-----+   NB. Both valences.
+
++-+---------+-----+
+|0|1 65535 0|x u y|
++-+---------+-----+
 
 == documentation (non-DoJ) ==
 

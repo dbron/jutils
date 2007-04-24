@@ -27,7 +27,7 @@
 
   *  `2!:6` should be added to the release notes
 
-  * Since [ dde was decomitted] in J6.01,  http://www.jsoftware.com/help/user/cmdline.htm should remove /ddetopic
+  * Since [ dde was decomitted] in J6.01,  http://www.jsoftware.com/help/user/cmdline.htm should remove /ddetopic  also ddeserer and ddeclient scripts should be removed, also dde labs.
 
 == frontend ==
 

@@ -1,0 +1,49 @@
+== interpreter ==
+
+  *  `gerund^:n` should be decomitted
+
+  *  bugs reported in http://www.jsoftware.com/pipermail/programming/2007-April/006144.html (crash and hang) should be fixed.
+
+  *  errors jbreak and CTRL+C should be catchable by `try.` or `::`
+ 
+  *  figure out why `{: memr bytes N,N+1`  isn't the same as `memr byte N+1`
+
+  * in unmaphard.ijs {{{
+   NB.! Report this bug (?)
+   NB.  For some reason (#~ [: y~ mapRefr 5!:1) an=. ...  gives different 
+   NB.  results from   an #~ y~ mapRefr 5!:1 an=. ...  
+   NB.  and  (#~ y~ mapRefr)  5!:1 an =.   gives a domain error when it shouldn't.}}}
+
+  *  Bother reporting `0 -: 0%_1` but `-. 0 -:&% 0%_1` ?  Probably not.
+
+== dictionary ==
+
+  *  `3!:6` to document it must be loaded from a file (makes sense; if it weren't in a file, then it was just created, hence ths original text could be available)
+
+  *  The definitions of "attention interrupt", "break", and "input interrupt" at  given in http://www.jsoftware.com/help/user/interrupt.htm  should be documented  http://www.jsoftware.com/help/dictionary/errors.htm or it should at least say "implemented by the frontend" etc.
+
+
+== documentation (non-DoJ ==
+
+  *  `2!:6` should be added to the release notes
+
+  * Since [ dde was decomitted] in J6.01,  http://www.jsoftware.com/help/user/cmdline.htm should remove /ddetopic
+
+== frontend ==
+
+
+== library ==
+
+   * in scriptserver.ijs {{{
+
+         NB.!  JSTDLIBBUG:  MUST FLOOR BYTE COUNT.
+         NB.!  Bug in createjmf_jmf_  if 1{:: y is floating, even 
+         NB.!  if  (=<.)  , you'll get errors later on in map_jmf_
+
+         NB.!  JSTDLIBBUG:  
+         NB.!  Can't share readonly -- bug in share_jmf_
+
+         NB.!  JSTDLIBBUG:  Can't share non-JMF file as mapped
+         NB.!  other J session will require JMF header,
+         NB.!  and since that's not stored in non-JMF files
+         NB.!  the other J session can't find it. }}}

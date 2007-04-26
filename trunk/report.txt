@@ -15,6 +15,9 @@
    NB.  and  (#~ y~ mapRefr)  5!:1 an =.   gives a domain error when it shouldn't.}}}
 
   *  Bother reporting `0 -: 0%_1` but `-. 0 -:&% 0%_1` ?  Probably not.
+  *  13 : n  fails if n is a multiline script (contains LFs, is rank 2, is boxed)
+
+  *  'locked_name' f. --> contents of locked name
 
 
 == dictionary ==

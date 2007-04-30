@@ -1,5 +1,18 @@
 == interpreter ==
 
+  *  Get errors under dbr 0 that disappear under dbr 1
+  	   dbr 1
+	   N=.(  (bom_BOM_@:[ ,    ('(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )';'') rxrplc ]) utf8) @:utfread &.> {."1 dirtree 'E:\ais_demo\*.aro'
+	   dbr 0
+	   N=.(  (bom_BOM_@:[ ,    ('(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )';'') rxrplc ]) utf8) @:utfread &.> {."1 dirtree 'E:\ais_demo\*.aro'
+	|domain error: hfd
+	|   '-'join H<;.1~(+/\0,#&>K)e.~i.#H=.tolower     hfd u dfh;K=.'-'cut y['419c943-4507-4efe-a198-80f08208c7cf'
+	   hfd
+	'0123456789ABCDEF' {~ 16 #.^:_1 ]
+	   ln'hfd'
+	hfd_z_ 
+	   
+
   *  `gerund^:n` should be decomitted
 
   *  bugs reported in http://www.jsoftware.com/pipermail/programming/2007-April/006144.html (crash and hang) should be fixed.
@@ -21,6 +34,9 @@
 
 
 == dictionary ==
+
+  *  Fills in section I should match fills on vocab page for 
+     {.  (overtake).  Spefically, section I should mention  s: a:
 
   *  `3!:6` to document it must be loaded from a file (makes sense; if it weren't in a file, then it was just created, hence ths original text could be available)
 

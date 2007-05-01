@@ -9,7 +9,7 @@ NB.        (i.e. the last non-blank non-comment line of your script
 NB.        must be the output of your script.)  In particular, if 
 NB.        your script ends with something like:
 NB.                3 : 0 'a'
-NB.                .       y
+NB.                   y
 NB.                )
 NB.         You will get a nonce error.
 NB.

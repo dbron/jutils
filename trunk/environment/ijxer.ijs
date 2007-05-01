@@ -38,7 +38,8 @@ sr             =.  2 : '(m&=`(e.&m)@.(1<#m))`(,:&n) }'
 isnb           =.  3&(('NB.' -: {.) *. '.:' -.@:e.~ { :: (' '"_))@:>@:{:@:(;: :: (a:"_))
 dropnb         =.  }.~ isnb * -@:#@:>@:{:@:;:
 cut            =.  [: -.&a: <@:dltb@:dropnb;._2@,~
-strprep        =.  (LF&cut)@:(TAB sr ' ')@:(-.&CR)
+toJ            =.  (CR sr LF)@:(#~ -.@(CRLF&E.@,))
+strprep        =.  (LF&cut)@:(TAB sr ' ')@:toJ
 boxopen        =.  <^:(0 = L.)
 fread          =.  1!:1@:boxopen
 nonexplend     =.  ( (13!:8 )@:(11"_)^:(')'-:{.&>@:{:))

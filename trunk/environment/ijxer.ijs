@@ -45,7 +45,7 @@ fread          =.  1!:1@:boxopen
 nonexplend     =.  ( (13!:8 )@:(11"_)^:(')'-:{.&>@:{:))
 fprep          =.  nonexplend@:strprep@:fread
 join           =.  -@:#@:[ }. ;@:(,&.> boxopen)~
-assgnlast      =.  }:    , 'Z_ijx_ =: ' , L: 0 {:
+assgnlast      =.  }:    , 'Z =: ' , L: 0 {:
 srep           =.  ';'&join@:(lrep&.>)@:assgnlast@:fprep
-ijxer          =:  '+ 2 : ''Z_ijx_'' ( 0!:0 ; (10{a.) ,&.> ' , ')' ,~ srep f.
+ijxer          =:  '+ 2 : ''Z'' ( 0!:0 ; (10{a.) ,&.> ' , ')' ,~ srep f.
 clixer         =:  'clipcopy *' wd@:, ijxer

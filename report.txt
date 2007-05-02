@@ -40,8 +40,14 @@
 
   *  'locked_name' f. --> contents of locked name
 
+  *  1.5r2.3  should be an ill formed number
+
 
 == dictionary ==
+  *  The DoJ doesnt say that 1x1x is an ill formed number.
+
+  *  The DoJ doesnt say that 3 : 'if. goto_bob. do. 1 else. label_bob. 2 end.' 0
+     is a control error; and it is not consisten with  3 : 'if. return. do. 1 else. 2 end.' 0
 
   *  Care shoudl be used when equating scripts from  II.H and explicit defs.
      Scripts from  II.H Can contain other scripts, recursively.  Explicits cannot.

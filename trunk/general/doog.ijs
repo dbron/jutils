@@ -5,9 +5,11 @@ NB.  an operator of the same class. When that derived operator is given
 NB.  argument(s), it applies the primitive operator to each (pair of) 
 NB.  verb(s) in the argument(s), and returns a gerund:
    doog =: adverb define
-        M   =. a: 1 : m
-        cm  =. conjunction = ncM =. nc {. ;: 'M'
-        ncM : (  'g=.{.^:(1 -: #)@:}:' ; (cm#'(g u`[)') , '((,' ,(5!:5{.;:'m') , ')' , '<@; <)@,"0' , '(g ', (cm{'uv') ,'`])'  )
+        M    =.  a: 1 : m
+        cm   =.  conjunction = ncM =. nc {. ;: 'M'
+        lrep =.  '''(u ,&<~ 5!:1{.;:''''u'''') {::~ *./ 3 : (''''y 5!:0'''';''''1'''') :: 0:"0 u'';''{. u`['''
+        prmb =.  , ' 1 :  (((noun,verb) i. nc{.;:''' , ')',~ lrep ,~  ''' ) {:: ' ,~ ]
+        ncM : (  ( cm# 'u =.' ,prmb 'u' ) ; ((, ' =.' , prmb) uv) ; (cm#'u'), ' ((,' ,(5!:5{.;:'m') , ')' , '<@; <)@,"0 ' , uv =. cm{'uv')
 )
 
    NB.  This adverb emulates the undocumented, 
@@ -158,4 +160,4 @@ NB. Closing Paren -->)
 )
    encap        =: dyad define
    x (cocreate '') Encap&|: y
-)
+)ye

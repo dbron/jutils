@@ -36,7 +36,13 @@ NB.        you might otherwise have anonymous context.   And I might've
 NB.        overlooked other obscure places where it will matter.  
 NB.        But for the most part it won't matter, and if it does, then
 NB.        train your script to expect Z to be assigned to its last line.
-
+NB.
+NB.   (E)  This very script itself defines a bunch of names.  That has
+NB.        implications similar to (D) and also may conflict your script's 
+NB.        previous expectations of those name's values.  THis may be changed
+NB.        /fixed in a future release of this cript.  To protect yourself in the
+NB.        interim, make sure your script is standalone (i.e. as if it were
+NB.        loaded in a clean J session).
 lrep           =.  3 : '5!:5<''y'''
 'TAB CR LF'    =.  9 10 13 { a.
 dltb           =.  #~ ([: (+./\ *. +./\.) ' '&~:)

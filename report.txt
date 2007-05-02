@@ -7,6 +7,7 @@
      Display of  
       ] A=: 0 "."0 >(,. ' '&,.)&.>/"1] 2 2 $ <"_1 (#: i. 2^#$M) |."_1 _ (3 3 $ '123456789') (<;~2+i.3)} M=.7 7 $ '0'
 
+   
   *  Get errors under dbr 0 that disappear under dbr 1
   	   dbr 1
 	   N=.(  (bom_BOM_@:[ ,    ('(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )';'') rxrplc ]) utf8) @:utfread &.> {."1 dirtree 'E:\ais_demo\*.aro'
@@ -41,6 +42,12 @@
 
 
 == dictionary ==
+
+  *  Care shoudl be used when equating scripts from  II.H and explicit defs.
+     Scripts from  II.H Can contain other scripts, recursively.  Explicits cannot.
+     Explicits can contain control words; Scripts from II.H Cannot.  
+     0!:n  should document that it requires the II.H kind of script,
+     not the explicit kind of script.
 
   *  Fills in section I should match fills on vocab page for 
      {.  (overtake).  Spefically, section I should mention  s: a:

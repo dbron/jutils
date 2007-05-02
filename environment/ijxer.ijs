@@ -27,9 +27,15 @@ NB.
 NB.   (Ci) Your script will not run from a file.  So, e.g., 3 : '4!:4 <''y''' 0 
 NB.        won't do what you expect.
 NB.
-NB.   (D)  The output is assigned to the variable  Z_ijx_ .  Since this
-NB.        is the last line of your script, that shouldn't matter, but
-NB.        there might be edge conditions where it does.
+NB.   (D)  The output is assigned to the name  Z .  Since this
+NB.        is the last line of your script, that shouldn't matter
+NB.        unless that last line itself depends upon the name Z
+NB.        or does reflection (e.g. 4!:0) which would be sensitive
+NB.        to the name appearing. And it introduces named context where
+NB.        you might otherwise have anonymous context.   And I might've
+NB.        overlooked other obscure places where it will matter.  
+NB.        But for the most part it won't matter, and if it does, then
+NB.        train your script to expect Z to be assigned to its last line.
 
 lrep           =.  3 : '5!:5<''y'''
 'TAB CR LF'    =.  9 10 13 { a.

@@ -1,9 +1,17 @@
 NB. ===  Distribute Operators Over Gerunds ===
 	
-NB.  Given the formal name of a primitive operator,  doog  will derive 
-NB.  an operator of the same class. When that derived operator is given
-NB.  argument(s), it applies the primitive operator to each (pair of) 
-NB.  verb(s) in the argument(s), and returns a gerund:
+NB. Given the formal name of a primitive operator, `doog` will derive an operator of the same class.
+NB. The derived operator is related to the one named, except that it is extended to gerunds.  
+NB.
+NB. Much in the same way thast verbs abstract away the "arrayness" of its noun arguments, 
+NB. so `doog` abstracts away the "arrayness" of arguments to operators.  Arrays of operator 
+NB. arguments are, of course, gerunds.
+NB.
+NB. The result of a `doog`-derived operator is always a gerund, and it may optionally be given 
+NB. an array argument.  If it is not, its output is simply the atomic representation of the output 
+NB. of the primitive operator.
+
+However, if one (or both) of the arguments to the derived operator is a gerund, it applies the operation to each verb in the gerund, or between each pair of verbs in the case of a `doog`-derived conjunction with two gerund arguments. 
    doog =: adverb define
         M    =.  a: 1 : m
         cm   =.  conjunction = ncM =. nc {. ;: 'M'

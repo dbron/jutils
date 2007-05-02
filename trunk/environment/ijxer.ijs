@@ -43,6 +43,7 @@ NB.        previous expectations of those name's values.  THis may be changed
 NB.        /fixed in a future release of this cript.  To protect yourself in the
 NB.        interim, make sure your script is standalone (i.e. as if it were
 NB.        loaded in a clean J session).
+
 lrep           =.  3 : '5!:5<''y'''
 'TAB CR LF'    =.  9 10 13 { a.
 dltb           =.  #~ ([: (+./\ *. +./\.) ' '&~:)

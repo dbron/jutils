@@ -10,8 +10,11 @@ NB.
 NB. The result of a `doog`-derived operator is always a gerund, and it may optionally be given 
 NB. an array argument.  If it is not, its output is simply the atomic representation of the output 
 NB. of the primitive operator.
+NB.
+NB.However, if one (or both) of the arguments to the derived operator is a gerund, it applies 
+NB. the operation to each verb in the gerund, or between each pair of verbs in the case of a 
+NB. `doog`-derived conjunction with two gerund arguments. 
 
-However, if one (or both) of the arguments to the derived operator is a gerund, it applies the operation to each verb in the gerund, or between each pair of verbs in the case of a `doog`-derived conjunction with two gerund arguments. 
    doog =: adverb define
         M    =.  a: 1 : m
         cm   =.  conjunction = ncM =. nc {. ;: 'M'

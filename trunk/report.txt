@@ -44,6 +44,18 @@
 
 
 == dictionary ==
+  *  The DoJ says "Names begin with a letter and may continue 
+     with letters, underlines, and digits" and "A primary may .. 
+     be an inflected name"  .  But that's not true;  
+     first, a primitive can be an inflected digit, and a name 
+     may not begin with a digit.  Second, an "inflected name" 
+     cannot be a primitive unless the name (sans inflection) is
+     exactly one character long.  An "inflected name" of 2 or more 
+     characters is punctation (i.e. a control word, possibly 
+     unspecified).  Though of course  =:  is punctuation and also
+     a primitive...
+    
+
   *  The DoJ doesnt say that 1x1x is an ill formed number.
 
   *  The DoJ doesnt say that 3 : 'if. goto_bob. do. 1 else. label_bob. 2 end.' 0

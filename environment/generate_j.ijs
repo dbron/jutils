@@ -12,6 +12,12 @@ NB.  Names assigned.
 nms          =:  ;:'lngamma digamma trigamma tetragamma'
 
 NB.  Different formulation of each name...
+NB.  Note that we could be even finer grained
+NB.  with, EG:
+NB.            ln        =.      ^.`(1x1&^.)`(1x1 ^. ])
+NB.            gamma     =.  1 {. !`[
+NB.            dec       =.      <:`(_1&+)  `(-&1)     `(_1 + ])`(] - 1:)
+NB.            LNGAMMAS  =:  ('@:' <@; <)@,"0/&.> { ln;gamma;<dec
 LNGAMMAS     =:       ^.@:!@:<:   `(1x1 ^. !@:<:)
 DIGAMMAS     =:  1 {. lngamma D 1`[
 TRIGAMMAS    =:       lngamma D 2`(digamma D 1)

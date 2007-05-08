@@ -18,6 +18,7 @@ NB.            ln        =.      ^.`(1x1&^.)`(1x1 ^. ])
 NB.            gamma     =.  1 {. !`[
 NB.            dec       =.      <:`(_1&+)  `(-&1)     `(_1 + ])`(] - 1:)
 NB.            LNGAMMAS  =:  ('@:' <@; <)@,"0/&.> { ln;gamma;<dec
+NB.
 LNGAMMAS     =:       ^.@:!@:<:   `(1x1 ^. !@:<:)
 DIGAMMAS     =:  1 {. lngamma D 1`[
 TRIGAMMAS    =:       lngamma D 2`(digamma D 1)

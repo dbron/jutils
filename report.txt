@@ -54,7 +54,17 @@
      characters is punctation (i.e. a control word, possibly 
      unspecified).  Though of course  =:  is punctuation and also
      a primitive...
-    
+ 
+  *  explicit def says 
+	 The explicit result is the result of the last non-test block sentence executed; 
+     ... See Control Structures for the definition of a block. 
+     And Control structs say the final execute sentence is returned
+     and if there is no such last executed sentence the final
+     result is i. 0 0
+
+  *  where does it say     3 : 'select. 0 case.do.end.'0  is ok but
+      3 : 'select.case.do.end.'0 is a control error?
+
 
   *  The DoJ doesnt say that 1x1x is an ill formed number.
 

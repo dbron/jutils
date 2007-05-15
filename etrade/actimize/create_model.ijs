@@ -109,8 +109,9 @@ create           =:  verb define
 	assert. 'd' -: 4 {::^:2 {. d  [ 'Demo must be a directory'
 
 
-	demoRplc     =:  ('(?ix) demo ';MODEL_PREFIX)&rxrplc
-	aiaguid      =:  MODEL_PREFIX addtoGUID	
+	demoRplc      =:  ('(?ix) demo ';MODEL_PREFIX)&rxrplc
+	aiaguid       =:  MODEL_PREFIX addtoGUID	
+    aiaguid_base_ =: ('aiaguid_','_',~;coname'')~
 
 	dest_dir     =:  substDir src_dir
 

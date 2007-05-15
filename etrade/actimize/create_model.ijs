@@ -29,9 +29,20 @@ rxRplc_jregex_   =:  4 : 0
 
 rxRplc_z_        =:  rxRplc_jregex_
 
-NB.  Replace  dirtree  from  dir  , which has 2 problems: 
+NB.  Modified  dirtree  from  dir  , which has 2 problems: 
 NB.  it always lowercases filenames, and it doesn't list 
-NB.  directories
+NB.  directories.  This version solves the lowercase problem.
+dirtree2 =: 3 : 0
+	0 dirtree2 y
+:
+	oldtolower=:5!:1{.;:'tolower'
+	tolower =: ]
+	z=.x dirtree y
+	tolower=: oldtolower 5!:0
+	z
+)
+
+NB.  Completely replace dirtree.  This version solves both problems.
 DirTree          =:  (; [: ,@:; 1 (;@:($:&.>))&.>`];.1 <^:2 (, '\'&,)&.>&.> (({.~ 0 - 2 + #) <@:({."1)@:}./.~ 1 0 , 'd' = 4 {::"1^:2 ])^:(0 < #)@:(1!:0)@:(,&'\*'))
 
 NB.  Copy directory and substitute MODEL_PREFIX 
@@ -76,15 +87,15 @@ addtoGUID        =:  adverb define
 
 create           =:  verb define
 
-	assert.          2 -:           # y	[ 'Argument is  ''MODEL_PREFIX'' ; ''C:\demo_model\dir'' '
-	assert. 'boxed'   -:   datatype   y [ 'Argument is  ''MODEL_PREFIX'' ; ''C:\demo_model\dir'' '
+	assert.         2 -:            # y [ 'Argument is  ''MODEL_PREFIX'' ; ''C:\demo_model\dir'' '
+	assert.   'boxed' -:   datatype   y [ 'Argument is  ''MODEL_PREFIX'' ; ''C:\demo_model\dir'' '
 	assert. 'literal' -:"1 datatype&> y [ 'Argument is  ''MODEL_PREFIX'' ; ''C:\demo_model\dir'' '
 
 	smoutput 'Starting...'
 
 	'pfx src'    =:  y 
 
-	MODEL_PREFIX =: pfx
+	MODEL_PREFIX =:  pfx
 
 	smoutput 'New model''s prefix is ',MODEL_PREFIX 
 
@@ -92,7 +103,7 @@ create           =:  verb define
     
  	smoutput 'Demo model directory is ',src_dir
 
-    d            =. 1!:0 :: ((0 5 $ a:)"_) src_dir
+    d            =.  1!:0 :: ((0 5 $ a:)"_) src_dir
 
 	assert. 1 5 -: $ d            [ 'Demo directory must exist'
 	assert. 'd' -: 4 {::^:2 {. d  [ 'Demo must be a directory'
@@ -101,17 +112,18 @@ create           =:  verb define
 	demoRplc     =:  ('(?ix) demo ';MODEL_PREFIX)&rxrplc
 	aiaguid      =:  MODEL_PREFIX addtoGUID	
 
-	dest_dir     =: substDir src_dir
+	dest_dir     =:  substDir src_dir
 
 	smoutput 'Copied demo model dir, beginning object modification...'
 
-	(fwrite~ (  (BOM_bom_   @:[ , [: utf16le   @:demoRplc ('(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )';'') rxRplc ]) utf16LEto8   ) @:fread)&.> {."1 dirtree2 dest,'\*.aro'
+	(fwrite~ (  (BOM_bom_   @:[ , [: utf16le   @:demoRplc ('(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )';'') rxRplc ]) utf16LEto8   ) @:fread)&.> {."1 dirtree2 dest_dir,'\*.aro'
 
 	smoutput 'Object modification complete; beginning package modification...'
-	(fwrite~ ('(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )';'') rxRplc demoRplc@:fread)&.> {."1 dirtree2 dest,'\*.apk'
+	(fwrite~ ('(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )';'') rxRplc demoRplc@:fread)&.> {."1 dirtree2 dest_dir,'\*.apk'
 
 	smoutput 'Done.'
 	smoutput 'Please double-check results. New model is here:  ', dest_dir
+
 )
 
 
@@ -121,7 +133,6 @@ TEST             =:  0
 0!:2^:TEST noun define
 
 	L-: >{:,'(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )' (rxmatches rxfrom ]) L=.'419c943-4507-4efe-a198-80f08208c7cf'
-	'419c943-4507-4efe-a198-80f08208c7d0' -: ('(?ix)  (  [0-9a-f]+-  (?:[0-9a-f]+-){3}  [0-9a-f]+  )';'') rxrplc '419c943-4507-4efe-a198-80f08208c7cf'
 	'419c943-4507-4efe-a198-80f08208c7d0' -: >:^:(~:&0) guid L
 
 )

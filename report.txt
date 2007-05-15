@@ -133,7 +133,14 @@
 
   * Since [ dde was decomitted] in J6.01,  http://www.jsoftware.com/help/user/cmdline.htm should remove /ddetopic  also ddeserer and ddeclient scripts should be removed, also dde labs.
 
+  *  http://www.jsoftware.com/help/user/input_log.htm
+     should be ctrl+SHIFT+up and ctrl+SHIFT+down
+
 == frontend ==
+  
+  * Ctrl+shift+up/dwn in a script window puts the recalled line
+    in the script window, overwriting its last line.  It should
+    recall the line in the execution window, leaving focus there.
 
 
 == library ==

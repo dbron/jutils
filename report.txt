@@ -65,6 +65,20 @@
   *  where does it say     3 : 'select. 0 case.do.end.'0  is ok but
       3 : 'select.case.do.end.'0 is a control error?
 
+  *  Control struct:  "The last sentence executed in a T block 
+     is tested for a non-zero value in its leading atom, and 
+     determines the block to be executed next."  This is only
+     true for if.elseif.else./while.whilst. blocks, and is
+     redundant with the language in the pages specific to those blocks.
+     It is also true of a T block for a case. statement but NOT for
+     a select. statement.  This redundant language is either
+     ambiguous (HOW does it determine which block to execute?)
+     or incorrect.
+
+     Morever, the language "determining whether the B block after the 
+     do. or the rest of the sentence is executed. " is suspect; 
+     control words are punctuation, so there are multiple sentences
+     after a T block.
 
   *  The DoJ doesnt say that 1x1x is an ill formed number.
 

@@ -149,7 +149,10 @@ tablify             =:  verb define
 	assert. (# colname1__hdr) -: file_width =. >./lens__lin
 
 	NB.  Report sometimes ends with a bunch of blank lines; trim these.
-	data_end        =.  idx__lin {~ last__lin =. (<:#lens__lin) <. 1 + 2 (~: i: 1:) lens__lin
+	NB.  Note that I use  4 (< i: 1:) instead of  2 (~: i: 1:) because
+	NB.  If the file is just the right size, the last formfeed can come
+	NB.  exactly at the end of the data, leaving a line 3 bytes long. 
+	data_end        =.  idx__lin {~ last__lin =. (<:#lens__lin) <. 1 + 4 (< i: 1:) lens__lin
 	bytes__tlr      =.  +/lens__lin {.~ -ln_ct__tlr =. last__lin  -~ # idx__lin
 
 	NB.  Since we reduced the file, we have to correspdoningly reduce line byte counts.
@@ -171,7 +174,7 @@ tablify             =:  verb define
 
 	NB.  Extract only the data portion of the raw file and expand each 
     NB.  row to the maximum line length (to make the array rectangular).
-	T               =:  LFs__lin ];.2 B ];.0~ ,:/ bytes__hdr  ,  _1 + data_end - bytes__hdr
+	T               =:  LFs__lin ];.2 B ];.0~ ,:/ bytes__hdr  ,  #LFs__lin NB. _1 + data_end - bytes__hdr
 	T               =:  file_shape {. T
 
 	unmap_jmf_ b
@@ -202,7 +205,7 @@ clean               =: dyad define
 	NB. ff              =. 60 (({:@:] * ln_ct__x -~ [) + (*{:) (*i.@:>.) (%~{.) ) $T 
     NB. ff              =. width * +/\ ln_ct__x ((-~ {.) , }.@:]) 60 (>.@:%~ # [) {. 'len width'  =.  $T
 	NB. ff              =.         +/\ ln_ct__x ((-~ {.) , }.@:]) 60 (>.@:%~ # [) {. 'len width'  =.  $T
-	ff              =.  (#T) }:@:]^:(< {:) ln_ct__x -~ 60 ([ * 1 + i.@:>.@:%~)#T
+	ff              =.  (#T) }:@:]^:(<: {:) ln_ct__x -~ 60 ([ * 1 + i.@:>.@:%~)#T
     assert. (12{a.) = T {~ <ff;0 
     fixed           =.  1 |.!.LF"1 ff { T
 	y               =.  fixed ff} y

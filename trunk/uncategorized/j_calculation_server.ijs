@@ -13,6 +13,7 @@ NB.
 NB.     *  Find out when and how to close a connection gracefully.     
 
 	load 'socket'
+    coinsert'jsocket'
 	
 	clean =:  sdcleanup ''						NB.  Free up unused networking resources
 	
@@ -90,15 +91,16 @@ NB.     *  Find out when and how to close a connection gracefully.
 
 		socket =. openSocket ''   				NB.  Open socket
 
-		socket bindSocket port   				NB.  Bind socket to port
+		ALPHA=:socket bindSocket port   				NB.  Bind socket to port
 
 		listenOnSocket socket	 				NB.  Listen for connections
 
 		a_syncSocket socket						NB.  Don't block when waiting for streams
 
 NB.		thisSocket =: socket
+		smoutput 'Listening for connections'
 
-		'Listening for connections'
+		sdcheck sdgetsockname_jsocket_ socket 
 )
 
 	socket_handler=: verb define
@@ -138,6 +140,7 @@ NB.					syncConnection thisSocket											NB.  Sync with client
 	processSocket =: verb define
 		socket =: y
 
+		while. 
 		data =. socket read 1000 				            NB.  Read stream
 		
 		'toProcess SOCKET_DATA' =: (({. ,&< }.)~ >:@:i.&LF) SOCKET_DATA,data

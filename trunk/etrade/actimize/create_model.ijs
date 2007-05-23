@@ -1,5 +1,7 @@
 ami_z_ =: conew & 'ami' : ($:@:,&:<)
 
+DEMO_PREFIX =: 'demo'
+
 smoutput noun define
 
    ami  'MODEL_PREFIX' ; 'C:\demo_model\dir'
@@ -84,7 +86,6 @@ addtoGUID        =:  adverb define
 
 )
 
-
 create           =:  verb define
 
 	assert.         2 -:            # y [ 'Argument is  ''MODEL_PREFIX'' ; ''C:\demo_model\dir'' '
@@ -109,7 +110,7 @@ create           =:  verb define
 	assert. 'd' -: 4 {::^:2 {. d  [ 'Demo must be a directory'
 
 
-	demoRplc      =:  ('(?ix) demo ';MODEL_PREFIX)&rxrplc
+	demoRplc      =:  (MODEL_PREFIX;~'(?ix)',DEMO_PREFIX)&rxrplc
 	aiaguid       =:  MODEL_PREFIX addtoGUID	
     aiaguid_base_ =: ('aiaguid_','_',~;coname'')~
 

@@ -1,24 +1,39 @@
 NB. ===  Distribute Operators Over Gerunds ===
-	
-NB. Given the formal name of a primitive operator, `doog` will derive an operator of the same class.
-NB. The derived operator is related to the one named, except that it is extended to gerunds.  
+NB. Given the formal name of a primitive modifier (adverb 
+NB. or conjunction), doog will derive an operator of the 
+NB. same class. The derived operator is related to the one
+NB. named, except that it is extended to gerunds. 
 NB.
-NB. Much in the same way thast verbs abstract away the "arrayness" of its noun arguments, 
-NB. so `doog` abstracts away the "arrayness" of arguments to operators.  Arrays of operator 
-NB. arguments are, of course, gerunds.
+NB. Much in the same way that rank abstracts the operation
+NB. of verbs on nouns, so doog abstracts the operation of
+NB. modifiers on verbs. Both rank and doog modify their 
+NB. argument such that the derived entity properly handles
+NB. arrays of arguments. 
 NB.
-NB. The result of a `doog`-derived operator is always a gerund, and it may optionally be given 
-NB. an array argument.  If it is not, its output is simply the atomic representation of the output 
-NB. of the primitive operator.
+NB. Howerver, whereas arrays of nouns are just nouns, arrays
+NB. of verbs are gerunds. Therefore doog extends primitive
+NB. modifiers (such as @), to operate on gerunds. The 
+NB. arguments to a doog-derived modifier may be gerunds, and
+NB. the result is always a gerund. 
 NB.
-NB.However, if one (or both) of the arguments to the derived operator is a gerund, it applies 
-NB. the operation to each verb in the gerund, or between each pair of verbs in the case of a 
-NB. `doog`-derived conjunction with two gerund arguments. 
-
+NB. In the case that that the arguments to a doog-derived 
+NB. modifier are not gerunds, then the modifier acts just
+NB. like its named counterpart (except that it produces a 
+NB. gerund; the atomic representation of the result of its
+NB. counterpart). 
+NB.
+NB. Otherwise, doog applies the modifier to or between each
+NB. verb or pair of corresponding verbs in the in the
+NB. gerund(s). In the case of a derived conj with only one
+NB. gerundal argument, the other argument may be a verb or
+NB. a noun, with the expected results. 
+NB.
+NB. Gerunds are distinguised from other nouns in that each
+NB. of their atoms is a valid atomic representation.
    doog =: adverb define
         M    =.  a: 1 : m
         cm   =.  conjunction = ncM =. nc {. ;: 'M'
-        lrep =.  '''(u ,&<~ 5!:1{.;:''''u'''') {::~ *./ 3 : (''''y 5!:0'''';''''1'''') :: 0:"0 u'';''{. u`['''
+        lrep =.  '''(m ,&<~ 5!:1{.;:''''m'''') {::~ *./ 3 : (''''y 5!:0'''';''''1'''') :: 0:"0 m'';''{. u`['''
         prmb =.  , ' 1 :  (((noun,verb) i. nc{.;:''' , ')',~ lrep ,~  ''' ) {:: ' ,~ ]
         ncM : (  ( cm# 'u =.' ,prmb 'u' ) ; ((, ' =.' , prmb) uv) ; (cm#'u'), ' ((,' ,(5!:5{.;:'m') , ')' , '<@; <)@,"0 ' , uv =. cm{'uv')
 )
@@ -171,4 +186,4 @@ NB. Closing Paren -->)
 )
    encap        =: dyad define
    x (cocreate '') Encap&|: y
-)ye
+)

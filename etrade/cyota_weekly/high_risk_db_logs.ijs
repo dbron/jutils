@@ -3,7 +3,7 @@ require 'strings task csv'
 risk_ach_script =: noun define
 	export proxy_domn=CORP
 	export proxy_user=dbron
-	export proxy_pass=w00t\!W00T\!3
+	export proxy_pass=w00t\!W00T\!33
 	export proxy_host=10.22.79.250
 	export proxy_port=8080
 
@@ -54,6 +54,6 @@ wire_comma   =:  bash risk_wire_script
 ACH          =:  fixcsv  ach_comma
 WIRE         =:  fixcsv  wire_comma
 
-CLIP_ON =: 1
-clip^:CLIP_ON CRLF join <@:}:@:;"1 TAB (,~ trim@:":) L: 0  ACH
-clip^:CLIP_ON CRLF join <@:}:@:;"1 TAB (,~ trim@:":) L: 0  WIRE
+CLIP_ON =: 0
+clip^:CLIP_ON CRLF join <@:}:@:;"1 TAB (,~ trim@:":) L: 0  }: ACH
+clip^:CLIP_ON CRLF join <@:}:@:;"1 TAB (,~ trim@:":) L: 0  }: WIRE

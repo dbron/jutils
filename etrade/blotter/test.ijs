@@ -1,5 +1,5 @@
 require 'debug jmf doog'
-load'~user\util\etrade\blotter\blotter.ijs'
+load'~user\etrade\blotter\blotter.ijs'
 dbr 1
 itay_requires =: ;: 'account last first order_id trader_id status b_s_ss_o_c quantity symbol optionsymbol mkt_lmt tif type time_entered b_s fill_qty price report action_time'
 FIELDS        =: (_2]\;:'STATUS ORDER_STATUS QUANTITY ORDER_QUANTITY') ({:"1@:[)`((i. {."1)~)`] } normalNames_blotter_ itay_requires 
@@ -44,7 +44,7 @@ doIt =: verb define
 )
 
 NB. 4 A."1]0 ". (1 1j1 1 1j1 1 1 1 1) #"1 ('c:\documents and settings\dbron\my documents\proj\blotter\Blotter' (+ i.)&:#'02132007') {"1 H#~ '7' = (-#'6.txt       '){"1 H=:>listFiles 'c:\documents and settings\dbron\my documents\proj\blotter\blotter*.txt'
-doIt"1] 2007 04 09 NB.todate _1 + todayno 3 {. 6!:0'' NB. 2007 02 26 NB. todate 1 2 3 6 7 8 9 13 14 (+ todayno)  2007 01 30  
+doIt"1] 2007 05 21 NB.todate _1 + todayno 3 {. 6!:0'' NB. 2007 02 26 NB. todate 1 2 3 6 7 8 9 13 14 (+ todayno)  2007 01 30  
 NB.doIt"1] 2007 3 14
 NB.q=:W~:' '
 NB.p=:W e. LF,{.,TAB__A

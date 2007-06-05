@@ -3,14 +3,14 @@ load 'strings'
 
 NB.  Enter lunch data here
 ORDERS			=: '=' makeTable noun define
-	Bron     =	7.59
-	Meyer    =	7.59
-	Egge     = 	6.49
-	Sargent  = 	3.79
-	Saracino =	2.19 5.79 0.29 1.29
+	Itay     =	8.00
+	Liad     =	8.00
+	Adi      = 	6.75 3.50
+	Kim      = 	8.00
+	Dan      =	4.50
 )
 
-QUOTE			=:  40.20
+QUOTE			=:  41.45
 TIP				=:  2
 
 NB.  Calculation section

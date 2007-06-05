@@ -27,9 +27,9 @@ power =: verb define
 	ROWS   =. (_2 {.\ '|' makeTable ])&.> DATAA
 
 	DATA2  =. (<@:>"1@:|:;.1~ a: ~: {."1)@:('|'&makeTable)&.> DATAA NB. ((<@:>"1@:|:);.2~ a: = {."1)@:('|'&makeTable)&.>  DATAA
-	D      =. {. L: 0  DATA2
+	D      =. {. L: 0  DATA2 #~ GOOD_DATES =: DATA2 ~: <i. 0 1
 
-	T =. 3 : '(''FILEDATE'';HEADERS) , ; (<"1 sRANGE) ,. L: 1"0 Q=.y'  (}.&.>)@:(] ({"1 ,.&a:)&.>~ (i.&.> <@:(3 : 'HEADERS =: y')@:/:~@:~.@:;)@:({.&.>)) D
+	T =. GOOD_DATES 4 : '(''FILEDATE'';HEADERS) , ; (<"1 x # sRANGE) ,. L: 1"0 Q=.y'  (}.&.>)@:(] ({"1 ,.&a:)&.>~ (i.&.> <@:(3 : 'HEADERS =: y')@:/:~@:~.@:;)@:({.&.>)) D
 	T =. T,.(<'DATE'),8 {.&.> (}.T) {"1~ ({.;:'Time') i.~ {.T
 	T
 )
@@ -48,7 +48,7 @@ rower =: verb define
 
 
 NB.  WEEK =: todate (i.7) + 1 + todayno LAST_DATE_COVERED =: 2007 04 26
-T =: power   todate (i.7) + 1 + todayno LAST_DATE_COVERED =: 2007 05 03
+T =: power  BBB=: todate (i.7) + 1 + todayno LAST_DATE_COVERED =: 2007 05 17
 
 NB.clip CRLF join <@:}:@:;"1 TAB (,~ trim@:":) L: 0  (a:,.~}. T) {"1~ ({. T) i.&:(-.&(a. -. UCALPHA)@:toupper @:trim L: 0) TAB cut 'Activity                      	Type      	Time       	Count	Date'
 NB.  _2 }. NVtext (<'0.1') ({.@:(8!:2)) &.> (~.  1{"1 T_bkdw_) ,. (<">-:;SLURRD),.~ SLURRD=:<@#/.~ 1{"1 T_bkdw_

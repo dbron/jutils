@@ -42,6 +42,19 @@
 
   *  1.5r2.3  should be an ill formed number
 
+  *  goto_label.  doesn't:
+
+        gtch  =:  3 : 0 
+           select. y 
+                 case. 0 do. goto_case1.   NB.  Considered harmful
+                 case. 1 do. label_case1. 'Judge not, lest ye be judged' 
+           end.
+        )
+
+        |control error
+        |   [1]         case. 0 do. goto_case1.   NB.  Considered harmful
+        |   gtch=:    3 :0
+        NB.  http://www.jsoftware.com/jwiki/System/Interpreter/Requests?action=diff&rev2=191&rev1=190
 
 == dictionary ==
   *  The DoJ says "Names begin with a letter and may continue 

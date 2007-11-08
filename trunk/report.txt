@@ -56,6 +56,32 @@
         |   gtch=:    3 :0
         NB.  http://www.jsoftware.com/jwiki/System/Interpreter/Requests?action=diff&rev2=191&rev1=190
 
+  *  In	 http://www.jsoftware.com/help/dictionary/d310n.htm
+	   2605 174 qdoj ':'
+	2.  The explicit result is the result of the last 
+	    non-test block sentence executed; that result
+	    must be a noun in the 3 : and 4 : cases.
+
+     This should possibly include  13 :  .  Though the phrase 
+    "otherwise equivalent to 3 : n" in the description of that
+     case might cover it (because the "otherwise" of  13 :  does
+     not contain "last-non-test block sentence").
+
+  *  In   http://www.jsoftware.com/help/dictionary/errors.htm
+	   5684 239 qdoj 'errors'
+	syntax error   )   the result of a sentence is not a 
+	                   noun/verb/adverb/conjunction; a verb 
+	                   attempting to produce a verb/adverb/
+	                   conjunction result
+
+     What about sentences which produce no result?  For example,
+     this sentence does not produce a NVAC yet it does not produce a
+     syntax error:
+
+	   NB.  Hi.  I'm a valid J sentence.
+
+     See:  http://www.jsoftware.com/jwiki/System/Interpreter/Bugs#do_without_result  
+
 == dictionary ==
   *  The DoJ says "Names begin with a letter and may continue 
      with letters, underlines, and digits" and "A primary may .. 

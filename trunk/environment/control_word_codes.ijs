@@ -21,7 +21,8 @@ defn         =:  1 2"_ <@(5!:7)/ ]
 is_a_verb    =:  'That`s not a verb'&assert@:0:`is_explicit@.is_verb@:parse
 is_explicit  =:  ('That`s not an explicit verb'&assert@:0:`(1:)@.(+./@:]) 0: ~: #&>)@:defn
 sentences    =:  {:"1@:>@:{.@:#~
-t_blocks     =:  1: |. ({.;:'do.')@:=  NB.  This could probably be figured out from 1&{"1 from 5!:7, but the 'control code words' are not documented
+NB.t_blocks     =:  1: |. ({.;:'do.')@:=  NB.  This could probably be figured out from 1&{"1 from 5!:7, but the 'control code words' are not documented
+t_blocks     =:  1: |. ({.;:'do.')&=  NB.  This could probably be figured out from 1&{"1 from 5!:7, but the 'control code words' are not documented
 
 
 

@@ -1,10 +1,28 @@
 NB.  + (<1;2) ("_) (`'') (-:`) ([`) (`:6) (({.;:'^:')`) (`:6)  (L: 1 0)~ (`{::) (`:6)
 
-tst   =: ("_) (`'') (-:`) ([`) NB.(`:6) 
-rpl   =: (({.;:'^:')`) 
-lvl   =: (tst (`:6) rpl ) ((`:6) ~)
-str   =: rpl lvl
-store =: 'str' f.
+load 'c:\program files\j\scripts\uncategorized\parenthesize.ijs'
+P=:<;._1 '|"_|`''''|-:`|[`|`:6|({.;:''^:'')`|`:6|L:1 0|~|`{::|`:6'
+p=.parenthesize P   
+~.O=:3 : ('z=.+1 :(''+ (<1;2) '',y)';'4!:0 {.;:''z''') :: (0 - 13!:11 bind'')&> p
+assert 0
+
+ri    =:  "_
+ge    =:  `''
+mg    =:  -:`
+lg    =:  [` 
+ev    =: `:6
+pg    =: ({.;:'^:')` 
+lvl   =: L: 1 0
+tw    =: ~ 
+fg    =: `{::
+
+store =:  ri (ge (mg (lg (pg (ev (lvl (tw (fg ev))))))))
+
+NB. tst   =: ("_) (`'') (-:`) ([`) NB.(`:6) 
+NB. rpl   =: (({.;:'^:')`) 
+NB. lvl   =: (tst (`:6) rpl ) ((`:6) ~)
+NB. str   =: rpl lvl
+NB. store =: 'str' f.
 
 
 

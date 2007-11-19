@@ -787,3 +787,12 @@ NB.  Make sure we don't reload the workspace if this script is reloaded
 
 NB.  If 'j' option given on the command line, get the original command line and execute everything following /j, then exit.
 NB.  base36 =: (encoding -&# lc_alpha) ([ #. | + (#dec_digits) * <:)  (encoding=.;'dec_digits uc_alpha lc_alpha'=.;:'0123456789 ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz') i. ]
+
+NB.  Memoize for arbitrary inputs, not just small integers
+NB.  EG:     3 : 'y [ smoutput y' memo&.> 'aa'  NB.  Only calls verb once;
+NB.      2
+NB.      +-+-+
+NB.      |a|a|
+NB.      +-+-+
+
+memo =: M. ("0) (&.((6 s: s:)@:<@:(3!:1)))

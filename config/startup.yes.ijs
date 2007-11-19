@@ -1,4 +1,34 @@
 NB.  =====================================================================================================================================================
+NB.  Bootstrap:  Where am I?
+NB.  =====================================================================================================================================================
+
+   	NB.  Split a filename into directory;filename.
+	NB.  EG:  splitPath 'c:\temp\test.txt' NB.  Returns 'c:\temp\';'test.txt'
+	splitPath				=: (({. ,&< }.)~ # <. >:@:i:&PATHSEP_j_)
+
+	NB.  This will return (directory;filename) of the file which runs it.  Any input is acceptablw
+	NB.  Find a name that hasn't been defined.
+	getUnassignedName		=. ([ $:^:(_1: ~: nc@:<))@:(5&(] {~ (?@:# #)) bind UCALPHA)
+	NB.  Define a previously undefined name, get the filename of the script that defined it, then delete it.
+	scriptFile				=. (4!:55@:{. ] {:)@:(, 4!:4 { [: ,&(<'') 4!:3 bind '')&.:<@:([ ".@:,&'=:$~0')@:getUnassignedName
+	scriptFile              =. 3 : '(4!:3$~0){::~4!:4{.;:''y'''  NB.  Stolen from Roger
+	NB.    Split a script's filename into directory;filename
+	NB.!!  Should I use $: and f. in conjunction like this?
+	NB.getPath				=:  4!:55@:< ] (({. ; }.)~ >:@: i:&'\')@:>@:(4!:4@:< { 4!:3) [ ".@:(] , '=:'''&,@:(,&'''')@:])
+	NB.getPath				=:  ([: (({. ; }.)~ >:@:i:&'\') (4!:55 ] 4!:4 { 4!:3)&.<@:".@:(, '=:'''&,@:(,&'''')))
+	getPath					=: (splitPath@:scriptFile) f.
+
+
+	NB.  The following line saves the path and filename of this script into the variable utilsfile_z_
+	utilsfile_z_			=:  ; utilspath =. getPath ''
+	utilspath  				=. ({: ,~ ] {.~ PATHSEP_j_ i:~ }:) > {.utilspath
+
+	NB.  Should probably only modify USERFOLDERS_j_, and make references to, eg, ~User
+	NB.  instead of ~user.  But why is ~user in SYSTEMFOLDERS in the first place?
+	SYSTEMFOLDERS_j_		=: (<utilspath) (<1 ;~ (<'user') i.~ {."1 SYSTEMFOLDERS_j_)} SYSTEMFOLDERS_j_
+
+	
+NB.  =====================================================================================================================================================
 NB.  Dependencies:  J scripts we need loaded to define the rest of our utilities
 NB.  =====================================================================================================================================================
 
@@ -382,22 +412,6 @@ NB.  ===========================================================================
 	NB.  Make a nested directory
 	mkdir					=:  *./ @: , @: (1!:5 @: nonExistant @: dirs) f. :: 0:
 
-   	NB.  Split a filename into directory;filename.
-	NB.  EG:  splitPath 'c:\temp\test.txt' NB.  Returns 'c:\temp\';'test.txt'
-	splitPath				=: (({. ,&< }.)~ # <. >:@:i:&PATHSEP_j_)
-
-	NB.  This will return (directory;filename) of the file which runs it.  Any input is acceptablw
-	NB.  Find a name that hasn't been defined.
-	getUnassignedName		=. ([ $:^:(_1: ~: nc@:<))@:(5&(] {~ (?@:# #)) bind UCALPHA)
-	NB.  Define a previously undefined name, get the filename of the script that defined it, then delete it.
-	scriptFile				=. (4!:55@:{. ] {:)@:(, 4!:4 { [: ,&(<'') 4!:3 bind '')&.:<@:([ ".@:,&'=:$~0')@:getUnassignedName
-	scriptFile              =. 3 : '(4!:3$~0){::~4!:4{.;:''y'''  NB.  Stolen from Roger
-	NB.    Split a script's filename into directory;filename
-	NB.!!  Should I use $: and f. in conjunction like this?
-	NB.getPath				=:  4!:55@:< ] (({. ; }.)~ >:@: i:&'\')@:>@:(4!:4@:< { 4!:3) [ ".@:(] , '=:'''&,@:(,&'''')@:])
-	NB.getPath				=:  ([: (({. ; }.)~ >:@:i:&'\') (4!:55 ] 4!:4 { 4!:3)&.<@:".@:(, '=:'''&,@:(,&'''')))
-   	getPath					=: (splitPath@:scriptFile) f.
-
 	getNmdPath				=:  verb define
 		me                                       =. cocreate''	
 		nms                 =.  '__me' , L: 0 ~ ;: 'dir basename ext' 
@@ -701,29 +715,24 @@ NB.  ===========================================================================
 NB.  Execution section: Run at startup
 NB.  =====================================================================================================================================================
 
-NB.  The following line saves the path and filename of this script into the variable utilsfile_z_
-utilsfile_z_				=:  ; utilspath =. getPath ''
-
-utilspath                   =. jpath '~user\util\'  NB.  Assume living under J directory
-
 NB.  Require this so we can use comman line options in all our programs.
-load '..\OS\commandLineParser.ijs' ,~ utilspath
+load '~user\OS\commandLineParser.ijs'
 
 NB.  Require this so that we can save/load workspaces
-load '..\environment\jworkspace.ijs' ,~ utilspath
+load '~user\environment\jworkspace.ijs'
 
 NB.  Require this so that we use formatTimeSpan
-load '..\time\formattimespan.ijs' ,~ utilspath
+load '~user\time\formattimespan.ijs' 
 
 NB.  Require this so that we can shorten the path in "recent files"
-load '..\environment\reduce_prefix.ijs' ,~ utilspath
+load '~user\environment\reduce_prefix.ijs' 
 
 NB.  Require this so that we can shorten the path in "recent files"
-load '..\environment\nameScope.ijs' ,~ utilspath
+load '~user\environment\nameScope.ijs'
 
 NB.  Load all of Oleg's useful utils.
-load (#~ endsWith&'x') listFiles '..\contrib\oleg\*.ijs' ,~ utilspath
-load '..\contrib\millers\fw2dl.ijs' ,~ utilspath
+load (#~ endsWith&'x') listFiles '..\contrib\oleg\*.ijs'
+load '~user\contrib\millers\fw2dl.ijs'
 
 NB.  Turn on debugging if requested
 3 : 0 ^: # $ getOption 'djbdebug'

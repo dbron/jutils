@@ -117,6 +117,12 @@
      All these forms produce the same verb.  Check that 5!:1 doesn't
      document/permit this.
 
+  *  Two bugs in explicit.  See http://www.nabble.com/Re%3A-reduce-fold-in-J-as-an-adverb-or-conjuction-p13904865s24193.html
+
+  *  Behavior of 2!:5 .  See the file  2xenos5.ijs  in this directory.  Though this may be a "front end" bug because
+     it was Eric Iverson, not Roger Hui, who responded to the question "Are there buffer overflow vulnerabilities in the 
+     implementation of 2!:5 ?".  See http://www.jsoftware.com/pipermail/programming/2007-November/008823.html
+
 == dictionary ==
   *  The DoJ says "Names begin with a letter and may continue 
      with letters, underlines, and digits" and "A primary may .. 

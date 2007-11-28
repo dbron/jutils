@@ -133,7 +133,27 @@
   *  Section D, Comparatives says "an arbitrary tolerance can be set" but this is not in 
      agreement with Appendix C, System Conventions and limits which says 
      "tolerance		less than or equal to 2^_34".
-    
+
+  *  0!: , Scripts, doesn't say how 0!:0xx distinguishes files from nouns (the answer is boxing)
+  
+  *  Section II.J, Errors and Suspensions, says that errors only occur in script FILES, but
+     they can occur with noun-scripts too:
+
+        t=: '2*3',(10{a.),'2+''a''',(10{a.),'2+3'
+        0!:101 t
+        2*3
+     6
+        2+'a'
+     |domain error
+     |   2    +'a'
+     |[-1] 
+   
+
+  *  Appendix D, Errors, says allocation error is raised for "memory mapped BOXED arrays"
+     in fact, it can occur for a memory mapped array of any type.
+
+  *  Appendix D, Errors, says "T is not an array of all 1s in a control structure assert. T"    
+     but in fact 0!:2 will also raise assertion errors.
 
   *  The DoJ says "Names begin with a letter and may continue 
      with letters, underlines, and digits" and "A primary may .. 

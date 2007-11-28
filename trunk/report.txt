@@ -123,7 +123,18 @@
      it was Eric Iverson, not Roger Hui, who responded to the question "Are there buffer overflow vulnerabilities in the 
      implementation of 2!:5 ?".  See http://www.jsoftware.com/pipermail/programming/2007-November/008823.html
 
+  *  =!.(%2^34) is permitted but 9!:19[2^_34 is not.  The highest global tolerance permitted is % 2 + 2^34 .
+     These two facts are not in agreement; I think the second one is wrong because Appendix C, System Conventions
+     and limits says "tolerance		less than or equal to 2^_34".
+  
+
 == dictionary ==
+
+  *  Section D, Comparatives says "an arbitrary tolerance can be set" but this is not in 
+     agreement with Appendix C, System Conventions and limits which says 
+     "tolerance		less than or equal to 2^_34".
+    
+
   *  The DoJ says "Names begin with a letter and may continue 
      with letters, underlines, and digits" and "A primary may .. 
      be an inflected name"  .  But that's not true;  

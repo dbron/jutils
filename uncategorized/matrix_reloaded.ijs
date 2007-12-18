@@ -31,10 +31,7 @@ matrix_close_button=: 3 : 0
 )
 
 matrix_reloaded_button=: 3 : 0
-	smoutput 'hi'
-	staph=.12
-	(smoutput ] load) (4!:4<'staph') { 4!:3$0
-	smoutput 'bye'
+	(smoutput ] load) (4!:4<'matrix_reloaded_button') { 4!:3$0
 )
 
 

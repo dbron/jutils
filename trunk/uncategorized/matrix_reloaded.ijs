@@ -15,7 +15,6 @@ rem form end;
 )
 
 matrix_run=: 3 : 0
-	wdreset''
 	wd MATRIX
 	NB. initialize form here
 	wd 'set counter ',":COUNTER =: 0

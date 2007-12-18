@@ -15,6 +15,7 @@ rem form end;
 )
 
 matrix_run=: 3 : 0
+	wdreset''
 	wd MATRIX
 	NB. initialize form here
 	wd 'set counter ',":COUNTER =: 0
@@ -30,7 +31,7 @@ matrix_close_button=: 3 : 0
 )
 
 matrix_reloaded_button=: 3 : 0
-	(smoutput ] load) (4!:4<'matrix_reloaded_button') { 4!:3$0
+	load (4!:4<'matrix_reloaded_button') { 4!:3$0
 )
 
 

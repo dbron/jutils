@@ -135,6 +135,23 @@
      "tolerance		less than or equal to 2^_34".
 
   *  0!: , Scripts, doesn't say how 0!:0xx distinguishes files from nouns (the answer is boxing)
+
+  *  Section II.G should say it supports  @:  as well as  @ 
+     http://www.jsoftware.com/pipermail/general/2006-December/028251.html
+
+  *  Should document all the places  !.  actually works.  For example: 
+
+       	   #.^:_1:!.0 
+	#.^:(_1:)!.0
+	
+	   #.^:_1!.0 
+	|domain error
+	|       #.^:_1!.0
+
+     This is because  !.  actually sets a global flag, I believe.  See:
+
+     http://www.jsoftware.com/pipermail/general/2007-November/031266.html
+     http://www.jsoftware.com/pipermail/general/2004-August/017959.html	   
   
   *  Section II.J, Errors and Suspensions, says that errors only occur in script FILES, but
      they can occur with noun-scripts too:
@@ -268,8 +285,16 @@
     recall the line in the execution window, leaving focus there.
 
 
+  *  Selecting an entire primitive and pressing CTRL+F1
+     makes J complain that it can't find the relevant page.
+     One must place the cursor, without highlighting anything,
+     _before_ the primitive in question.  Also, it might be nice
+     if pressing CTRL+1 in a foreign of the form   n!:m  brought
+     up the page for that specific foreign (at the relevant anchor, 
+     if possible)
+ 
 == library ==
-
+   
    * in scriptserver.ijs {{{
 
          NB.!  JSTDLIBBUG:  MUST FLOOR BYTE COUNT.

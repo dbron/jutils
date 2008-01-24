@@ -1,0 +1,37 @@
+Message-ID: <PC179020080124162601012479f6123d@NBDBRON>
+X-Mailer: Ultrafunk Popcorn 1.79 (17-Oct-2007)
+X-Priority: 3
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=iso-8859-1
+Date: Thu, 24 Jan 2008 16:26:01 -0500
+From: Dan Bron <j@bron.us>
+To: Programming forum <programming@jsoftware.com>
+Subject: J for string manipulation
+Reply-To: j@bron.us
+
+Recently, some of us have been having an off-list discussion regarding J as a "general purpose" programming language.
+
+The question of J's strengths and weaknesses has been raised.  One weakness I cited was string manipulation.
+
+So here's a challenge for you.  Write a J program equivalent to this Perl:
+
+   perl -pi -e "s/([^)0-9])\r/$1)\r/" input.txt
+
+The Perl program fixes a malformed file.  It ensures that all appropriate lines end with a  )  .  Some lines already end with a  )  and so shouldn't be changed.  Some lines are special, and end with a digit, and shouldn't be changed.  So all lines that don't end with a ) or a digit must have a ) appended.  The line terminator is CRLF.
+
+You have to write the program as fast as possible, and the program itself has to execute as fast as possible.  These are two separate goals.  You have to fix the immediate problem, and you should have a tool to fix the problem again under urgent conditions.
+
+I have put a little sample data here:
+
+   http://www.jsoftware.com/svn/DanBron/trunk/challenge/string-manip/data.txt
+
+your program must be able to efficiently handle input 10-100 times as large.
+
+Write back with:
+
+   (A) Your program
+   (B)  How long it took you to develop (honestly)
+   (C)  How long it takes to correctly process a file 10x the size of the sample.
+
+-Dan

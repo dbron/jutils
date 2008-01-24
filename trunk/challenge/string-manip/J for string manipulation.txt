@@ -30,7 +30,7 @@ your program must be able to efficiently handle input 10-100 times as large.
 
 Write back with:
 
-   (A) Your program
+   (A)  Your program
    (B)  How long it took you to develop (honestly)
    (C)  How long it takes to correctly process a file 10x the size of the sample.
 

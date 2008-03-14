@@ -751,7 +751,9 @@ NB.  It appears that this startup script is run before the IJX window is created
 NB.  so 'smoutput' won't work.  So I just create a verb to print the prompt
 NB.  and call it from a later script (newuser.ijs specificially)
 printPrompt_z_ =: verb define
-	smoutput 'New J (' , (({.~ i.&'/') 9!:14 '') ,  ') session started on ' , ((i.&' ') ({. , ' at '"_ , }.@:}.) ]) _4 }. datetimestamp_base_ 6!:0 ''
+
+	version =. ( ('vb' {~1 e. 'beta' E. ]) , 4 {.!.'?' ]) }. (i. {. [)&>/ ('_' ;~ 1!:1) :: ('/' ;~ 9!:14@:(''"_))  <jpath'~bin/installer.txt'
+	smoutput 'New J (' , version ,  ') session started on ' , ((i.&' ') ({. , ' at '"_ , }.@:}.) ]) _4 }. datetimestamp_base_ 6!:0 ''
 
 	if.  you_want_regex_loaded_and_the_random_seed_changed =. 1 do.  NB.  Usually when you restart J ? wil give the same results in the same order as the last time.  This changes when you reset the randoms edd.
 	require 'regex'

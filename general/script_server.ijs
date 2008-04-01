@@ -1,24 +1,33 @@
 cocurrent 'scriptserver'
-require'jmf validate socket'
+require'files jmf validate socket'
 coinsert 'jsocket'
 unmapall_jmf_ ''
 
 NB.  Figure out how many bytes are required for mapped file
+NB.! JSTDLIBBUG:  Feature request, create a mapped file
+NB.! from a variable, using the smallest possible amount of
+NB.! space.  Or, if I tell you the shape and J internal type
+NB.! of the variable I want, then create a mapped file precisely
+NB.! large enough to hold such a variable.
 highest_port		=:  2^16
-bits_per_byte		=:  8
+bits_per_byte		=:  2^3
 byte_per_int		=:  2^2
 
 NB.!  JSTDLIBBUG:  MUST FLOOR BYTE COUNT.
-NB.!  Bug in createjmf_jmf_  if 1{:: y is floating, even NB.!  if  (=<.)  , you'll get errors later on in map_jmf_
+NB.!  Bug in createjmf_jmf_  if 1{:: y is floating, even 
+NB.!  if  (=<.)  , you'll get errors later on in map_jmf_
+NB.!  So make sure to use  <.  .
 bytes_per_port		=:  <. bits_per_byte %: highest_port   
 
 strToPort           =:  _1&". ^:((2 ^ 1 10 17) e.~ 3!:0) :: _1:
-portPending			=:  -:&(pendingPort =: 0)
+portPending			=:  -:&(pendingPort =: 0)  NB.  pendingPort=0 means we're starting up a server.
 isPort				=:  ((1 , highest_port)&inrange  *. isinteger *. isscalar) :: 0: @: strToPort
 
 
 SCRIPTSTOOPEN       =: (#~ fexist) 2 }. ARGV   	NB.  Drop executable name and script name
 
+NB.  If we set the registry to launch scripts from jconsole,
+NB.  then there is no IJX, and hence no IJX name.
 IJXNAME				=:  (,&a: {::~ 'x'i.~{:&>) (<@(3 : 'SMNAME__y':: 0:) "0  \: (0 ". ;:^:_1) ) conl 1
 'PORTFILENAME IJXNUM'	=:  (( ] (] ;~ '.port' ,~ ,) _4 }. (}.~#)) getpath_j_) IJXNAME
 SHARENAME			=:  'JSCRIPTPORT_',IJXNUM
@@ -84,6 +93,10 @@ GO =: verb define
 			NB.  Publish "pending" portno before start listening
 			(VARNAME) =: pendingPort 
 
+			NB.  Because VARNAME~ is mapped, and is passed
+			NB.  in to startServer, that verb can assign
+			NB.  y=.port number  and the port number will
+			NB.  be available in VARNAME~ .
 			if. -. startServer  VARNAME~ do.  NB. :: 0:
 				(VARNAME) =: _1
 				unmap_jmf_ :: 0: VARNAME
@@ -133,12 +146,14 @@ socket_handler    =: verb define
 	CHILDREN =: CHILDREN,new
 	
 )
-socket_handler_z_ =: socket_handler
-verb define
 
-  while. SOCKNO e. sdcheck sdgetsockets ''
+socket_handler_z_ =: socket_handler
+
+NB.verb define
+
+NB.  while. SOCKNO e. sdcheck sdgetsockets ''
   
-)
+NB.)
 
 coclass 'scriptsocket'
 coinsert 'jsocket'

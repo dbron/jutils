@@ -1,4 +1,19 @@
 == interpreter ==
+  *  Spurios syntax error:
+		   3 : 0 ''
+		
+		:
+		)
+		|syntax error
+		|       3 :0''
+
+    The problem is that in a 3 :0  def, if there are no lines before or after
+    the  :  separating monad from dyad, then the  :  is treated as the primitive conjuction
+    rather than a delimiter, so the verb tries to return a conj and gets a syntax err.
+    Not that it matters much: even if this bug were fixed, calling the verb would produce
+    a domain error rather than a syntax error.
+
+
   
   *  Display of
        0 "."0 >(,. ' '&,.)&.>/"1] 2 2 $ <"_1 (#: i. 2^#$M) |."_1 _ (3 3 $ '123456789') (<;~2+i.3)} M=.7 7 $ '0'
@@ -129,6 +144,8 @@
   
 
 == dictionary ==
+
+  *  This page  http://www.jsoftware.com/help/dictionary/d310v.htm  shouldn't show "Valence error"
 
   *  Section D, Comparatives says "an arbitrary tolerance can be set" but this is not in 
      agreement with Appendix C, System Conventions and limits which says 
@@ -308,3 +325,5 @@
          NB.!  other J session will require JMF header,
          NB.!  and since that's not stored in non-JMF files
          NB.!  the other J session can't find it. }}}
+
+

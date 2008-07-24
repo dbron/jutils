@@ -1,4 +1,5 @@
 == interpreter ==
+
   *  Spurios syntax error:
 		   3 : 0 ''
 		
@@ -144,6 +145,27 @@
   
 
 == dictionary ==
+
+  *  The Vocab page for  x:  doesn't document  100&x:  or  101&x:  but they seem to work:
+         
+	   100 x: i. 10
+	0 1 2 3 4 5 6 7 8 9
+	   101 x: i. 10
+	0 1 2 3 4 5 6 7 8 9
+
+     They're nonce errors for rational numbers:
+
+	   101 x: 1r4
+	|nonce error
+	|   101     x:1r4
+
+  *  The Vocab page for  x:  and  !.  don't document  x:!.0  but it works:
+
+       	   x:!.0 i. 10
+	0 1 2 3 4 5 6 7 8 9
+
+     This probably just sets tolerance for conversion from float -> rational or extended.
+
 
   *  This page  http://www.jsoftware.com/help/dictionary/d310v.htm  shouldn't show "Valence error"
 

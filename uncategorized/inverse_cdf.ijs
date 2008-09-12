@@ -58,15 +58,14 @@ invCDF0 =:  (0.02425 ; (0 |.@". ]);._2 noun define)&$: : (dyad define)
 
 NB.  Try to make this work like it's rank zero, without actually doing "0
 invCDF1 =: (X=:({.@:,;}.)];._2(0|.@".]);._2 noun define)&$: : (dyad define)
-
     NB.  Threshold & coefficients given as parameters
-	't c'=.x
+    't c'=.x
 	
-	NB.  Find the region
-	region =.  y (I.~ +. (= {.)) (, -.) t 
+    NB.  Find the region
+    region =.  y (I.~ +. (= {.)) (, -.) t 
  
     NB.  Select the polynomials
-	cf     =.  c {~ hl =. 1 ~: region
+    cf     =.  c {~ hl =. 1 ~: region
 
     NB.  Calculate q (based on region)
     q      =.  hl } (*: srq =. y-0.5) , ,: %: _2 * ^. h + y * _1 ^ h =. region = 2

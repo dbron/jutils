@@ -10,9 +10,6 @@ X=:({.@:, ; }.) ];._2 (0 |.@". ]);._2 noun define
 )
 
 invCDF0 =:  X&$: : (dyad define)
-    NB.  Check bounds
-	assert. (0<y)*.(y<1)
-
     NB.  Threshold & coefficients given as parameters
 	't c'=.x
 

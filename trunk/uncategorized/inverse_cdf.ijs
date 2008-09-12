@@ -86,27 +86,27 @@ invCDF1 =: (X=:({.@:,;}.)];._2(0|.@".]);._2 noun define)&$: : (dyad define)
 
 NB.  x is (threshold;coeff), y is data
 invCDF2                =:  ] invCDFh~ region ; {:@:[
-NB.  x is (region ; coeff), y is data
-	invCDFh            =:  ((] scaledPolyDiv (y05_q~ }:)) {. , hl_cf&>~/)~
-		NB.  x is coeff , y is region
-		hl_cf          =:  (] ; {~) 1&~:
-	    NB.  x is (region;hl;cf), y is (y05;q)
-		scaledPolyDiv  =:  selectMult&:>&:{. * polyDiv&:>&:{:
+    NB.  x is (region ; coeff), y is data
+    invCDFh            =:  ((] scaledPolyDiv (y05_q~ }:)) {. , hl_cf&>~/)~
+        NB.  x is coeff , y is region
+        hl_cf          =:  (] ; {~) 1&~:
+        NB.  x is (region;hl;cf), y is (y05;q)
+        scaledPolyDiv  =:  selectMult&:>&:{. * polyDiv&:>&:{:
             NB.  x is region, y is y05
-			selectMult =:  merge@:(,&< 1 , _1 ,~ ,:)
+            selectMult =:  merge@:(,&< 1 , _1 ,~ ,:)
             NB.  x is cf, y is q
-			polyDiv    =:  %/"1@:p.
-		NB.  x is (region;hl), y is data
-		NB.  output is y05 ; q (i.e. transformed data)
-		y05_q          =:  [ ({.@:] (,<) merge@:,&:{:) y05_nlt     
-		merge          =:  >@:{.`(>@:{:)}
-			NB.  output is y05 ; all transform choices, i.e. 
-			NB.  y05 ;  (*:y-0.5),nlt
-			y05_nlt    =:  y05 (([ ; (,~ *:)~) ,:) nlt                  
-				y05    =:  _0.5 + ]
-				NB.  Non-linear transform choices
-				NB.  x is (region ; hl), y is data
-				nlt    =:  _2 %:@:* ((] ^.@:+ (* _1&^)) 2 = >@:{.)~            
+            polyDiv    =:  %/"1@:p.
+        NB.  x is (region;hl), y is data
+        NB.  output is y05 ; q (i.e. transformed data)
+        y05_q          =:  [ ({.@:] (,<) merge@:,&:{:) y05_nlt     
+        merge          =:  >@:{.`(>@:{:)}
+            NB.  output is y05 ; all transform choices, i.e. 
+            NB.  y05 ;  (*:y-0.5),nlt
+            y05_nlt    =:  y05 (([ ; (,~ *:)~) ,:) nlt                  
+                y05    =:  _0.5 + ]
+                NB.  Non-linear transform choices
+                NB.  x is (region ; hl), y is data
+                nlt    =:  _2 %:@:* ((] ^.@:+ (* _1&^)) 2 = >@:{.)~           
 
 X=:({.@:,;}.)];._2(0|.@".]);._2 noun define
 	+0.02425 

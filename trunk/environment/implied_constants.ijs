@@ -51,7 +51,7 @@ nOne1  =:  (A.@i. - !@#@[)&$ |:
 nOne2  =:  # -~ (i:     {:)          NB.!!  Doesn't work for  ''
 nOne3  =:  # -~ (i: (-. }:))         NB.  Probably not in all cases?  Certainly not when ''-:(-.}.)
 
-zero0  =:  i.   {.
+zero0  =:  i. {.
 zero1  =:  i.(-.}.)                  NB.  Probably not in all cases?  Certainly not when ''-:(-.}.)
 zero2  =:  +  -
 
@@ -64,6 +64,7 @@ two0   =:  %  -:                     NB.  two0  =:  * %@-:
 two1   =:  %~ +:
 two2   =:  ^. *:
 two3   =:  ^.~%:                     NB.  two2   =:  %@(^.%:)   NB.  Could be considered a constant of 0.5, or a constant or 2
+two4   =:  |. pI #.                  NB.!!  Doesn't work for singleton inputs
 
 e0     =:  %: ^
 e1     =:  %:~^.
@@ -71,6 +72,16 @@ e1     =:  %:~^.
 pi     =:  %~ o.
 
 i0     =:  %~ j.
+
+
+
+
+
+pInv       =.  ((-~ {.) p.@, }.@])~                               NB.  polynomial inverse 
+normalest  =.  \: (0 = {:@+.) ,. (=<.) ,. (0 <: {.@+.) ,. -@|     NB.  Intuitive selection of root
+pI         =: {.@normalest@>@{:@pInv f.                           NB.  p.^:_1
+
+
 
 NB.  Neat plot!
 NB.  plot 2-([: {.@+. ] ^.~ >:@#@#:)&> 0-.~i:500

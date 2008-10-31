@@ -65,7 +65,7 @@ NB.  Exclude pages where Talk:Page has ==opt-out== / ===language=== / excuse
 NB.  Sort by http://rosettacode.org/wiki/Special:Mostrevisions 
 
 noun define
-Generate a report which identifes the gaps in your language's representation on RosettaCode.
+Generate a report which identifes the gaps in your language`s representation on RosettaCode.
 
 Fetch Category:Solutions_by_Programming_Task, Category:Puzzles and Category:Your_Language. 
 For the puzzles and tasks listed, take the difference of the latter from the union of the 
@@ -86,17 +86,21 @@ partition.
 Sort the first subsection (tasks and puzzles which are unsolved but solvable) by (primarily) 
 the number of languages which have provided solutions and (secondarily, ie. for ties 
 within the primary sort) by the number of revisions of the page, as reported by 
-http://rosettacode.org/wiki/Special:Mostrevisions .
+http://rosettacode.org/wiki/Special:Mostrevisions (or, better  http://www.rosettacode.org/wiki/Special:Popularpages  ?) .
 
 Annotate the second group (unsolvable tasks and puzzles) with a brief synopsis of the
 reason given for opting out (say, the first 10 words) in the == opt-out == / === your language === 
 section.
 
 All tasks and puzzles mentioned should be links; in the first subsection, to the primary task page,
-in the second subsection, to the relevant anchor on the task's talk page (ie to the opt-out / 
+in the second subsection, to the relevant anchor on the task`s talk page (ie to the opt-out / 
 your-language section of the talk page).
 
 See [Category_talk:J#unsolved_tasks|Unsolved tasks in J] for an example.
+
+Your goal is to inspire people to (legitimately) minimize Your_Language's index in:
+
+	http://www.rosettacode.org/wiki/Special:Mostlinked
 )
 
 noun define

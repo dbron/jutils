@@ -57,13 +57,13 @@ Note 'examples of use'
 	   	
 
 	NB.  Similarly for local assignment
-		3 : ('L isL y';'L + 1') 8   
+	   3 : ('L isL y';'L + 1') 8   
 	9
 
 	   L                             NB.  L only available within local scope
 	|value error: L
 
-		3 : ('L isL y';'L =. 1') 8   NB.  Can't be redefined within local scope
+	   3 : ('L isL y';'L =. 1') 8   NB.  Can't be redefined within local scope
 	|read-only data
 	|   L    =.1
 	
@@ -78,7 +78,7 @@ Note 'examples of use'
 
 	NB.  And are even smart about allowing you to shadow globals with locals
 	NB.  as you'd expect...
-	   	3 : 'avg isL 45' ''
+	   3 : 'avg isL 45' ''
 	45
 
 	   avg

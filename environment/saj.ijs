@@ -1,7 +1,9 @@
 NB.  Single-assigment J
 
+
 NB.=== Requirements ===
 jsystemdefs 'hostdefs' [ require 'dll'
+
 
 NB.=== Implementation ===
 NB.  Adverb.  Argument is either a noun (string or boxed string) or 
@@ -17,8 +19,7 @@ Readonly         =.  [ (] memw~ (AFRO * 0~:{.@:[) 23 b.~ ( (26 b.) AFRO ) 17 b.~
   NB.  Verb.  Get flags from header of name.  Same inputs as Fullname.
   Getflagsad     =.  SZI + 1 { [: memr (0 4, JINT) ,~ symget@:<
 
-NB.  Adverbs, Permanent global & local (respectively) assigment.  That is, the names assigned cannot be reassigned.
-NB.  Local assigment; cannot be reassigned
+NB.  Adverbs.  Permanent global & local (respectively) assigment.  That is, the names assigned cannot be reassigned.
 is               =.  name (`({.;:'=:')) ("_) (` ( ((] [ 1 Readonly 0 {:: [ ) ".@:;)@:([ 3 assert  unassigned             @:{.)@:,)) (`(3 : '<5!:5{.;:''y''')) (`:6)
 isL              =.  name (`({.;:'=.')) ("_) (` ( ((] [ 1 Readonly 0 {:: [ ) ".@:;)@:([ 3 assert (unassigned +. isGlobal)@:{.)@:,)) (`(3 : '<5!:5{.;:''y''')) (`:6)
   NB.  Monadic verb.  Determines whether name input is unassigned.
@@ -30,13 +31,14 @@ isL              =.  name (`({.;:'=.')) ("_) (` ( ((] [ 1 Readonly 0 {:: [ ) ".@
     NB.  Ambivalent verb; returns all global names accessible from here without locale qualifier
     globalNames  =.  ;@:(3 : '<nl__y$0'"0)@:(, |.@:copath)@:coname@:(''"_)
 
+
 NB.=== Interface ===
 NB.  Global & local permanent assignment
 is_z_            =:  'is' f.
 isL_z_           =:  'isL' f.
 
-NB.=== Usage ===
 
+NB.=== Usage ===
 Note 'examples of use'
 
 	NB. Simple use:  define a name.

@@ -94,6 +94,8 @@ Note 'examples of use'
 	hello
 	   hello
 	goodbye
+
+	   erase'msg hello'
 	   
 	NB.  So when you want to be absolutely safe, use the quoted form:
 	   msg  =: 'hello'

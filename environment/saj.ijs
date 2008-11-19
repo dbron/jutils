@@ -1,6 +1,9 @@
 NB.  Single-assigment J
+
+NB.=== Requirements ===
 jsystemdefs 'hostdefs' [ require 'dll'
 
+NB.=== Implementation ===
 NB.  Adverb.  Argument is either a noun (string or boxed string) or 
 NB.  a name (which means an unassigned name or a proverb (but not one of the special ones, 
 NB.  i.e. not u or v in an explicit operator).  Basically, anything that's stacked by name.
@@ -27,9 +30,12 @@ isL              =.  name (`({.;:'=.')) ("_) (` ( ((] [ 1 Readonly 0 {:: [ ) ".@
     NB.  Ambivalent verb; returns all global names accessible from here without locale qualifier
     globalNames  =.  ;@:(3 : '<nl__y$0'"0)@:(, |.@:copath)@:coname@:(''"_)
 
+NB.=== Interface ===
 NB.  Global & local permanent assignment
 is_z_            =:  'is' f.
 isL_z_           =:  'isL' f.
+
+NB.=== Usage ===
 
 Note 'examples of use'
 
@@ -105,7 +111,6 @@ Note 'examples of use'
 	|domain error
 	|       (<'msg')is'goodbye'
    
-
 	NB.  But multiple assigments, evocations, etc, will almost certainly fail. 
 	
 	NB.  Also, while I believe the verbs should be entirely locale-safe

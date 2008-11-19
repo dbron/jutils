@@ -6,9 +6,9 @@ jsystemdefs 'hostdefs' [ require 'dll'
 
 
 NB.=== Implementation ===
-NB.  Adverb.  Argument is either a noun (string or boxed string) or 
-NB.  a name (which means an unassigned name or a proverb (but not one of the special ones, 
-NB.  i.e. not u or v in an explicit operator).  Basically, anything that's stacked by name.
+NB.  Adverb.  Argument is either a noun representing a name (as a string or boxed string) or 
+NB.  a name (which means an unassigned name or a proverb [but not one of the special ones, 
+NB.  i.e. not u or v in an explicit operator]): basically, anything that's stacked by name.
 name             =.  (`'') ("_) ((<^:(0=L.))`)  (`(<'0';i.0)) (`:6)
 
 NB.  Stolen from JMF.  Converted to tacit so namescope doesn't become an issue.
@@ -43,7 +43,7 @@ Note 'examples of use'
 
 	NB. Simple use:  define a name.
 	   G              NB.  Undefined
-	|value error: R
+	|value error: G
 
 	   G is 22        NB.  Define it
 	22
@@ -56,7 +56,7 @@ Note 'examples of use'
 	|   G    =:55
 	   	
 
-    NB.  Similarly for local assignment
+	NB.  Similarly for local assignment
 		3 : ('L isL y';'L + 1') 8   
 	9
 

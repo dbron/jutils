@@ -57,6 +57,7 @@ fs =: conjunction def ( (fw 'strand')&=`(,:&(<' ''()[]{}<>'' fancyStrand'))}&.:;
 t =: s __
 
 0!:111^:0: Note 'Examples.  Change  0:  to  1:  to run'
+
 	__ 'a' 'b' 'c' + - * (+/ % #) a:   t
 	__  'a' 'b' 'c' + - * (+/ % #) a:  s __
 	| 'a' 'b' 'c' + - * (+/ % #) a:    s |
@@ -74,9 +75,11 @@ t =: s __
     | 'this is' 3 'words' 'of strand notation'  s|
     
 	[ 'this is' 4 'words of strand notation, which is ' > 3   fs]
+
 )
 
 Note 'Promises, promises'
+
 	If J ever supports Unicode identifiers, or if I ever write 
 	my Punycode-ish IJS converter script, we could have notation
 	like this:
@@ -85,5 +88,7 @@ Note 'Promises, promises'
 	« =: '«'"_
 	
     « 'This' 'is' 'strand' 'notation' »
+
+	« > (+/%#)  »  NB.  Gerund
 
 )

@@ -1,5 +1,18 @@
-fw   =: {.@:;:  NB.  'f'irst 'w'ord
+NB.  Strand notation emulation in J.
+NB.  Short story:
+NB.        	[ 'this is' 6 'words' 'of strand notation, which is ' > 5   fs]
+NB.      +-------+-+-----+-----------------------------+-+-+
+NB.      |this is|6|words|of strand notation, which is |>|5|
+NB.      +-------+-+-----+-----------------------------+-+-+
+NB.  See bottom of script for more examples.
+   
 
+NB.  'f'irst 'w'ord
+fw   =: {.@:;:
+
+NB.  'N'ou'n' 'it' --
+NB.  make a boxed noun out of the argument
+NB.  whether noun already or verb.
 nnit =: adverb define
     if. noun=nc{.;:'u'do.
         <u
@@ -11,7 +24,11 @@ nnit =: adverb define
     NB.  <`{:@.((<,''0'')-:{.) u"_`'''' {::~ ,&.>0 1 0
 )
 
-strand =:conjunction     define
+NB.  Strand notation conjunction in J.
+NB.  Recursive operator.
+NB.  Don't use directly, use  s  or  t
+NB.  instead.
+strand =:conjunction define
 
     m =. u nnit
 
@@ -23,17 +40,27 @@ strand =:conjunction     define
 
 )
 
+NB.  See bottom of script for examples.
 s  =: conjunction define
     u strand (v nnit)
 )
 
+
+NB.  Cover verb.  Marker is  __  .
+NB.  Would use  _.  but can't rely on
+NB.  _. = _.  being true.
+t =: s __
+
+
+NB.  Like strand, but supports balanced parens as
+NB.  markers.  Again, don't use directly.  Use  fs  instead.
 fancyStrand =: adverb define
 
 	NB.  Through manipulation of the text of  strand  ,
-    NB.  permit "paired  markers" for strand notation, 
+	NB.  permit "paired  markers" for strand notation, 
 	NB.  e.g.
-    NB.     [ 'hello' 'there'  fs ]   ,  < 'hello' 'there'  fs >  
-    NB.    '(' 'hello' 'there' fs ')' , '{' 'hello' 'there' fs '}'
+	NB.     [ 'hello' 'there'  fs ]   ,  < 'hello' 'there'  fs >  
+	NB.    '(' 'hello' 'there' fs ')' , '{' 'hello' 'there' fs '}'
 	NB.  Paired markers are given as the argument to 
 	NB.  this adverb.
 
@@ -54,8 +81,6 @@ fancyStrand =: adverb define
 NB.  "fancy" analog to  s  .  Also produced through text manipulation.
 fs =: conjunction def ( (fw 'strand')&=`(,:&(<' ''()[]{}<>'' fancyStrand'))}&.:;: L:0 {:"1 (2) 5!:7 fw 's' )
 
-t =: s __
-
 0!:111^:0: Note 'Examples.  Change  0:  to  1:  to run'
 
 	__  'a' 'b' 'c' + - * (+/ % #) a:  t
@@ -72,8 +97,8 @@ t =: s __
 	'{' hello there fs'}'
 	
 
-	| 'this is' 3 'words' 'of strand notation'  s|
-	[ 'this is' 4 'words of strand notation, which is ' > 3   fs]
+	| 'this is' 4 'words' 'of strand notation'  s|
+	[ 'this is' 6 'words' 'of strand notation, which is ' > 5   fs]
 
 )
 

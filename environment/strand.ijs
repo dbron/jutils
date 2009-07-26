@@ -66,14 +66,13 @@ t =: s __
 
 	| hello there   fs|
 	[ hello there   fs]
-    < hello there   fs>
+	< hello there   fs>
 
 	'(' hello there fs')'
 	'{' hello there fs'}'
 	
 
-    | 'this is' 3 'words' 'of strand notation'  s|
-    
+	| 'this is' 3 'words' 'of strand notation'  s|
 	[ 'this is' 4 'words of strand notation, which is ' > 3   fs]
 
 )
@@ -87,7 +86,7 @@ Note 'Promises, promises'
 	» =: s «
 	« =: '«'"_
 	
-    « 'This' 'is' 'strand' 'notation' »
+	« 'This' 'is' 'strand' 'notation' »
 
 	« > (+/%#)  »  NB.  Gerund
 

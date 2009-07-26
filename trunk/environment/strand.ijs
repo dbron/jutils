@@ -58,18 +58,18 @@ t =: s __
 
 0!:111^:0: Note 'Examples.  Change  0:  to  1:  to run'
 
-	__ 'a' 'b' 'c' + - * (+/ % #) a:   t
+	__  'a' 'b' 'c' + - * (+/ % #) a:  t
 	__  'a' 'b' 'c' + - * (+/ % #) a:  s __
-	| 'a' 'b' 'c' + - * (+/ % #) a:    s |
+	|   'a' 'b' 'c' + - * (+/ % #) a:  s |
 
-	| hello there s |
+	| hello there    s|
 
-	| hello there fs |
-	[hello there fs]
-    <hello there fs>
+	| hello there   fs|
+	[ hello there   fs]
+    < hello there   fs>
 
-	'(' hello there fs ')'
-	'{' hello there fs '}'
+	'(' hello there fs')'
+	'{' hello there fs'}'
 	
 
     | 'this is' 3 'words' 'of strand notation'  s|

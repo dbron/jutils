@@ -71,6 +71,7 @@ NB.  sure paramSyntax is called.  Used as in example
 NB.  below.
 fdef                =: adverb def '(u defn)&:paramSyntax'
 
+
 Note 'Example'
 	NB.  ===========     EXAMPLE SECTION    =========== 
 	NB.  Define a parameterized verb.  A noun-define is used to create the default parameter table,

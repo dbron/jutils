@@ -15,7 +15,7 @@ NB.  make a boxed noun out of the argument
 NB.  whether noun already or verb.
 nnit         =:  adverb define
 
-	if. noun=nc{.;:'u'do.
+	if. noun=nc fw'u'do.
 		<u
 	else.
 		{.u`''

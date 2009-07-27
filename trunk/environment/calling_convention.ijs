@@ -1,17 +1,30 @@
 NB.  Require strand and parameterized verbs script
 NB.  should be in this same directory
-splitPath =. ({. ,&< }.)~ (# <. >:@:i:&'\')
-'dir file'=.  splitPath (here =. 3 : '(4!:3$~0) {::~ 4!:4{.;: y') 'here'
-require dir,L:0 '.ijs',L:0~ ;:'parameterized_verbs strand'
+splitPath   =.  ({. ,&< }.)~ (# <. >:@:i:&'\')
+'dir file'  =.  splitPath (here =. 3 : '(4!:3$~0) {::~ 4!:4{.;: y') 'here'
+require dir ,L:0 '.ijs' ,L:0~ ;:'parameterized_verbs strand'
 
-NB.  Either  [value value value          ... fs]
-NB.  or      [value, value, value,       ... fs]
-NB.  or      [name=value' name=value  ... fs]
-NB.  or      [name=value',name=value, ... fs]
+NB.  Combination of strand notation and parameterized verbs
+NB.  allows us to define verbs with formal (named) arguments
+NB.  and call them like
+NB.        func[value, value, value,   ... fs]
+NB.        func[name=value,name=value, ... fs]
+NB.
+NB.  See bottom of script for examples.
 
-NB.  Note there are some syntactic constraints
-NB.  but also freedoms.  
-
+NB.  This whole script is just one extra verb and 
+NB.  cover-adverb added to the services of the
+NB.  scripts required above.  
+NB.
+NB.  This verb, paramSyntax, sits on top of strand
+NB.  notation, and permits some flexibility in
+NB.  calling parameterized J verbs.  It emulates
+NB.  the calling conventions of other programming 
+NB.  languages.
+NB.
+NB.  Caveat:  there are some syntactic constraints
+NB.  (imposed by J's own grammar), but also freedoms.  
+NB.
 NB.  For example, in the [value value value] syntax, 
 NB.  you couldn't have 2 adjacent numeric parameters
 NB.  because they'd run into each other, so you'd 
@@ -21,13 +34,18 @@ NB.  Or you could use the comma syntax, like
 NB.  [1 2 3, 4 5 6]
 NB.
 NB.  But note that this has the cost that (,',') 
-NB.  can never included in the strand (using this verb).
+NB.  can never included in the strand (using this calling 
+NB.  convention), and therefore ,',' itself can never be 
+NB.  a parameter.
 NB.
 NB.  Further, in the  name=value  syntax, either you
 NB.  can quote the name, as in 'name' or you can use
 NB.  a bare name, so long as it's unassigned or a proverb.
 NB.  Actually, this is true of values, too (for string values,
-NB.  anyway)
+NB.  anyway).
+NB.
+NB.  In general, the only parts of speech which can be
+NB.  embedded in a strand are nouns and verbs.
 NB.  
 NB.  The freedoms are provided by the flexibility of 
 NB.  the parameterized_verb and strand scripts.
@@ -36,18 +54,20 @@ NB.  theColor='blue' or THE_COLOR='blue' etc. Similarly, the
 NB.  strand markers can also be changed, e.g.
 NB.  ['blue' fs]  or  |'blue' fs] or <'blue' fs> or #'blue' fs#
 NB.  
-NB.  Note that the verb only applies if the argument is a scalar or
-NB.  a vector.  A fully-qualified names,.values table is left alone.
+NB.  Note that paramSyntax only applies if the argument is a scalar or
+NB.  a vector.  A fully-qualified name,.value table is left alone.
 NB.
 NB.  Finally, note that paramSyntax is just a verb of convenience,
 NB.  Using strand notation, one could easily write his own 
 NB.  specialized syntax (a DSL), so long as it's composed 
-NB.  entirely of nouns and verbs.
-NB.  EG:  sql [select FOO where BAR > (99+108) and BAZ e. 'abc' fs]
+NB.  entirely of nouns and verbs.  EG:
+NB.
+NB.     sql [select FOO where BAR > (99+108) and BAZ e. 'abc' fs]
 NB.
 paramSyntax         =: ([`(({.,.{:)@:]"1) @.((fw '=') *./ .= 1 {"1 _1: }. ])   _3 ]\ ])@:-.&(fw ',')^:(2 > #@$)
 
 NB.  'F'unction 'def'inition:  utitlity cover to defn that makes sure paramSyntax is called
+Note 'Example'
 fdef                =: adverb def '(u defn)&:paramSyntax'
 
 	NB.  ===========     EXAMPLE SECTION    =========== 
@@ -75,8 +95,8 @@ fdef                =: adverb def '(u defn)&:paramSyntax'
 	
 	        print '======='
 	)
-
-Note 'Examples'
+	
+	
 	myFunc['c:\file.txt' 906   fs]
 	myFunc['c:\file.txt',906   fs]
 	myFunc[color='blue'        fs]
@@ -84,4 +104,5 @@ Note 'Examples'
 	myFunc[max=906, color=blue fs]
 	myFunc[MAX=906, COLOR=blue fs]
 	myFunc<MAX=906, COLOR=blue fs>
+
 )

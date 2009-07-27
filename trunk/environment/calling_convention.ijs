@@ -73,39 +73,54 @@ fdef                =: adverb def '(u defn)&:paramSyntax'
 
 
 Note 'Example'
-	NB.  ===========     EXAMPLE SECTION    =========== 
-	NB.  Define a parameterized verb.  A noun-define is used to create the default parameter table,
-	NB.  to enhance readability.
+
+	NB.  Can define my own arguments and their default values
 	myFunc              =:  verb fdef
 	        filename    =  'c:\short.log'
 	        max         =  42
 	        color       =  'red'
 	)
 	
-			NB.  Ignore this line; I just use it to avoid cluttering the session window.
-	        print       =. 'r=.LF,~(r"_ ::]$0),'".@,3 :'5!:5<''y'''
-	
-	        print LF,'======='
-	
-	        print 'Logging to:  ', filename
-	        print 'Max is:  '  , ": max  NB.  Note the format;  we're expecting this parameter to be numeric (but this is not checked).
-	
+
+		NB.  Note no reference to x or y ... just using
+		NB.  my arguments as "expected" or "normal".	
+
+	        smoutput 'Logging to:  ', filename
+	        smoutput 'Max is:  '  , ": max
+
+		NB.  Can determine which of my arguments was user-specifed
+		NB.  and which defaulted, and do something about it.
+
 	        if. color_is_default do.
-	                print 'My favorite color is '  ,color
+	                smoutput 'My favorite color is '  ,color
 	        else.
-	                print 'Your favorite color is ',color
+	                smoutput 'Your favorite color is ',color
 	        end.
-	
-	        print '======='
 	)
 	
 	
-	myFunc['c:\file.txt' 906   fs]
-	myFunc['c:\file.txt',906   fs]
-	myFunc[color='blue'        fs]
-	myFunc[color= blue         fs]
+	NB.  Strand notation
+	myFunc['c:\file.txt'  906  'blue' fs]
+
+	NB.  Commas, like other langs
+	myFunc['c:\file.txt', 906, 'blue' fs]
+
+	NB.  Unspecified args are defaulted ("optional")
+	myFunc['c:\file.txt' fs]
+
+	NB.  Can use named arguments, like eg VB
+	myFunc[color='blue'  fs]
+
+	NB.  Often values needn't be quoted
+	myFunc[color= blue   fs]
+
+	NB.  Combination of comma syntax and name=value
 	myFunc[max=906, color=blue fs]
+
+	NB.  Spelling of names is flexible
 	myFunc[MAX=906, COLOR=blue fs]
+
+	NB.  Can use other delimiters, too...
 	myFunc<MAX=906, COLOR=blue fs>
 
 )

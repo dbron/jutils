@@ -66,12 +66,11 @@ NB.     sql [select FOO where BAR > (99+108) and BAZ e. 'abc' fs]
 NB.
 paramSyntax         =: ([`(({.,.{:)@:]"1) @.((fw '=') *./ .= 1 {"1 _1: }. ])   _3 ]\ ])@:-.&(fw ',')^:(2 > #@$)
 
-NB.  Cover adverb, similar to 'defn' from parameterized_verbs
-NB.  but that calls 'paramSyntax' first.  Used as in example
+NB.  'F'unction 'def'inition:  cover adverb to defn that makes 
+NB.  sure paramSyntax is called.  Used as in example
 NB.  below.
 fdef                =: adverb def '(u defn)&:paramSyntax'
 
-NB.  'F'unction 'def'inition:  utitlity cover to defn that makes sure paramSyntax is called
 Note 'Example'
 	NB.  ===========     EXAMPLE SECTION    =========== 
 	NB.  Define a parameterized verb.  A noun-define is used to create the default parameter table,

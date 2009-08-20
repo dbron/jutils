@@ -71,7 +71,7 @@ NB.  Convoluted because I want to use ^: instead of $:
 NB.  This makes embeddeding this function (and fixing 
 NB.  derived functions) easier, but means I have to cut
 NB.  bottom-up rather than recurse top-down.
-nestToBox      =.  (;:'()') cleanNest@:cutNest@:idxNest ]  NB.  Don't use  x&$: : here, or fixing the final adverb will break.
+nest2Box       =.  (;:'()') cleanNest@:cutNest@:idxNest ]  NB.  Don't use  x&$: : here, or fixing the final adverb will break.
   cleanNest    =.  bubble@:rmScaff
     bubble     =.  >@:{.^:(1=#)L:1^:_   NB.  "Bubble up" superfluous boxes
     rmScaff    =.  >@:{.L:1
@@ -84,12 +84,12 @@ nestToBox      =.  (;:'()') cleanNest@:cutNest@:idxNest ]  NB.  Don't use  x&$: 
      nesting   =.  (+/\@:(-/))@:(=/)
 
 NB.  Prove that the nested-boxing calculator works.
-GEE            =.  WDN@.(nestToBox WDN)
+GEE            =.  WDN@.(nest2Box WDN)
 assert -:&:(5!:1)/ ;:'SNEE GEE'   NB.  Prove the results are identical
 
 NB.  End result: adverb to evoke arbitrary sentence 
 NB.  (excluding punctuation like copulae, control words, etc)
-anon_evoke     =.  (("_) (`'') (<@gn`)) (`(<gn 0)) (`:6) ('@.' ; (,&<&gn nestToBox)@:gTxt`) (`:6) (@.1 0 2)
+anon_evoke     =.  (("_) (`'') (<@gn`)) (`(<gn 0)) (`:6) ('@.' ; (,&<&gn nest2Box)@:gTxt`) (`:6) (@.1 0 2)
 ae             =:  'anon_evoke' f.
 
 NB.  Prove  ae  works.

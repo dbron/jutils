@@ -46,22 +46,21 @@ NB.  Which is truncated -- full text available at
 NB.     http://www.jsoftware.com/pipermail/general/2009-August/033221.html
 
 NB.  Test sentence.
-TXT=:'(345 * _2 + +/@:(+/%#) * ]) - ''hello''"_ , <.' 
+TXT            =:  '(345 * _2 + +/@:(+/%#) * ]) - ''hello''"_ , <.' 
 
 NB.  Tokenize, discard any comment, convert anonymous nouns to gerundial form 
 NB.  (atomic rep)
 gTxt           =.  (gn@:".@:]^:[&.>~ [: (('''' = {.) +. (':'~:{:) *. '_0123456789' e.~ {.)@|: 2 {.&> ])@:(}.~ _1 * 'NB.' ( ('.:'e.~{:@]) < (-: }:) ) 4 {.&> {:)@:;:
-  gn           =.  (":0) ; <@] NB.  Gerundify a noun
-
+  gn           =.  (":0) ; <@]    NB.  Gerundify a noun
 
 NB.  Concept is to use the  words@.(nested boxes) to evoke code
 NB.  For example:
-WDN            =:  gTxt TXT  NB. Below is word indices, nested equivalent to parenthesization
+WDN            =:  gTxt TXT       NB. Below is word indices, nested equivalent to parenthesization
 K              =:  ( 1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; (9 ; 10 ; 11 ; 12) ; 14 ; 15);17;18;19;20;21;22
 
 NB.  Prove that the nesting reproduced the parenthesization
-SNEE           =:  WDN@.K  NB.  words@.(nested boxes) method
-".'FLEE =: ',TXT           NB.  Original sentence
+SNEE           =:  WDN@.K         NB.  words@.(nested boxes) method
+".'FLEE =: ',TXT                  NB.  Original sentence
 assert -:&:(5!:1)/ ;:'SNEE FLEE'  NB.  Prove the results are identical
 
 
@@ -72,19 +71,19 @@ NB.  derived functions) easier, but means I have to cut
 NB.  bottom-up rather than recurse top-down.
 nestToBox      =.  (;:'()') cleanNest@:cutNest@:idxNest ]  NB.  Don't use  x&$: : here, or fixing the final adverb will break.
   cleanNest    =.  bubble@:rmScaff
-    bubble     =.  >@:{.^:(1=#)L:1^:_  NB.  "Bubble up" superfluous boxes
+    bubble     =.  >@:{.^:(1=#)L:1^:_   NB.  "Bubble up" superfluous boxes
     rmScaff    =.  >@:{.L:1
    cutNest     =.  cutBot L:1^:maxDepth  
      cutBot    =.  ('';1) <@:,;.1 ] noParen;.2&>~ minMask
-       noParen =.  <@:(}.@:}:^:(1<#))  NB.  Exclude indexes of paren chars
-       minMask =.  (=<./)&.>@:{:      NB.  Cut on minimum depth
+       noParen =.  <@:(}.@:}:^:(1<#))   NB.  Exclude indexes of paren chars
+       minMask =.  (=<./)&.>@:{:        NB.  Cut on minimum depth
      maxDepth  =.  1 + >./@:>@:{:
    idxNest     =.  i.@#@] ,&< nesting
      nesting   =.  (+/\@:(-/))@:(=/)
 
 NB.  Prove that the nested-boxing calculator works.
 GEE =: WDN@.(nestToBox WDN)
-assert -:&:(5!:1)/ ;:'SNEE GEE'  NB.  Prove the results are identical
+assert -:&:(5!:1)/ ;:'SNEE GEE'   NB.  Prove the results are identical
 
 NB.  End result: adverb to evoke arbitrary sentence 
 NB.  (excluding punctuation like copulae, control words, etc)
@@ -93,5 +92,5 @@ ae            =: 'anon_evoke' f.
 
 NB.  Prove  ae  works.
 FREE =: TXT ae
-assert -:&:(5!:1)/ ;:'SNEE GEE'  NB.  Prove the results are identical
+assert -:&:(5!:1)/ ;:'SNEE GEE'   NB.  Prove the results are identical
 

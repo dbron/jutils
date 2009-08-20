@@ -49,7 +49,9 @@ NB.  Test sentence.
 TXT            =:  '(345 * _2 + +/@:(+/%#) * ]) - ''hello''"_ , <.' 
 
 NB.  Tokenize, discard any comment, convert anonymous nouns to gerundial form 
-NB.  (atomic rep)
+NB.  (atomic rep).  Anonymous nouns are detected by their first character:
+NB.  literals start with ' and numbers start with an underscore or digit
+NB.  (and don't continue with a colon).
 gTxt           =.  (gn@:".@:]^:[&.>~ [: (('''' = {.) +. (':'~:{:) *. '_0123456789' e.~ {.)@|: 2 {.&> ])@:(}.~ _1 * 'NB.' ( ('.:'e.~{:@]) < (-: }:) ) 4 {.&> {:)@:;:
   gn           =.  (":0) ; <@]    NB.  Gerundify a noun
 

@@ -62,7 +62,7 @@ K              =.  ( 1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; (9 ; 10 ; 11 ; 12) ; 14 ; 15);1
 
 NB.  Prove that the nesting reproduced the parenthesization
 SNEE           =.  WDN@.K         NB.  words@.(nested boxes) method
-".'FLEE =: ',TXT                  NB.  Original sentence
+".'FLEE        =. ',TXT           NB.  Original sentence
 assert -:&:(5!:1)/ ;:'SNEE FLEE'  NB.  Prove the results are identical
 
 
@@ -84,7 +84,7 @@ nestToBox      =.  (;:'()') cleanNest@:cutNest@:idxNest ]  NB.  Don't use  x&$: 
      nesting   =.  (+/\@:(-/))@:(=/)
 
 NB.  Prove that the nested-boxing calculator works.
-GEE =: WDN@.(nestToBox WDN)
+GEE            =.  WDN@.(nestToBox WDN)
 assert -:&:(5!:1)/ ;:'SNEE GEE'   NB.  Prove the results are identical
 
 NB.  End result: adverb to evoke arbitrary sentence 

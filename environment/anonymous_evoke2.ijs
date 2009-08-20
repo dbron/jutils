@@ -46,7 +46,7 @@ NB.  Which is truncated -- full text available at
 NB.     http://www.jsoftware.com/pipermail/general/2009-August/033221.html
 
 NB.  Test sentence.
-TXT            =:  '(345 * _2 + +/@:(+/%#) * ]) - ''hello''"_ , <.' 
+TXT            =.  '(345 * _2 + +/@:(+/%#) * ]) - ''hello''"_ , <.' 
 
 NB.  Tokenize, discard any comment, convert anonymous nouns to gerundial form 
 NB.  (atomic rep).  Anonymous nouns are detected by their first character:
@@ -57,11 +57,11 @@ gTxt           =.  (gn@:".@:]^:[&.>~ [: (('''' = {.) +. (':'~:{:) *. '_012345678
 
 NB.  Concept is to use the  words@.(nested boxes) to evoke code
 NB.  For example:
-WDN            =:  gTxt TXT       NB. Below is word indices, nested equivalent to parenthesization
-K              =:  ( 1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; (9 ; 10 ; 11 ; 12) ; 14 ; 15);17;18;19;20;21;22
+WDN            =.  gTxt TXT       NB. Below is word indices, nested equivalent to parenthesization
+K              =.  ( 1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; (9 ; 10 ; 11 ; 12) ; 14 ; 15);17;18;19;20;21;22
 
 NB.  Prove that the nesting reproduced the parenthesization
-SNEE           =:  WDN@.K         NB.  words@.(nested boxes) method
+SNEE           =.  WDN@.K         NB.  words@.(nested boxes) method
 ".'FLEE =: ',TXT                  NB.  Original sentence
 assert -:&:(5!:1)/ ;:'SNEE FLEE'  NB.  Prove the results are identical
 
@@ -89,10 +89,10 @@ assert -:&:(5!:1)/ ;:'SNEE GEE'   NB.  Prove the results are identical
 
 NB.  End result: adverb to evoke arbitrary sentence 
 NB.  (excluding punctuation like copulae, control words, etc)
-anon_evoke    =.  (("_) (`'') (<@gn`)) (`(<gn 0)) (`:6) ('@.' ; (,&<&gn nestToBox)@:gTxt`) (`:6) (@.1 0 2)
-ae            =: 'anon_evoke' f.
+anon_evoke     =.  (("_) (`'') (<@gn`)) (`(<gn 0)) (`:6) ('@.' ; (,&<&gn nestToBox)@:gTxt`) (`:6) (@.1 0 2)
+ae             =:  'anon_evoke' f.
 
 NB.  Prove  ae  works.
-FREE =: TXT ae
+FREE           =.  TXT ae
 assert -:&:(5!:1)/ ;:'SNEE GEE'   NB.  Prove the results are identical
 

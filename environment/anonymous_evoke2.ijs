@@ -94,5 +94,5 @@ ae             =:  'anon_evoke' f.
 
 NB.  Prove  ae  works.
 FREE           =.  TXT ae
-assert -:&:(5!:1)/ ;:'SNEE GEE'   NB.  Prove the results are identical
+assert -:&:(5!:1)/ ;:'SNEE FREE'   NB.  Prove the results are identical
 

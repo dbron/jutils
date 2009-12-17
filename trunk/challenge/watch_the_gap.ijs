@@ -2,11 +2,11 @@ NB.  Load standard libraries for HTTP and XML/XSLT
 coinsert 'jsocket' [ load 'socket ~system\examples\socket\socklab.ijs xml/xslt'
 
 NB.  Modify standard J web-fetching function, to accomodate rosettacode.org 
-NB.  (which insists on a HTTP 1.0 and a HOST header, so modify standard wget function.)
+NB.  (which insists on a HTTP 1.0 and a HOST header)
 wget =:[: toJ 0: 3 : ((;:',CR,LF')([:;:^:_1]#!.(<'@:(],~'' HTTP 1.0'',~^:([:-.]-:#@:]{.[)[)CR,LF,(''Host: '',>{.host),')~1 j.</\@:E.)L:1;:&.>;2 A.(<':');{:"1&.>(1 2)<@(5!:7)<ff=.'webget_z_') ]
 
 NB.  Fetch lists of solutions by task and language
-'t j'=:'rosettacode.org/wiki/Category:' wget@,L:0 ;:'Puzzles Solutions_by_Programming_Task J'
+'p s j'=:'rosettacode.org/wiki/Category:' wget@,L:0 ;:'Puzzles Solutions_by_Programming_Task J'
 
 /:~ @: , @: > @: (*/&.>/) @: ((^ i.@>:)&.>/) @: (__&q:)
 
@@ -89,7 +89,7 @@ within the primary sort) by the number of revisions of the page, as reported by
 http://rosettacode.org/wiki/Special:Mostrevisions (or, better  http://www.rosettacode.org/wiki/Special:Popularpages  ?) .
 
 Annotate the second group (unsolvable tasks and puzzles) with a brief synopsis of the
-reason given for opting out (say, the first 10 words) in the == opt-out == / === your language === 
+reason given for opting out (say, the first 10 words) in the == opt-out == / === <your language> === 
 section.
 
 All tasks and puzzles mentioned should be links; in the first subsection, to the primary task page,
@@ -101,6 +101,10 @@ See [Category_talk:J#unsolved_tasks|Unsolved tasks in J] for an example.
 Your goal is to inspire people to (legitimately) minimize Your_Language's index in:
 
 	http://www.rosettacode.org/wiki/Special:Mostlinked
+
+To that end, the very first line of the == unsolved tasks == section should read:
+
+	<Your language>`s current rank:  <rank in http://www.rosettacode.org/wiki/Special:Mostlinked>
 )
 
 noun define
@@ -116,12 +120,12 @@ Report solutions in your language tagged with {{needs-review}} and any custom te
 
 
 
-
+noun define
 Exclude from this set any puzzle or task for which someone has provided a reason your 
 language has opted 
 Take the difference 
 Take the un
-)
+
 
 
 W=:wget 'rosettacode.org/wiki/Special:Allpages' 

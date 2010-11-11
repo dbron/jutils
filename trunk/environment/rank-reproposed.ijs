@@ -87,6 +87,6 @@ NB.  PROPOSAL:  Competes with rV for the new definition of  u"v  , and is simila
 NB.  (and in some ways a simplification of) rG :
 NB.        u"v y <=>   u"(      mru  v&,   # $ y )y 
 NB.      x u"v y <=> x u"( (lru,rru) v x ,&#&$ y )y 
-rP =: conjunction define NB.  r"P with P a verb processing pertinent information (verb rank[s] on the left, noun rank[s] on the right)
+rP     =:  conjunction define NB.  r"P with P a verb processing pertinent information (verb rank[s] on the left, noun rank[s] on the right)
 	u r ( ,@:( 1: :_2: {. u b.@:0: )   v  ,&#&$)
 )

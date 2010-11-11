@@ -5,16 +5,15 @@ AZ      =:  'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 aZ      =:  az,AZ
 
 NB.  Name the various error messages
-( =&a:`(,:&(<'XXXX'))} k)=.1+i.#k=. toupper@:('_error' (] }.~ -@#@[ * [ -: -@#@[ {. ]) e.&aZ`('_'&,:)})&.> 9!:8''
+(=&a:`(,:&(<'XXXX'))} k)=.1+i.#k=. toupper@:('_error' (] }.~ -@#@[ * [ -: -@#@[ {. ]) e.&aZ`('_'&,:)})&.> 9!:8''
 
 NB.  Precondition checkers
-assert =: 0 0 $ 13!:8@:]^:((0 e. ])`([))
-isType =: -: {.@($ ,)~&0
-
+assert  =:  0 0 $ 13!:8@:]^:((0 e. ])`([))
+isType  =:  -: {.@($ ,)~&0
 
 NB.  Train to gerund ( (+/ % #) t2g -: +/`%`# . Has known bugs (try (+/ # ,&<) t2g) 
 NB.  Utility only used in  "rr"  cover function.
-t2g =: adverb define NB.  train to gerund
+t2g     =:  adverb define NB.  train to gerund
         if. verb -: nc un=.{.;:'u' do.
                 NB.!  Must be a way to avoid the redundant boxopen.
                 boxopen (}: , boxxopen@:$:@:{:)@:>@:{:^:((,&.>'23')e.~{.)@:> 5!:1 un
@@ -26,14 +25,15 @@ t2g =: adverb define NB.  train to gerund
 NB.  Conjunction  rr  doesn't represent a proposed new definition
 NB.  of " .  It is only a cover function I would define locally 
 NB.  if the proposed new definitions of  "  below were implemented.
-rr =: conjunction define
+rr      =:  conjunction define
 	u r (v t2g)	     NB.  Precludes use of rV directly, but allows us to write  u rr (f g h)  for  u r (f`g`h)  .
 )
 
 
 
+
 NB.  PROPOSAL:  new overall definition of  "  
-r =:  conjunction define NB.  General rank
+r       =:  conjunction define NB.  General rank
 
 	if. verb-:nc{.;:'v' do.
 		u rV v
@@ -51,7 +51,7 @@ r =:  conjunction define NB.  General rank
 )
 
 NB.  PROPOSAL:  u"v y  <->  u"(v y) y  & similarly for the dyad.
-rV =:  conjunction define NB.  u"v reproposed
+rV      =:  conjunction define NB.  u"v reproposed
 	  u r (  v y) y
 :
 	x u r (x v y) y
@@ -59,7 +59,7 @@ rV =:  conjunction define NB.  u"v reproposed
 
 NB.  PROPOSAL:  u"n  with n boxed but not gerund, then n represents nested recursions, one level per box.
 NB.  EG: u"(1 1;2;3 3 3)  <=>  u"1 1"2"3 3 3
-rB =:  conjunction define NB.  r"B with B boxed (non gerund) 
+rB      =:  conjunction define NB.  r"B with B boxed (non gerund) 
 	DOMAIN assert a: isType n
 	RANK assert 1=#@$n   NB.  Exclude scalars for now - maybe we can find a better use for u"(<something)
 	DOMAIN assert 0 isType&> n
@@ -68,7 +68,7 @@ rB =:  conjunction define NB.  r"B with B boxed (non gerund)
 )
 
 NB.  PROPOSAL:  u"n y with n a gerund f`g`h is  u"( (f u b. 0) g h&#&$ y) y  & similarly for the dyad
-rG =:  conjunction define NB.  r"G with G gerund 
+rG      =:  conjunction define NB.  r"G with G gerund 
 	DOMAIN assert a: isType n
 	RANK assert 1=#@$n   
 	LENGTH assert 3=#n  NB.  COuld just assert on (,3)-:$n  but RANK vs LENGTH gives more help

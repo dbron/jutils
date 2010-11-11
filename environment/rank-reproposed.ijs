@@ -45,9 +45,14 @@ r       =:  conjunction define NB.  General rank
 		elseif. do.
 			DOMAIN assert 1
 		end.
-	elseif. do.
+NB. 	elseif. (0 isType n) *. 1=#@$n do.          NB.  Ambrus' proposal
+NB. 		if. 3<#n  do. n =. 3 $&.|. n end.       NB.  Rule 2
+NB. 		if.+./ ngr=.0>n do. n =. nrg}n,:_ end.  NB.  Rule 1
+NB. 		u"n
+	elseif.
 		u"n
 	end.
+	
 )
 
 NB.  PROPOSAL:  u"v y  <->  u"(v y) y  & similarly for the dyad.
@@ -68,11 +73,12 @@ rB      =:  conjunction define NB.  r"B with B boxed (non gerund)
 )
 
 NB.  PROPOSAL:  u"n y with n a gerund f`g`h is  u"( (f u b. 0) g h&#&$ y) y  & similarly for the dyad
-rG      =:  conjunction define NB.  r"G with G gerund 
+rG     =:  conjunction define NB.  r"G with G gerund 
 	DOMAIN assert a: isType n
 	RANK assert 1=#@$n   
 	LENGTH assert 3=#n  NB.  COuld just assert on (,3)-:$n  but RANK vs LENGTH gives more help
 
-	u r ( n@.0 bind (u b. 0) n@.1 n@.2&#&$)  NB.  Could skip the bind if we assume n@.0 is functional & side-effect free (should be)
+	'mru dru' =. split u b. 0  NB.  n@.0 bind (u b. 0) 
+	u r ( n@.0 bind mru : (n@.0/ bind dru) n@.1 n@.2&#&$)  NB.  Could skip the bind if we assume n@.0 is functional & side-effect free (should be)
 )
 

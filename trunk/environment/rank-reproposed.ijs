@@ -49,7 +49,7 @@ NB. 	elseif. (0 isType n) *. 1=#@$n do.          NB.  Ambrus' proposal
 NB. 		if. 3<#n  do. n =. 3 $&.|. n end.       NB.  Rule 2
 NB. 		if.+./ ngr=.0>n do. n =. nrg}n,:_ end.  NB.  Rule 1
 NB. 		u"n
-	elseif.
+	elseif. do.
 		u"n
 	end.
 	
@@ -82,3 +82,11 @@ rG     =:  conjunction define NB.  r"G with G gerund
 	u r ( n@.0 bind mru : (n@.0/ bind dru) n@.1 n@.2&#&$)  NB.  Could skip the bind if we assume n@.0 is functional & side-effect free (should be)
 )
 
+
+NB.  PROPOSAL:  Competes with rV for the new definition of  u"v  , and is similar to 
+NB.  (and in some ways a simplification of) rG :
+NB.        u"v y <=>   u"(      mru  v&,   # $ y )y 
+NB.      x u"v y <=> x u"( (lru,rru) v x ,&#&$ y )y 
+rP =: conjunction define NB.  r"P with P a verb processing pertinent information (verb rank[s] on the left, noun rank[s] on the right)
+	u r ( ,@:( 1: :_2: {. u b.@:0: )   v  ,&#&$)
+)

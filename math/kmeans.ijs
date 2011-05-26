@@ -16,7 +16,7 @@ centroids            =:  ([ mean/.~ closestCentroid)^:(]`_:`initialCentroids)   
 
 NB.  Visualization code (ripped off from Max Harms, 2011-05-26)
 NB.  https://github.com/Raelifin/K-Means-Clustering-in-J/blob/master/k-meansClustering.ijs#L45
-packPoints           =:  <"1@:|:                                                     NB.  Or without transpose:  <@:,;.1~ 1:
+packPoints           =:  <"1@:|:                                                     NB.  or without transpose:  <@:,;.1~ 1:
 plotClusters         =:  dyad define                                                 NB.  x=centroids, y=clusters; only works on 2D clusters because it's a 2D plot
 	require 'plot'
 

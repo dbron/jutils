@@ -10,14 +10,14 @@ initialCentroids     =:  (] , randomCentroid)^:(<:@:]`(,:@:seedCentroid@:[))~   
     wghtProb         =:  [: <:@:{: >:@# +/\@:>`]`]} ?@:0: /:@:,~ 0,(%{:)@:(+/\)      NB.  y=relative weights;z=index of a random point, chosen uniformly wrt weighting
 
 NB.  Having selected the initial centroids, the standard K-means algo follows
-centroids            =:  ([ mean/.~ closestCentroid)^:(]`_:`initialCentroids)        NB.  x=K, y=dataset
-  closestCentroid    =:  [: (i.<./)"1 distance/                                      NB.  x=dataset,y=centroids
-  mean               =:  +/ % #                                                      NB.  y=data to average
+centroids            =:  ([ mean/.~ closestCentroid)^:(]`_:`initialCentroids)        NB.  x=K, y=dataset; z=K stable centroids of y
+  closestCentroid    =:  [: (i.<./)"1 distance/                                      NB.  x=dataset,y=centroids; z=closest centroid to each datapoint
+  mean               =:  +/ % #                                                      NB.  y=data to average; z=mean of y
 
 NB.  Visualization code (ripped off from Max Harms, 2011-05-26)
 NB.  https://github.com/Raelifin/K-Means-Clustering-in-J/blob/master/k-meansClustering.ijs#L45
-packPoints           =:  <"1@:|:                                                     NB.  or without transpose:  <@:,;.1~ 1:
-plotClusters         =:  dyad define                                                 NB. x=centroids, y=clusters; only works on 2D clusters because it's a 2D plot
+packPoints           =:  <"1@:|:                                                     NB.  Or without transpose:  <@:,;.1~ 1:
+plotClusters         =:  dyad define                                                 NB.  x=centroids, y=clusters; only works on 2D clusters because it's a 2D plot
 	require 'plot'
 
 	pd 'reset;aspect 1;type dot;pensize 2'

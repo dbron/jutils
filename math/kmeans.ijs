@@ -7,7 +7,7 @@ initialCentroids     =:  (] , randomCentroid)^:(<:@:]`(,:@:seedCentroid@:[))~   
   seedCentroid       =:  {~ ?@#                                                      NB.  y=dataset; z=first (random) centroid
   randomCentroid     =:  [ {~ [: wghtProb [: <./ distance/~                          NB.  x=centroids,y=dataset; z=random centroid, chosen to spread out initial values
     distance         =:  +/&.:*:@:-"1                                                NB.  x=list of centroids, y=dataset;z=Euclidean distance
-    wghtProb         =:  [: <:@:{: >:@# +/\@:>`]`]} ?@:0: /:@:,~ 0,(%{:)@:(+/\)      NB.  y=relative weights;z=index of a random point, chosen uniformly wrt weighting
+    wghtProb         =:  1&$: : ((%{:)@:(+/\)@:] I. [ ?@$ 0:)"0 1                    NB.  y=relative weights;z=index of a random point, chosen uniformly wrt weighting
 
 NB.  Having selected the initial centroids, the standard K-means algo follows
 centroids            =:  ([ mean/.~ closestCentroid)^:(]`_:`initialCentroids)        NB.  x=K, y=dataset; z=K stable centroids of y

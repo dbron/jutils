@@ -371,7 +371,13 @@ NB.  ===========================================================================
 	NB.  (4;'hello') -: (;:'x y') in z,z
    in  =: 1 : '[: >^:(0 -: #@:$) m &(4 : '' ( x,''''_'''' ([ , ] , [) ;y )~ '' L: 0) '
 
-
+	NB.  Weighted probabilities.
+	NB.  x wghtProb y .  x is a scalar nonnegative integer and y is a vector of floats, 
+	NB.  representing weights.  Then, x wghtProb y produces x random integers from the 
+	NB.  set i.#y (i.e., the indices of y).  The indices are selected randomly, but weighted
+	NB.  by the corresponding value at the index, wrt to the sum of y.  The monad is the dyad
+	NB.  with x=.1, and produces a scalar.
+	wghtProb         	=:  {.@:(1&$:) : ((%{:)@:(+/\)@:] I. [ ?@$ 0:)"0 1                 NB.  Due to Roger Hui http://j.mp/lj5Pnt
 
 NB.  =====================================================================================================================================================
 NB.  Date/Time Utilities:  Mostly conversions
@@ -456,8 +462,8 @@ NB.  ===========================================================================
 
 	NB.  Maps integer returned from 9!:12 onto human-readable string.
 	PLATFORM				=:  ({::~ ] i. 9!:12 bind '')&>/ 0 1 2 3 4 5 6 7 _1 ,&<~ <;._1 '|PC|PC386|Windows|Macintosh|OS2|Unix|Windows32 (95/98/2000/NT)|Windows CE|Other|Unknown'
-	JVERSION				=:  9!:14''
-	ENVIRONMENT				=:  JVERSION , ' on ' , PLATFORM
+	JVERS   				=:  9!:14''
+	ENVIRONMENT				=:  JVERS , ' on ' , PLATFORM
 
 	defineAndDefaultParams	=:  2 : 0
 	NB.  This conjunction takes a noun as a LHA and a explicit monadic verb as a RHA.
@@ -752,7 +758,7 @@ NB.  so 'smoutput' won't work.  So I just create a verb to print the prompt
 NB.  and call it from a later script (newuser.ijs specificially)
 printPrompt_z_ =: verb define
 
-	version =. ( ('vb' {~1 e. 'beta' E. ]) , 4 {.!.'?' ]) }. (i. {. [)&>/ ('_' ;~ 1!:1) :: ('/' ;~ 9!:14@:(''"_))  <jpath'~bin/installer.txt'
+	version =. ( ('vb' {~1 e. 'beta' E. ]) , 4 {.!.'?' 0 {:: ' ' cut ]) }. (i. {. [)&>/ ('_' ;~ 1!:1) :: ('/' ;~ 9!:14@:(''"_))  <jpath'~bin/installer.txt'
 	smoutput 'New J (' , version ,  ') session started on ' , ((i.&' ') ({. , ' at '"_ , }.@:}.) ]) _4 }. datetimestamp_base_ 6!:0 ''
 
 	if.  you_want_regex_loaded_and_the_random_seed_changed =. 1 do.  NB.  Usually when you restart J ? wil give the same results in the same order as the last time.  This changes when you reset the randoms edd.
@@ -807,3 +813,7 @@ NB.      |a|a|
 NB.      +-+-+
 
 memo =: M. ("0) (&.((6 s: s:)@:<@:(3!:1)))
+
+
+NB. =========================================================
+printPrompt''

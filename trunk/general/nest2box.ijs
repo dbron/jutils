@@ -2,22 +2,21 @@ bd =: verb define                          NB.  Bracket Delimited
 	'()' bd y
 :
 	nlr =. +:/ 'l r' =. lr =. x =/ y
-
 	d   =. nlr # r + +/\ -/ lr
-    y   =. nlr # y
-
-    d bfn y
+	y   =. nlr # y
+	
+	d bfn y
 )
 
 bfn =: dyad define                          NB.  Box from nest
-   nested  =. 1 , 2 ~:/\ x = {.x
-
-   x       =. nested <;.1 x
-   y       =. nested <;.1 y
-  
-   nestmsk =. (#y) $ 0 1
-   nest    =. (nestmsk # x) bfn&.> nestmsk # y
-   (_2|#y) }. , |: nest ,:~ y #~ -.nestmsk 
+	nested  =. 1 , 2 ~:/\ x = {.x
+	
+	x       =. nested <;.1 x
+	y       =. nested <;.1 y
+	  
+	nestmsk =. (#y) $ 0 1
+	nest    =. (nestmsk # x) bfn&.> nestmsk # y
+	(_2|#y) }. , |: nest ,:~ y #~ -.nestmsk 
 )
 
 
@@ -34,7 +33,7 @@ Note 'Demonstrate use'
 	|        ||  |+-------+-----------------------+||     |             |
 	|        |+--+---------------------------------+|     |             |
 	+--------+--------------------------------------+-----+-------------+
-
+	
 	   NB.  Pick a complicated, standard verb...
 	   ;:^:_1: _3 }.&.> (\: 7!:5) (#~ 0 = [: +/ 1 2 #@(5!:7)/ ]) ((4!:3'') i. getscripts_j_ <'stdlib') ((= 4!:4)#]) '_z_' ,L:0~ nl_z_ 3
 	assert toCRLF toJ type script scriptd Note names smoutput...

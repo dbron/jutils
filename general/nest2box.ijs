@@ -4,18 +4,17 @@ bd =: verb define                          NB.  Bracket Delimited
 	nlr =. +:/ 'l r' =. lr =. x =/ y
 	d   =. nlr # r + +/\ -/ lr
 	y   =. nlr # y
-	
 	d bfn y
 )
 
 bfn =: dyad define                          NB.  Box from nest
 	nested  =. 1 , 2 ~:/\ x = {.x
 	
-	x       =. nested <;.1 x
+	x       =. nested <;.1 <:x
 	y       =. nested <;.1 y
 	  
 	nestmsk =. (#y) $ 0 1
-	nest    =. (nestmsk # x) bfn&.> nestmsk # y
+	nest    =. (<:&.> nestmsk # x) bfn&.> nestmsk # y
 	(_2|#y) }. , |: nest ,:~ y #~ -.nestmsk 
 )
 
@@ -51,4 +50,8 @@ Note 'Demonstrate use'
 	|     |      |   ||     |+-----+----+------+|        ||     |
 	|     |      |   |+-----+-------------------+--------+|     |
 	+-----+------+---+------------------------------------+-----+
+
+	NB.  Note that bfn doesn't work on toJ
+	NB.  The cause is toJ starts with a nested depth of 2 rather than zero
+	NB.  Have to think about this...
 )

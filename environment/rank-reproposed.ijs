@@ -9,7 +9,7 @@ NB.  Name the various error messages
 
 NB.  Precondition checkers
 assert  =:  0 0 $ 13!:8@:]^:((0 e. ])`([))
-isType  =:  -: {.@($ ,)~&0
+isType  =:  -: {.@($ ,)~&0	
 
 NB.  Train to gerund ( (+/ % #) t2g -: +/`%`# . Has known bugs (try (+/ # ,&<) t2g) 
 NB.  Utility only used in  "rr"  cover function.

@@ -4,10 +4,10 @@ Ev             =.  `:6  NB.  Atomic rep to verb
 gerN           =.  noun&$: : ger =: ":@:[ <@,&< ]  NB.  Produce atomic rep of nameclass x and value y (which should be an atomic rep if x~:0)
 
 fw             =.  {.@:;:  NB.  First Word
-Fw             =.  ("_) (gerN `) (`(gerN 0)) (`:6) (fw`) (`:6)  NB.  Don't like the `(gerN 0) part, feels forced
+Fw             =.  ("_) (gerN`) (`(gerN 0)) (`:6) (fw`) (`:6)  NB.  Don't like the `(gerN 0) part, feels forced
 
 NB.  Application
-cap            =.  <@transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
+cap            =.  <@:transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
   boxed        =.  0 < L.
   isAt         =.  ('@'Fw={.) *. pair
     pair       =.  2 = #
@@ -46,5 +46,10 @@ Note 'Examples'
 	|domain error
 	|       (+/+:@%#)Cap
 
-	   	   
+	   NB.  Once cap f. Cap works, we're done
+	   CAP   =:  cap f. Cap
+	   CAP2  =:  CAP f. Cap
+
+       CAP2 G -: CAP G  NB.  No more @s to remove....
+	1
 )

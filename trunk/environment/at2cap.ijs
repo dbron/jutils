@@ -1,22 +1,23 @@
 NB.  Utils
-G     =: `''  NB.  Verb to atomic rep
-Ev    =: `:6  NB.  Atomic rep to verb
-gerN  =: noun&$: : ger =: ":@:[ <@,&< ]  NB.  Produce atomic rep of nameclass x and value y (which should be an atomic rep if x~:0)
+G              =. `''  NB.  Verb to atomic rep
+Ev             =.  `:6  NB.  Atomic rep to verb
+gerN           =.  noun&$: : ger =: ":@:[ <@,&< ]  NB.  Produce atomic rep of nameclass x and value y (which should be an atomic rep if x~:0)
 
-fw =: {.@:;:  NB.  First Word
-Fw =: ("_) (gerN `) (`(gerN 0)) (`:6) (fw`) (`:6)  NB.  Don't like the `(gerN 0) part, feels forced
+fw             =.  {.@:;:  NB.  First Word
+Fw             =.  ("_) (gerN `) (`(gerN 0)) (`:6) (fw`) (`:6)  NB.  Don't like the `(gerN 0) part, feels forced
 
 NB.  Application
-cap            =:  <@transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
-  boxed        =:  0 < L.
-  isAt         =:  ('@'Fw={.) *. pair
-    pair       =:  2 = #
-  transform    =:  at2Cap pullrank~ outrank ; {:
-    outrank    =:  0 *./ .>~^:] _1 |. 1:G , rankG
-      rankG    =:  [: |.&.>&.> (;:'@[b.') <@(subO/)@:,"1 0 ]
-    pullrank   =:  <@fullrank {::~ ('';1;0) }.~ _2 * 0 {:: [
-      fullrank =:  '"' Fw subO ,&{:~
-        subO   =:  , <  NB. subOrdinate
-    at2Cap     =:  verb ger [:G , ]
-Cap         =:  G ((<":0)`) (cap f.`) (@.(0;1 2)) (`:6)
+cap            =.  <@transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
+  boxed        =.  0 < L.
+  isAt         =.  ('@'Fw={.) *. pair
+    pair       =.  2 = #
+  transform    =.  at2Cap pullrank~ outrank ; {:
+    outrank    =.  0 *./ .>~^:] _1 |. 1:G , rankG
+      rankG    =.  [: |.&.>&.> (;:'@[b.') <@(subO/)@:,"1 0 ]
+    pullrank   =.  <@fullrank {::~ ('';1;0) }.~ _2 * 0 {:: [
+      fullrank =.  '"' Fw subO ,&{:~
+        subO   =.  , <  NB. subOrdinate
+    at2Cap     =.  verb ger [:G , ]
+
+Cap_z_         =:  G ((<":0)`) (cap f.`) (@.(0;1 2)) (`:6)
 

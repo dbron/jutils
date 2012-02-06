@@ -1,5 +1,5 @@
 NB.  Utils
-G              =. `''  NB.  Verb to atomic rep
+G              =.  `''  NB.  Verb to atomic rep
 Ev             =.  `:6  NB.  Atomic rep to verb
 gerN           =.  noun&$: : ger =: ":@:[ <@,&< ]  NB.  Produce atomic rep of nameclass x and value y (which should be an atomic rep if x~:0)
 

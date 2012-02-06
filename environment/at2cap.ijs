@@ -12,12 +12,39 @@ cap            =.  <@transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
   isAt         =.  ('@'Fw={.) *. pair
     pair       =.  2 = #
   transform    =.  at2Cap pullrank~ outrank ; {:
-    outrank    =.  0 *./ .>~^:] _1 |. 1:G , rankG
+    outrank    =.  0 +./ .>~^:] _1 |. 1:G , rankG
       rankG    =.  [: |.&.>&.> (;:'@[b.') <@(subO/)@:,"1 0 ]
     pullrank   =.  <@fullrank {::~ ('';1;0) }.~ _2 * 0 {:: [
       fullrank =.  '"' Fw subO ,&{:~
         subO   =.  , <  NB. subOrdinate
     at2Cap     =.  verb ger [:G , ]
 
-Cap_z_         =:  G ((<":0)`) (cap f.`) (@.(0;1 2)) (`:6)
+Cap_z_         =:  'G' f. ((<":0)`) (cap f.`) (@.(0;1 2)) (`:6)
 
+Note 'Examples'
+	   f@g Cap
+	[: f g
+	   f@(g@h) Cap
+	[: f [: g h
+	   f@g@h Cap
+	[: ([: f g) h
+
+	   {.@$ Cap
+	[: {. $
+	   {.@+. Cap
+	([: {. +.)"0 0 0
+	   <@%. Cap
+	([: < %.)"2 _ 2
+	   %.@< Cap
+	([: %. <)"_ 0 0
+
+	   NB.  FIX THIS
+	   (+/ +:% #) Cap
+	|domain error
+	|       (+/+:%#)Cap
+	   (+/ +:@% #) Cap
+	|domain error
+	|       (+/+:@%#)Cap
+
+	   	   
+)

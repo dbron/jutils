@@ -7,7 +7,7 @@ fw             =.  {.@:;:  NB.  First Word
 Fw             =.  ("_) (gerN`) (`(gerN 0)) (`:6) (fw`) (`:6)  NB.  Don't like the `(gerN 0) part, feels forced
 
 NB.  Application
-cap            =.  <@:transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
+cap            =.  <@transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
   boxed        =.  0 < L.
   isAt         =.  ('@'Fw={.) *. pair
     pair       =.  2 = #
@@ -19,7 +19,7 @@ cap            =.  <@:transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
         subO   =.  , <  NB. subOrdinate
     at2Cap     =.  verb ger [:G , ]
 
-Cap_z_         =:  'G' f. ((<":0)`) (cap f.`) (@.(0;1 2)) (`:6)
+Cap_z_         =:  'G' f. ((<":0)`) (cap f.@(<^:(1<#))`) (@.(0;1 2)) (`:6)
 
 Note 'Examples'
 	   f@g Cap
@@ -50,6 +50,6 @@ Note 'Examples'
 	   CAP   =:  cap f. Cap
 	   CAP2  =:  CAP f. Cap
 
-       CAP2 G -: CAP G  NB.  No more @s to remove....
+       'CAP2' f. G -: 'CAP' f. G  NB.  No more @s to remove....
 	1
 )

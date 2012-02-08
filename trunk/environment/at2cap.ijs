@@ -19,7 +19,7 @@ cap            =.  <@transform^:pair@:>@:{:^:isAt@:($:&.>)^:boxed
         subO   =.  , <  NB. subOrdinate
     at2Cap     =.  verb ger [:G , ]
 
-Cap_z_         =:  'G' f. ((<":0)`) (cap f.@(<^:(1<#))`) (@.(0;1 2)) (`:6)
+Cap_z_         =:  'G' f. ((<":0)`) (<`) (cap f. `) (@.(0;1;2 3)) (`:6)
 
 Note 'Examples'
 	   f@g Cap

@@ -6,22 +6,22 @@ Pf =. 1 : ('u y';':';'x u y') NB. protect from f.
 NB. Make regex more readable/maintainable
 RE =. +1 :n=. |. <;._2 noun define
 
-   '^', RE_RANK K, RE_XXX1 T`'?', RE_XXX2 T`'?', RE_SEP, (RE_FIRST,' ',RE_LAST)K
+  '^', RE_RANK K, RE_XXX1 T`'?', RE_XXX2 T`'?', RE_SEP, (RE_FIRST,' ',RE_LAST)K
 
-	RE_RANK  =.  '\d+|DNF|DNS|VK|DQ|OTL|x'
-	RE_XXX1  =.  RE_SEP,'\d+|x'
-	RE_XXX2  =.  RE_SEP,'[a-zA-Z]+\d*'
-	RE_FIRST =.  RE_LAST=. '[^\t\r\n\. ]+'
-	RE_SEP   =.  '[\*\t \.]+'
+  RE_RANK  =.  '\d+|DNF|DNS|VK|DQ|OTL|x'
+  RE_XXX1  =.  RE_SEP,'\d+|x'
+  RE_XXX2  =.  RE_SEP,'[a-zA-Z]+\d*'
+  RE_FIRST =.  RE_LAST=. '[^\t\r\n\. ]+'
+  RE_SEP   =.  '[\*\t \.]+'
 
-	K        =. '('   , ,&')' Appl  NB.  Keep
-	T        =. '(?:' , ,&')' Appl  NB.  Toss
-	Appl     =. 2 : 'u n'
+  K        =. '('   , ,&')' Appl  NB.  Keep
+  T        =. '(?:' , ,&')' Appl  NB.  Toss
+  Appl     =. 2 : 'u n'
 
-	NB. Nouns aren't as forgiving as verbs, and 
-	NB. dependencies must be defined first.
-	NB. So create a script & execute it in 
-	NB. reverse order.
+  NB. Nouns aren't as forgiving as verbs, and 
+  NB. dependencies must be defined first.
+  NB. So create a script & execute it in 
+  NB. reverse order.
 )
 
 NB.  Scoring tables

@@ -21,7 +21,7 @@ RE =. +1 :n=. |. <;._2 noun define
 	NB. Nouns aren't as forgiving as verbs, and 
 	NB. dependencies must be defined first.
 	NB. So create a script & execute it in 
-    NB. reverse order.
+	NB. reverse order.
 )
 
 NB.  Scoring tables

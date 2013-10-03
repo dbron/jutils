@@ -34,10 +34,10 @@ NB.  Scoring tables
 
 NB.  Logic
 report             =:  tally/@:|:@:record
-  tally            =.  ~.@[  sortStich catSumCount/.
+  tally            =.  ~.@[  sortStich catSumCount@;/.
     sortStich      =.  ,. /: ]
-    catSumCount    =.  +/@; (category ; ;) #
-      category     =.  4 <. 35 30 20 I. (* 2&<) 
+    catSumCount    =.  +/ (category ; ;) #
+      category     =.  4 <. 1 + 35 30 20 I. (* 2&<:) 
   record           =.  [: ; (,: <"0@scores)~/&.|:&.>@:races 
     scores         =.  [: score 0 ". ;:^:_1
       score        =.  scorePlace pointGroup

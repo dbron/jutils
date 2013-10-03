@@ -28,7 +28,7 @@ NB.  Scoring tables
 'GROUPS POINTS' =. <"_1 |: ".;._2 noun define
  5  ;  3 2 1                NB.  5 <= #riders <= 10
  11 ;  7 5 4 3 2 1          NB. 11 <= #riders <= 20 
- 21 ;  8 6 5 4 3 2 1        NB. 21 <= #rides  <= 49
+ 21 ;  8 6 5 4 3 2 1        NB. 21 <= #riders  <= 49
  50 ; 10 8 7 6 5 4 3 2 1    NB. 50 or more #riders 
 )
 

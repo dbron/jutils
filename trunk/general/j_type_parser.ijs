@@ -43,24 +43,6 @@ NB. Byte Size in bits; Byte Max Value
 BS  =: 2 ^. BMV =: #a.
  
 jt =: verb define
-	NB. Chars to bytes
-	y    =. a. i. y	  
-
-	NB. Don't know word size yet / byte order yet; 
-	NB. have to look for first non-zero byte (i.&1@:~: is shortcutted)
-	flagIdx =. i.&1@:~:&0 {. y  
-	flag    =. flagIdx { y
-
-	'WORDSIZE ENDIANNESS' =. FLAGVALS {~ FLAGCODES i. flag
-	smoutput b32  =. -. b64  =. '64'       -: WORDSIZE
-	smoutput boLE =. -. boBE =. 'standard' -: ENDIANNESS
-
-	NB. Break y into machine words in standard byte order 
-	NB. (if we're on a big-endian machine, then boLE is 0
-	NB. and (-boLE)&A. is 0&A. which is the identity function;
-	NB. contrariwise _1&A. is reverse.)
-	y =. y (-boLE)&A.\~ - BS  %~ b64 { 32 64  
-
 	NB. First 4 headers are fixed size: 1 machine word each
 	FIXEDHEADERS           =.  ;:'flag type count rank'
 	'fixedHeader rest'     =.  (#FIXEDHEADERS) split y
@@ -96,8 +78,9 @@ jt =: verb define
 
 		case. REFERENCES  do.
 			smoutput 'indirect yo'
-			'pointers data'=.count split data
+			'pointers data' =. count split data
 			smoutput 'pointers'; pointers
+			smoutput HOOBAR=:data <@jt ::_1:;.1~ (i.#data) e. (-{.) BS %~ BMV #. pointers
 
 			if. BOXES e.~ <type do.
 				smoutput 'HI!!!' ,":(<type) e. BOXES 
@@ -108,11 +91,43 @@ jt =: verb define
 
 		case.             do.
 			smoutput '???'
-
-		end.
 	end.	
 
 	data
+)
+
+host2JT =: 	verb define
+
+	if. (1=#$y) *. 'literal'-:datatype y do.
+		NB. Chars to bytes
+		y    =. a. i. y	  
+	
+		NB. Don't know word size yet / byte order yet; 
+		NB. have to look for first non-zero byte (i.&1@:~: is shortcutted)
+		flagIdx =. i.&1@:~:&0 {. y  
+		flag    =. flagIdx { y
+	
+
+		y =. y (-boLE)&A.\~ - BS  %~ b64 { 32 64  
+
+	else.
+		assert. (2=#$y) *. 'integer'-:datatype y
+
+		flag    =. BMV #. {. y
+	end.
+
+
+
+
+		'WORDSIZE ENDIANNESS' =. FLAGVALS {~ FLAGCODES i. flag
+		b64  =. '64'       -: WORDSIZE
+		smoutput boLE =. -. boBE =. 'standard' -: ENDIANNESS
+	
+		NB. Break y into machine words in standard byte order 
+		NB. (if we're on a big-endian machine, then boLE is 0
+		NB. and (-boLE)&A. is 0&A. which is the identity function;
+		NB. contrariwise _1&A. is reverse.)
+
 )
 
 smoutput jt 3!:1 ] 0123456789101112131415161719202122232425x

@@ -64,7 +64,15 @@ NB.  entirely of nouns and verbs.  EG:
 NB.
 NB.     sql [select FOO where BAR > (99+108) and BAZ e. 'abc' fs]
 NB.
-paramSyntax         =: ([`(({.,.{:)@:]"1) @.((fw '=') *./ .= 1 {"1 _1: }. ])   _3 ]\ ])@:-.&(fw ',')^:(2 > #@$)
+NB.!! DJB 2014-07-03:  The third example below (myFunc['c:\file.txt' fs]) 
+NB.!! chokes with an index error, because _3 ]\ ,<'file.txt' only has 1 column, 
+NB.!! not 3 . Don't know how that ever worked. I also don't understand why 
+NB.!! we were dropping off the last row of the table with _1: }. ] (nor why 
+NB.!! I didn't just use }: ).  Anyway, leaving the old version commented out 
+NB.!! here, in case the changes break something else later (i.e. the _1 }. 
+NB.!! ] was adjusting for an edge-case I've forgotten about).
+NB.paramSyntax      =: ([`(({.,.{:)@:]"1) @.((fw '=') *./ .= 1 {"1 _1: }. ])   _3 ]\ ])@:-.&(fw ',')^:(2 > #@$)
+paramSyntax         =: ([`(({.,.{:)@:]"1) @.((fw '=') *./ .= 1 {"1 ]) _3 ]\ ])^:(2 < #)@:-.&(fw ',')^:(2 > #@$)
 
 NB.  'F'unction 'def'inition:  cover adverb to defn that makes 
 NB.  sure paramSyntax is called.  Used as in example

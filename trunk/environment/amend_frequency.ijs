@@ -44,19 +44,21 @@ RESULTS =:  noun define -. TAB
 primitiveStats =: verb define
 	y primitiveStats~ {."1 dirtree '/*.ijs' ,~ jpath'~install'
 :
-	NB. Exclude duplicate files (same name and exact same size)
-	filenms =.  (#~ ~:@:(1!:4 ;"0 (}.~ 1+i:&'\')&.>)) x
+	NB. Parse
+	filenms =.  (#~ ~:@:(1!:4 ;"0 (}.~ 1+i:&'\')&.>)) x  NB. Exclude duplicate files (same name and exact same size)
 	files   =.  toJ@:fread&.> filenms
 	lines   =:  LF cut&.> files
 	words   =.  ;; ;: :: (''"_) L:0 lines
 	
-	
+	NB. Count
 	pf      =.  (#P) {. _1 + #/.~ P , words
-	'p pf'  =.  (<pf) \:~&.> P ,&< pf   NB. Sort by frequency
+	'p pf'  =.  (<pf) \:~&.> P ,&< pf                    NB. Sort by frequency
 	
+	NB. Tabulate
 	(hdrs)  =.  i.#hdrs=:;: 'PRIM    RANK            COUNT        PFREQ             WFREQ       WPCT'
 	T       =.     hdrs  ,   p    ,. (1+&.>i.#p)  ,. (<"0 pf) ,. ((<@%~ +/) pf) ,. ((;"> 100*%) pf %~ #words)
 	
+	NB. Format
 	'nm prm'=.  _2 {. 'The word' ; {.@:;:^:(0=L.) y 
 	stats   =.  T {~ idx =. (<prm) i.~ T {~ <a:;PRIM
 	R       =.  RESULTS sprintf (#files) ; (+/ #&> lines) ; (#words) ; (+/;T{~<(<0);COUNT) ; nm ; prm ; (COUNT { stats) ,(RANK { stats) , (#p) ; nm ; (PFREQ{stats) , (WFREQ{stats) , (WPCT{stats)
@@ -64,3 +66,4 @@ primitiveStats =: verb define
 )
 
 smoutput primitiveStats ;:'Amend }'
+NB. smoutput primitiveStats ;:'Key /.'

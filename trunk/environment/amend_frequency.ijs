@@ -44,13 +44,14 @@ RESULTS =:  noun define -. TAB
 primitiveStats =: verb define
 	y primitiveStats~ {."1 dirtree '/*.ijs' ,~ jpath'~install'
 :
-	NB.
-	files   =.  toJ@:fread&.> x
+	NB. Exclude duplicate files (same name and exact same size)
+	filenms =.  (#~ ~:@:(1!:4 ;"0 (}.~ 1+i:&'\')&.>)) x
+	files   =.  toJ@:fread&.> filenms
 	lines   =:  LF cut&.> files
 	words   =.  ;; ;: :: (''"_) L:0 lines
 	
 	
-	pf      =.  (#P) {. #/.~ P , words
+	pf      =.  (#P) {. _1 + #/.~ P , words
 	'p pf'  =.  (<pf) \:~&.> P ,&< pf   NB. Sort by frequency
 	
 	(hdrs)  =.  i.#hdrs=:;: 'PRIM    RANK            COUNT        PFREQ             WFREQ       WPCT'
@@ -59,7 +60,7 @@ primitiveStats =: verb define
 	'nm prm'=.  _2 {. 'The word' ; {.@:;:^:(0=L.) y 
 	stats   =.  T {~ idx =. (<prm) i.~ T {~ <a:;PRIM
 	R       =.  RESULTS sprintf (#files) ; (+/ #&> lines) ; (#words) ; (+/;T{~<(<0);COUNT) ; nm ; prm ; (COUNT { stats) ,(RANK { stats) , (#p) ; nm ; (PFREQ{stats) , (WFREQ{stats) , (WPCT{stats)
-	R , , LF ,.~ (,. ' '&,.)&:>/ (<<1 0) C.&.> '-',&.>({.T),&.>'l,0.0,c0.0,c0.0,c0.0,q<%>0.2' 8!:1 T {~ (i.&.<:#T) -. (i.&.<:#T) -. idx + i:2
+	R , , LF ,.~ (,. ' '&,.)&:>/ (<<1 0) C.&.> '-' ,&.> ({.T) ,&.> 'l,0.0,c0.0,c0.0,c0.0,q<%>0.2' 8!:1 T {~ (i.&.<:#T) -. (i.&.<:#T) -. idx + i:2
 )
 
 smoutput primitiveStats ;:'Amend }'

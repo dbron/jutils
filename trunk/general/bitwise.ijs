@@ -1,6 +1,8 @@
 require 'strings validate'
 coclass 'bdot'
 
+NB. See htmlhelp_j_ 'dictionary/dbdotn.htm'
+NB. or http://www.jsoftware.com/help/dictionary/dbdotn.htm
 BDOT        =:  TAB cut&> LF cut noun define
 	M		 MC		BITWISE		TABLE		NOTATION		
 	0		_16		16		0 0 0 0		0:

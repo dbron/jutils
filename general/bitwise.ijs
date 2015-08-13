@@ -22,8 +22,8 @@ BDOT        =:  TAB cut&> LF cut noun define
 	14		_2		30		1 1 1 0		*:
 	15		_1		31		1 1 1 1		1:
 	_		_		32		_ _ _ _		|.
-	_		_		33		_ _ _ _		|.!._
-	_		_		34		_ _ _ _		signed_shift
+	_		_		33		_ _ _ _		|.!.0
+	_		_		34		_ _ _ _		|.!.1
 )
 
 NB. Parse
@@ -33,7 +33,7 @@ NB. Parse
 NB. Normalization utilities
 nota2Geru   =:  3 : '{. +1 :y `'''' '
 normRank0   =:  3 : '{. ( (y 5!:0) 1 : ''if. -. 0 0 -: _2 {. u b. 0 do. u =. u"0 end. u'') ` '''' '
-normRotGer  =:  ({. |.!._`'') [^:(1 1 1 0 -: -:S:0)^:(-:&:{::)"0 ]
+normRotGer  =:  ] NB. ({. |.!._`'') [^:(1 1 1 0 -: -:S:0)^:(-:&:{::)"0 ]
 
 NB. Normalize
 (nh)        =:  0&".&>@:".&.> nh =. H -. ;:'NOTATION'

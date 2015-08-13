@@ -33,7 +33,7 @@ NB. Parse
 NB. Normalization utilities
 nota2Geru   =:  3 : '{. +1 :y `'''' '
 normRank0   =:  3 : '{. ( (y 5!:0) 1 : ''if. -. 0 0 -: _2 {. u b. 0 do. u =. u"0 end. u'') ` '''' '
-normRotGer  =:  ] NB. ({. |.!._`'') [^:(1 1 1 0 -: -:S:0)^:(-:&:{::)"0 ]
+normRotGer  =:  ] NB. ({. |.!._`'') [^:(1 1 1 0 -: -:S:0)^:(-:&:{::)"0 ]    NB. Normalize |.!.n to |.!._
 
 NB. Normalize
 (nh)        =:  0&".&>@:".&.> nh =. H -. ;:'NOTATION'
@@ -61,7 +61,6 @@ bdot        =:  verb define
   NB. lookup by "GERUND" (derived from "NOTATION") 
   elseif. lit +. box   do. 
     NB. Convert notation to a.r.
-    NB. Normalize |.!.n to |.!._
     NB. Normalize 1:"0 to 1: etc (1"0 doesn't work)
     y =. <^:lit y
     y =. normRank0@normRotGer"0 nota2Geru^:(ischaracter@>)"0 y

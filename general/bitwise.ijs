@@ -42,60 +42,68 @@ T           =:  GERUND ,.~ |: boxopen"_1@:".&> H
 tidx        =.  < a: ; H i. {.;:'TABLE'
 T           =:  T tidx}~ <"2 TABLE =: 2 2 $ S:0 tidx { T
 
-bw          =:  adverb define
-	try.
-		NB. Convert verbs just as we do nouns.
-		NB. In the end, they'll be scalar, 
-		NB. so we'll return a verb, as expected.
-		if. verb=nc<'u' do.
-			u =. {. u`''
-		end.
+bdot        =:  verb define
+  NB. Lookups depend on type
+  'bln num lit box' =. (*./@:(0 1 e.~ ,) ; isnumeric ; ischaracter ; isboxed) y
+  rank =. #$y
 
-		NB. Lookups depend on type
-		'bln num lit box' =. (*./@:(0 1 e.~ ,) ; isnumeric ; ischaracter ; isboxed) u
-		rank =. #$u
+  NB. lookup by "TABLE" (truth table)
+  if. bln *. ((rank>1) *. 2 2 -: _2{.$y) +. degenr=.((rank<3) *. 4 = {:$y) do. 
+    NB. Permit "degenerate" vectors (i.e. 1x4s instead of 2x2s)
+    NB. for the convenience of typing 1 0 1 0 bw or a table of such rows.
+    y =. 2 2 $"1^:degenr y          
+    r =. T {~ TABLE i. y	
 
-		NB. lookup by "TABLE" (truth table)
-		if. bln *. ((rank>1) *. 2 2 -: _2{.$u) +. degenr=.((rank<3) *. 4 = {:$u) do. 
-			NB. Permit "degenerate" vectors (i.e. 1x4s instead of 2x2s)
-			NB. for the convenience of typing 1 0 1 0 bw or a table of such rows.
-			u =. 2 2 $"1^:degenr u          
-			r =. T {~ TABLE i. u	
+  NB. lookup by "M","MC","BITWISE" (b. code)
+  elseif. (num *. -. bln) +. (bln *. -. (0 4,:2 2) e.~ _2{.$y)  do. 
+    r =. (T,T,T) {~ (M,MC,BITWISE) i. y
 
-		NB. lookup by "M","MC","BITWISE" (b. code)
-		elseif. (num *. -. bln) +. (bln *. -. (0 4,:2 2) e.~ _2{.$u)  do. 
-			r =. (T,T,T) {~ (M,MC,BITWISE) i. u
+  NB. lookup by "GERUND" (derived from "NOTATION") 
+  elseif. lit +. box   do. 
+    NB. Convert notation to a.r.
+    NB. Normalize |.!.n to |.!._
+    NB. Normalize 1:"0 to 1: etc (1"0 doesn't work)
+    y =. <^:lit y
+    y =. normRank0@normRotGer"0 nota2Geru^:(ischaracter@>)"0 y
+    r =. T {~ GERUND i. y
 
-		NB. lookup by "GERUND" (derived from "NOTATION") 
-		elseif. lit +. box   do. 
-			NB. Convert notation to a.r.
-			NB. Normalize |.!.n to |.!._
-			NB. Normalize 1:"0 to 1: etc (1"0 doesn't work)
-			u =. <^:lit u
-			u =. normRank0@normRotGer"0 nota2Geru^:(ischaracter@>)"0 u
-			r =. T {~ GERUND i. u
+  elseif. 1  do.
+    assert. 0
+  end.
 
-		elseif. 1  do.
-			assert. 0
-		end.
-
-		if. (1=#$r) do.
-   			bwidx =. H i. {.;:'BITWISE'
-
-			NB. If u is already bitwise
-			if. u >: :: 0: T {::~ <0;bwidx do.
-				({:r) 5!:0       NB. return J verb (gerund is last col)
-			else.
-				(bwidx {:: r) b. NB. return bitwise b. verb
-			end.
-		else.
-			r
-		end.
-	catch.
-		u
-	end.
-
+  r
 )
+
+bw          =:  adverb define
+  try.
+     NB. Convert verbs just as we do nouns.
+     NB. In the end, they'll be scalar, 
+     NB. so we'll return a verb, as expected.
+     if. verb=nc<'u' do.
+       u =. {. u`''
+     end.
+
+     r =. bdot u
+
+     if. 1=#$r do.
+      bwidx =. H i. {.;:'BITWISE'
+
+      NB. If u is already bitwise
+      if. u >: :: 0: T {::~ <0;bwidx do.
+        ({:r) 5!:0       NB. return J verb (gerund is last col)
+      else.
+        (bwidx {:: r) b. NB. return bitwise b. verb
+      end.
+    else.
+      r
+    end.
+  catch.
+    NB. If u was a verb it will be returned as a noun; 
+    NB.  using a non-'u' name has problems.
+    u 
+  end.
+)
+
 
 bw_z_ =: bw_bdot_
 

@@ -1,10 +1,10 @@
-NB.  =====================================================================================================================================================
+ NB.  =====================================================================================================================================================
 NB.  Bootstrap:  Where am I?
 NB.  =====================================================================================================================================================
 
    	NB.  Split a filename into directory;filename.
 	NB.  EG:  splitPath 'c:\temp\test.txt' NB.  Returns 'c:\temp\';'test.txt'
-	splitPath				=: (({. ,&< }.)~ # <. >:@:i:&PATHSEP_j_)
+	splitPath				=: (({. ,&< }.)~ # <. >:@:i:&PATHJSEP_j_)
 
 	NB.  This will return (directory;filename) of the file which runs it.  Any input is acceptablw
 	NB.  Find a name that hasn't been defined.
@@ -21,11 +21,11 @@ NB.  ===========================================================================
 
 	NB.  The following line saves the path and filename of this script into the variable utilsfile_z_
 	utilsfile_z_			=:  ; utilspath =. getPath ''
-	utilspath  				=. ({: ,~ ] {.~ PATHSEP_j_ i:~ }:) > {.utilspath
+	utilspath  				=. ({: ,~ ] {.~ PATHJSEP_j_ i:~ }:) > {.utilspath
 
 	NB.  Should probably only modify USERFOLDERS_j_, and make references to, eg, ~User
 	NB.  instead of ~user.  But why is ~user in SYSTEMFOLDERS in the first place?
-	SYSTEMFOLDERS_j_		=: (<utilspath) (<1 ;~ (<'user') i.~ {."1 SYSTEMFOLDERS_j_)} SYSTEMFOLDERS_j_
+	SystemFolders_j_		=: (<utilspath) (<1 ;~ (<'user') i.~ {."1 SystemFolders_j_)} SystemFolders_j_
 
 	
 NB.  =====================================================================================================================================================
@@ -302,7 +302,7 @@ NB.  ===========================================================================
 `
 	NB.  List the files in a directory.  Outputs a list of boxes, each containing the fully-qualified name of a file matching the query.
 	NB.  EG:  listFiles 'c:\temp\*.txt'
-	listFiles				=:  (({.~ >:@:i:&PATHSEP_j_)&.> , each {."1@:(1!:0))@:boxopen
+	listFiles				=:  (({.~ >:@:i:&PATHJSEP_j_)&.> , each {."1@:(1!:0))@:boxopen
 
 	NB.  Box to any level (get around the boxing depth limitation (max L. is supposed to be 270))
 	NB.  Doesn't work on boxed data (because it will change everything at L: 0).
@@ -719,7 +719,7 @@ NB.  ===========================================================================
 	extractDirs    =.  ;;.0~ 1 1  ,: 1 ,~ _1 + #
 	recurseUpDirs  =.  ((,&'\..' ,&< 1!:0)@:>@:{.)^:(0: < */@:($&>)@:{:)^:(<_)
 	whereAmI       =:  extractDirs @: recurseUpDirs @: < bind '.' f.
-	I_AM_HERE      =:  PATHSEP_j_&join@:|.@:,~&a:  {."1  whereAmI '' 
+	I_AM_HERE      =:  PATHJSEP_j_&join@:|.@:,~&a:  {."1  whereAmI '' 
 
 
 NB.  =====================================================================================================================================================
@@ -742,7 +742,7 @@ NB.  Require this so that we can shorten the path in "recent files"
 load '~user\environment\nameScope.ijs'
 
 NB.  Load all of Oleg's useful utils.
-load (#~ endsWith&'x') listFiles '..\contrib\oleg\*.ijs'
+load (#~ endsWith&'x') 	 '..\contrib\oleg\*.ijs'
 load '~user\contrib\millers\fw2dl.ijs'
 
 NB.  Turn on debugging if requested
@@ -762,30 +762,29 @@ NB.  It appears that this startup script is run before the IJX window is created
 NB.  so 'smoutput' won't work.  So I just create a verb to print the prompt
 NB.  and call it from a later script (newuser.ijs specificially)
 printPrompt_z_ =: verb define
-
 	version =. ( ('vb' {~1 e. 'beta' E. ]) , 4 {.!.'?' 0 {:: ' ' cut ]) }. (i. {. [)&>/ ('_' ;~ 1!:1) :: ('/' ;~ 9!:14@:(''"_))  <jpath'~bin/installer.txt'
 	smoutput 'New J (' , version ,  ') session started on ' , ((i.&' ') ({. , ' at '"_ , }.@:}.) ]) _4 }. datetimestamp_base_ 6!:0 ''
 
 	if.  you_want_regex_loaded_and_the_random_seed_changed =. 1 do.  NB.  Usually when you restart J ? wil give the same results in the same order as the last time.  This changes when you reset the randoms edd.
-	require 'regex'
+		require 'regex'
 	
-	NB.  Set random seed to time, so we don't always get the same line from the same file
-	NB.  2006-Dec-01:  Changed  <@:^.  to [: ^. <.  because the interpreter now tries to 
-	NB.  special case  <.@:f  in addition to <.@f  , which introduces a nonce error.  
-	(?@:[ 9!:1)/ 2032 12 31 23 59 59 999x  (((<.<:2^31)&(] #:~ [ #~ 1: + [: <. ^.)@:#.)&.|. <.@:(, *&1000@:(1&|)@:{:))  6!:0''
+		NB.  Set random seed to time, so we don't always get the same line from the same file
+		NB.  2006-Dec-01:  Changed  <@:^.  to [: ^. <.  because the interpreter now tries to 
+		NB.  special case  <.@:f  in addition to <.@f  , which introduces a nonce error.  
+		(?@:[ 9!:1)/ 2032 12 31 23 59 59 999x  (((<.<:2^31)&(] #:~ [ #~ 1: + [: <. ^.)@:#.)&.|. <.@:(, *&1000@:(1&|)@:{:))  6!:0''
 
-    or               =. 2 : 'u :: (n"_)'
-    orNada           =. or (i.0)
-	randFile         =.  toJ@:(1!:1 :: (''"_))@:({ orNada~ ?@:#)@:listFiles@:jpath 
-    isNB             =. (4&{ or ' ' e. '.:'"_)  < 'NB.'"_ -: 3&{.
+		or               =. 2 : 'u :: (n"_)'
+		orNada           =. or (i.0)
+		randFile         =. toJ@:(1!:1 :: (''"_))@:({ orNada~ ?@:#)@:listFiles@:jpath 
+		isNB             =. (4&{ or ' ' e. '.:'"_)  < 'NB.'"_ -: 3&{.
 
-	NB.  Live code (livecode):  ('NB.[^.:]';'''')&( ((] +. +./\@:>)(+. ~:/\))/ @:(rxE&>))@:<   NB.  Mask where code is 'dead' (in quotes or after NB.)
-    containsCode     =. (0: ~: # - (isNB@:>@:{:))@:;:&>
+		NB.  Live code (livecode):  ('NB.[^.:]';'''')&( ((] +. +./\@:>)(+. ~:/\))/ @:(rxE&>))@:<   NB.  Mask where code is 'dead' (in quotes or after NB.)
+		containsCode     =. (0: ~: # - (isNB@:>@:{:))@:;:&>
 
-    randNonEmptyLine =. (>@:{ orNada~ (({ orNada~ ? @:#)@:bx@:containsCode))  @: (LF&cut)  NB.  Do NOT use  {:: in place of >@:{  because ''&{:: is NOT the same as ''&(>@:{) 
-    clean            =. ('NB.[^.:]';'''')&(>@:] #~ =&' '@:>@:]  (*./\.@:+. (j. 1 0&E.)@:= ]) ((] < +./\@:>)(+. ~:/\))/@:(rxE :: 0: &>))@:<^:(0: -.@:e. $)   NB.  Have to use S: instead of &> because 'boxed' -: datatype > 0 $ a: and rxE is sensitive to 'boxed' -: datatype
+		randNonEmptyLine =. ({ orNada~ (({ orNada~ ? @:#)@:bx@:containsCode))  @: (LF&cut)
+		clean            =. ('NB.[^.:]';'''')&(>@:] #~ =&' '@:>@:]  (*./\.@:+. (j. 1 0&E.)@:= ]) ((] < +./\@:>)(+. ~:/\))/@:(rxE :: 0: &>))@:<^:(0: -.@:e. $)   NB.  Have to use S: instead of &> because 'boxed' -: datatype > 0 $ a: and rxE is sensitive to 'boxed' -: datatype
 
-	smoutput '   ' & , @: clean @: randNonEmptyLine  @: randFile  orNada '~system\examples\phrases\*.ijs'  NB.  :: ((13!:11 ,&< 13!:12)@:empty "_)
+		smoutput '   ' & , @: clean @: -.&a: @: randNonEmptyLine  @: randFile  orNada '~system\examples\phrases\*.ijs'  NB.  :: ((13!:11 ,&< 13!:12)@:empty "_)
 	end.
 
 	smoutput ''
@@ -798,7 +797,7 @@ Binary   :
 Library  :
 Platform :
 Profile  :
-
+r
 
 
 )

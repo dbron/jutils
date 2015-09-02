@@ -78,7 +78,7 @@ optionSplitter    =.  (({. ,&< }.)~ <./@:i.&' "');._1@:('/'&,)
 
 cocurrent 'z'     [ returnTo_z_ =.  coname''
 
-getCommandLine		=:  [: 15!:1@:,&0 _1@:> 'kernel32 GetCommandLineA *c'"_ (15!:0) ''"_
+getCommandLine    =:  ([: 15!:1@:,&0 _1@:> 'kernel32 GetCommandLineA *c'"_ (15!:0) ''"_ ) :: (''"_)
 commandLineParser =:  ({. , optionParser each @:{:)"1@:}.@:optionSplitter@:('/ '&,) f.
 commandLine       =:  commandLineParser getCommandLine ''
 getOption         =:  ($:~ ". bind 'commandLine_z_') : (] >@{.@:]^:(L.@:[ = 0:) (((i.~ {."1)~ { ,&(<0)@:({:"1)@:[) ,@:boxopen))

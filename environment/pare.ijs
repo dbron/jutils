@@ -1,4 +1,4 @@
-NB.  ===
+NB.  ====
 NB.  Utilities
 NB.
 NL   =.  ":noun       NB. Noun Label (for atomic reps)
@@ -6,7 +6,7 @@ gn   =.  NL <@; <@]   NB. Gerundify a Noun
 NLAR =.  gn <NL       NB. Noun Label Atomic Rep
 
 
-NB.  ===
+NB.  ====
 NB.  Adverb: Apply [verb] To Atomic Representation [of input]
 NB.
 NB.  The goal is to produce  

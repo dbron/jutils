@@ -33,6 +33,7 @@ Par  =:  @(sri f.) (`'') ( `(;:'Ko`@.  ') ) ( `NLAR ) ( `(gn 0; 1 2) )          
 Pare =:  @(sri f.) (`'') ( `(;:'Ko`@.`:') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( `(gn 6) ) ( @.(1;5 2;0 2;3 6;4 7) )
 
 NB. Atomic Representation as an adverb 
+NB. Note that ] Pare (with an E) would be the identity adverb
 Ar   =:  ] Par
 
 0!:2^:(DEBUG=.0) noun define

@@ -29,7 +29,7 @@ Pare =:  (@(sri f.)) (`'') ( `(;:'Ko`@.`:') ) ( `(<<|.;~<":noun) ) ( `(< (":noun
 NB. Atomic Representation as an adverb 
 Ar   =:  ] Par
 
-0!:2^:(DEBUG=.1) noun define
+0!:2^:(DEBUG=.0) noun define
    NB. A bug in the J engine prevents S from being displayed
    S    =.  f A2ar
    T    =.  ( (<":0)` ) (f`) ( @.(0; 1 2) )

@@ -1,41 +1,48 @@
-NB. Utilities
+NB.  ===
+NB.  Utilities
 NB.
 NL   =.  ":noun       NB. Noun Label (for atomic reps)
 gn   =.  NL <@; <@]   NB. Gerundify a Noun
 NLAR =.  gn <NL       NB. Noun Label Atomic Rep
 
-NB. Adverb: Apply [verb] To Atomic Representation [of input]
+
+NB.  ===
+NB.  Adverb: Apply [verb] To Atomic Representation [of input]
 NB.
-NB. The goal is to produce  
-NB.    ((<":0)`) (f`) (@.(0; 1 2))
-NB. Where the input and output of f are atomic representations (a.r.s).
+NB.  The goal is to produce  
+NB.     ((<":0)`) (f`) (@.(0; 1 2))
+NB.  Where the input and output of f are atomic representations (a.r.s).
 NB.
-NB. For rationale, see:  http://www.jsoftware.com/pipermail/programming/2013-November/033914.html
+NB.  For rationale, see:  http://www.jsoftware.com/pipermail/programming/2013-November/033914.html
 NB.
-NB. Thus, in the RHA to the final @. : the (3 1) is (<":0)` and the
-NB. (0 1) is (f`) and the (2 4) is @.(0;1 2)
+NB.  Thus, in the RHA to the final @. : the (3 1) is (<":0)` and the
+NB.  (0 1) is (f`) and the (2 4) is @.(0;1 2)
 A2ar =:  (`'') ( `(;:'`@.') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( @.(3 1;0 1;2 4) )
 
-NB. Knock Out (convert nouns to verbs, 
-NB. then convert everything to a.r.)
+NB.  Knock Out (convert nouns to verbs, 
+NB.  then convert everything to a.r.)
 Ko   =:  ("_) (`'')
 sri  =.  {.@>@{:           NB. Strip Rank Infinity off the atomic rep
 
-NB. Process Atomic Rep: similar to A2ar except transparent handling of
-NB. both nouns and verbs. 
+NB.  Process Atomic Rep: similar to A2ar except transparent handling of
+NB.  both nouns and verbs. 
 NB.
-NB. Pare is similar, but Executes the result.
+NB.  Pare is similar, but Executes the result.
 NB. 
-NB. Because J doesn't allow, e.g. A2ar (`:6), as A2ar produces an adverb,
-NB. there's really no good way to reuse the logic of A2ar, so we copy and
-NB. tweak it.
+NB.  Because J doesn't allow, e.g. A2ar (`:6), as A2ar produces an adverb,
+NB.  there's really no good way to reuse the logic of A2ar, so we copy and
+NB.  tweak it.
 Par  =:  @(sri f.) (`'') ( `(;:'Ko`@.  ') ) ( `NLAR ) ( `(gn 0; 1 2) )             ( @.(1;4 2;0 2;3 5    ) )
 Pare =:  @(sri f.) (`'') ( `(;:'Ko`@.`:') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( `(gn 6) ) ( @.(1;5 2;0 2;3 6;4 7) )
 
-NB. Atomic Representation as an adverb 
-NB. Note that ] Pare (with an E) would be the identity adverb
+NB.  Atomic Representation as an adverb 
+NB.  Note that ] Pare (with an E) would be the identity adverb
 Ar   =:  ] Par
 
+
+NB. ====
+NB.  Examples
+NB.  Change DEBUG to 1 to run tests
 0!:2^:(DEBUG=.0) noun define
    NB. A bug in the J engine prevents S from being displayed
    S    =.  f A2ar

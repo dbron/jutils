@@ -22,7 +22,8 @@ A2ar =:  (`'') ( `(;:'`@.') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( @.(3 1;0 1;2 4) )
 NB.  Knock Out (convert nouns to verbs, 
 NB.  then convert everything to a.r.)
 Ko   =:  ("_) (`'')
-sri  =.  {.@>@{:           NB. Strip Rank Infinity off the atomic rep
+sri  =.  {.@>@{:                NB. Strip Rank Infinity off the atomic rep
+peel =.  5!:1^:(verb=nc ::_3:)  NB. Remove one layer of naming
 
 NB.  Process Atomic Rep: similar to A2ar except transparent handling of
 NB.  both nouns and verbs. 
@@ -39,8 +40,8 @@ NB. Same as Par/Pare, but if the input is a named verb, peels off the name
 NB. to reveal the value of the verb (similar to f. but only for the very first
 NB. level of naming). Obviously if the user wants the input fully fixed, he can
 NB. apply f. first.
-Bar  =:  @(5!:1^:(verb=nc ::_3:)@sri f.) (`'') ( `(;:'Ko`@.  ') ) ( `NLAR ) ( `(gn 0; 1 2) )             ( @.(1;4 2;0 2;3 5    ) )
-Bare =:  @(5!:1^:(verb=nc ::_3:)@sri f.) (`'') ( `(;:'Ko`@.`:') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( `(gn 6) ) ( @.(1;5 2;0 2;3 6;4 7) )
+Bar  =:  @(peel@sri f.) (`'') ( `(;:'Ko`@.  ') ) ( `NLAR ) ( `(gn 0; 1 2) )             ( @.(1;4 2;0 2;3 5    ) )
+Bare =:  @(peel@sri f.) (`'') ( `(;:'Ko`@.`:') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( `(gn 6) ) ( @.(1;5 2;0 2;3 6;4 7) )
 
 
 

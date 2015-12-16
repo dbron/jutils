@@ -35,6 +35,15 @@ NB.  tweak it.
 Par  =:  @(sri f.) (`'') ( `(;:'Ko`@.  ') ) ( `NLAR ) ( `(gn 0; 1 2) )             ( @.(1;4 2;0 2;3 5    ) )
 Pare =:  @(sri f.) (`'') ( `(;:'Ko`@.`:') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( `(gn 6) ) ( @.(1;5 2;0 2;3 6;4 7) )
 
+NB. Same as Par/Pare, but if the input is a named verb, peels off the name
+NB. to reveal the value of the verb (similar to f. but only for the very first
+NB. level of naming). Obviously if the user wants the input fully fixed, he can
+NB. apply f. first.
+Bar  =:  @(5!:1^:(verb=nc ::_3:)@sri f.) (`'') ( `(;:'Ko`@.  ') ) ( `NLAR ) ( `(gn 0; 1 2) )             ( @.(1;4 2;0 2;3 5    ) )
+Bare =:  @(5!:1^:(verb=nc ::_3:)@sri f.) (`'') ( `(;:'Ko`@.`:') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( `(gn 6) ) ( @.(1;5 2;0 2;3 6;4 7) )
+
+
+
 NB.  Atomic Representation as an adverb 
 NB.  Note that ] Pare (with an E) would be the identity adverb
 Ar   =:  ] Par

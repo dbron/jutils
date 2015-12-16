@@ -76,4 +76,9 @@ NB.  Change DEBUG to 1 to run tests
      atop  =.  '@' <@; <@:,&boxopen
 
    7 10 -:  3 4 (+: + -:) xform Pare 2 4      NB. (+:3 4) + (-: 2 4)
+
+   NB. Bar/e is the same as Par/e but peels off the top-level name
+   avg =: +/ % #
+   (<'avg') -: avg ]Par
+   (5!:1<'avg') -: avg ]Bar   
 )

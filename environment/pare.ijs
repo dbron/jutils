@@ -79,6 +79,6 @@ NB.  Change DEBUG to 1 to run tests
 
    NB. Bar/e is the same as Par/e but peels off the top-level name
    avg =: +/ % #
-   (<'avg') -: avg ]Par
-   (5!:1<'avg') -: avg ]Bar   
+   (     <'avg') -: avg ]Par
+   (5!:1 <'avg') -: avg ]Bar   
 )

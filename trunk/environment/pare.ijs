@@ -43,8 +43,6 @@ NB. apply f. first.
 Bar  =:  @(peel@sri f.) (`'') ( `(;:'Ko`@.  ') ) ( `NLAR ) ( `(gn 0; 1 2) )             ( @.(1;4 2;0 2;3 5    ) )
 Bare =:  @(peel@sri f.) (`'') ( `(;:'Ko`@.`:') ) ( `NLAR ) ( `(gn 0; 1 2) ) ( `(gn 6) ) ( @.(1;5 2;0 2;3 6;4 7) )
 
-
-
 NB.  Atomic Representation as an adverb 
 NB.  Note that ] Pare (with an E) would be the identity adverb
 Ar   =:  ] Par

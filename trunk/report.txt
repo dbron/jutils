@@ -348,4 +348,3 @@
          NB.!  and since that's not stored in non-JMF files
          NB.!  the other J session can't find it. }}}
 
-test
